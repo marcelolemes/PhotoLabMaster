@@ -1,0 +1,27 @@
+@CHARSET "ISO-8859-1";
+
+.ui-layout-north {
+	z-index: 20 !important;
+	overflow: visible !important;
+	border: none !important;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	z-index: 20 !important;
+	overflow: visible !important;
+	border: none !important;
+}
+
+.ui-menubar{
+		border: none !important;
+		
+}
+.ui-layout-center {
+		border: none !important;
+}
+.ui-layout-center.ui-layout-unit-content {
+		border: none !important;
+}
+.semBorda tr, .semBorda td {
+	border: none !important;
+}
