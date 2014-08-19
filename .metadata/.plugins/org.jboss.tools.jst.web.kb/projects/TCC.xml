@@ -81,27 +81,43 @@
   <core validator-id="jsf-verification"/>
   <core validator-id="jboss.jsf.core"/>
   <el>
-   <linked-el length="25" name="%0" offset="1106" path="%1"/>
-   <linked-el length="27" name="%0" offset="1013" path="%1"/>
-   <linked-el length="25" name="%2" offset="1106" path="%1"/>
-   <linked-el length="27" name="%2" offset="1013" path="%1"/>
-   <linked-el length="25" name="%2" offset="1408" path="%1"/>
-   <linked-el length="27" name="%2" offset="1266" path="%1"/>
-   <linked-el length="25" name="%3" offset="1106" path="%1"/>
-   <linked-el length="27" name="%3" offset="1013" path="%1"/>
-   <linked-el length="25" name="%3" offset="1408" path="%1"/>
-   <linked-el length="27" name="%3" offset="1266" path="%1"/>
+   <linked-el length="25" name="%0" offset="732" path="%1"/>
+   <linked-el length="25" name="%0" offset="752" path="%2"/>
+   <linked-el length="27" name="%0" offset="661" path="%2"/>
+   <linked-el length="27" name="%0" offset="641" path="%1"/>
+   <linked-el length="25" name="%3" offset="732" path="%1"/>
+   <linked-el length="26" name="%3" offset="895" path="%4"/>
+   <linked-el length="25" name="%3" offset="752" path="%4"/>
+   <linked-el length="27" name="%3" offset="661" path="%4"/>
+   <linked-el length="25" name="%3" offset="752" path="%2"/>
+   <linked-el length="27" name="%3" offset="661" path="%2"/>
+   <linked-el length="28" name="%3" offset="875" path="%1"/>
+   <linked-el length="26" name="%3" offset="895" path="%2"/>
+   <linked-el length="25" name="%3" offset="1119" path="%2"/>
+   <linked-el length="27" name="%3" offset="641" path="%1"/>
+   <linked-el length="25" name="%3" offset="1090" path="%4"/>
+   <linked-el length="25" name="%5" offset="732" path="%1"/>
+   <linked-el length="25" name="%5" offset="752" path="%2"/>
+   <linked-el length="27" name="%5" offset="661" path="%2"/>
+   <linked-el length="28" name="%5" offset="875" path="%1"/>
+   <linked-el length="26" name="%5" offset="895" path="%2"/>
+   <linked-el length="25" name="%5" offset="1119" path="%2"/>
+   <linked-el length="27" name="%5" offset="641" path="%1"/>
   </el>
  </validation>
  <aliases>
   <alias path="/TCC/src/br/com/login/model/User.java" value="%0"/>
-  <alias path="userBean" value="%2"/>
-  <alias path="/TCC/WebContent/Login/login_index.xhtml" value="%1"/>
-  <alias path="/TCC/src/br/com/login/bean/UserBean.java" value="%3"/>
+  <alias path="userBean" value="%3"/>
+  <alias path="/TCC/WebContent/Login/login_index.xhtml" value="%2"/>
+  <alias path="/TCC/WebContent/Cadastro/cadastro_index.xhtml" value="%1"/>
+  <alias path="/TCC/src/br/com/login/bean/UserBean.java" value="%5"/>
+  <alias path="/TCC/WebContent/Cadastro/login_index.xhtml" value="%4"/>
+  <alias path="%5" value="/TCC/src/br/com/login/bean/UserBean.java"/>
   <alias path="%0" value="/TCC/src/br/com/login/model/User.java"/>
-  <alias path="%3" value="/TCC/src/br/com/login/bean/UserBean.java"/>
-  <alias path="%2" value="userBean"/>
-  <alias path="%1" value="/TCC/WebContent/Login/login_index.xhtml"/>
+  <alias path="%4" value="/TCC/WebContent/Cadastro/login_index.xhtml"/>
+  <alias path="%3" value="userBean"/>
+  <alias path="%2" value="/TCC/WebContent/Login/login_index.xhtml"/>
+  <alias path="%1" value="/TCC/WebContent/Cadastro/cadastro_index.xhtml"/>
  </aliases>
  <includes/>
  <uris>

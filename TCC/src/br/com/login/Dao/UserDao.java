@@ -11,7 +11,6 @@ public class UserDao {
 
 	public boolean testarLogin(User user) throws Exception {
 		User resultado;
-		String senha;
 		Session sessao = HibernateUtil.getSession();
 		org.hibernate.Transaction transacao = sessao.beginTransaction();
 		Criteria criteria = sessao.createCriteria(User.class);
@@ -29,5 +28,16 @@ public class UserDao {
 		} else
 			return false;
 
+	}
+	public void gravarUsuario(User user) throws Exception {
+		Session sessao = HibernateUtil.getSession();
+		org.hibernate.Transaction transacao = sessao.beginTransaction();
+		sessao.save(user);
+		transacao.commit();
+		sessao.close();
+		
+		
+		
+	
 	}
 }

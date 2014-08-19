@@ -45,6 +45,28 @@ public class UserBean {
 		}
 	}
 
+	
+	public void gravar() throws Exception {
+		UserDao userDao = new UserDao();
+
+		try{
+			userDao.gravarUsuario(user);
+			messageSucessoGravar();
+		}
+		catch(Exception ex){
+			messageErroGravar();
+		}
+	}
+	
+	public void messageSucessoGravar() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravado!",
+						"Usuário gravado com sucesso, Seja bem vindo "
+								+ nomeSessao));
+		
+	}
+	
 	public void messageSucessoLogin() {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
@@ -54,6 +76,14 @@ public class UserBean {
 		
 	}
 
+	public void messageErroGravar() {
+		FacesContext
+				.getCurrentInstance()
+				.addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Gravar",
+								"Erro ao gravar, por favor, tente novamente"));
+	}
 	public void messageErroLogin() {
 		FacesContext
 				.getCurrentInstance()

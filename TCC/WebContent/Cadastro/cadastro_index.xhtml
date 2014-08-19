@@ -10,7 +10,7 @@
 <h:outputStylesheet library="css" name="estilo.css" />
 <body>
 	<div align="center" >
-		<p:panel styleClass="center">
+		<p:panel>
 			<p:panelGrid columns="2" styleClass="semBorda">
 				<p:outputLabel value="Apelido" />
 				<p:inputText id="apelidoInput" value="#{userBean.user.apelido}" />
@@ -18,17 +18,11 @@
 				<p:inputText value="#{userBean.user.senha}" />
 				<p:message for="apelidoInput" display="text" />
 			</p:panelGrid>
-			<p:commandButton value="Buscar" action="#{userBean.logar()}"
-			update="@all" />
-			<p:commandButton value="Cadastrar" action="/Cadastro/cadastro_index.xhtml"/>
+			<p:commandButton value="Gravar" action="#{userBean.gravar()}"
+			 />
+			
 		</p:panel>
 
-		
-	</div>
-	<div align="left">
-		<h:form id="session">
-			<p:outputLabel value="#{userBean.nomeSessao}" />
-		</h:form>
-	</div>
+		</div>
 </body>
 </html>
