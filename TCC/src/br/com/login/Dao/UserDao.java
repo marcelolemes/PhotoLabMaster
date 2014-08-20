@@ -11,7 +11,6 @@ public class UserDao {
 
 	public boolean testarLogin(User user) throws Exception {
 		User resultado;
-		String senha;
 		Session sessao = HibernateUtil.getSession();
 		org.hibernate.Transaction transacao = sessao.beginTransaction();
 		Criteria criteria = sessao.createCriteria(User.class);
@@ -20,14 +19,27 @@ public class UserDao {
 		if (resultado != null) {
 			if (resultado.getSenha() != null) {
 				if (resultado.getSenha().equals(user.getSenha())) {
+					sessao.close();
 					return true;
 				} else
+					sessao.close();
 					return false;
 
 			} else
+				sessao.close();
 				return false;
 		} else
+			sessao.close();
 			return false;
+		
 
+	}
+
+	public void Gravar(User user) throws Exception {
+		Session sessao = HibernateUtil.getSession();
+		org.hibernate.Transaction transacao = sessao.beginTransaction();
+		sessao.saveOrUpdate(user);
+		transacao.commit();
+		sessao.close();
 	}
 }

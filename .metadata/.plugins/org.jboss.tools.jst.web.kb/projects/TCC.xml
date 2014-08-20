@@ -4,7 +4,6 @@
  <used-by-projects/>
  <paths>
   <path value="C:/Users/mega/workspace/TCC/WebContent/WEB-INF/lib/mysql-connector-java-5.1.29-bin.jar"/>
-  <path value="F:/Desenvolvimento/apache-tomcat-7.0.52-windows-x64/apache-tomcat-7.0.52/lib/catalina.jar"/>
   <path value="/TCC/WebContent/WEB-INF/faces-config.xml">
    <libraries>
     <library class="faces-config">
@@ -13,6 +12,7 @@
     </library>
    </libraries>
   </path>
+  <path value="F:/Desenvolvimento/apache-tomcat-7.0.52-windows-x64/apache-tomcat-7.0.52/lib/catalina.jar"/>
   <path value="F:/Desenvolvimento/apache-tomcat-7.0.52-windows-x64/apache-tomcat-7.0.52/lib/catalina-tribes.jar"/>
   <path value="F:/Desenvolvimento/apache-tomcat-7.0.52-windows-x64/apache-tomcat-7.0.52/lib/jasper.jar"/>
   <path value="C:/Users/mega/workspace/TCC/WebContent/WEB-INF/lib/hibernate-commons-annotations-4.0.4.Final.jar"/>
@@ -81,41 +81,54 @@
   <core validator-id="jsf-verification"/>
   <core validator-id="jboss.jsf.core"/>
   <el>
-   <linked-el length="25" name="%0" offset="732" path="%1"/>
-   <linked-el length="27" name="%0" offset="641" path="%1"/>
-   <linked-el length="25" name="%2" offset="732" path="%1"/>
-   <linked-el length="27" name="%3" offset="865" path="%4"/>
-   <linked-el length="27" name="%3" offset="1104" path="%4"/>
-   <linked-el length="25" name="%3" offset="1255" path="%4"/>
-   <linked-el length="25" name="%3" offset="958" path="%4"/>
-   <linked-el length="27" name="%5" offset="865" path="%4"/>
-   <linked-el length="25" name="%5" offset="958" path="%4"/>
-   <linked-el length="27" name="%6" offset="865" path="%4"/>
-   <linked-el length="27" name="%6" offset="1104" path="%4"/>
-   <linked-el length="25" name="%6" offset="732" path="%1"/>
-   <linked-el length="23" name="%6" offset="860" path="%1"/>
-   <linked-el length="27" name="%6" offset="641" path="%1"/>
-   <linked-el length="25" name="%6" offset="1255" path="%4"/>
-   <linked-el length="25" name="%6" offset="958" path="%4"/>
-   <linked-el length="27" name="%7" offset="641" path="%1"/>
+   <linked-el length="29" name="%0" offset="736" path="%1"/>
+   <linked-el length="26" name="%0" offset="833" path="%1"/>
+   <linked-el length="31" name="%0" offset="641" path="%1"/>
+   <linked-el length="27" name="%2" offset="913" path="%3"/>
+   <linked-el length="25" name="%2" offset="998" path="%4"/>
+   <linked-el length="27" name="%2" offset="1141" path="%4"/>
+   <linked-el length="25" name="%2" offset="1353" path="%4"/>
+   <linked-el length="25" name="%2" offset="1004" path="%3"/>
+   <linked-el length="28" name="%2" offset="1147" path="%3"/>
+   <linked-el length="27" name="%2" offset="907" path="%4"/>
+   <linked-el length="27" name="%5" offset="913" path="%3"/>
+   <linked-el length="25" name="%5" offset="998" path="%4"/>
+   <linked-el length="25" name="%5" offset="1004" path="%3"/>
+   <linked-el length="27" name="%5" offset="907" path="%4"/>
+   <linked-el length="27" name="%6" offset="913" path="%3"/>
+   <linked-el length="25" name="%6" offset="998" path="%4"/>
+   <linked-el length="27" name="%6" offset="1141" path="%4"/>
+   <linked-el length="25" name="%6" offset="1090" path="%7"/>
+   <linked-el length="25" name="%6" offset="1353" path="%4"/>
+   <linked-el length="26" name="%6" offset="895" path="%7"/>
+   <linked-el length="25" name="%6" offset="752" path="%7"/>
+   <linked-el length="27" name="%6" offset="661" path="%7"/>
+   <linked-el length="25" name="%6" offset="1004" path="%3"/>
+   <linked-el length="28" name="%6" offset="1147" path="%3"/>
+   <linked-el length="27" name="%6" offset="907" path="%4"/>
+   <linked-el length="29" name="%8" offset="736" path="%1"/>
+   <linked-el length="26" name="%8" offset="833" path="%1"/>
+   <linked-el length="31" name="%8" offset="641" path="%1"/>
   </el>
  </validation>
  <aliases>
-  <alias path="userBean.user" value="%0"/>
+  <alias path="/TCC/WebContent/Login/cadastro_index.xhtml" value="%3"/>
+  <alias path="/TCC/src/br/com/login/bean/CadastroBean.java" value="%0"/>
   <alias path="/TCC/WebContent/Cadastro/cadastro_index.xhtml" value="%1"/>
-  <alias path="userBean.user.senha" value="%2"/>
+  <alias path="/TCC/WebContent/Cadastro/login_index.xhtml" value="%7"/>
   <alias path="/TCC/WebContent/Login/login_index.xhtml" value="%4"/>
-  <alias path="/TCC/src/br/com/login/bean/UserBean.java" value="%3"/>
+  <alias path="/TCC/src/br/com/login/bean/UserBean.java" value="%2"/>
   <alias path="/TCC/src/br/com/login/model/User.java" value="%5"/>
   <alias path="userBean" value="%6"/>
-  <alias path="userBean.user.apelido" value="%7"/>
+  <alias path="cadastroBean" value="%8"/>
   <alias path="%5" value="/TCC/src/br/com/login/model/User.java"/>
   <alias path="%6" value="userBean"/>
-  <alias path="%7" value="userBean.user.apelido"/>
-  <alias path="%0" value="userBean.user"/>
+  <alias path="%7" value="/TCC/WebContent/Cadastro/login_index.xhtml"/>
+  <alias path="%8" value="cadastroBean"/>
+  <alias path="%0" value="/TCC/src/br/com/login/bean/CadastroBean.java"/>
   <alias path="%1" value="/TCC/WebContent/Cadastro/cadastro_index.xhtml"/>
-  <alias path="%2" value="userBean.user.senha"/>
-  <alias path="%3" value="/TCC/src/br/com/login/bean/UserBean.java"/>
+  <alias path="%2" value="/TCC/src/br/com/login/bean/UserBean.java"/>
+  <alias path="%3" value="/TCC/WebContent/Login/cadastro_index.xhtml"/>
   <alias path="%4" value="/TCC/WebContent/Login/login_index.xhtml"/>
  </aliases>
  <includes/>

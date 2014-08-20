@@ -13,8 +13,11 @@
 		<p:messages id="messages" showDetail="true" autoUpdate="true"
 			closable="true" showIcon="false" />
 		<p:growl id="growl" showDetail="true" sticky="true" />
-		<div align="center"></div>
+		<div align="center">
+			<p:outputLabel value="Bem vindo ao Login" />
+		</div>
 		<p:panel styleClass="center">
+
 			<p:panelGrid columns="2" styleClass="semBorda">
 				<p:outputLabel value="Apelido" />
 				<p:inputText id="apelidoInput" value="#{userBean.user.apelido}" />
@@ -23,6 +26,8 @@
 				<p:message for="apelidoInput" display="text" />
 			</p:panelGrid>
 			<p:commandButton value="Buscar" action="#{userBean.logar()}"
+				update="@all" />
+			<p:commandButton value="Cadastrar" action="cadastro_index.xhtml"
 				update="@all" />
 			<div align="left">
 				<h:form id="session">

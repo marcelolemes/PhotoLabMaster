@@ -29,8 +29,8 @@
 }
 
 .center {
+	border: none !important;
 	position: absolute;
 	right: 40%;
-	top: 30% 
-	
+	top: 30%
 }
