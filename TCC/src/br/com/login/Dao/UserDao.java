@@ -1,0 +1,33 @@
+package br.com.login.Dao;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
+import br.com.login.model.User;
+import br.com.login.util.HibernateUtil;
+
+public class UserDao {
+
+	public boolean testarLogin(User user) throws Exception {
+		User resultado;
+		String senha;
+		Session sessao = HibernateUtil.getSession();
+		org.hibernate.Transaction transacao = sessao.beginTransaction();
+		Criteria criteria = sessao.createCriteria(User.class);
+		criteria.add(Restrictions.eq("apelido", user.getApelido()));
+		resultado = (User) criteria.uniqueResult();
+		if (resultado != null) {
+			if (resultado.getSenha() != null) {
+				if (resultado.getSenha().equals(user.getSenha())) {
+					return true;
+				} else
+					return false;
+
+			} else
+				return false;
+		} else
+			return false;
+
+	}
+}
