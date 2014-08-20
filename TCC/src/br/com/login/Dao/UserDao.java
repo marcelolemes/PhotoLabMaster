@@ -19,25 +19,27 @@ public class UserDao {
 		if (resultado != null) {
 			if (resultado.getSenha() != null) {
 				if (resultado.getSenha().equals(user.getSenha())) {
+					sessao.close();
 					return true;
 				} else
+					sessao.close();
 					return false;
 
 			} else
+				sessao.close();
 				return false;
 		} else
+			sessao.close();
 			return false;
+		
 
 	}
-	public void gravarUsuario(User user) throws Exception {
+
+	public void Gravar(User user) throws Exception {
 		Session sessao = HibernateUtil.getSession();
 		org.hibernate.Transaction transacao = sessao.beginTransaction();
-		sessao.save(user);
+		sessao.saveOrUpdate(user);
 		transacao.commit();
 		sessao.close();
-		
-		
-		
-	
 	}
 }

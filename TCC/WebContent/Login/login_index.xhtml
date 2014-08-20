@@ -9,7 +9,11 @@
 </h:head>
 <h:outputStylesheet library="css" name="estilo.css" />
 <body>
-	<div align="center" >
+	<h:form id="login">
+		<p:messages id="messages" showDetail="true" autoUpdate="true"
+			closable="true" showIcon="false" />
+		<p:growl id="growl" showDetail="true" sticky="true" />
+		<div align="center"></div>
 		<p:panel styleClass="center">
 			<p:panelGrid columns="2" styleClass="semBorda">
 				<p:outputLabel value="Apelido" />
@@ -19,16 +23,16 @@
 				<p:message for="apelidoInput" display="text" />
 			</p:panelGrid>
 			<p:commandButton value="Buscar" action="#{userBean.logar()}"
-			update="@all" />
-			<p:commandButton value="Cadastrar" action="/Cadastro/cadastro_index.xhtml"/>
+				update="@all" />
+			<p:commandButton value="Cadastrar" action="cadastro_index.xhtml"
+				update="@all" />
+			<div align="left">
+				<h:form id="session">
+					<p:outputLabel value="#{userBean.nomeSessao}" />
+				</h:form>
+			</div>
 		</p:panel>
 
-		
-	</div>
-	<div align="left">
-		<h:form id="session">
-			<p:outputLabel value="#{userBean.nomeSessao}" />
-		</h:form>
-	</div>
+	</h:form>
 </body>
 </html>

@@ -9,8 +9,12 @@
 </h:head>
 <h:outputStylesheet library="css" name="estilo.css" />
 <body>
-	<div align="center" >
-		<p:panel>
+<h:form id="cadastro">
+		<p:messages id="messages" showDetail="true" autoUpdate="true"
+			closable="true" showIcon="false" />
+		<p:growl id="growl" showDetail="true" sticky="true" />
+		<div align="center"></div>
+		<p:panel styleClass="center">
 			<p:panelGrid columns="2" styleClass="semBorda">
 				<p:outputLabel value="Apelido" />
 				<p:inputText id="apelidoInput" value="#{userBean.user.apelido}" />
@@ -19,10 +23,9 @@
 				<p:message for="apelidoInput" display="text" />
 			</p:panelGrid>
 			<p:commandButton value="Gravar" action="#{userBean.gravar()}"
-			 />
-			
-		</p:panel>
+				update="@all" />
+			</p:panel>
 
-		</div>
+	</h:form>
 </body>
 </html>

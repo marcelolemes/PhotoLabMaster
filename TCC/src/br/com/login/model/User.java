@@ -1,7 +1,5 @@
 package br.com.login.model;
 
-import java.io.Serializable;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.Column;
@@ -15,11 +13,7 @@ import javax.persistence.Table;
 @ManagedBean
 @RequestScoped
 @Table(name = "Usuario")
-public class User implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5680566631347397096L;
+public class User {
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)

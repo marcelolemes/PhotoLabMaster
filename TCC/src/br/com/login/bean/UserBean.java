@@ -2,6 +2,7 @@ package br.com.login.bean;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -9,17 +10,17 @@ import br.com.login.Dao.UserDao;
 import br.com.login.model.User;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class UserBean {
 
 	public UserBean() {
-		
+
 		user = new User();
 	}
 
 	private User user;
 
-	private String nomeSessao= new String();
+	private String nomeSessao = new String();
 
 	public User getUser() {
 		return user;
@@ -37,53 +38,40 @@ public class UserBean {
 			setNomeSessao(user.getApelido());
 			nomeSessao = user.getApelido();
 			messageSucessoLogin();
-			
-			
+
 		} else {
 			System.out.print("Não encontrado");
 			messageErroLogin();
 		}
 	}
 
-	
-	public void gravar() throws Exception {
+	public void gravar() {
 		UserDao userDao = new UserDao();
-
-		try{
-			userDao.gravarUsuario(user);
+		try {
+			userDao.Gravar(user);
 			messageSucessoGravar();
+		} catch (Exception ex) {
+			messageErroLogin();
 		}
-		catch(Exception ex){
-			messageErroGravar();
-		}
+
+	}
+
+	public void messageSucessoLogin() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Login",
+						"Realizado com sucesso, Seja bem vindo " + nomeSessao));
+
 	}
 	
 	public void messageSucessoGravar() {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravado!",
-						"Usuário gravado com sucesso, Seja bem vindo "
-								+ nomeSessao));
-		
-	}
-	
-	public void messageSucessoLogin() {
-		FacesContext.getCurrentInstance().addMessage(
-				null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Login",
-						"Realizado com sucesso, Seja bem vindo "
-								+ nomeSessao));
-		
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravar",
+						"Cadastro realizado com sucesso, Seja bem vindo " + nomeSessao));
+
 	}
 
-	public void messageErroGravar() {
-		FacesContext
-				.getCurrentInstance()
-				.addMessage(
-						null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Gravar",
-								"Erro ao gravar, por favor, tente novamente"));
-	}
 	public void messageErroLogin() {
 		FacesContext
 				.getCurrentInstance()
@@ -91,6 +79,15 @@ public class UserBean {
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login",
 								"Usuário/Senha incorretos, por favor, tente novamente"));
+	}
+	
+	public void messageErroCadastro() {
+		FacesContext
+				.getCurrentInstance()
+				.addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cadastro",
+								"O Cadastro falhou, por favor, tente novamente"));
 	}
 
 	public String getNomeSessao() {
