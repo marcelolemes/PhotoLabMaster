@@ -10,7 +10,7 @@ import br.com.login.Dao.UserDao;
 import br.com.login.model.User;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class UserBean {
 
 	public UserBean() {
@@ -30,7 +30,7 @@ public class UserBean {
 		this.user = user;
 	}
 
-	public void logar() throws Exception {
+	public String logar() throws Exception {
 		UserDao userDao = new UserDao();
 
 		if (userDao.testarLogin(user)) {
@@ -38,11 +38,12 @@ public class UserBean {
 			setNomeSessao(user.getApelido());
 			nomeSessao = user.getApelido();
 			messageSucessoLogin();
-
+			return "result.xhtml";
 		} else {
 			System.out.print("Não encontrado");
 			messageErroLogin();
 		}
+		return null;
 	}
 
 	public void gravar() {

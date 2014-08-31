@@ -19,7 +19,7 @@
 				<p:outputLabel value="Apelido" />
 				<p:inputText id="apelidoInput" value="#{userBean.user.apelido}" />
 				<p:outputLabel value="Senha" />
-				<p:inputText value="#{userBean.user.senha}" />
+				<p:password value="#{userBean.user.senha}" />
 				<p:message for="apelidoInput" display="text" />
 			</p:panelGrid>
 			<p:commandButton value="Buscar" action="#{userBean.logar()}"
