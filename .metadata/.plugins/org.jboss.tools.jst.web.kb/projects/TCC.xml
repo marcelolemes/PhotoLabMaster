@@ -4,16 +4,15 @@
  <used-by-projects/>
  <paths>
   <path value="C:/Users/marcelo/workspace/TCC/WebContent/WEB-INF/lib/javassist-3.18.1-GA.jar"/>
-  <path value="C:/Users/marcelo/workspace/TCC/WebContent/WEB-INF/lib/antlr-2.7.7.jar"/>
   <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/el-api.jar"/>
-  <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/catalina-tribes.jar"/>
+  <path value="C:/Users/marcelo/workspace/TCC/WebContent/WEB-INF/lib/antlr-2.7.7.jar"/>
   <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/catalina.jar"/>
+  <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/catalina-tribes.jar"/>
   <path value="C:/Users/marcelo/workspace/TCC/WebContent/WEB-INF/lib/jboss-logging-3.1.3.GA.jar"/>
   <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/servlet-api.jar"/>
-  <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/jasper.jar"/>
   <path value="C:/Users/marcelo/workspace/TCC/WebContent/WEB-INF/lib/jandex-1.1.0.Final.jar"/>
+  <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/jasper.jar"/>
   <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/tomcat-dbcp.jar"/>
-  <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/tomcat-util.jar"/>
   <path value="C:/Users/marcelo/workspace/TCC/WebContent/WEB-INF/lib/javax.faces-2.2.5.jar">
    <libraries>
     <library class="tld">
@@ -30,6 +29,7 @@
     </library>
    </libraries>
   </path>
+  <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/tomcat-util.jar"/>
   <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/tomcat-jdbc.jar"/>
   <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/tomcat-api.jar"/>
   <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/tomcat-coyote.jar"/>
@@ -51,12 +51,12 @@
   <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/tomcat-i18n-ja.jar"/>
   <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/ecj-4.3.1.jar"/>
   <path value="C:/Users/marcelo/workspace/TCC/WebContent/WEB-INF/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
-  <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/annotations-api.jar"/>
   <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/jasper-el.jar"/>
+  <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/annotations-api.jar"/>
   <path value="C:/Users/marcelo/workspace/TCC/WebContent/WEB-INF/lib/dom4j-1.6.1.jar"/>
   <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/tomcat-i18n-es.jar"/>
-  <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/catalina-ant.jar"/>
   <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/jsp-api.jar"/>
+  <path value="C:/Users/marcelo/dev/apache-tomcat-7.0.50-windows-x86/apache-tomcat-7.0.50/lib/catalina-ant.jar"/>
   <path value="C:/Users/marcelo/workspace/TCC/WebContent/WEB-INF/lib/hibernate-core-4.3.5.Final.jar"/>
   <path value="C:/Users/marcelo/workspace/TCC/WebContent/WEB-INF/lib/primefaces-5.0.jar">
    <libraries>
@@ -81,53 +81,40 @@
   <core validator-id="jsf-verification"/>
   <core validator-id="jboss.jsf.core"/>
   <el>
-   <linked-el length="25" name="%0" offset="945" path="%1"/>
-   <linked-el length="25" name="%0" offset="943" path="%2"/>
+   <linked-el length="25" name="%0" offset="944" path="%1"/>
+   <linked-el length="25" name="%0" offset="942" path="%2"/>
    <linked-el length="27" name="%0" offset="854" path="%1"/>
+   <linked-el length="27" name="%0" offset="449" path="%3"/>
    <linked-el length="27" name="%0" offset="852" path="%2"/>
-   <linked-el length="25" name="%3" offset="945" path="%1"/>
-   <linked-el length="26" name="%3" offset="895" path="%4"/>
-   <linked-el length="25" name="%3" offset="752" path="%4"/>
-   <linked-el length="25" name="%3" offset="1298" path="%2"/>
-   <linked-el length="27" name="%3" offset="661" path="%4"/>
-   <linked-el length="25" name="%3" offset="943" path="%2"/>
-   <linked-el length="27" name="%3" offset="854" path="%1"/>
-   <linked-el length="28" name="%3" offset="1088" path="%1"/>
-   <linked-el length="27" name="%3" offset="1086" path="%2"/>
-   <linked-el length="25" name="%3" offset="1090" path="%4"/>
-   <linked-el length="27" name="%3" offset="852" path="%2"/>
-   <linked-el length="26" name="%5" offset="833" path="%6"/>
-   <linked-el length="31" name="%5" offset="641" path="%6"/>
-   <linked-el length="29" name="%5" offset="736" path="%6"/>
-   <linked-el length="26" name="%7" offset="833" path="%6"/>
-   <linked-el length="31" name="%7" offset="641" path="%6"/>
-   <linked-el length="29" name="%7" offset="736" path="%6"/>
-   <linked-el length="25" name="%8" offset="945" path="%1"/>
-   <linked-el length="25" name="%8" offset="1298" path="%2"/>
-   <linked-el length="25" name="%8" offset="943" path="%2"/>
-   <linked-el length="27" name="%8" offset="854" path="%1"/>
-   <linked-el length="28" name="%8" offset="1088" path="%1"/>
-   <linked-el length="27" name="%8" offset="1086" path="%2"/>
-   <linked-el length="27" name="%8" offset="852" path="%2"/>
+   <linked-el length="25" name="%4" offset="1297" path="%2"/>
+   <linked-el length="25" name="%4" offset="944" path="%1"/>
+   <linked-el length="25" name="%4" offset="942" path="%2"/>
+   <linked-el length="28" name="%4" offset="1087" path="%1"/>
+   <linked-el length="27" name="%4" offset="854" path="%1"/>
+   <linked-el length="27" name="%4" offset="1085" path="%2"/>
+   <linked-el length="27" name="%4" offset="449" path="%3"/>
+   <linked-el length="27" name="%4" offset="852" path="%2"/>
+   <linked-el length="25" name="%5" offset="1297" path="%2"/>
+   <linked-el length="25" name="%5" offset="944" path="%1"/>
+   <linked-el length="25" name="%5" offset="942" path="%2"/>
+   <linked-el length="28" name="%5" offset="1087" path="%1"/>
+   <linked-el length="27" name="%5" offset="854" path="%1"/>
+   <linked-el length="27" name="%5" offset="1085" path="%2"/>
+   <linked-el length="27" name="%5" offset="449" path="%3"/>
+   <linked-el length="27" name="%5" offset="852" path="%2"/>
   </el>
  </validation>
  <aliases>
   <alias path="/TCC/src/br/com/login/model/User.java" value="%0"/>
+  <alias path="/TCC/WebContent/Login/result.xhtml" value="%3"/>
   <alias path="/TCC/WebContent/Login/cadastro_index.xhtml" value="%1"/>
-  <alias path="userBean" value="%3"/>
-  <alias path="/TCC/src/br/com/login/bean/CadastroBean.java" value="%5"/>
-  <alias path="cadastroBean" value="%7"/>
+  <alias path="userBean" value="%4"/>
   <alias path="/TCC/WebContent/Login/login_index.xhtml" value="%2"/>
-  <alias path="/TCC/WebContent/Cadastro/cadastro_index.xhtml" value="%6"/>
-  <alias path="/TCC/src/br/com/login/bean/UserBean.java" value="%8"/>
-  <alias path="/TCC/WebContent/Cadastro/login_index.xhtml" value="%4"/>
-  <alias path="%7" value="cadastroBean"/>
-  <alias path="%8" value="/TCC/src/br/com/login/bean/UserBean.java"/>
-  <alias path="%5" value="/TCC/src/br/com/login/bean/CadastroBean.java"/>
-  <alias path="%6" value="/TCC/WebContent/Cadastro/cadastro_index.xhtml"/>
+  <alias path="/TCC/src/br/com/login/bean/UserBean.java" value="%5"/>
+  <alias path="%5" value="/TCC/src/br/com/login/bean/UserBean.java"/>
   <alias path="%0" value="/TCC/src/br/com/login/model/User.java"/>
-  <alias path="%4" value="/TCC/WebContent/Cadastro/login_index.xhtml"/>
-  <alias path="%3" value="userBean"/>
+  <alias path="%4" value="userBean"/>
+  <alias path="%3" value="/TCC/WebContent/Login/result.xhtml"/>
   <alias path="%2" value="/TCC/WebContent/Login/login_index.xhtml"/>
   <alias path="%1" value="/TCC/WebContent/Login/cadastro_index.xhtml"/>
  </aliases>
