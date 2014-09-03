@@ -2,7 +2,7 @@ package br.com.login.bean;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -19,8 +19,8 @@ public class UserBean {
 	}
 
 	private User user;
-
-	private String nomeSessao = new String();
+	@ManagedProperty(value = "#{sessao}")
+	private String sessao = new String();
 
 	public User getUser() {
 		return user;
@@ -35,8 +35,8 @@ public class UserBean {
 
 		if (userDao.testarLogin(user)) {
 			System.out.print("Encontrado");
-			setNomeSessao(user.getApelido());
-			nomeSessao = user.getApelido();
+
+			setSessao(user.getApelido());
 			messageSucessoLogin();
 			return "result.xhtml";
 		} else {
@@ -61,15 +61,19 @@ public class UserBean {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Login",
-						"Realizado com sucesso, Seja bem vindo " + nomeSessao));
+						"Realizado com sucesso, Seja bem vindo " + sessao));
 
 	}
-	
+
 	public void messageSucessoGravar() {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravar",
-						"Cadastro realizado com sucesso, Seja bem vindo " + nomeSessao));
+						"Cadastro realizado com sucesso, Seja bem vindo "
+								+ sessao));
+		// remover sessão do manage bean selecionado
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.remove("userBean");
 
 	}
 
@@ -80,23 +84,24 @@ public class UserBean {
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login",
 								"Usuário/Senha incorretos, por favor, tente novamente"));
+		// remover sessão do manage bean selecionado
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.remove("userBean");
 	}
-	
+
 	public void messageErroCadastro() {
-		FacesContext
-				.getCurrentInstance()
-				.addMessage(
-						null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cadastro",
-								"O Cadastro falhou, por favor, tente novamente"));
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cadastro",
+						"O Cadastro falhou, por favor, tente novamente"));
 	}
 
-	public String getNomeSessao() {
-		return nomeSessao;
+	public String getSessao() {
+		return sessao;
 	}
 
-	public void setNomeSessao(String nomeSessao) {
-		this.nomeSessao = nomeSessao;
+	public void setSessao(String sessao) {
+		this.sessao = sessao;
 	}
 
 }

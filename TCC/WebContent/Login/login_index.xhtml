@@ -27,9 +27,7 @@
 			<p:commandButton value="Cadastrar" action="cadastro_index.xhtml"
 				update="@all" />
 			<div align="left">
-				<h:form id="session">
-					<p:outputLabel value="#{userBean.nomeSessao}" />
-				</h:form>
+			<input type="hidden" name="hidden1" value="#{userBean.sessao}" />
 			</div>
 		</p:panel>
 
