@@ -2,25 +2,28 @@ package br.com.login.bean;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.login.Dao.UserDao;
 import br.com.login.model.User;
 
-@ManagedBean
-@SessionScoped
+@ManagedBean(name = "userBean")
+@RequestScoped
 public class UserBean {
 
 	public UserBean() {
 
 		user = new User();
+
 	}
 
 	private User user;
-	@ManagedProperty(value = "#{sessao}")
+	private User userLogado;
+
 	private String sessao = new String();
+
+	private String teste = new String();
 
 	public User getUser() {
 		return user;
@@ -33,12 +36,14 @@ public class UserBean {
 	public String logar() throws Exception {
 		UserDao userDao = new UserDao();
 
-		if (userDao.testarLogin(user)) {
+		if ((userLogado = userDao.testarLogin(user)) != null) {
 			System.out.print("Encontrado");
-
 			setSessao(user.getApelido());
+			sessao = user.getApelido();
+
 			messageSucessoLogin();
 			return "result.xhtml";
+
 		} else {
 			System.out.print("Não encontrado");
 			messageErroLogin();
@@ -61,7 +66,7 @@ public class UserBean {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Login",
-						"Realizado com sucesso, Seja bem vindo " + sessao));
+						"Seja bem vindo " + sessao));
 
 	}
 
@@ -71,9 +76,21 @@ public class UserBean {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravar",
 						"Cadastro realizado com sucesso, Seja bem vindo "
 								+ sessao));
+
+		fecharSessao();
+	}
+
+	public void fecharSessao() {
 		// remover sessão do manage bean selecionado
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.remove("userBean");
+
+	}
+	public String sairSessao() {
+		// remover sessão do manage bean selecionado
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.remove("userBean");
+		return "login_index.xhtml";
 
 	}
 
@@ -102,6 +119,22 @@ public class UserBean {
 
 	public void setSessao(String sessao) {
 		this.sessao = sessao;
+	}
+
+	public String getTeste() {
+		return teste;
+	}
+
+	public void setTeste(String teste) {
+		this.teste = teste;
+	}
+
+	public User getUserLogado() {
+		return userLogado;
+	}
+
+	public void setUserLogado(User userLogado) {
+		this.userLogado = userLogado;
 	}
 
 }

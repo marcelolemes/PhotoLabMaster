@@ -9,7 +9,7 @@ import br.com.login.util.HibernateUtil;
 
 public class UserDao {
 
-	public boolean testarLogin(User user) throws Exception {
+	public User testarLogin(User user) throws Exception {
 		User resultado;
 		Session sessao = HibernateUtil.getSession();
 		org.hibernate.Transaction transacao = sessao.beginTransaction();
@@ -20,17 +20,18 @@ public class UserDao {
 			if (resultado.getSenha() != null) {
 				if (resultado.getSenha().equals(user.getSenha())) {
 					sessao.close();
-					return true;
+					
+					return resultado;
 				} else
 					sessao.close();
-					return false;
+					return null;
 
 			} else
 				sessao.close();
-				return false;
+				return null;
 		} else
 			sessao.close();
-			return false;
+			return null;
 		
 
 	}
@@ -42,4 +43,6 @@ public class UserDao {
 		transacao.commit();
 		sessao.close();
 	}
+	
+	
 }

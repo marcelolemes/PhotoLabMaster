@@ -3,12 +3,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title></title>
-</head>
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title></title>
+</h:head>
+<h:outputStylesheet library="css" name="estilo.css" />
 <body>
-<p:outputLabel id="apelidoInput" value="#{resultBean.sessao}" />
-
+	<h:form id="user">
+		<p:growl id="growl" showDetail="true" sticky="true"  />
+		<p:panel styleClass="center">
+		<p:panelGrid columns="2">
+			<p:outputLabel value="Usuário da sessão" />
+			<p:outputLabel value="#{userBean.sessao}" />
+			<p:outputLabel value="serviço atual" />
+			<p:outputLabel value="#{userBean.userLogado.servicoatual}" />
+			<p:outputLabel value="ultimo serviço" />
+			<p:outputLabel value="#{userBean.userLogado.servicoanterior}" />
+			<p:commandButton value="Sair" action="#{userBean.sairSessao()}"/>
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
 </body>
 </html>

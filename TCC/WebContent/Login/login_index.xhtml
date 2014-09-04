@@ -13,7 +13,6 @@
 		<p:messages id="messages" showDetail="true" autoUpdate="true"
 			closable="true" showIcon="false" />
 		<p:growl id="growl" showDetail="true" sticky="true" />
-		<div align="center"></div>
 		<p:panel styleClass="center">
 			<p:panelGrid columns="2" styleClass="semBorda">
 				<p:outputLabel value="Apelido" />
@@ -27,7 +26,7 @@
 			<p:commandButton value="Cadastrar" action="cadastro_index.xhtml"
 				update="@all" />
 			<div align="left">
-			<input type="hidden" name="hidden1" value="#{userBean.sessao}" />
+				<p:outputLabel value="#{userBean.teste}" />
 			</div>
 		</p:panel>
 

@@ -22,6 +22,37 @@ public class User {
 	private String apelido;
 	@Column
 	private String senha;
+	@Column
+	private String servicoatual;
+	@Column
+	private String servicoanterior;
+	@Column
+	private String ultimoacesso;
+	
+
+	public String getUltimoacesso() {
+		return ultimoacesso;
+	}
+
+	public void setUltimoacesso(String ultimoacesso) {
+		this.ultimoacesso = ultimoacesso;
+	}
+
+	public String getServicoanterior() {
+		return servicoanterior;
+	}
+
+	public void setServicoanterior(String servicoanterior) {
+		this.servicoanterior = servicoanterior;
+	}
+
+	public String getServicoatual() {
+		return servicoatual;
+	}
+
+	public void setServicoatual(String servicoatual) {
+		this.servicoatual = servicoatual;
+	}
 
 	public int getCod() {
 		return cod;
