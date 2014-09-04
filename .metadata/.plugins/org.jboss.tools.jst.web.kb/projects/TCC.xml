@@ -78,30 +78,35 @@
   <path value="C:/Users/marcelo/workspace/TCC/WebContent/WEB-INF/lib/hibernate-commons-annotations-4.0.4.Final.jar"/>
  </paths>
  <validation>
-  <core validator-id="jsf-verification"/>
-  <core validator-id="jboss.jsf.core"/>
   <el>
-   <linked-el length="25" name="%0" offset="944" path="%1"/>
-   <linked-el length="25" name="%0" offset="942" path="%2"/>
-   <linked-el length="27" name="%0" offset="854" path="%1"/>
-   <linked-el length="27" name="%0" offset="449" path="%3"/>
-   <linked-el length="27" name="%0" offset="852" path="%2"/>
-   <linked-el length="25" name="%4" offset="1297" path="%2"/>
-   <linked-el length="25" name="%4" offset="944" path="%1"/>
-   <linked-el length="25" name="%4" offset="942" path="%2"/>
-   <linked-el length="27" name="%4" offset="1085" path="%2"/>
-   <linked-el length="27" name="%4" offset="854" path="%1"/>
-   <linked-el length="28" name="%4" offset="1087" path="%1"/>
-   <linked-el length="27" name="%4" offset="449" path="%3"/>
-   <linked-el length="27" name="%4" offset="852" path="%2"/>
-   <linked-el length="25" name="%5" offset="1297" path="%2"/>
-   <linked-el length="25" name="%5" offset="944" path="%1"/>
-   <linked-el length="25" name="%5" offset="942" path="%2"/>
-   <linked-el length="27" name="%5" offset="1085" path="%2"/>
-   <linked-el length="27" name="%5" offset="854" path="%1"/>
-   <linked-el length="28" name="%5" offset="1087" path="%1"/>
-   <linked-el length="27" name="%5" offset="449" path="%3"/>
-   <linked-el length="27" name="%5" offset="852" path="%2"/>
+   <linked-el length="25" name="%0" offset="945" path="%1"/>
+   <linked-el length="27" name="%0" offset="855" path="%1"/>
+   <linked-el length="25" name="%0" offset="912" path="%2"/>
+   <linked-el length="41" name="%0" offset="890" path="%3"/>
+   <linked-el length="38" name="%0" offset="779" path="%3"/>
+   <linked-el length="27" name="%0" offset="822" path="%2"/>
+   <linked-el length="25" name="%4" offset="945" path="%1"/>
+   <linked-el length="27" name="%4" offset="1055" path="%2"/>
+   <linked-el length="27" name="%4" offset="855" path="%1"/>
+   <linked-el length="20" name="%4" offset="1239" path="%2"/>
+   <linked-el length="25" name="%4" offset="912" path="%2"/>
+   <linked-el length="21" name="%4" offset="686" path="%3"/>
+   <linked-el length="41" name="%4" offset="890" path="%3"/>
+   <linked-el length="38" name="%4" offset="779" path="%3"/>
+   <linked-el length="26" name="%4" offset="975" path="%3"/>
+   <linked-el length="27" name="%4" offset="822" path="%2"/>
+   <linked-el length="28" name="%4" offset="1088" path="%1"/>
+   <linked-el length="25" name="%5" offset="945" path="%1"/>
+   <linked-el length="27" name="%5" offset="1055" path="%2"/>
+   <linked-el length="27" name="%5" offset="855" path="%1"/>
+   <linked-el length="20" name="%5" offset="1239" path="%2"/>
+   <linked-el length="25" name="%5" offset="912" path="%2"/>
+   <linked-el length="21" name="%5" offset="686" path="%3"/>
+   <linked-el length="41" name="%5" offset="890" path="%3"/>
+   <linked-el length="38" name="%5" offset="779" path="%3"/>
+   <linked-el length="26" name="%5" offset="975" path="%3"/>
+   <linked-el length="27" name="%5" offset="822" path="%2"/>
+   <linked-el length="28" name="%5" offset="1088" path="%1"/>
   </el>
  </validation>
  <aliases>

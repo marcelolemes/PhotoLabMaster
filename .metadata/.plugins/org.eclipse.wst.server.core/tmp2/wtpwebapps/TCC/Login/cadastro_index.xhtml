@@ -9,7 +9,7 @@
 </h:head>
 <h:outputStylesheet library="css" name="estilo.css" />
 <body>
-<h:form id="cadastro">
+	<h:form id="cadastro">
 		<p:messages id="messages" showDetail="true" autoUpdate="true"
 			closable="true" showIcon="false" />
 		<p:growl id="growl" showDetail="true" sticky="true" />
@@ -24,8 +24,8 @@
 			</p:panelGrid>
 			<p:commandButton value="Gravar" action="#{userBean.gravar()}"
 				update="@all" />
-			</p:panel>
-
+		</p:panel>
+		
 	</h:form>
 </body>
 </html>
