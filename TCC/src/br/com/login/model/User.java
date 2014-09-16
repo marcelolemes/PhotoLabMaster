@@ -1,7 +1,9 @@
 package br.com.login.model;
 
+import java.io.Serializable;
+import java.sql.Timestamp;
+
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,13 +13,18 @@ import javax.persistence.Table;
 
 @Entity
 @ManagedBean
-@RequestScoped
 @Table(name = "Usuario")
-public class User {
+public class User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int cod;
+	@Column
+	private int nivelacesso;
 	@Column
 	private String apelido;
 	@Column
@@ -27,14 +34,15 @@ public class User {
 	@Column
 	private String servicoanterior;
 	@Column
-	private String ultimoacesso;
-	
+	private Timestamp ultimoacesso;
+	@Column
+	private boolean logado;
 
-	public String getUltimoacesso() {
+	public Timestamp getUltimoacesso() {
 		return ultimoacesso;
 	}
 
-	public void setUltimoacesso(String ultimoacesso) {
+	public void setUltimoacesso(Timestamp ultimoacesso) {
 		this.ultimoacesso = ultimoacesso;
 	}
 
@@ -62,6 +70,14 @@ public class User {
 		this.cod = cod;
 	}
 
+	public int getNivelAcesso() {
+		return nivelacesso;
+	}
+
+	public void setNivelAcesso(int nivelAcesso) {
+		this.nivelacesso = nivelAcesso;
+	}
+
 	public String getApelido() {
 		return apelido;
 	}
@@ -76,6 +92,22 @@ public class User {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public int getNivelacesso() {
+		return nivelacesso;
+	}
+
+	public void setNivelacesso(int nivelacesso) {
+		this.nivelacesso = nivelacesso;
+	}
+
+	public boolean isLogado() {
+		return logado;
+	}
+
+	public void setLogado(boolean logado) {
+		this.logado = logado;
 	}
 
 }

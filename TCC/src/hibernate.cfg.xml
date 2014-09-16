@@ -12,6 +12,7 @@
 		</property>
 		<property name="hibernate.connection.url">
 			jdbc:mysql://localhost:3306/login
+			
 		</property>
 		<property name="hibernate.connection.driver_class">
 			com.mysql.jdbc.Driver
@@ -27,6 +28,8 @@
 
 		<mapping class="br.com.login.model.User" />
 		<mapping class="br.com.login.bean.UserBean" />
+		<mapping class="br.com.login.model.Contrato" />
+		<mapping class="br.com.login.bean.CadastrarContratoBean" />
 
 	</session-factory>
 </hibernate-configuration>
