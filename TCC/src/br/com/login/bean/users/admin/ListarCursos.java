@@ -1,20 +1,30 @@
-package br.com.login.bean;
+package br.com.login.bean.users.admin;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 
 import br.com.login.Dao.ContratoDao;
 import br.com.login.model.Contrato;
 import br.com.login.model.Metricas;
+import br.com.login.model.User;
+
+import com.lowagie.text.BadElementException;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Image;
+import com.lowagie.text.PageSize;
 
 @ManagedBean
-@SessionScoped
-public class EditarCursos implements Serializable {
+@ViewScoped
+public class ListarCursos implements Serializable {
 	/**
 	 * 
 	 */
@@ -23,8 +33,6 @@ public class EditarCursos implements Serializable {
 	 * 
 	 */
 
-
-
 	ContratoDao contDao = new ContratoDao();
 	private Metricas metricas = new Metricas();
 	private List<Contrato> listaContrato;
@@ -32,7 +40,7 @@ public class EditarCursos implements Serializable {
 	private List<String> urgencias;
 	private Contrato contratoSelecionado;
 
-	public EditarCursos() throws Exception {
+	public ListarCursos() throws Exception {
 
 		listaContrato = contDao.listarContratos();
 
@@ -53,8 +61,18 @@ public class EditarCursos implements Serializable {
 		return "/pages/conteudo/visualizarcursos_index.xhtml";
 	}
 
+	public String parserStatus(Contrato contrato) {
+		return metricas.getStatusContratoLista().get(contrato.getStatus())
+				.getLabel();
+	}
+	
 
-		public String updateContrato(Contrato contrato) throws Exception {
+	public String parserUrgencia(Contrato contrato) {
+		return metricas.getUrgenciaLista().get(contrato.getUrgencia())
+				.getLabel();
+	}
+
+	public String updateContrato(Contrato contrato) throws Exception {
 		if (contDao.Update(contrato)) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
@@ -69,6 +87,23 @@ public class EditarCursos implements Serializable {
 			return "/pages/visualizarcursos_index.xhtml";
 		}
 
+	}
+
+	public void preProcessPDF(Object document) throws IOException,
+			BadElementException, DocumentException {
+		Document pdf = (Document) document;
+		pdf.open();
+		pdf.setPageSize(PageSize.A4);
+
+		ServletContext servletContext = (ServletContext) FacesContext
+				.getCurrentInstance().getExternalContext().getContext();
+		String logo = servletContext.getRealPath("") + File.separator
+				+ "resources" + File.separator + "images" + File.separator
+				+ "logo.png";
+		Image image = Image.getInstance(logo);
+		image.setAlignment(Image.ALIGN_CENTER);
+		pdf.add(image);
+		
 	}
 
 	public ContratoDao getContDao() {

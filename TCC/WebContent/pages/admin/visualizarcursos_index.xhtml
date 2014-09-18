@@ -10,21 +10,24 @@
 	<h:head>
 		<meta http-equiv="Content-Type"
 			content="text/html; charset=ISO-8859-1" />
+		<link rel="shortcut icon" type="image/x-icon"
+			href="/resources/images/icone.ico" />
 		<title></title>
 	</h:head>
 	<h:outputStylesheet library="css" name="estilo.css" />
+	<h:outputStylesheet library="css" name="dialog.css" />
 
 	<body>
+		<p:growl id="growl" showDetail="true" autoUpdate="true" />
 
-		
-	<p:growl id="growl" showDetail="true" autoUpdate="true" />
-	
-	
 		<ui:define name="menu">
 			<ui:include src="/include/menu.xhtml" />
 		</ui:define>
+	
 		<ui:define name="content">
-			<ui:include src="/Login/cadastro.xhtml" />
+			<ui:include src="/pages/admin/conteudo/visualizarcursos.xhtml" />
 		</ui:define>
+		
+		
 	</body>
 </ui:composition>

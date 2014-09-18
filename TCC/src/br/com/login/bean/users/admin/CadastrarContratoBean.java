@@ -1,4 +1,4 @@
-package br.com.login.bean;
+package br.com.login.bean.users.admin;
 
 import java.io.Serializable;
 

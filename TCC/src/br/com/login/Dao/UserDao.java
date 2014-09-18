@@ -13,7 +13,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import br.com.login.bean.UserBean;
+import br.com.login.bean.users.UserBean;
 import br.com.login.model.User;
 import br.com.login.util.HibernateUtil;
 

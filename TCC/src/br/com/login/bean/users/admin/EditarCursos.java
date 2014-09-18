@@ -1,11 +1,11 @@
-package br.com.login.bean;
+package br.com.login.bean.users.admin;
 
 import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.login.Dao.ContratoDao;
@@ -13,8 +13,8 @@ import br.com.login.model.Contrato;
 import br.com.login.model.Metricas;
 
 @ManagedBean
-@ViewScoped
-public class ListarCursos implements Serializable {
+@SessionScoped
+public class EditarCursos implements Serializable {
 	/**
 	 * 
 	 */
@@ -32,7 +32,7 @@ public class ListarCursos implements Serializable {
 	private List<String> urgencias;
 	private Contrato contratoSelecionado;
 
-	public ListarCursos() throws Exception {
+	public EditarCursos() throws Exception {
 
 		listaContrato = contDao.listarContratos();
 
@@ -53,17 +53,8 @@ public class ListarCursos implements Serializable {
 		return "/pages/conteudo/visualizarcursos_index.xhtml";
 	}
 
-	public String parserStatus(Contrato contrato) {
-		return metricas.getStatusContratoLista().get(contrato.getStatus())
-				.getLabel();
-	}
 
-	public String parserUrgencia(Contrato contrato) {
-		return metricas.getUrgenciaLista().get(contrato.getUrgencia())
-				.getLabel();
-	}
-
-	public String updateContrato(Contrato contrato) throws Exception {
+		public String updateContrato(Contrato contrato) throws Exception {
 		if (contDao.Update(contrato)) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,

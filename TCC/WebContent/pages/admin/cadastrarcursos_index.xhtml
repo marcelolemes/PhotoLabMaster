@@ -13,18 +13,17 @@
 		<title></title>
 	</h:head>
 	<h:outputStylesheet library="css" name="estilo.css" />
-
+	<f:metadata>
+		<f:viewAction action="#{userBean.verificarLogado()}" />
+	</f:metadata>
 	<body>
-		<f:metadata>
-			<f:viewAction action="#{userBean.verificarLogado()}" />
-		</f:metadata>
-
 		<p:growl id="growl" showDetail="true" autoUpdate="true" />
+
 		<ui:define name="menu">
 			<ui:include src="/include/menu.xhtml" />
 		</ui:define>
 		<ui:define name="content">
-			<ui:include src="/pages/conteudo/usuarios_cadastrados.xhtml" />
+			<ui:include src="/pages/admin/conteudo/cadastrocurso.xhtml" />
 		</ui:define>
 	</body>
 </ui:composition>

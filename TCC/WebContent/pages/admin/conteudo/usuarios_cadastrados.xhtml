@@ -27,7 +27,7 @@
 			</p:column>
 
 			<p:column headerText="Nivel de acesso">
-				<h:outputText value="#{users.nivelAcesso}" />
+				<h:outputText value="#{listaUsuariosBean.parserNivel(users)}" />
 			</p:column>
 			<p:column headerText="Ultimo Acesso">
 				<h:outputText value="#{users.ultimoacesso}" />

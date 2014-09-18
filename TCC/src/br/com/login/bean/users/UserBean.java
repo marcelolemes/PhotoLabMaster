@@ -1,4 +1,4 @@
-package br.com.login.bean;
+package br.com.login.bean.users;
 
 import java.io.Serializable;
 import java.util.List;
@@ -60,7 +60,7 @@ public class UserBean implements Serializable {
 		if (user.isLogado()) {
 			loginAtivo();
 						
-			return "/pages/result_index.xhtml";
+			return "/pages/admin/result_index.xhtml";
 
 		} else {
 			userDao = new UserDao();
@@ -84,7 +84,7 @@ public class UserBean implements Serializable {
 
 		if (user.isLogado() /*&& (userBean.getUserLogado() != null)*/) {
 
-			return "/pages/result_index.xhtml";
+			return "/pages/admin/result_index.xhtml";
 			
 		} else {
 			return "/pages/login_index.xhtml";
@@ -95,7 +95,7 @@ public class UserBean implements Serializable {
 
 		if (user.isLogado() /*&& (userBean.getUserLogado() != null)*/) {
 
-			return "/pages/result_index.xhtml";
+			return "/pages/admin/result_index.xhtml";
 			
 		} else {
 			return "/pages/login_index.xhtml";
@@ -118,7 +118,7 @@ public class UserBean implements Serializable {
 
 		if (getUserLogado() != null  && getUserLogado().getNivelAcesso() < 2)  {
 
-			return "/pages/visualizarcursos_index.xhtml";
+			return "/pages/admin/visualizarcursos_index.xhtml";
 			
 		} else {
 			return "/pages/result_index.xhtml";
@@ -134,7 +134,7 @@ public class UserBean implements Serializable {
 				user = new User();
 				user.setLogado(true);
 			}
-			return "/pages/result_index.xhtml";
+			return "/pages/admin/result_index.xhtml";
 
 		} catch (Exception ex) {
 			messageErroCadastro();
@@ -179,7 +179,7 @@ public class UserBean implements Serializable {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Login",
 						"Seja bem vindo " + sessao));
 		// return "result.xhtml";
-		return "/pages/result_index.xhtml";
+		return "/pages/admin/result_index.xhtml";
 
 	}
 
@@ -189,7 +189,7 @@ public class UserBean implements Serializable {
 				new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Ativo",
 						"Sessão ainda ativa para o usuário:  " + sessao));
 		// return "result.xhtml";
-		return "/pages/result_index.xhtml";
+		return "/pages/admin/result_index.xhtml";
 
 	}
 	
@@ -199,7 +199,7 @@ public class UserBean implements Serializable {
 				new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Ativo",
 						"Sessão ativa reiniciada:  " + sessao));
 		// return "result.xhtml";
-		return "/pages/result_index.xhtml";
+		return "/pages/admin/result_index.xhtml";
 
 	}
 

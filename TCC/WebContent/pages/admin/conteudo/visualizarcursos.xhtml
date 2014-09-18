@@ -6,7 +6,18 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-
+<style type="text/css">
+            .urgente {
+                background-color: #fca752 !important;
+                background-image: none !important;
+                color: #fff !important;
+            }
+            .urgentissimo {
+                background-color: red !important;
+                background-image: none !important;
+                color: #fff !important;
+            }
+        </style>
 
 </h:head>
 <h:outputStylesheet library="css" name="estilo.css" />
@@ -23,11 +34,10 @@
 		<p:dataTable id="contratos" var="contrato"
 			value="#{listarCursos.listaContrato}" resizableColumns="true"
 			style="witdth:20px" sortBy="urgencia" widgetVar="cursosTable"
-			styleClass="ui-state-default" rowKey="#{contrato.cod}"
-			emptyMessage="Nenhum contrato encontrado."
+			rowKey="#{contrato.cod}" emptyMessage="Nenhum contrato encontrado."
 			filteredValue="#{listarCursos.contratosFiltrados}"
 			draggableColumns="true" scrollRows="30" scrollable="true"
-			scrollHeight="450" liveScroll="true">
+			scrollHeight="450" liveScroll="true" styleClass="interiorTabela" > <!-- rowStyleClass="#{contrato.urgencia eq 5 ? 'urgente':null} #{contrato.urgencia eq 4 ? 'urgentissimo':null}" -->
 
 			<p:column style="width:32px;text-align: center" width="30px"
 				exportable="false">
@@ -86,10 +96,10 @@
 
 
 
-		<p:dialog header="Contrato info:" widgetVar="contratoDialogo"
-			modal="false" showEffect="fade" resizable="false" closable="true"
-			styleClass="fundobranco" closeOnEscape="true"
-			style="text-align:center;">
+		<p:dialog id="continfo" header="Contrato info:"
+			widgetVar="contratoDialogo" modal="false" showEffect="fade"
+			resizable="false" closable="true" styleClass="fundobranco"
+			closeOnEscape="true" style="text-align:center;">
 			<p:outputPanel id="contratoDetalhe" style="text-align:center;">
 				<p:panelGrid columns="2"
 					rendered="#{not empty listarCursos.contratoSelecionado}">
@@ -111,6 +121,11 @@
 
 					<p:outputLabel value="Média de fotos" />
 					<h:outputText value="#{listarCursos.contratoSelecionado.media}" />
+
+					<h:commandLink id="infopdf">
+						<p:graphicImage url="/resources/images/pdf.png" />
+						<p:printer target="continfo" />
+					</h:commandLink>
 				</p:panelGrid>
 			</p:outputPanel>
 		</p:dialog>
@@ -122,11 +137,13 @@
 				<p:resetInput target=":cursos" />
 			</p:commandButton>
 
-			<!-- <h:commandLink id="pdf">
-				<p:graphicImage url="/resources/images/excel.png" />
-				<p:dataExporter type="xls" target="contratos" fileName="Cursos" />
+			<h:commandLink id="tabelapdf">
+				<p:graphicImage url="/resources/images/pdf.png" />
+				<p:dataExporter type="pdf" target="contratos" fileName="Cursos"
+					encoding="iso-8859-1" pageOnly="true"
+					preProcessor="#{listarCursos.preProcessPDF}" />
 			</h:commandLink>
-			 -->
+
 		</p:panelGrid>
 	</h:form>
 	<p:dialog widgetVar="contratoEdit" showEffect="fade" resizable="false"
@@ -135,7 +152,8 @@
 		<h:form id="editarForm">
 			<p:outputPanel id="contratoEditar" style="text-align:center;">
 				<p:panelGrid columns="4"
-					rendered="#{not empty listarCursos.contratoSelecionado}" styleClass="semBorda">
+					rendered="#{not empty listarCursos.contratoSelecionado}"
+					styleClass="semBorda">
 					<p:outputLabel value="Número do contrato" />
 					<p:inputText
 						value="#{listarCursos.contratoSelecionado.numeroContrato}" />

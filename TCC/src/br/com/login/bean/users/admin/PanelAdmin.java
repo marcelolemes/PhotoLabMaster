@@ -1,4 +1,4 @@
-package br.com.login.bean;
+package br.com.login.bean.users.admin;
 
 import java.io.Serializable;
 
@@ -10,10 +10,11 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.login.Dao.UserDao;
+import br.com.login.bean.users.UserBean;
 
 @ManagedBean
 @ViewScoped
-public class PanelUser implements Serializable {
+public class PanelAdmin implements Serializable {
 
 	/**
 	 * 
@@ -39,10 +40,10 @@ public class PanelUser implements Serializable {
 
 				userBean.autoridadeInsuficiente();
 
-				return "/pages/result_index.xhtml";
+				return "/pages/admin/result_index.xhtml";
 			} else {
 
-				return "/pages/visualizarcursos_index.xhtml";
+				return "/pages/admin/visualizarcursos_index.xhtml";
 			}
 
 		} else {
@@ -60,10 +61,10 @@ public class PanelUser implements Serializable {
 
 				userBean.autoridadeInsuficiente();
 				// return "result.xhtml";
-				return "/pages/result_index.xhtml";
+				return "/pages/admin/result_index.xhtml";
 			} else {
 
-				return "/pages/cadastro_index.xhtml";
+				return "/pages/admin/cadastro_index.xhtml";
 			}
 
 		} else {
@@ -80,10 +81,10 @@ public class PanelUser implements Serializable {
 			if (userBean.getUserLogado().getNivelAcesso() < 0) {
 
 				userBean.autoridadeInsuficiente();
-				return "/pages/result_index.xhtml";
+				return "/pages/admin/result_index.xhtml";
 			} else {
 
-				return "/pages/cadastrarcursos_index.xhtml";
+				return "/pages/admin/cadastrarcursos_index.xhtml";
 			}
 
 		} else {
@@ -101,10 +102,10 @@ public class PanelUser implements Serializable {
 
 				userBean.autoridadeInsuficiente();
 				// return "result.xhtml";
-				return "/pages/result_index.xhtml";
+				return "/pages/admin/result_index.xhtml";
 			} else {
 
-				return "/pages/usuarios_cadastrados_index.xhtml";
+				return "/pages/admin/usuarios_cadastrados_index.xhtml";
 			}
 
 		} else {
