@@ -11,7 +11,7 @@
 <h:outputStylesheet library="css" name="estilo.css" />
 <body>
 	<h:form id="cadastro">
-		
+
 		<div align="center"></div>
 		<p:panel styleClass="center">
 			<p:panelGrid columns="2" styleClass="semBorda">
@@ -25,8 +25,7 @@
 					<f:selectItems value="#{userBean.nivelAcessoCadastro}" />
 				</p:selectOneMenu>
 				<p:outputLabel value="Setor" />
-				<p:selectOneMenu id="setoroinput"
-					value="#{userBean.user.setor}">
+				<p:selectOneMenu id="setorinput" value="#{userBean.user.setor}">
 					<f:selectItems value="#{userBean.setores}" />
 				</p:selectOneMenu>
 

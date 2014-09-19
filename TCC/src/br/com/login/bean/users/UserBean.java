@@ -60,8 +60,11 @@ public class UserBean implements Serializable {
 	public String logar() throws Exception {
 		if (user.isLogado()) {
 			loginAtivo();
-
-			return "/pages/admin/result_index.xhtml";
+			if (userLogado.getNivelAcesso() > 4) {
+				return "/pages/admin/result_index.xhtml";
+			} else {
+				return "/pages/user/result_index" + userLogado.getSetor() + ".xhtml";
+			}
 
 		} else {
 			userDao = new UserDao();
@@ -86,7 +89,11 @@ public class UserBean implements Serializable {
 
 		if (user.isLogado() /* && (userBean.getUserLogado() != null) */) {
 
-			return "/pages/admin/result_index.xhtml";
+			if (userLogado.getNivelAcesso() > 4) {
+				return "/pages/admin/result_index.xhtml";
+			} else {
+				return "/pages/user/result_index" + userLogado.getSetor() + ".xhtml";
+			}
 
 		} else {
 			return "/pages/login_index.xhtml";
@@ -97,7 +104,11 @@ public class UserBean implements Serializable {
 
 		if (user.isLogado() /* && (userBean.getUserLogado() != null) */) {
 
-			return "/pages/admin/result_index.xhtml";
+			if (userLogado.getNivelAcesso() > 4) {
+				return "/pages/admin/result_index.xhtml";
+			} else {
+				return "/pages/user/result_index" + userLogado.getSetor() + ".xhtml";
+			}
 
 		} else {
 			return "/pages/login_index.xhtml";
@@ -176,8 +187,14 @@ public class UserBean implements Serializable {
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Login",
 						"Seja bem vindo " + sessao));
-		// return "result.xhtml";
-		return "/pages/admin/result_index.xhtml";
+
+		if (userLogado.getNivelAcesso() > 4) {
+			return "/pages/admin/result_index.xhtml";
+		}
+
+		else {
+			return "/pages/user/result_index" + userLogado.getSetor() + ".xhtml";
+		}
 
 	}
 
@@ -187,7 +204,13 @@ public class UserBean implements Serializable {
 				new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Ativo",
 						"Sessão ainda ativa para o usuário:  " + sessao));
 		// return "result.xhtml";
-		return "/pages/admin/result_index.xhtml";
+		if (userLogado.getNivelAcesso() < 4) {
+			return "/pages/admin/result_index.xhtml";
+		}
+
+		else {
+			return "/pages/user/result_index" + userLogado.getSetor() + ".xhtml";
+		}
 
 	}
 

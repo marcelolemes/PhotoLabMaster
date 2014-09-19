@@ -31,16 +31,19 @@ public class PanelAdmin implements Serializable {
 
 	}
 
-	
-
 	public String btVisualizarCursos() {
 
 		if (userBean.getUser().isLogado()) {
-			if (userBean.getUserLogado().getNivelAcesso() < 2) {
+			if (userBean.getUserLogado().getNivelAcesso() < 4) {
 
 				userBean.autoridadeInsuficiente();
 
-				return "/pages/admin/result_index.xhtml";
+				if (userBean.getUserLogado().getNivelAcesso() > 4) {
+					return "/pages/admin/result_index.xhtml";
+				} else {
+					return "/pages/user/result_index"
+							+ userBean.getUserLogado().getSetor() + ".xhtml";
+				}
 			} else {
 
 				return "/pages/admin/visualizarcursos_index.xhtml";
@@ -61,7 +64,13 @@ public class PanelAdmin implements Serializable {
 
 				userBean.autoridadeInsuficiente();
 				// return "result.xhtml";
-				return "/pages/admin/result_index.xhtml";
+
+				if (userBean.getUserLogado().getNivelAcesso() > 4) {
+					return "/pages/admin/result_index.xhtml";
+				} else {
+					return "/pages/user/result_index"
+							+ userBean.getUserLogado().getSetor() + ".xhtml";
+				}
 			} else {
 
 				return "/pages/admin/cadastro_index.xhtml";
@@ -81,7 +90,13 @@ public class PanelAdmin implements Serializable {
 			if (userBean.getUserLogado().getNivelAcesso() < 0) {
 
 				userBean.autoridadeInsuficiente();
-				return "/pages/admin/result_index.xhtml";
+
+				if (userBean.getUserLogado().getNivelAcesso() > 4) {
+					return "/pages/admin/result_index.xhtml";
+				} else {
+					return "/pages/user/result_index"
+							+ userBean.getUserLogado().getSetor() + ".xhtml";
+				}
 			} else {
 
 				return "/pages/admin/cadastrarcursos_index.xhtml";
@@ -94,14 +109,20 @@ public class PanelAdmin implements Serializable {
 		}
 
 	}
-	
+
 	public String btCadastrarAlbum() {
 
 		if (userBean.getUser().isLogado()) {
-			if (userBean.getUserLogado().getNivelAcesso() < 0) {
+			if (userBean.getUserLogado().getNivelAcesso() < 4) {
 
 				userBean.autoridadeInsuficiente();
-				return "/pages/admin/result_index.xhtml";
+
+				if (userBean.getUserLogado().getNivelAcesso() > 4) {
+					return "/pages/admin/result_index.xhtml";
+				} else {
+					return "/pages/user/result_index"
+							+ userBean.getUserLogado().getSetor() + ".xhtml";
+				}
 			} else {
 
 				return "/pages/admin/cadastro_album_index.xhtml";
@@ -114,13 +135,46 @@ public class PanelAdmin implements Serializable {
 		}
 
 	}
+
 	public String btListarAlbuns() {
 
 		if (userBean.getUser().isLogado()) {
-			if (userBean.getUserLogado().getNivelAcesso() < 0) {
+			if (userBean.getUserLogado().getNivelAcesso() < 4) {
 
 				userBean.autoridadeInsuficiente();
-				return "/pages/admin/result_index.xhtml";
+
+				if (userBean.getUserLogado().getNivelAcesso() > 4) {
+					return "/pages/admin/result_index.xhtml";
+				} else {
+					return "/pages/user/result_index"
+							+ userBean.getUserLogado().getSetor() + ".xhtml";
+				}
+			} else {
+
+				return "/pages/admin/visualizaralbuns_index.xhtml";
+			}
+
+		} else {
+			userBean.nenhumUsuario();
+			return "/pages/login_index.xhtml";
+
+		}
+
+	}
+
+	public String btListarAlbunsCurso() {
+
+		if (userBean.getUser().isLogado()) {
+			if (userBean.getUserLogado().getNivelAcesso() < 4) {
+
+				userBean.autoridadeInsuficiente();
+
+				if (userBean.getUserLogado().getNivelAcesso() > 4) {
+					return "/pages/admin/result_index.xhtml";
+				} else {
+					return "/pages/user/result_index"
+							+ userBean.getUserLogado().getSetor() + ".xhtml";
+				}
 			} else {
 
 				return "/pages/admin/visualizaralbuns_index.xhtml";
@@ -137,11 +191,17 @@ public class PanelAdmin implements Serializable {
 	public String btListarUsers() {
 
 		if (userBean.getUser().isLogado()) {
-			if (userBean.getUserLogado().getNivelAcesso() < 3) {
+			if (userBean.getUserLogado().getNivelAcesso() < 4) {
 
 				userBean.autoridadeInsuficiente();
 				// return "result.xhtml";
-				return "/pages/admin/result_index.xhtml";
+
+				if (userBean.getUserLogado().getNivelAcesso() > 4) {
+					return "/pages/admin/result_index.xhtml";
+				} else {
+					return "/pages/user/result_index"
+							+ userBean.getUserLogado().getSetor() + ".xhtml";
+				}
 			} else {
 
 				return "/pages/admin/usuarios_cadastrados_index.xhtml";
@@ -165,26 +225,20 @@ public class PanelAdmin implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().invalidateSession();
 	}
-	
-	
-	
-	
-	
 
 	public String sairSessao() throws Exception {
 
 		if (userBean.getUser().isLogado()) {
 			try {
 				userBean.setLogado(false);
-				
+
 				userDao.gravarTimestamp(userBean.getUserLogado());
 
 				/*
 				 * userBean.setUserLogado(null);
 				 */
-				
 
-				// Sair
+				// testando
 				FacesContext context = FacesContext.getCurrentInstance();
 				context.getExternalContext().invalidateSession();
 
@@ -210,7 +264,6 @@ public class PanelAdmin implements Serializable {
 		}
 
 	}
-	
 
 	public UserBean getUserBean() {
 		return userBean;

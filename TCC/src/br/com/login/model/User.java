@@ -96,14 +96,6 @@ public class User implements Serializable {
 		this.senha = senha;
 	}
 
-	public int getNivelacesso() {
-		return nivelacesso;
-	}
-
-	public void setNivelacesso(int nivelacesso) {
-		this.nivelacesso = nivelacesso;
-	}
-
 	public boolean isLogado() {
 		return logado;
 	}

@@ -35,9 +35,9 @@ public class ListaUsuariosBean implements Serializable {
 	}
 
 	public String parserNivel(User user) {
-		return metricas.getNivelAcesso().get(user.getNivelacesso()).getLabel();
+		return metricas.getNivelAcesso().get(user.getNivelAcesso())
+				.getLabel();
 	}
-
 	public String parserSetor(User user) {
 		try {
 			return metricas.getSetores().get(user.getSetor()).getLabel();
@@ -47,6 +47,7 @@ public class ListaUsuariosBean implements Serializable {
 		}
 
 	}
+
 
 	public List<User> getListaUsers() {
 		return listaUsers;
