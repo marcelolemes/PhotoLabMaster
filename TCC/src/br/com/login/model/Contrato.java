@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -53,7 +55,11 @@ public class Contrato implements Serializable {
 	private String obs;
 	@Column
 	private Date dataBackup;
-	@OneToMany (mappedBy="contrato")
+	@ManyToOne
+	@JoinColumn(name = "ficha_id", referencedColumnName = "cod")
+	private Ficha nFicha;
+	
+	@OneToMany(mappedBy = "contrato")
 	private List<Album> listaAlbum;
 
 	public List<Album> getListaAlbum() {

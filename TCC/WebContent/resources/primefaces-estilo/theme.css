@@ -1249,5 +1249,9 @@
 body .ui-layout-center .ui-layout-unit-content .ui-layout-unit-centralContent
 	{
 	background: url("#{request.contextPath}/resources/images/back.png");
+	border: none !important;
 }
 
+.ui-layout-unit-footer {
+	border: none !important;
+}

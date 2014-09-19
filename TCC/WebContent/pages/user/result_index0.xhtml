@@ -21,7 +21,7 @@
 		</f:metadata>
 
 		<ui:define name="menu">
-			<ui:include src="/include/menu.xhtml" />
+			<ui:include src="/include/user/menu0.xhtml" />
 		</ui:define>
 		<ui:define name="content">
 
@@ -31,7 +31,8 @@
 					<ui:insert name="northContent" />
 				</p:layoutUnit>
 
-				<p:layoutUnit position="center" header="Setor 0">
+				<p:layoutUnit position="center"
+					header="Setor #{listaUsuariosBean.parserSetor(panelAdmin.userBean.userLogado)}">
 					<ui:insert name="centralContent" />
 					<p:panel styleClass="panecentral">
 						<p:panelGrid columns="2" styleClass="semBorda">
@@ -55,7 +56,7 @@
 						</p:panelGrid>
 
 					</p:panel>
-				<h:form>
+					<h:form>
 						<p:dialog header="TrocarSenha" widgetVar="TrocarSenha">
 							<p:panel id="trocarSenhaPanel">
 								<p:panelGrid columns="2" styleClass="semBorda">
