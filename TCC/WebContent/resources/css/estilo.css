@@ -9,7 +9,26 @@
 .ui-layout-north .ui-layout-unit-content {
 	z-index: 20 !important;
 	overflow: visible !important;
+	opacity: 1;
 	border: none !important;
+}
+
+.ui-layout-south {
+	z-index: 30 !important;
+	overflow-y: hidden !important;
+	overflow-x: hidden !important;
+	border: none !important;
+}
+
+.ui-layout-south .ui-layout-unit-footer {
+	z-index: 30 !important;
+	overflow-y: hidden !important;
+	overflow-x: hidden !important;
+	opacity: 1;
+}
+
+ui-layout-south {
+	top: 200px !important;
 }
 
 .ui-menubar {
@@ -29,8 +48,127 @@
 }
 
 .center {
-	border: none !important;
 	position: absolute;
 	right: 40%;
 	top: 30%
+}
+
+.panecentral {
+	background-color: #fff;
+	position: absolute;
+	right: 40%;
+	top: 10%;
+	border: 1px solid #000;
+}
+
+.ui-button {
+	
+}
+
+.ui-button-text-only .ui-button-text {
+	
+}
+
+.button:hover {
+	
+}
+
+.button-login,.ui-button-login {
+	font-size: 20px ! important;
+	/*background-color: #000 ! important;*/
+	height: 50px ! important;
+	width: 300px ! important;
+}
+
+.button-login:hover,.ui-button-login:hover {
+	font-size: 20px ! important;
+	/*background-color: #000 ! important;*/
+	height: 50px ! important;
+	width: 300px ! important;
+}
+
+.titulologin {
+	font-size: 50px ! important;
+	font-style: bold ! important;
+}
+
+.profile-img {
+	width: 96px;
+	height: 96px;
+	display: block;
+	border-radius: 50%;
+	margin: 0 auto 10px;
+}
+
+.calendar {
+	background-color: #fff;
+	display: block;
+	overflow: visible !important;
+	color: #000;
+}
+
+.ui-layout {
+	background-color: #ccc !important;
+}
+
+.ui-state-default {
+	background-color: #d8e5f3;
+	font-weight: bold;
+}
+
+.fundobranco-input {
+	background-color: #fff !important;
+	font-size: 20px ! important;
+	/*background-color: #000 ! important;*/
+	height: 50px ! important;
+	width: 300px ! important;
+}
+
+.fundobranco {
+	background-color: #fff !important;
+	overflow: visible !important;
+	border: 1px solid #000;
+	z-index: 50 !important
+}
+
+.ui-dialog {
+	background-color: #fff !important;
+	overflow: visible !important;
+	border: 1px solid #000
+}
+
+.ui-tooltip {
+	background-color: #fff;
+}
+
+.botao-info {
+	background-color: #fff !important;
+	border: none !important;
+}
+
+.botao-edit {
+	background-color: #fff !important;
+	border: none !important;
+}
+
+.interiorTabela { /*aqui o estilo de old dentro do seu css*/
+	background-color: #fff !important;
+}
+
+.botao-sair {
+	background-color: red !important;
+}
+
+.botao-sair-hover .botao-sair:hover {
+	background-color: black !important;
+}
+
+body,.ui-layout-unit-content,.ui-layout-unit-centralContent {
+	background: url("#{request.contextPath}/resources/images/back.png")
+		!important;
+}
+
+.ui-layout-center {
+	background: url("#{request.contextPath}/resources/images/back.png")
+		!important;
 }
