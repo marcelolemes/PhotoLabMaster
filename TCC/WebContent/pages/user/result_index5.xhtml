@@ -55,19 +55,21 @@
 						</p:panelGrid>
 
 					</p:panel>
-					<p:dialog header="TrocarSenha" widgetVar="TrocarSenha">
-						<p:panel id="trocarSenhaPanel">
-							<p:panelGrid columns="2" styleClass="semBorda">
-								<p:outputLabel value="insira a NOVA senha:" />
-								<h:inputSecret value="#{userBean.user.senha}" />
-								<p:outputLabel value="REPITA a NOVA senha:" />
-								<h:inputSecret value="#{userBean.senhaTemporaria}" />
-								<p:commandButton value="Gravar senha"
-									action="#{userBean.mudarSenha()}"
-									oncomplete="PF('TrocarSenha').hide()" />
-							</p:panelGrid>
-						</p:panel>
-					</p:dialog>
+					<h:form>
+						<p:dialog header="TrocarSenha" widgetVar="TrocarSenha">
+							<p:panel id="trocarSenhaPanel">
+								<p:panelGrid columns="2" styleClass="semBorda">
+									<p:outputLabel value="insira a NOVA senha:" />
+									<h:inputSecret value="#{panelAdmin.senhaTemporaria}" />
+									<p:outputLabel value="REPITA a NOVA senha:" />
+									<h:inputSecret value="#{panelAdmin.senhaTemporaria2}" />
+									<p:commandButton value="Gravar senha"
+										action="#{panelAdmin.mudarSenha()}"
+										oncomplete="PF('TrocarSenha').hide()" />
+								</p:panelGrid>
+							</p:panel>
+						</p:dialog>
+					</h:form>
 
 				</p:layoutUnit>
 

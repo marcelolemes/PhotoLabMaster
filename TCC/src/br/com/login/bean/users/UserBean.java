@@ -37,7 +37,7 @@ public class UserBean implements Serializable {
 	private User userLogado;
 	UserDao userDao;
 	private String sessao = new String();
-	private String senhaTemporaria;
+	
 
 	private static boolean logado = false;
 
@@ -63,7 +63,8 @@ public class UserBean implements Serializable {
 			if (userLogado.getNivelAcesso() > 4) {
 				return "/pages/admin/result_index.xhtml";
 			} else {
-				return "/pages/user/result_index" + userLogado.getSetor() + ".xhtml";
+				return "/pages/user/result_index" + userLogado.getSetor()
+						+ ".xhtml";
 			}
 
 		} else {
@@ -92,7 +93,8 @@ public class UserBean implements Serializable {
 			if (userLogado.getNivelAcesso() > 4) {
 				return "/pages/admin/result_index.xhtml";
 			} else {
-				return "/pages/user/result_index" + userLogado.getSetor() + ".xhtml";
+				return "/pages/user/result_index" + userLogado.getSetor()
+						+ ".xhtml";
 			}
 
 		} else {
@@ -107,7 +109,8 @@ public class UserBean implements Serializable {
 			if (userLogado.getNivelAcesso() > 4) {
 				return "/pages/admin/result_index.xhtml";
 			} else {
-				return "/pages/user/result_index" + userLogado.getSetor() + ".xhtml";
+				return "/pages/user/result_index" + userLogado.getSetor()
+						+ ".xhtml";
 			}
 
 		} else {
@@ -156,23 +159,7 @@ public class UserBean implements Serializable {
 
 	}
 
-	public void mudarSenha() throws Exception {
-		if (user.getSenha().equals(senhaTemporaria)) {
-			userLogado.setSenha(senhaTemporaria);
-			userDao.Update(userLogado);
-			messageAlteraSenha();
-		} else {
-
-			FacesContext
-					.getCurrentInstance()
-					.addMessage(
-							null,
-							new FacesMessage(FacesMessage.SEVERITY_ERROR,
-									sessao,
-									"Senha não alterada, digite a nova senha nos campos indicados"));
-		}
-
-	}
+	
 
 	public void messageAlteraSenha() {
 		FacesContext.getCurrentInstance().addMessage(
@@ -193,7 +180,8 @@ public class UserBean implements Serializable {
 		}
 
 		else {
-			return "/pages/user/result_index" + userLogado.getSetor() + ".xhtml";
+			return "/pages/user/result_index" + userLogado.getSetor()
+					+ ".xhtml";
 		}
 
 	}
@@ -209,7 +197,8 @@ public class UserBean implements Serializable {
 		}
 
 		else {
-			return "/pages/user/result_index" + userLogado.getSetor() + ".xhtml";
+			return "/pages/user/result_index" + userLogado.getSetor()
+					+ ".xhtml";
 		}
 
 	}
@@ -305,9 +294,7 @@ public class UserBean implements Serializable {
 		this.nivelAcessoCadastro = nivelAcessoCadastro;
 	}
 
-	public String getSenhaTemporaria() {
-		return senhaTemporaria;
-	}
+
 
 	public List<SelectItem> getSetores() {
 		return setores;
@@ -325,8 +312,6 @@ public class UserBean implements Serializable {
 		this.userDao = userDao;
 	}
 
-	public void setSenhaTemporaria(String senhaTemporaria) {
-		this.senhaTemporaria = senhaTemporaria;
-	}
+
 
 }

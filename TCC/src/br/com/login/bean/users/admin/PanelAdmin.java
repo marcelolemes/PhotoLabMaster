@@ -21,6 +21,8 @@ public class PanelAdmin implements Serializable {
 	 */
 
 	UserDao userDao = new UserDao();
+	private String senhaTemporaria;
+	private String senhaTemporaria2;
 	private static final long serialVersionUID = -8922198411434111521L;
 
 	@ManagedProperty("#{userBean}")
@@ -28,6 +30,28 @@ public class PanelAdmin implements Serializable {
 
 	@PostConstruct
 	public void init() {
+
+	}
+
+	public void mudarSenha() throws Exception {
+		System.out.println("Primeira senha " + senhaTemporaria);
+		System.out.println("Segunda senha " + senhaTemporaria2);
+
+		if (senhaTemporaria != null && senhaTemporaria2 != null
+				&& senhaTemporaria.equals(senhaTemporaria2)) {
+			userBean.getUserLogado().setSenha(senhaTemporaria2);
+			userDao.Update(userBean.getUserLogado());
+			userBean.messageAlteraSenha();
+		} else {
+
+			FacesContext
+					.getCurrentInstance()
+					.addMessage(
+							null,
+							new FacesMessage(FacesMessage.SEVERITY_ERROR,
+									userBean.getUserLogado().getApelido(),
+									"Senha não alterada, digite a nova senha nos campos indicados"));
+		}
 
 	}
 
@@ -87,7 +111,7 @@ public class PanelAdmin implements Serializable {
 	public String btCadastrarCursos() {
 
 		if (userBean.getUser().isLogado()) {
-			if (userBean.getUserLogado().getNivelAcesso() < 0) {
+			if (userBean.getUserLogado().getSetor() != 0) {
 
 				userBean.autoridadeInsuficiente();
 
@@ -271,6 +295,22 @@ public class PanelAdmin implements Serializable {
 
 	public void setUserBean(UserBean userBean) {
 		this.userBean = userBean;
+	}
+
+	public String getSenhaTemporaria() {
+		return senhaTemporaria;
+	}
+
+	public void setSenhaTemporaria(String senhaTemporaria) {
+		this.senhaTemporaria = senhaTemporaria;
+	}
+
+	public String getSenhaTemporaria2() {
+		return senhaTemporaria2;
+	}
+
+	public void setSenhaTemporaria2(String senhaTemporaria2) {
+		this.senhaTemporaria2 = senhaTemporaria2;
 	}
 
 }
