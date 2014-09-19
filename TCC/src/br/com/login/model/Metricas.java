@@ -12,15 +12,17 @@ public class Metricas implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -6233474203192271864L;
-	private static List<SelectItem> nivelAcesso = new ArrayList<SelectItem>();
-	private static List<SelectItem> urgenciaLista = new ArrayList<SelectItem>();
-	private static List<SelectItem> statusContratoLista = new ArrayList<SelectItem>();
+	private List<SelectItem> nivelAcesso = new ArrayList<SelectItem>();
+	private List<SelectItem> urgenciaLista = new ArrayList<SelectItem>();
+	private List<SelectItem> statusContratoLista = new ArrayList<SelectItem>();
+	private List<SelectItem> setores = new ArrayList<SelectItem>();
 
 	public Metricas() {
 
 		inicializarNivelAcesso();
 		inicializarUrgenciaLista();
 		iniciarStatusLista();
+		inicializarSetores();
 	}
 
 	public void inicializarNivelAcesso() {
@@ -32,13 +34,24 @@ public class Metricas implements Serializable {
 		nivelAcesso.add(new SelectItem(5, "SysAdmin"));
 	}
 
+	public void inicializarSetores() {
+		setores.add(new SelectItem(0, "Cadastro"));
+		setores.add(new SelectItem(1, "Correção de cor"));
+		setores.add(new SelectItem(2, "Tratamento de pele"));
+		setores.add(new SelectItem(3, "Montagem"));
+		setores.add(new SelectItem(4, "Impressão"));
+		setores.add(new SelectItem(5, "Backup"));
+
+	}
+
 	public void inicializarUrgenciaLista() {
-		urgenciaLista.add(new SelectItem(0, "Urgentíssimo"));
-		urgenciaLista.add(new SelectItem(1, "Muito Urgente"));
-		urgenciaLista.add(new SelectItem(2, "Urgente"));
-		urgenciaLista.add(new SelectItem(3, "Normal"));
-		urgenciaLista.add(new SelectItem(4, "Baixa"));
-		urgenciaLista.add(new SelectItem(5, "Manter Parado"));
+		urgenciaLista.add(new SelectItem(0, "Fazendo"));
+		urgenciaLista.add(new SelectItem(1, "Urgentíssimo"));
+		urgenciaLista.add(new SelectItem(2, "Muito Urgente"));
+		urgenciaLista.add(new SelectItem(3, "Urgente"));
+		urgenciaLista.add(new SelectItem(4, "Normal"));
+		urgenciaLista.add(new SelectItem(5, "Baixa"));
+		urgenciaLista.add(new SelectItem(6, "Manter Parado"));
 
 	}
 
@@ -53,7 +66,8 @@ public class Metricas implements Serializable {
 		statusContratoLista.add(new SelectItem(6, "Cor/Tratamento"));
 		statusContratoLista.add(new SelectItem(7, "Parado tratamento de pele"));
 		statusContratoLista.add(new SelectItem(8, "Em tratamento de pele"));
-		statusContratoLista.add(new SelectItem(9, "Em tratamento Terceirizado"));
+		statusContratoLista
+				.add(new SelectItem(9, "Em tratamento Terceirizado"));
 		statusContratoLista.add(new SelectItem(10, "Tratamento/Montagem"));
 		statusContratoLista.add(new SelectItem(11, "Tratamento Pronto"));
 		statusContratoLista.add(new SelectItem(12, "Parado Montagem"));
@@ -70,7 +84,7 @@ public class Metricas implements Serializable {
 	}
 
 	public void setNivelAcesso(List<SelectItem> nivelAcesso) {
-		Metricas.nivelAcesso = nivelAcesso;
+		this.nivelAcesso = nivelAcesso;
 	}
 
 	public List<SelectItem> getUrgenciaLista() {
@@ -78,7 +92,7 @@ public class Metricas implements Serializable {
 	}
 
 	public void setUrgenciaLista(List<SelectItem> urgenciaLista) {
-		Metricas.urgenciaLista = urgenciaLista;
+		this.urgenciaLista = urgenciaLista;
 	}
 
 	public List<SelectItem> getStatusContratoLista() {
@@ -86,7 +100,15 @@ public class Metricas implements Serializable {
 	}
 
 	public void setStatusContratoLista(List<SelectItem> statusContratoLista) {
-		Metricas.statusContratoLista = statusContratoLista;
+		this.statusContratoLista = statusContratoLista;
+	}
+
+	public List<SelectItem> getSetores() {
+		return setores;
+	}
+
+	public void setSetores(List<SelectItem> setores) {
+		this.setores = setores;
 	}
 
 }

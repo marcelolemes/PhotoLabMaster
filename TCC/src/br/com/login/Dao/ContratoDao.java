@@ -11,6 +11,9 @@ import org.hibernate.Session;
 import br.com.login.model.Contrato;
 import br.com.login.util.HibernateUtil;
 
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
+
 @ViewScoped
 public class ContratoDao implements Serializable {
 
@@ -52,4 +55,16 @@ public class ContratoDao implements Serializable {
 		return listaRetorno;
 
 	}
+
+	public Contrato pesquisarContrato(String numeroContrato) throws Exception {
+		Session sessao = HibernateUtil.getSession();
+		Criteria criteria = sessao.createCriteria(Contrato.class);
+		criteria.add(Restrictions.like("numeroContrato", numeroContrato,
+				MatchMode.ANYWHERE));
+		Contrato Retorno = (Contrato) criteria.uniqueResult();
+		sessao.close();
+		return Retorno;
+
+	}
+
 }

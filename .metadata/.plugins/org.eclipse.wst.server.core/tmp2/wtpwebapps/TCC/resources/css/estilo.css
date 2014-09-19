@@ -3,20 +3,21 @@
 .ui-layout-north {
 	z-index: 20 !important;
 	overflow: visible !important;
-	/*border: none !important;*/
+	border: none !important;
 }
 
 .ui-layout-north .ui-layout-unit-content {
 	z-index: 20 !important;
 	overflow: visible !important;
 	opacity: 1;
+	border: none !important;
 }
 
 .ui-layout-south {
 	z-index: 30 !important;
 	overflow-y: hidden !important;
 	overflow-x: hidden !important;
-	background-image: url('resources/images/footer.png');
+	border: none !important;
 }
 
 .ui-layout-south .ui-layout-unit-footer {
@@ -148,4 +149,26 @@ ui-layout-south {
 .botao-edit {
 	background-color: #fff !important;
 	border: none !important;
+}
+
+.interiorTabela { /*aqui o estilo de old dentro do seu css*/
+	background-color: #fff !important;
+}
+
+.botao-sair {
+	background-color: red !important;
+}
+
+.botao-sair-hover .botao-sair:hover {
+	background-color: black !important;
+}
+
+body,.ui-layout-unit-content,.ui-layout-unit-centralContent {
+	background: url("#{request.contextPath}/resources/images/back.png")
+		!important;
+}
+
+.ui-layout-center {
+	background: url("#{request.contextPath}/resources/images/back.png")
+		!important;
 }

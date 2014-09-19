@@ -1,38 +1,58 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<h:outputStylesheet library="css" name="modelo.css" />
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Lab Monitor ©</title>
+	<h:outputStylesheet library="css" name="estilo.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>PhotoLab Master</title>
 	<link rel="shortcut icon" type="image/x-icon"
 		href="#{request.contextPath}/resources/images/icone.ico" />
 </h:head>
 <body>
+
+
+
+
 	<p:layout fullPage="true">
 		<p:layoutUnit position="north" resizable="true">
 			<ui:insert name="menu" />
 		</p:layoutUnit>
 		<p:layoutUnit position="center" resizable="true"
 			style="overflow-y: visible !important;">
+			<audio autoplay="autoplay">
+				<source src="#{request.contextPath}/resources/audio/som.mp3"
+					type="audio/mp3" />
+			</audio>
 			<p:growl showDetail="true" autoUpdate="true" />
 			<ui:insert name="content" />
 		</p:layoutUnit>
+		<p:layoutUnit position="east" resizable="true">
+			<ui:insert name="east" />
+		</p:layoutUnit>
+		<p:layoutUnit position="west" resizable="true">
+			<ui:insert name="west" />
+		</p:layoutUnit>
 		<p:layoutUnit position="south" resizable="true" size="10%"
 			layout="block">
+
 			<h:form id="footer">
+
 				<div style="float: right;">
 					<p:graphicImage url="/resources/images/footer.png" />
 				</div>
 				<div style="float: left;">
-					<p:panelGrid columns="3" styleClass="semBorda">
-						<p:outputLabel value="Usuário(a): " />
-						<p:outputLabel value="#{panelUser.userBean.userLogado.apelido}"
-							rendered="#{not empty panelUser.userBean.userLogado.apelido}" />
+
+					<p:panelGrid columns="4">
+
+						<p:commandButton icon="ui-icon-close" styleClass="botao-sair"
+							rendered="#{not empty panelAdmin.userBean.userLogado.apelido}"
+							value="#{panelAdmin.userBean.userLogado.apelido} (sair)"
+							action="#{panelAdmin.sairSessao()}" update="@all" process="@this" />
+
 						<p:clock pattern="HH:mm:ss" mode="server" />
 					</p:panelGrid>
 				</div>

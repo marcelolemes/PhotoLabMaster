@@ -30,6 +30,12 @@
 			<p:growl showDetail="true" autoUpdate="true" />
 			<ui:insert name="content" />
 		</p:layoutUnit>
+		<p:layoutUnit position="east" resizable="true">
+			<ui:insert name="east" />
+		</p:layoutUnit>
+		<p:layoutUnit position="west" resizable="true">
+			<ui:insert name="west" />
+		</p:layoutUnit>
 		<p:layoutUnit position="south" resizable="true" size="10%"
 			layout="block">
 
@@ -39,11 +45,14 @@
 					<p:graphicImage url="/resources/images/footer.png" />
 				</div>
 				<div style="float: left;">
-					<p:panelGrid columns="4" styleClass="semBorda">
-						<p:commandButton id="botao-sair" icon="ui-icon-close" styleClass="botao-sair"
+
+					<p:panelGrid columns="4">
+
+						<p:commandButton icon="ui-icon-close" styleClass="botao-sair"
 							rendered="#{not empty panelAdmin.userBean.userLogado.apelido}"
 							value="#{panelAdmin.userBean.userLogado.apelido} (sair)"
 							action="#{panelAdmin.sairSessao()}" update="@all" process="@this" />
+
 						<p:clock pattern="HH:mm:ss" mode="server" />
 					</p:panelGrid>
 				</div>
