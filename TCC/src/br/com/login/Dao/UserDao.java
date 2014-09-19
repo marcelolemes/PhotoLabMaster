@@ -59,7 +59,7 @@ public class UserDao implements Serializable {
 			if (resultado.getSenha() != null) {
 				if (resultado.getSenha().equals(user.getSenha())) {
 					if (resultado.isLogado()) {
-						new UserBean().reiniciarsessão();
+						new UserBean().reiniciarsessao();
 						sessao.close();
 						return resultado;
 					} else {
@@ -121,7 +121,7 @@ public class UserDao implements Serializable {
 							new FacesMessage(
 									FacesMessage.SEVERITY_FATAL,
 									"Cadastro",
-									"Não é possível salvar, o apelido é muito curto, insira um nome com ao menos 4 caracteres"));
+									"Nï¿½o ï¿½ possï¿½vel salvar, o apelido ï¿½ muito curto, insira um nome com ao menos 4 caracteres"));
 			sessao.close();
 			return false;
 		} else {
@@ -133,7 +133,7 @@ public class UserDao implements Serializable {
 								null,
 								new FacesMessage(FacesMessage.SEVERITY_FATAL,
 										"Cadastro",
-										"Não é possível salvar, a senha é muito curta, insira ao menos 4 caracteres"));
+										"Nï¿½o ï¿½ possï¿½vel salvar, a senha ï¿½ muito curta, insira ao menos 4 caracteres"));
 				sessao.close();
 				return false;
 			} else {
@@ -145,7 +145,7 @@ public class UserDao implements Serializable {
 							null,
 							new FacesMessage(FacesMessage.SEVERITY_FATAL,
 									"Cadastro",
-									"Não é possível salvar, o nome já existe"));
+									"Nï¿½o ï¿½ possï¿½vel salvar, o nome jï¿½ existe"));
 					sessao.close();
 					return false;
 				} else {

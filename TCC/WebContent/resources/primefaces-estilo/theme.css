@@ -60,7 +60,8 @@
 	background: #FFF
 		url("#{resource['primefaces-flick:images/ui-bg_highlight-soft_25_0073ea_1x100.png']}")
 		50% 50% repeat-x;
-	font-weight: bold color:#0073ea;
+	font-weight: bold;
+            color: #0073ea;
 }
 
 .ui-state-hover a,.ui-state-hover a:hover {
@@ -972,7 +973,7 @@
 	box-shadow: 0px 0px 5px #0073ea, inset 0 2px 2px #8f8f8f;
 }
 
-} /** Menu **/
+ /** Menu **/
 .ui-menu.ui-widget {
 	min-width: 250px;
 	padding: 5px 0;
@@ -1196,7 +1197,8 @@
 		endColorstr='#ffeb9316', GradientType=0);
 	filter: progid:DXImageTransform.Microsoft.gradient(enabled= false);
 	background-repeat: repeat-x;
-	border-color: #e38d13 background-color: #fff;
+	border-color: #e38d13;
+        background-color: #fff;
 }
 
 .ui-button-warning:hover,.ui-button-warning:focus {
@@ -1246,8 +1248,12 @@
 	display: inline-block;
 }
 */
-
-body .ui-layout-center .ui-layout-unit-content{
+body .ui-layout-center .ui-layout-unit-content .ui-layout-unit-centralContent
+	{
 	background: url("#{request.contextPath}/resources/images/back.png");
+	border: none !important;
 }
 
+.ui-layout-unit-footer {
+	border: none !important;
+}

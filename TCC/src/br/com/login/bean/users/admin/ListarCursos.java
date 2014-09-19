@@ -1,25 +1,18 @@
 package br.com.login.bean.users.admin;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
-
 import br.com.login.Dao.ContratoDao;
 import br.com.login.model.Contrato;
 import br.com.login.model.Metricas;
-import br.com.login.model.User;
-
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
-import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 
 @ManagedBean
@@ -95,14 +88,6 @@ public class ListarCursos implements Serializable {
 		pdf.open();
 		pdf.setPageSize(PageSize.A4);
 
-		ServletContext servletContext = (ServletContext) FacesContext
-				.getCurrentInstance().getExternalContext().getContext();
-		String logo = servletContext.getRealPath("") + File.separator
-				+ "resources" + File.separator + "images" + File.separator
-				+ "logo.png";
-		Image image = Image.getInstance(logo);
-		image.setAlignment(Image.ALIGN_CENTER);
-		pdf.add(image);
 		
 	}
 

@@ -24,19 +24,20 @@ public class UserBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private List<SelectItem> nivelAcessoCadastro = new Metricas()
 			.getNivelAcesso();
+	private List<SelectItem> setores = new Metricas().getSetores();
 
 	public UserBean() {
 
 		user = new User();
 		user.setLogado(false);
-		
+
 	}
 
 	private User user;
 	private User userLogado;
 	UserDao userDao;
 	private String sessao = new String();
-	private String senhaTemporaria;
+	
 
 	private static boolean logado = false;
 
@@ -59,8 +60,12 @@ public class UserBean implements Serializable {
 	public String logar() throws Exception {
 		if (user.isLogado()) {
 			loginAtivo();
-						
-			return "/pages/admin/result_index.xhtml";
+			if (userLogado.getNivelAcesso() > 4) {
+				return "/pages/admin/result_index.xhtml";
+			} else {
+				return "/pages/user/result_index" + userLogado.getSetor()
+						+ ".xhtml";
+			}
 
 		} else {
 			userDao = new UserDao();
@@ -72,7 +77,7 @@ public class UserBean implements Serializable {
 				return messageSucessoLogin();
 
 			} else {
-				System.out.print("Não encontrado");
+				System.out.print("Nï¿½o encontrado");
 				user = new User();
 				user.setLogado(false);
 				messageErroLogin();
@@ -80,52 +85,61 @@ public class UserBean implements Serializable {
 			return null;
 		}
 	}
+
 	public String verificarLogado() throws Exception {
 
-		if (user.isLogado() /*&& (userBean.getUserLogado() != null)*/) {
+		if (user.isLogado() /* && (userBean.getUserLogado() != null) */) {
 
-			return "/pages/admin/result_index.xhtml";
-			
+			if (userLogado.getNivelAcesso() > 4) {
+				return "/pages/admin/result_index.xhtml";
+			} else {
+				return "/pages/user/result_index" + userLogado.getSetor()
+						+ ".xhtml";
+			}
+
 		} else {
 			return "/pages/login_index.xhtml";
 		}
 	}
-	
+
 	public String btHome() throws Exception {
 
-		if (user.isLogado() /*&& (userBean.getUserLogado() != null)*/) {
+		if (user.isLogado() /* && (userBean.getUserLogado() != null) */) {
 
-			return "/pages/admin/result_index.xhtml";
-			
+			if (userLogado.getNivelAcesso() > 4) {
+				return "/pages/admin/result_index.xhtml";
+			} else {
+				return "/pages/user/result_index" + userLogado.getSetor()
+						+ ".xhtml";
+			}
+
 		} else {
 			return "/pages/login_index.xhtml";
 		}
 	}
-	
+
 	public void btTrocarSenha() throws Exception {
 
-		if (user.isLogado() /*&& (userBean.getUserLogado() != null)*/) {
-			RequestContext context = RequestContext.getCurrentInstance();   
+		if (user.isLogado() /* && (userBean.getUserLogado() != null) */) {
+			RequestContext context = RequestContext.getCurrentInstance();
 			context.execute("PF('TrocarSenha').show()");
 
-			
 		} else {
 
 		}
 	}
-	
+
 	public String verificarAutoridadeLoginVisualizarCursos() throws Exception {
 
-		if (getUserLogado() != null  && getUserLogado().getNivelAcesso() < 2)  {
+		if (getUserLogado() != null && getUserLogado().getNivelAcesso() < 2) {
 
 			return "/pages/admin/visualizarcursos_index.xhtml";
-			
+
 		} else {
 			return "/pages/result_index.xhtml";
 		}
 	}
-	
-	
+
 	public String gravar() {
 		userDao = new UserDao();
 		try {
@@ -146,30 +160,12 @@ public class UserBean implements Serializable {
 	}
 
 	
-	public void mudarSenha() throws Exception {
-		if (user.getSenha().equals(senhaTemporaria)){
-			userLogado.setSenha(senhaTemporaria);
-			userDao.Update(userLogado);
-			messageAlteraSenha();
-		} 
-		else{
-			
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, sessao,
-							"Senha não alterada, digite a nova senha nos campos indicados"));
-		}
-		
-				
-		
-	}
+
 	public void messageAlteraSenha() {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, sessao,
 						"Sua senha foi alterada com sucesso"));
-		
-		
 
 	}
 
@@ -178,8 +174,15 @@ public class UserBean implements Serializable {
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Login",
 						"Seja bem vindo " + sessao));
-		// return "result.xhtml";
-		return "/pages/admin/result_index.xhtml";
+
+		if (userLogado.getNivelAcesso() > 4) {
+			return "/pages/admin/result_index.xhtml";
+		}
+
+		else {
+			return "/pages/user/result_index" + userLogado.getSetor()
+					+ ".xhtml";
+		}
 
 	}
 
@@ -187,17 +190,24 @@ public class UserBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Ativo",
-						"Sessão ainda ativa para o usuário:  " + sessao));
+						"Sessï¿½o ainda ativa para o usuï¿½rio:  " + sessao));
 		// return "result.xhtml";
-		return "/pages/admin/result_index.xhtml";
+		if (userLogado.getNivelAcesso() < 4) {
+			return "/pages/admin/result_index.xhtml";
+		}
+
+		else {
+			return "/pages/user/result_index" + userLogado.getSetor()
+					+ ".xhtml";
+		}
 
 	}
-	
-	public String reiniciarsessão() {
+
+	public String reiniciarsessao() {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Ativo",
-						"Sessão ativa reiniciada:  " + sessao));
+						"Sessï¿½o ativa reiniciada:  " + sessao));
 		// return "result.xhtml";
 		return "/pages/admin/result_index.xhtml";
 
@@ -218,10 +228,10 @@ public class UserBean implements Serializable {
 				.addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login",
-								"Usuário/Senha incorretos, por favor, tente novamente"));
-		// remover sessão do manage bean selecionado
-//		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-//				.remove("userBean");
+								"Usuï¿½rio/Senha incorretos, por favor, tente novamente"));
+		// remover sessï¿½o do manage bean selecionado
+		// FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+		// .remove("userBean");
 	}
 
 	public void nenhumUsuario() {
@@ -230,7 +240,7 @@ public class UserBean implements Serializable {
 				.addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro",
-								"Nenhum usuário logado, para realizar alguma operação, efetue seu login"));
+								"Nenhum usuï¿½rio logado, para realizar alguma operaï¿½ï¿½o, efetue seu login"));
 
 	}
 
@@ -241,7 +251,7 @@ public class UserBean implements Serializable {
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_WARN, userLogado
 								.getApelido(),
-								"Seu acesso à esta função não é permitida, acesso negado!"));
+								"Seu acesso ï¿½ esta funï¿½ï¿½o nï¿½o ï¿½ permitida, acesso negado!"));
 
 	}
 
@@ -284,12 +294,24 @@ public class UserBean implements Serializable {
 		this.nivelAcessoCadastro = nivelAcessoCadastro;
 	}
 
-	public String getSenhaTemporaria() {
-		return senhaTemporaria;
+
+
+	public List<SelectItem> getSetores() {
+		return setores;
 	}
 
-	public void setSenhaTemporaria(String senhaTemporaria) {
-		this.senhaTemporaria = senhaTemporaria;
+	public UserDao getUserDao() {
+		return userDao;
 	}
+
+	public void setSetores(List<SelectItem> setores) {
+		this.setores = setores;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
+
 
 }

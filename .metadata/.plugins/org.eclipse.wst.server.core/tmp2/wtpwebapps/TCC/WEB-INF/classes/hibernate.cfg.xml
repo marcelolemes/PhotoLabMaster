@@ -27,9 +27,12 @@
 		<property name="format_sql">true</property>
 
 		<mapping class="br.com.login.model.User" />
-		<mapping class="br.com.login.bean.UserBean" />
+		<mapping class="br.com.login.bean.users.UserBean" />
 		<mapping class="br.com.login.model.Contrato" />
-		<mapping class="br.com.login.bean.CadastrarContratoBean" />
+		<mapping class="br.com.login.model.Album" />
+		<mapping class="br.com.login.model.Ficha" />
+		<mapping class="br.com.login.model.Cliente" />
+		<mapping class="br.com.login.bean.users.admin.CadastrarContratoBean" />
 
 	</session-factory>
 </hibernate-configuration>

@@ -159,6 +159,16 @@ ui-layout-south {
 	background-color: red !important;
 }
 
-.botao-sair-hover {
+.botao-sair-hover .botao-sair:hover {
 	background-color: black !important;
+}
+
+body,.ui-layout-unit-content,.ui-layout-unit-centralContent {
+	background: url("#{request.contextPath}/resources/images/back.png")
+		!important;
+}
+
+.ui-layout-center {
+	background: url("#{request.contextPath}/resources/images/back.png")
+		!important;
 }
