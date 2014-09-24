@@ -1,10 +1,9 @@
 package br.com.login.model;
 
+import javax.faces.model.SelectItem;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.faces.model.SelectItem;
 
 public class Metricas implements Serializable {
 
@@ -26,27 +25,27 @@ public class Metricas implements Serializable {
 	}
 
 	public void inicializarNivelAcesso() {
-		nivelAcesso.add(new SelectItem(0, "Patr„o"));
-		nivelAcesso.add(new SelectItem(1, "Usu·rio J˙nior"));
-		nivelAcesso.add(new SelectItem(2, "Usu·rio Comum"));
-		nivelAcesso.add(new SelectItem(3, "Usu·rio AvanÁado"));
+		nivelAcesso.add(new SelectItem(0, "Patr√£o"));
+		nivelAcesso.add(new SelectItem(1, "Usu√°rio J√∫nior"));
+		nivelAcesso.add(new SelectItem(2, "Usu√°rio Comum"));
+		nivelAcesso.add(new SelectItem(3, "Usu√°rio Avan√ßado"));
 		nivelAcesso.add(new SelectItem(4, "Gestor"));
 		nivelAcesso.add(new SelectItem(5, "SysAdmin"));
 	}
 
 	public void inicializarSetores() {
 		setores.add(new SelectItem(0, "Cadastro"));
-		setores.add(new SelectItem(1, "CorreÁ„o de cor"));
+		setores.add(new SelectItem(1, "Corre√ß√£o de cor"));
 		setores.add(new SelectItem(2, "Tratamento de pele"));
 		setores.add(new SelectItem(3, "Montagem"));
-		setores.add(new SelectItem(4, "Impress„o"));
+		setores.add(new SelectItem(4, "Impress√£o"));
 		setores.add(new SelectItem(5, "Backup"));
 
 	}
 
 	public void inicializarUrgenciaLista() {
 		urgenciaLista.add(new SelectItem(0, "Fazendo"));
-		urgenciaLista.add(new SelectItem(1, "UrgentÌssimo"));
+		urgenciaLista.add(new SelectItem(1, "Urgent√≠ssimo"));
 		urgenciaLista.add(new SelectItem(2, "Muito Urgente"));
 		urgenciaLista.add(new SelectItem(3, "Urgente"));
 		urgenciaLista.add(new SelectItem(4, "Normal"));
@@ -61,7 +60,7 @@ public class Metricas implements Serializable {
 		statusContratoLista.add(new SelectItem(1, "Renomeado"));
 		statusContratoLista.add(new SelectItem(2, "Separando"));
 		statusContratoLista.add(new SelectItem(3, "Parado na Cor"));
-		statusContratoLista.add(new SelectItem(4, "Em CorreÁ„o de Cor"));
+		statusContratoLista.add(new SelectItem(4, "Em Corre√ß√£o de Cor"));
 		statusContratoLista.add(new SelectItem(5, "Pronto Cor"));
 		statusContratoLista.add(new SelectItem(6, "Cor/Tratamento"));
 		statusContratoLista.add(new SelectItem(7, "Parado tratamento de pele"));
@@ -73,7 +72,7 @@ public class Metricas implements Serializable {
 		statusContratoLista.add(new SelectItem(12, "Parado Montagem"));
 		statusContratoLista.add(new SelectItem(13, "Em Montagem"));
 		statusContratoLista.add(new SelectItem(14, "Pronto Montagem"));
-		statusContratoLista.add(new SelectItem(15, "Em impress„o"));
+		statusContratoLista.add(new SelectItem(15, "Em impress√£o"));
 		statusContratoLista.add(new SelectItem(16, "Aguardando Backup"));
 		statusContratoLista.add(new SelectItem(17, "Em backup"));
 		statusContratoLista.add(new SelectItem(18, "Backup Pronto"));
