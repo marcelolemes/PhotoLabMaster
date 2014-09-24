@@ -105,14 +105,14 @@ public class UserBean implements Serializable {
 		if (user.isLogado() /* && (userBean.getUserLogado() != null) */) {
 
 			if (userLogado.getNivelAcesso() > 4) {
-				return "/pages/admin/result_index.xhtml?redirect=true";
+				return "/pages/admin/result_index.xhtml";
 			} else {
 				return "/pages/user/result_index" + userLogado.getSetor()
-						+ ".xhtml?redirect=true";
+						+ ".xhtml";
 			}
 
 		} else {
-			return "/pages/login_index.xhtml?redirect=true";
+			return "/pages/login_index.xhtml?";
 		}
 	}
 
