@@ -26,12 +26,12 @@ public class ListarFichas implements Serializable {
     private List<Ficha> listaFichas;
     Metricas metricas = new Metricas();
     ContratoDao contDao =new ContratoDao();
+    private static Ficha fichaSelecionada = new Ficha();
 
 
 
 
-
-    public Ficha getFichaSelecionada() {
+    public static Ficha getFichaSelecionada() {
         return fichaSelecionada;
     }
 
@@ -39,7 +39,7 @@ public class ListarFichas implements Serializable {
         this.fichaSelecionada = fichaSelecionada;
     }
 
-    private Ficha fichaSelecionada = new Ficha();
+
 
 
     @PostConstruct

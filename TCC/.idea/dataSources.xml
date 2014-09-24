@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3789424340">
+    <data-source source="LOCAL" name="hibernate.cfg.xml" uuid="ea6574e5-c336-4c8e-b1df-b53f768c0cdd">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/login</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfd8dfc5dfc5dfde</user-password>
+      <libraries>
+        <library>
+          <url>file://C:\Users\mega\workspace\TCC\WebContent\WEB-INF\lib\javassist-3.18.1-GA.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="build:classes:hibernate.cfg.xml" uuid="b4b2087e-be01-4118-9945-51b1185d97e3">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/login</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfd8dfc5dfc5dfde</user-password>
+      <libraries>
+        <library>
+          <url>file://C:\Users\mega\workspace\TCC\WebContent\WEB-INF\lib\javassist-3.18.1-GA.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
+</project>
+

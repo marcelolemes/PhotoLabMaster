@@ -87,7 +87,7 @@
                     <h:outputText value="#{contrato.cidade}" />
                 </p:column>
                 <p:column headerText="Ficha" width="8%">
-                    <h:outputText value="#{contrato.ficha}" />
+                    <h:outputText value="#{contrato.ficha.numero}/#{contrato.ficha.ano}" />
                 </p:column>
                 <p:column headerText="Status" width="20%" sortBy="status"
                           filterBy="status" filterMatchMode="exact">
@@ -187,8 +187,7 @@
                         <p:calendar styleClass="calendar"
                                     value="#{listarCursos.contratoSelecionado.dataPrazo}" locale="pt"
                                     navigator="true" pattern="MM-dd-yyyy" />
-                        <p:outputLabel value="Ficha" />
-                        <p:inputText value="#{listarCursos.contratoSelecionado.ficha}" />
+                       
                         <p:outputLabel value="Caminho" />
                         <p:inputText value="#{listarCursos.contratoSelecionado.caminho}" />
                         <p:outputLabel value="Status" />
