@@ -87,14 +87,14 @@ public class PanelAdmin implements Serializable {
                 userBean.autoridadeInsuficiente();
 
                 if (userBean.getUserLogado().getNivelAcesso() > 4) {
-                    return "/pages/admin/result_index.xhtml?redirect=true";
+                    return "/pages/admin/result_index.xhtml";
                 } else {
                     return "/pages/user/result_index"
                             + userBean.getUserLogado().getSetor() + ".xhtml";
                 }
             } else {
 
-                return "/pages/admin/visualizarfichas_index.xhtml ";
+                return "/pages/admin/visualizafichas_index.xhtml";
             }
 
         } else {

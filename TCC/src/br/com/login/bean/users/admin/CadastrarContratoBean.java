@@ -2,11 +2,11 @@ package br.com.login.bean.users.admin;
 
 import br.com.login.Dao.ContratoDao;
 import br.com.login.model.Contrato;
+import br.com.login.model.Ficha;
 import br.com.login.model.Metricas;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
@@ -25,10 +25,19 @@ public class CadastrarContratoBean implements Serializable {
     ContratoDao contDao = new ContratoDao();
     private Contrato contratoCadastro = new Contrato();
     private Metricas metricas = new Metricas();
-    @ManagedProperty("#{listarFichas}" )
-    private ListarFichas listarFichas;
+
+    private Ficha fichaSelecionada= new Ficha();
+
+    public Ficha getFichaSelecionada() {
+        return fichaSelecionada;
+    }
+
+    public void setFichaSelecionada(Ficha fichaSelecionada) {
+        this.fichaSelecionada = fichaSelecionada;
+    }
+
     public String gravarContrato() throws Exception {
-        contratoCadastro.setFicha(listarFichas.getFichaSelecionada());
+        contratoCadastro.setFicha(fichaSelecionada);
         if (contDao.Gravar(contratoCadastro)) {
             FacesContext.getCurrentInstance().addMessage(
                     null,
