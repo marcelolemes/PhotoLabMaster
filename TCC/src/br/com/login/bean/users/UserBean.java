@@ -1,19 +1,17 @@
 package br.com.login.bean.users;
 
-import java.io.Serializable;
-import java.util.List;
+import br.com.login.Dao.UserDao;
+import br.com.login.model.Metricas;
+import br.com.login.model.User;
+import org.primefaces.context.RequestContext;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
-
-import org.primefaces.context.RequestContext;
-
-import br.com.login.Dao.UserDao;
-import br.com.login.model.Metricas;
-import br.com.login.model.User;
+import java.io.Serializable;
+import java.util.List;
 
 @ManagedBean(name = "userBean", eager = true)
 @SessionScoped
@@ -64,7 +62,7 @@ public class UserBean implements Serializable {
 				return "/pages/admin/result_index.xhtml";
 			} else {
 				return "/pages/user/result_index" + userLogado.getSetor()
-						+ ".xhtml";
+						+ ".xhtml?faces-redirect=true";
 			}
 
 		} else {
@@ -77,7 +75,7 @@ public class UserBean implements Serializable {
 				return messageSucessoLogin();
 
 			} else {
-				System.out.print("N�o encontrado");
+				System.out.print("Não encontrado");
 				user = new User();
 				user.setLogado(false);
 				messageErroLogin();
@@ -107,14 +105,14 @@ public class UserBean implements Serializable {
 		if (user.isLogado() /* && (userBean.getUserLogado() != null) */) {
 
 			if (userLogado.getNivelAcesso() > 4) {
-				return "/pages/admin/result_index.xhtml";
+				return "/pages/admin/result_index.xhtml?redirect=true";
 			} else {
 				return "/pages/user/result_index" + userLogado.getSetor()
-						+ ".xhtml";
+						+ ".xhtml?redirect=true";
 			}
 
 		} else {
-			return "/pages/login_index.xhtml";
+			return "/pages/login_index.xhtml?redirect=true";
 		}
 	}
 

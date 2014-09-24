@@ -45,12 +45,11 @@
                  draggableColumns="true" scrollRows="30" scrollable="true"
                  scrollHeight="450" liveScroll="true" styleClass="interiorTabela" >
         <!-- rowStyleClass="#{contrato.urgencia eq 5 ? 'urgente':null} #{contrato.urgencia eq 4 ? 'urgentissimo':null}" -->
-        <p:column style="width:32px;text-align: center" width="30px"
-                  exportable="false">
-            <p:commandButton styleClass="botao-edit" icon=".ui-icon-closethick" action="#{panelAdmin.btCadastrarCursos()}"  >
+        <f:facet name="header">
+            <p:commandButton  icon=".ui-icon-closethick" value="Cadastrar Contrato" action="#{panelAdmin.btCadastrarCursos()}"  >
                 <f:setPropertyActionListener value="#{contrato.ficha}" target="#{cadastrarContratoBean.fichaSelecionada}" />
             </p:commandButton>
-        </p:column>
+        </f:facet>
         <p:column style="width:32px;text-align: center" width="30px"
                   exportable="false">
             <p:commandButton id="botao-edit" styleClass="botao-edit"

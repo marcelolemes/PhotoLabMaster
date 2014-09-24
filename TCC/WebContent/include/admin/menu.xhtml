@@ -17,7 +17,7 @@
 			<p:menubar>
 
 				<p:submenu label="Home">
-					<p:menuitem value="Painel Usuário" action="#{userBean.btHome()}" />
+					<p:menuitem value="Painel Usuário" actionListener="#{userBean.btHome()}" />
 					<p:submenu label="Configurações do usuário">
 						<p:menuitem value="Trocar senha"
 							action="#{userBean.btTrocarSenha()}" />
