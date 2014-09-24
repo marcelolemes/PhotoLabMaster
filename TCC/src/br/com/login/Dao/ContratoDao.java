@@ -1,6 +1,7 @@
 package br.com.login.Dao;
 
 import br.com.login.model.Contrato;
+import br.com.login.model.Ficha;
 import br.com.login.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -47,6 +48,16 @@ public class ContratoDao implements Serializable {
     public List<Contrato> listarContratos() throws Exception {
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Contrato.class);
+        List<Contrato> listaRetorno = criteria.list();
+        sessao.close();
+        return listaRetorno;
+
+    }
+    public List<Contrato> listarContratosPorFicha(Ficha ficha) throws Exception {
+        Session sessao = HibernateUtil.getSession();
+        System.out.println("Chegou no hibernate");
+        Criteria criteria = sessao.createCriteria(Contrato.class);
+        criteria.add(Restrictions.eq("ficha", ficha));
         List<Contrato> listaRetorno = criteria.list();
         sessao.close();
         return listaRetorno;

@@ -1,193 +1,183 @@
 package br.com.login.model;
 
+import javax.faces.bean.ManagedBean;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
-import javax.faces.bean.ManagedBean;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
 @ManagedBean
 @Table(name = "contrato")
 public class Contrato implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@Id
-	@Column
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int cod;
-	@Column
-	private String curso;
-	@Column
-	private String numeroContrato;
-	@Column
-	private String cidade;
-	@Column
-	private Date dataEntrada;
-	@Column
-	private Date dataPrazo;
-	@Column
-	private Date dataEntrega;
-	@Column
-	private String ficha; // por enquanto String
-	@Column
-	private String entidade;
-	@Column
-	private int media;
-	@Column
-	private String caminho;
-	@Column
-	private int status;
-	@Column
-	private int urgencia;
-	@Column
-	private String obs;
-	@Column
-	private Date dataBackup;
-	@ManyToOne
-	@JoinColumn(name = "ficha_id", referencedColumnName = "cod")
-	private Ficha nFicha;
-	
-	@OneToMany(mappedBy = "contrato")
-	private List<Album> listaAlbum;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int cod;
+    @Column
+    private String curso;
+    @Column
+    private String numeroContrato;
+    @Column
+    private String cidade;
+    @Column
+    private Date dataEntrada;
+    @Column
+    private Date dataPrazo;
+    @Column
+    private Date dataEntrega;
+    @Column
+    private String entidade;
+    @Column
+    private int media;
+    @Column
+    private String caminho;
+    @Column
+    private int status;
+    @Column
+    private int urgencia;
+    @Column
+    private String obs;
+    @Column
+    private Date dataBackup;
+    @ManyToOne(cascade = CascadeType.PERSIST, optional = true)
+    @JoinColumn(name = "ficha_id", referencedColumnName = "cod")
+    private Ficha ficha;
 
-	public List<Album> getListaAlbum() {
-		return listaAlbum;
-	}
+    @OneToMany(mappedBy = "contrato")
+    private List<Album> listaAlbum;
 
-	public void setListaAlbum(List<Album> listaAlbum) {
-		this.listaAlbum = listaAlbum;
-	}
+    public List<Album> getListaAlbum() {
+        return listaAlbum;
+    }
 
-	public int getCod() {
-		return cod;
-	}
+    public void setListaAlbum(List<Album> listaAlbum) {
+        this.listaAlbum = listaAlbum;
+    }
 
-	public void setCod(int cod) {
-		this.cod = cod;
-	}
+    public int getCod() {
+        return cod;
+    }
 
-	public String getNumeroContrato() {
-		return numeroContrato;
-	}
+    public void setCod(int cod) {
+        this.cod = cod;
+    }
 
-	public void setNumeroContrato(String numeroContrato) {
-		this.numeroContrato = numeroContrato;
-	}
+    public String getNumeroContrato() {
+        return numeroContrato;
+    }
 
-	public String getCidade() {
-		return cidade;
-	}
+    public void setNumeroContrato(String numeroContrato) {
+        this.numeroContrato = numeroContrato;
+    }
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
+    public String getCidade() {
+        return cidade;
+    }
 
-	public Date getDataEntrada() {
-		return dataEntrada;
-	}
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
 
-	public void setDataEntrada(Date dataEntrada) {
-		this.dataEntrada = dataEntrada;
-	}
+    public Date getDataEntrada() {
+        return dataEntrada;
+    }
 
-	public Date getDataEntrega() {
-		return dataEntrega;
-	}
+    public void setDataEntrada(Date dataEntrada) {
+        this.dataEntrada = dataEntrada;
+    }
 
-	public void setDataEntrega(Date dataEntrega) {
-		this.dataEntrega = dataEntrega;
-	}
+    public Date getDataEntrega() {
+        return dataEntrega;
+    }
 
-	public String getFicha() {
-		return ficha;
-	}
+    public void setDataEntrega(Date dataEntrega) {
+        this.dataEntrega = dataEntrega;
+    }
 
-	public void setFicha(String ficha) {
-		this.ficha = ficha;
-	}
+    public Ficha getFicha() {
+        return ficha;
+    }
 
-	public String getCaminho() {
-		return caminho;
-	}
+    public void setFicha(Ficha ficha) {
+        this.ficha = ficha;
+    }
 
-	public void setCaminho(String caminho) {
-		this.caminho = caminho;
-	}
+    public String getCaminho() {
+        return caminho;
+    }
 
-	public int getStatus() {
-		return status;
-	}
+    public void setCaminho(String caminho) {
+        this.caminho = caminho;
+    }
 
-	public void setStatus(int status) {
-		this.status = status;
-	}
+    public int getStatus() {
+        return status;
+    }
 
-	public int getUrgencia() {
-		return urgencia;
-	}
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
-	public void setUrgencia(int urgencia) {
-		this.urgencia = urgencia;
-	}
+    public int getUrgencia() {
+        return urgencia;
+    }
 
-	public String getObs() {
-		return obs;
-	}
+    public void setUrgencia(int urgencia) {
+        this.urgencia = urgencia;
+    }
 
-	public void setObs(String obs) {
-		this.obs = obs;
-	}
+    public String getObs() {
+        return obs;
+    }
 
-	public Date getDataBackup() {
-		return dataBackup;
-	}
+    public void setObs(String obs) {
+        this.obs = obs;
+    }
 
-	public void setDataBackup(Date dataBackup) {
-		this.dataBackup = dataBackup;
-	}
+    public Date getDataBackup() {
+        return dataBackup;
+    }
 
-	public Date getDataPrazo() {
-		return dataPrazo;
-	}
+    public void setDataBackup(Date dataBackup) {
+        this.dataBackup = dataBackup;
+    }
 
-	public String getCurso() {
-		return curso;
-	}
+    public Date getDataPrazo() {
+        return dataPrazo;
+    }
 
-	public void setCurso(String curso) {
-		this.curso = curso;
-	}
+    public String getCurso() {
+        return curso;
+    }
 
-	public void setDataPrazo(Date dataPrazo) {
-		this.dataPrazo = dataPrazo;
-	}
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
 
-	public int getMedia() {
-		return media;
-	}
+    public void setDataPrazo(Date dataPrazo) {
+        this.dataPrazo = dataPrazo;
+    }
 
-	public void setMedia(int media) {
-		this.media = media;
-	}
+    public int getMedia() {
+        return media;
+    }
 
-	public String getEntidade() {
-		return entidade;
-	}
+    public void setMedia(int media) {
+        this.media = media;
+    }
 
-	public void setEntidade(String entidade) {
-		this.entidade = entidade;
-	}
+    public String getEntidade() {
+        return entidade;
+    }
+
+    public void setEntidade(String entidade) {
+        this.entidade = entidade;
+    }
 
 }
+
