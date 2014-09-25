@@ -1,4 +1,4 @@
-package br.com.login.bean.users.admin;
+package br.com.login.bean.users.admin.br.com.login.bean.users.admin.listar;
 
 import br.com.login.Dao.ContratoDao;
 import br.com.login.model.Contrato;
@@ -35,17 +35,6 @@ public class ListarCursosFicha implements Serializable {
     private List<Contrato> contratosFiltrados;
     private List<String> urgencias;
     private Ficha fichaSelecionada = new Ficha();
-
-
-    public Ficha getFichaSelecionada() {
-        return fichaSelecionada;
-    }
-
-    public void setFichaSelecionada(Ficha fichaSelecionada) {
-        this.fichaSelecionada = fichaSelecionada;
-    }
-
-
     private Contrato contratoSelecionado;
 
     public ListarCursosFicha() throws Exception {
@@ -54,7 +43,13 @@ public class ListarCursosFicha implements Serializable {
 
     }
 
+    public Ficha getFichaSelecionada() {
+        return fichaSelecionada;
+    }
 
+    public void setFichaSelecionada(Ficha fichaSelecionada) {
+        this.fichaSelecionada = fichaSelecionada;
+    }
 
     public String btUpdateCursos() {
         return "/pages/conteudo/editarcursos_index.xhtml";
