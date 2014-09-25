@@ -1,7 +1,8 @@
 <component name="ArtifactManager">
-  <artifact type="war" build-on-make="true" name="TCC:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/TCC_war_exploded</output-path>
-    <root id="archive" name="TCCwar.war">
+  <artifact type="war" name="photolab">
+    <output-path>$PROJECT_DIR$/out/artifacts/photolab</output-path>
+    <root id="archive" name="photolab.war">
+      <element id="dir-copy" path="$PROJECT_DIR$/WebContent" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="TCC" />
@@ -9,8 +10,8 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="lib" />
         </element>
+        <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/web.xml" />
       </element>
-      <element id="javaee-facet-resources" facet="TCC/web/Web" />
     </root>
   </artifact>
 </component>
