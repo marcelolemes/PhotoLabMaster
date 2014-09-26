@@ -1,19 +1,13 @@
 package br.com.login.model;
 
+import javax.faces.bean.ManagedBean;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import javax.faces.bean.ManagedBean;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 @Entity
 @ManagedBean
-@Table(name = "Usuario")
+@Table(name = "usuario")
 public class User implements Serializable {
 	/**
 	 * 

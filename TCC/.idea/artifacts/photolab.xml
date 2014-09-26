@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="war" name="photolab">
-    <output-path>$PROJECT_DIR$/out/artifacts/photolab</output-path>
+    <output-path>$USER_HOME$/Desktop/MARCELO/DEPLOY</output-path>
     <root id="archive" name="photolab.war">
       <element id="dir-copy" path="$PROJECT_DIR$/WebContent" />
       <element id="directory" name="WEB-INF">
