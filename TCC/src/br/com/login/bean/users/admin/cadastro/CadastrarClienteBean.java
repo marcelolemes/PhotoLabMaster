@@ -17,10 +17,9 @@ public class CadastrarClienteBean implements Serializable {
     ClienteDao clienteDao = new ClienteDao();
     private Cliente cliente = new Cliente();
 
-    public void gravarCliente() throws Exception {
-
+    public String gravarCliente() throws Exception {
         clienteDao.Gravar(cliente);
-
+        return "/pages/admin/result_index.xhtml";
     }
 
     public Cliente getCliente() {

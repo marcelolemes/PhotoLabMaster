@@ -185,6 +185,32 @@ public class PanelAdmin implements Serializable {
 
 	}
 
+    public String btCadastrarClientes() {
+
+    		if (userBean.getUser().isLogado()) {
+    			if (userBean.getUserLogado().getSetor() != 0) {
+
+    				userBean.autoridadeInsuficiente();
+
+    				if (userBean.getUserLogado().getNivelAcesso() > 4) {
+    					return "/pages/admin/result_index.xhtml";
+    				} else {
+    					return "/pages/user/result_index"
+    							+ userBean.getUserLogado().getSetor() + ".xhtml";
+    				}
+    			} else {
+
+    				return "/pages/admin/cadastro/cadastro_cliente.xhtml";
+    			}
+
+    		} else {
+    			userBean.nenhumUsuario();
+    			return "/pages/login_index.xhtml";
+
+    		}
+
+    	}
+
 	public String btCadastrarAlbum() {
 
 		if (userBean.getUser().isLogado()) {

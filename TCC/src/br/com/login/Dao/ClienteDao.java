@@ -1,15 +1,14 @@
 package br.com.login.Dao;
 
-import java.io.Serializable;
-
-import javax.faces.bean.ViewScoped;
-
+import br.com.login.model.Cliente;
+import br.com.login.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import br.com.login.model.Cliente;
-import br.com.login.util.HibernateUtil;
+import javax.faces.bean.ViewScoped;
+import java.io.Serializable;
+import java.util.List;
 
 @ViewScoped
 public class ClienteDao implements Serializable {
@@ -37,4 +36,12 @@ public class ClienteDao implements Serializable {
 		return Retorno;
 
 	}
+
+    public List<Cliente> ListarCliente() throws Exception {
+    		Session sessao = HibernateUtil.getSession();
+    		Criteria criteria = sessao.createCriteria(Cliente.class);
+    		List<Cliente> listaRetorno = criteria.list();
+    		sessao.close();
+    		return listaRetorno;
+    	}
 }

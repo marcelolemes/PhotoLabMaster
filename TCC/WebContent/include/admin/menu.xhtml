@@ -4,49 +4,53 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
-	<h:head>
-		<meta http-equiv="Content-Type"
-			content="text/html; charset=ISO-8859-1" />
-		<title></title>
-	</h:head>
-	<h:outputStylesheet library="css" name="estilo.css" />
-	<body>
-		<h:form id="menu">
+    <h:head>
+        <meta http-equiv="Content-Type"
+              content="text/html; charset=ISO-8859-1" />
+        <title></title>
+    </h:head>
+    <h:outputStylesheet library="css" name="estilo.css" />
+    <body>
+    <h:form id="menu">
 
 
-			<p:menubar>
+        <p:menubar>
 
-				<p:submenu label="Home">
-					<p:menuitem value="Painel Usuário" action="#{userBean.btHome()}" />
-					<p:submenu label="Configurações do usuário">
-						<p:menuitem value="Trocar senha"
-							action="#{userBean.btTrocarSenha()}" />
-					</p:submenu>
-				</p:submenu>
+            <p:submenu label="Home">
+                <p:menuitem value="Painel Usuário" action="#{userBean.btHome()}" />
+                <p:submenu label="Configurações do usuário">
+                    <p:menuitem value="Trocar senha"
+                                action="#{userBean.btTrocarSenha()}" />
+                </p:submenu>
+            </p:submenu>
 
-				<p:submenu label="Fichas">
-					<p:menuitem value="Visualizar Fichas"
-						action="#{panelAdmin.btVisualizarFichas}" />
-                    <p:menuitem value="Cadastrar Fichas"
-                    						action="#{panelAdmin.btCadastrarFicha()}" />
+            <p:submenu label="Fichas">
+                <p:menuitem value="Visualizar Fichas"
+                            action="#{panelAdmin.btVisualizarFichas}" />
+                <p:menuitem value="Cadastrar Fichas"
+                            action="#{panelAdmin.btCadastrarFicha()}" />
+                <p:submenu label="Clientes">
+                    <p:menuitem value="Cadastrar Clientes"
+                                action="#{panelAdmin.btCadastrarClientes()}" />
 
-				</p:submenu>
-				<p:submenu label="Album">
-								<p:menuitem value="Cadastrar Album"
-						action="#{panelAdmin.btCadastrarAlbum()}" />
-							<p:menuitem value="Visualizar Albuns"
-						action="#{panelAdmin.btListarAlbuns()}" />
-				</p:submenu>
+                </p:submenu>
+            </p:submenu>
+            <p:submenu label="Album">
+                <p:menuitem value="Cadastrar Album"
+                            action="#{panelAdmin.btCadastrarAlbum()}" />
+                <p:menuitem value="Visualizar Albuns"
+                            action="#{panelAdmin.btListarAlbuns()}" />
+            </p:submenu>
 
-				<p:submenu label="SysAdmin">
-					<p:menuitem value="Cadastrar Usuário"
-						action="#{panelAdmin.btCadastro()}" />
+            <p:submenu label="SysAdmin">
+                <p:menuitem value="Cadastrar Usuário"
+                            action="#{panelAdmin.btCadastro()}" />
 
-					<p:menuitem value="Usuários Cadastrados"
-						action="#{panelAdmin.btListarUsers()}" />
-				</p:submenu>
+                <p:menuitem value="Usuários Cadastrados"
+                            action="#{panelAdmin.btListarUsers()}" />
+            </p:submenu>
 
-			</p:menubar>
-		</h:form>
-	</body>
+        </p:menubar>
+    </h:form>
+    </body>
 </ui:composition>

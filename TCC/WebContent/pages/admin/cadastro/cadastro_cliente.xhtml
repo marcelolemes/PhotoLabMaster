@@ -6,30 +6,32 @@
                 template="/template/templatePrincipal.xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<h:head>
-		<meta http-equiv="Content-Type"
-			content="text/html; charset=ISO-8859-1" />
-		<title></title>
-	</h:head>
-	<h:outputStylesheet library="css" name="estilo.css" />
+    <h:head>
+        <meta http-equiv="Content-Type"
+              content="text/html; charset=ISO-8859-1" />
+        <title></title>
+    </h:head>
+    <h:outputStylesheet library="css" name="estilo.css" />
 
-	<body>
-
-
-		<p:growl id="growl" showDetail="true" autoUpdate="true" />
+    <body>
 
 
-		<ui:define name="menu">
-            <ui:include src="/include/admin/menu.xhtml" />
-		</ui:define>
-		<ui:define name="content">
-		<h:form>
-		<h:outputText value="Nome da Cliente" />
-		<p:inputText value="#{cadastrarClienteBean.cliente.nome}"/>
-		<h:outputText value="Obs sobre o Cliente" />
-		<p:inputText value="#{cadastrarClienteBean.cliente.obs}"/>
-		<p:commandButton value="Gravar Cliente" action="#{cadastrarClienteBean.gravarCliente()}"/>
-		</h:form>
-		</ui:define>
-	</body>
+    <p:growl id="growl" showDetail="true" autoUpdate="true" />
+
+
+    <ui:define name="menu">
+        <ui:include src="/include/admin/menu.xhtml" />
+    </ui:define>
+    <ui:define name="content">
+        <h:form>
+            <p:panelGrid columns="2">
+                <h:outputText value="Nome da Cliente" />
+                <p:inputText value="#{cadastrarClienteBean.cliente.nome}"/>
+                <h:outputText value="Obs sobre o Cliente" />
+                <p:inputText value="#{cadastrarClienteBean.cliente.obs}"/>
+                <p:commandButton value="Gravar Cliente" action="#{cadastrarClienteBean.gravarCliente()}"/>
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+    </body>
 </ui:composition>
