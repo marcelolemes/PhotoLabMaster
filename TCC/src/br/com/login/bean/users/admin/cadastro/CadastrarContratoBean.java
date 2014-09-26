@@ -1,7 +1,7 @@
-package br.com.login.bean.users.admin.br.com.login.bean.users.admin.cadastro;
+package br.com.login.bean.users.admin.cadastro;
 
 import br.com.login.Dao.ContratoDao;
-import br.com.login.bean.users.admin.br.com.login.bean.users.admin.listar.ListarFichas;
+import br.com.login.bean.users.admin.listar.ListarFichas;
 import br.com.login.model.Contrato;
 import br.com.login.model.Ficha;
 import br.com.login.model.Metricas;
@@ -48,7 +48,7 @@ public class CadastrarContratoBean implements Serializable {
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravar",
                             "Gravado com sucesso"));
-            return "/pages/cadastrocursos_index.xhtml";
+            return "/pages/admin/visualizarcursos_ficha.xhtml";
         } else {
             FacesContext.getCurrentInstance().addMessage(
                     null,

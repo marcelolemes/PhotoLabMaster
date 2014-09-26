@@ -105,6 +105,33 @@ public class PanelAdmin implements Serializable {
 
     }
 
+    public String btCadastrarFicha(){
+
+
+        if (userBean.getUser().isLogado()) {
+                    if (userBean.getUserLogado().getNivelAcesso() < 4) {
+
+                        userBean.autoridadeInsuficiente();
+
+                        if (userBean.getUserLogado().getNivelAcesso() > 4) {
+                            return "/pages/admin/result_index.xhtml";
+                        } else {
+                            return "/pages/user/result_index"
+                                    + userBean.getUserLogado().getSetor() + ".xhtml";
+                        }
+                    } else {
+
+                        return "/pages/admin/cadastro/cadastro_ficha.xhtml";
+                    }
+
+                } else {
+                    userBean.nenhumUsuario();
+                    return "/pages/login_index.xhtml";
+
+                }
+
+    }
+
 	public String btCadastro() {
 
 		if (userBean.getUser().isLogado()) {
@@ -121,7 +148,7 @@ public class PanelAdmin implements Serializable {
 				}
 			} else {
 
-				return "/pages/admin/cadastro_index.xhtml";
+				return "/pages/admin/cadastro/cadastro_index.xhtml";
 			}
 
 		} else {
@@ -147,7 +174,7 @@ public class PanelAdmin implements Serializable {
 				}
 			} else {
 
-				return "/pages/admin/cadastrarcursos_index.xhtml";
+				return "/pages/admin/cadastro/cadastrarcursos_index.xhtml";
 			}
 
 		} else {
@@ -173,7 +200,7 @@ public class PanelAdmin implements Serializable {
 				}
 			} else {
 
-				return "/pages/admin/cadastro_album_index.xhtml";
+				return "/pages/admin/cadastro/cadastro_album_index.xhtml";
 			}
 
 		} else {
@@ -264,7 +291,7 @@ public class PanelAdmin implements Serializable {
 	}
 
 	public void fecharSessao() {
-		// remover sess�o do manage bean selecionado
+		// remover sessão do manage bean selecionado
 		// FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("userBean");
 		/*
 		 * userBean.setUserLogado(null); userBean.setLogado(false);
@@ -290,7 +317,7 @@ public class PanelAdmin implements Serializable {
 				FacesContext context = FacesContext.getCurrentInstance();
 				context.getExternalContext().invalidateSession();
 
-				// remover sess�o do manage bean selecionado
+				// remover sessão do manage bean selecionado
 				/*
 				 * FacesContext.getCurrentInstance().getExternalContext()
 				 * .getSessionMap().remove("userBean");
@@ -298,7 +325,7 @@ public class PanelAdmin implements Serializable {
 				FacesContext.getCurrentInstance().addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_INFO, "Logoff",
-								"Sess�o encerrada"));
+								"Sessão encerrada"));
 
 			} catch (Exception ex) {
 				// TODO: handle exception

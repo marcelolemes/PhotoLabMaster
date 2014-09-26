@@ -1,4 +1,4 @@
-package br.com.login.bean.users.admin.br.com.login.bean.users.admin.listar;
+package br.com.login.bean.users.admin.listar;
 
 import br.com.login.Dao.ContratoDao;
 import br.com.login.model.Contrato;

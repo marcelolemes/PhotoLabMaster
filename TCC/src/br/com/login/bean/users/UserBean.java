@@ -188,7 +188,7 @@ public class UserBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Ativo",
-						"Sess�o ainda ativa para o usu�rio:  " + sessao));
+						"Sessão ainda ativa para o usuário:  " + sessao));
 		// return "result.xhtml";
 		if (userLogado.getNivelAcesso() < 4) {
 			return "/pages/admin/result_index.xhtml";
@@ -205,7 +205,7 @@ public class UserBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Ativo",
-						"Sess�o ativa reiniciada:  " + sessao));
+						"Sessão ativa reiniciada:  " + sessao));
 		// return "result.xhtml";
 		return "/pages/admin/result_index.xhtml";
 
@@ -226,8 +226,8 @@ public class UserBean implements Serializable {
 				.addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login",
-								"Usu�rio/Senha incorretos, por favor, tente novamente"));
-		// remover sess�o do manage bean selecionado
+								"Usuário/Senha incorretos, por favor, tente novamente"));
+		// remover sessão do manage bean selecionado
 		// FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 		// .remove("userBean");
 	}
@@ -238,7 +238,7 @@ public class UserBean implements Serializable {
 				.addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro",
-								"Nenhum usu�rio logado, para realizar alguma opera��o, efetue seu login"));
+								"Nenhum usuário logado, para realizar alguma operação, efetue seu login"));
 
 	}
 
@@ -249,7 +249,7 @@ public class UserBean implements Serializable {
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_WARN, userLogado
 								.getApelido(),
-								"Seu acesso � esta fun��o n�o � permitida, acesso negado!"));
+								"Seu acesso á esta função não é permitida, portanto acesso negado!"));
 
 	}
 

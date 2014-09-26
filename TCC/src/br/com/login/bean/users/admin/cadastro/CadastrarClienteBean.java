@@ -1,4 +1,4 @@
-package br.com.login.bean.users.admin.br.com.login.bean.users.admin.cadastro;
+package br.com.login.bean.users.admin.cadastro;
 
 import br.com.login.Dao.ClienteDao;
 import br.com.login.model.Cliente;

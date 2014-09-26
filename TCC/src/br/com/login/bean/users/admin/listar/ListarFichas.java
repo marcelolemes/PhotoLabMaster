@@ -1,4 +1,4 @@
-package br.com.login.bean.users.admin.br.com.login.bean.users.admin.listar;
+package br.com.login.bean.users.admin.listar;
 
 import br.com.login.Dao.ContratoDao;
 import br.com.login.Dao.FichaDao;
@@ -49,6 +49,12 @@ public class ListarFichas implements Serializable {
 
     }
 
+    public void atualizar() throws Exception {
+        this.listaFichas.clear();
+        this.fichaDao.ListarFichas().clear();
+        this.listaFichas = fichaDao.ListarFichas();
+    }
+
     public List<Contrato> listarCursosFicha() throws Exception {
         System.out.println("Chegou na Ficha");
         System.out.println("FICHA : " + fichaSelecionada.getNumero());
@@ -60,7 +66,7 @@ public class ListarFichas implements Serializable {
 
     public String btListarCursosFicha() {
         System.out.println("Chegou no botão");
-        return "/pages/admin/conteudo/visualizarcursos_ficha.xhtml?redirect=true";
+        return "/pages/admin/visualizarcursos_ficha.xhtml?redirect=true";
     }
 
     public String parserUrgencia(int urgencia) {
