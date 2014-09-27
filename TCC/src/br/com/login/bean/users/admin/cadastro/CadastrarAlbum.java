@@ -65,7 +65,9 @@ public class CadastrarAlbum implements Serializable {
 		for (File file : albuns) {
 			Album album = new Album();
 			album.setNumero(file.getName());
-			album.setContrato(contrato);
+			album.setOcupado(false);
+            album.setContrato(contrato);
+
 			album.setStatus(contrato.getStatus());
 			listaAlbum.add(album);
 		}

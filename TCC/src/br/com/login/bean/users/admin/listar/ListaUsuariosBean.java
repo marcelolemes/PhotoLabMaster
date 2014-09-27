@@ -34,15 +34,21 @@ public class ListaUsuariosBean implements Serializable {
     }
 
     public String parserNivel(User user) {
-        return metricas.getNivelAcesso().get(user.getNivelAcesso())
-                .getLabel();
+        try {
+            return metricas.getNivelAcesso().get(user.getNivelAcesso())
+                    .getLabel();
+        }
+        catch (Exception e) {
+            System.out.println("Não deu");
+            return null;
+        }
     }
 
     public String parserSetor(User user) {
         try {
             return metricas.getSetores().get(user.getSetor()).getLabel();
         } catch (Exception e) {
-            System.out.println("N�o deu");
+            System.out.println("Não deu");
             return null;
         }
 

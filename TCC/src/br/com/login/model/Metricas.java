@@ -8,7 +8,7 @@ import java.util.List;
 public class Metricas implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -6233474203192271864L;
 	private List<SelectItem> nivelAcesso = new ArrayList<SelectItem>();
@@ -61,17 +61,17 @@ public class Metricas implements Serializable {
 		statusContratoLista.add(new SelectItem(2, "Separando"));
 		statusContratoLista.add(new SelectItem(3, "Parado na Cor"));
 		statusContratoLista.add(new SelectItem(4, "Em Correção de Cor"));
-		statusContratoLista.add(new SelectItem(5, "Pronto Cor"));
-		statusContratoLista.add(new SelectItem(6, "Cor/Tratamento"));
+        statusContratoLista.add(new SelectItem(5, "Cor/Tratamento"));
+		statusContratoLista.add(new SelectItem(6, "Pronto Cor"));
 		statusContratoLista.add(new SelectItem(7, "Parado tratamento de pele"));
 		statusContratoLista.add(new SelectItem(8, "Em tratamento de pele"));
 		statusContratoLista
 				.add(new SelectItem(9, "Em tratamento Terceirizado"));
 		statusContratoLista.add(new SelectItem(10, "Tratamento/Montagem"));
 		statusContratoLista.add(new SelectItem(11, "Tratamento Pronto"));
-		statusContratoLista.add(new SelectItem(12, "Parado Montagem"));
-		statusContratoLista.add(new SelectItem(13, "Em Montagem"));
-		statusContratoLista.add(new SelectItem(14, "Pronto Montagem"));
+        statusContratoLista.add(new SelectItem(12, "Parado Montagem"));
+        statusContratoLista.add(new SelectItem(13, "Em Montagem"));
+        statusContratoLista.add(new SelectItem(14, "Pronto Montagem"));
 		statusContratoLista.add(new SelectItem(15, "Em impressão"));
 		statusContratoLista.add(new SelectItem(16, "Aguardando Backup"));
 		statusContratoLista.add(new SelectItem(17, "Em backup"));

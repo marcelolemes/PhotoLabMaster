@@ -9,101 +9,113 @@ import java.sql.Timestamp;
 @ManagedBean
 @Table(name = "usuario")
 public class User implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@Id
-	@Column
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int cod;
-	@Column
-	private int nivelacesso;
-	@Column
-	private int setor;
-	@Column
-	private String apelido;
-	@Column
-	private String senha;
-	@Column
-	private String servicoatual;
-	@Column
-	private String servicoanterior;
-	@Column
-	private Timestamp ultimoacesso;
-	@Column
-	private boolean logado;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int cod;
+    @Column
+    private int nivelacesso;
+    @Column
+    private int setor;
+    @Column
+    private String apelido;
+    @Column
+    private String senha;
+    @Column
+    private String servicoatual;
+    @Column
+    private String servicoanterior;
+    @Column
+    private Timestamp ultimoacesso;
+    @Column
+    private boolean logado;
 
-	public Timestamp getUltimoacesso() {
-		return ultimoacesso;
-	}
+    @OneToOne
+    @JoinColumn(name = "album_atual", referencedColumnName = "cod")
+    private Album albumAtual;
 
-	public void setUltimoacesso(Timestamp ultimoacesso) {
-		this.ultimoacesso = ultimoacesso;
-	}
+    public Timestamp getUltimoacesso() {
+        return ultimoacesso;
+    }
 
-	public String getServicoanterior() {
-		return servicoanterior;
-	}
+    public void setUltimoacesso(Timestamp ultimoacesso) {
+        this.ultimoacesso = ultimoacesso;
+    }
 
-	public void setServicoanterior(String servicoanterior) {
-		this.servicoanterior = servicoanterior;
-	}
+    public String getServicoanterior() {
+        return servicoanterior;
+    }
 
-	public String getServicoatual() {
-		return servicoatual;
-	}
+    public void setServicoanterior(String servicoanterior) {
+        this.servicoanterior = servicoanterior;
+    }
 
-	public void setServicoatual(String servicoatual) {
-		this.servicoatual = servicoatual;
-	}
+    public String getServicoatual() {
+        return servicoatual;
+    }
 
-	public int getCod() {
-		return cod;
-	}
+    public void setServicoatual(String servicoatual) {
+        this.servicoatual = servicoatual;
+    }
 
-	public void setCod(int cod) {
-		this.cod = cod;
-	}
+    public int getCod() {
+        return cod;
+    }
 
-	public int getNivelAcesso() {
-		return nivelacesso;
-	}
+    public void setCod(int cod) {
+        this.cod = cod;
+    }
 
-	public void setNivelAcesso(int nivelAcesso) {
-		this.nivelacesso = nivelAcesso;
-	}
+    public int getNivelAcesso() {
+        return nivelacesso;
+    }
 
-	public String getApelido() {
-		return apelido;
-	}
+    public void setNivelAcesso(int nivelAcesso) {
+        this.nivelacesso = nivelAcesso;
+    }
 
-	public void setApelido(String apelido) {
-		this.apelido = apelido;
-	}
+    public String getApelido() {
+        return apelido;
+    }
 
-	public String getSenha() {
-		return senha;
-	}
+    public void setApelido(String apelido) {
+        this.apelido = apelido;
+    }
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+    public String getSenha() {
+        return senha;
+    }
 
-	public boolean isLogado() {
-		return logado;
-	}
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
-	public void setLogado(boolean logado) {
-		this.logado = logado;
-	}
+    public boolean isLogado() {
+        return logado;
+    }
 
-	public int getSetor() {
-		return setor;
-	}
+    public void setLogado(boolean logado) {
+        this.logado = logado;
+    }
 
-	public void setSetor(int setor) {
-		this.setor = setor;
-	}
+    public int getSetor() {
+        return setor;
+    }
+
+    public void setSetor(int setor) {
+        this.setor = setor;
+    }
+
+    public Album getAlbumAtual() {
+        return albumAtual;
+    }
+
+    public void setAlbumAtual(Album albumAtual) {
+        this.albumAtual = albumAtual;
+    }
 
 }

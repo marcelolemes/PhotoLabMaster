@@ -29,6 +29,9 @@
 				<p:layoutUnit position="north" resizable="true" header="North"
 					collapsible="true" closable="true">
 					<ui:insert name="northContent" />
+                    <p:commandButton value="Pegar album" actionListener="#{regraMontagem.btPegarAlbum}" rendered="#{empty panelAdmin.userBean.userLogado.albumAtual}" update="@all" />
+                    <p:commandButton value="Confirmar término do álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraMontagem.btTerminarAlbum}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
+                    <p:commandButton value="Cancelar álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraMontagem.btCancelarAlbum()}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
 				</p:layoutUnit>
 
 					<p:layoutUnit position="center"
@@ -39,8 +42,7 @@
 							<p:outputLabel value="Usuário da sessão" />
 							<p:outputLabel value="#{panelAdmin.userBean.userLogado.apelido}" />
 							<p:outputLabel value="serviço atual" />
-							<p:outputLabel
-								value="#{panelAdmin.userBean.userLogado.servicoatual}" />
+                            <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.numero}"/>
 							<p:outputLabel value="ultimo serviço" />
 							<p:outputLabel
 								value="#{panelAdmin.userBean.userLogado.servicoanterior}" />

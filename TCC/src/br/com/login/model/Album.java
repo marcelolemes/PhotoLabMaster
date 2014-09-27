@@ -1,15 +1,7 @@
 package br.com.login.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Album implements Serializable {
@@ -27,6 +19,17 @@ public class Album implements Serializable {
 	private int status;
 	@Column
 	private String obs;
+    @Column
+    private boolean ocupado;
+
+    @OneToOne (cascade = CascadeType.PERSIST, optional = true)
+    @JoinColumn(name = "func_trat", referencedColumnName = "cod")
+    private User userTratamento;
+
+    @OneToOne (cascade = CascadeType.PERSIST, optional = true)
+    @JoinColumn(name = "func_mont", referencedColumnName = "cod")
+    private User userMontagem;
+
 	@ManyToOne(cascade = CascadeType.PERSIST, optional = true)
 	@JoinColumn(name = "cont_id", referencedColumnName = "cod")
 	private Contrato contrato;
@@ -71,4 +74,28 @@ public class Album implements Serializable {
 		this.contrato = contrato;
 	}
 
+
+    public User getUserTratamento() {
+        return userTratamento;
+    }
+
+    public void setUserTratamento(User userAtual) {
+        this.userTratamento = userAtual;
+    }
+
+    public boolean isOcupado() {
+        return ocupado;
+    }
+
+    public void setOcupado(boolean ocupado) {
+        this.ocupado = ocupado;
+    }
+
+    public User getUserMontagem() {
+        return userMontagem;
+    }
+
+    public void setUserMontagem(User userMontagem) {
+        this.userMontagem = userMontagem;
+    }
 }
