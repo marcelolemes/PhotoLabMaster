@@ -8,13 +8,14 @@ import br.com.login.model.Album;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 
 /**
  * Created by marcelo on 26/09/2014.
  */
 @ManagedBean
-
+@ViewScoped
 public class RegraMontagem implements Serializable {
     UserDao userDao = new UserDao();
     //private Contrato contratoAtual;

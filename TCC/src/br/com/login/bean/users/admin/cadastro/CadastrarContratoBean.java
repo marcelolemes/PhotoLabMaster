@@ -48,7 +48,7 @@ public class CadastrarContratoBean implements Serializable {
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravar",
                             "Gravado com sucesso"));
-            return "/pages/admin/visualizarcursos_ficha.xhtml";
+            return "/pages/admin/visualizarcursos_ficha.xhtml?faces-redirect=true";
         } else {
             FacesContext.getCurrentInstance().addMessage(
                     null,

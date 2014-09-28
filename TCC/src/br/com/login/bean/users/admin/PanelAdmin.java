@@ -173,8 +173,9 @@ public class PanelAdmin implements Serializable {
 							+ userBean.getUserLogado().getSetor() + ".xhtml";
 				}
 			} else {
+                    System.out.println("Chegou no botão de cadastro!!!");
 
-				return "/pages/admin/cadastro/cadastrarcursos_index.xhtml";
+				return "/pages/admin/cadastro/cadastrarcurso_index.xhtml?faces-redirect=true";
 			}
 
 		} else {

@@ -70,7 +70,13 @@
                                              target="#{listarCursos.contratoSelecionado}" />
             </p:commandButton>
         </p:column>
-
+        <p:column style="width:32px;text-align: center" exportable="false">
+        <p:commandButton value="Gerar Albuns"
+                         action="#{cadastrarAlbum.gerarAlbunsCurso(listarCursos.contratoSelecionado)}">
+            <f:setPropertyActionListener value="#{contrato}"
+                                         target="#{listarCursos.contratoSelecionado}" />
+        </p:commandButton>
+        </p:column>>
         <p:column headerText="Contrato" width="9%" filterBy="numeroContrato"
                   filterMatchMode="contains" sortBy="numeroContrato">
             <h:outputText value="#{contrato.numeroContrato}" />

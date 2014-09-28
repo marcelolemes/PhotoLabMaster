@@ -124,7 +124,7 @@ public class RegraMontagemDao implements Serializable {
         catch (Exception e) {
         }
 
-}
+    }
 
     public void albumCancelado(Album album) throws Exception {
         Session sessao = HibernateUtil.getSession();
@@ -132,7 +132,7 @@ public class RegraMontagemDao implements Serializable {
         if (album!=null){
             album.setStatus(12);
             album.setOcupado(false);
-            }
+        }
         sessao.update(album);
         transacao.commit();
         FacesContext.getCurrentInstance().addMessage(
@@ -154,8 +154,7 @@ public class RegraMontagemDao implements Serializable {
         Criteria criteria = sessao.createCriteria(Contrato.class);
         criteria.add(Restrictions.ge("status",10));
         criteria.add(Restrictions.le("status", 13));
-        criteria.addOrder(Order.asc("urgencia"));
-        criteria.addOrder(Order.desc("status"));
+        criteria.addOrder(Order.asc("urgencia")).addOrder(Order.asc("status")).addOrder(Order.asc("cod"));
         criteria.setMaxResults(1);
         Contrato retorno = (Contrato) criteria.uniqueResult();
         if (retorno != null ) {
@@ -180,12 +179,47 @@ public class RegraMontagemDao implements Serializable {
         Criteria criteria = sessao.createCriteria(Album.class);
         criteria.add(Restrictions.eq("ocupado", true));
         criteria.add(Restrictions.eq("status", 13));
+
         int cont = (int) criteria.list().size();
-        contrato.setStatus(14);
-        contrato.setUrgencia(4);
-        sessao.update(contrato);
-        transacao.commit();
-        sessao.close();
+        if(cont == 0) {
+            try {
+                contrato.setStatus(14);
+                contrato.setUrgencia(4);
+                sessao.update(contrato);
+                transacao.commit();
+                sessao.close();
+
+                FacesContext.getCurrentInstance().addMessage(
+                        null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Contrato encerrado" ,
+                                "Informe ao seu superior"));
+            }
+            catch (Exception e){
+
+            }
+
+
+        }
+        else {
+            try{
+                FacesContext.getCurrentInstance().addMessage(
+                        null,
+                        new FacesMessage(FacesMessage.SEVERITY_WARN, "Ainda não é possível encerrar esse contrato" ,
+                                "Funcionários ainda estão nesse contrato"));
+
+                contrato.setUrgencia(4);
+                sessao.clear();
+                sessao.update(contrato);
+                transacao.commit();
+                sessao.close();
+            }
+            catch (Exception e){
+                FacesContext.getCurrentInstance().addMessage(
+                        null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Algo deu errado" ,
+                                "Tente outra vez"));
+            }
+        }
 
     }
 }
