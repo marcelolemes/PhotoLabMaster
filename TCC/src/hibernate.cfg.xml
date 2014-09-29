@@ -32,7 +32,7 @@
         <mapping class="br.com.login.model.Album"/>
         <mapping class="br.com.login.model.Ficha"/>
         <mapping class="br.com.login.model.Cliente"/>
-        <mapping class="br.com.login.model.RelatorioMontagem"/>
+        <mapping class="br.com.login.model.Relatorio"/>
         <mapping class="br.com.login.bean.users.admin.cadastro.CadastrarContratoBean"/>
 
     </session-factory>

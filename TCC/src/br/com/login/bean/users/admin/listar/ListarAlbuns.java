@@ -1,6 +1,7 @@
 package br.com.login.bean.users.admin.listar;
 
 import br.com.login.Dao.AlbumDao;
+import br.com.login.bean.users.UserBean;
 import br.com.login.model.Album;
 import br.com.login.model.Contrato;
 import br.com.login.model.Metricas;
@@ -25,7 +26,8 @@ public class ListarAlbuns implements Serializable {
 
     @ManagedProperty("#{listarCursos}")
     ListarCursos listarCursos;
-
+    @ManagedProperty("#{userBean}")
+    private UserBean userBean;
     AlbumDao albumDao = new AlbumDao();
     Metricas metricas = new Metricas();
     private List<Album> listaAlbuns;
@@ -42,6 +44,15 @@ public class ListarAlbuns implements Serializable {
         }
 
     }
+
+    public void btAtualizar() throws Exception{
+        albumDao = new AlbumDao();
+        listaAlbuns = albumDao.ListarAlbunsContrato(listarCursos.getContratoSelecionado());
+
+    }
+
+
+
 
 
 
@@ -75,5 +86,13 @@ public class ListarAlbuns implements Serializable {
 
     public void setListarCursos(ListarCursos listarCursos) {
         this.listarCursos = listarCursos;
+    }
+
+    public UserBean getUserBean() {
+        return userBean;
+    }
+
+    public void setUserBean(UserBean userBean) {
+        this.userBean = userBean;
     }
 }

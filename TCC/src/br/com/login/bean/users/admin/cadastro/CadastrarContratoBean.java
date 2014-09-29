@@ -43,6 +43,7 @@ public class CadastrarContratoBean implements Serializable {
 
     public String gravarContrato() throws Exception {
         contratoCadastro.setFicha(fichaSelecionada);
+        contratoCadastro.setQtdAlbum(0);
         if (contDao.Gravar(contratoCadastro)) {
             FacesContext.getCurrentInstance().addMessage(
                     null,

@@ -12,7 +12,8 @@ import java.util.Date;
 
 @Entity
 @ManagedBean
-public class RelatorioMontagem implements Serializable{
+@Table(name = "relatorio")
+public class Relatorio implements Serializable{
 
     @Id
     @Column
@@ -58,4 +59,5 @@ public class RelatorioMontagem implements Serializable{
     public void setDataOperacao(Timestamp dataOperacao) {
         this.dataOperacao = dataOperacao;
     }
+
 }

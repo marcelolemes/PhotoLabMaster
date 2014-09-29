@@ -41,6 +41,8 @@ public class Contrato implements Serializable {
     @Column
     private int urgencia;
     @Column
+    private int qtdAlbum;
+    @Column
     private String obs;
     @Column
     private Date dataBackup;
@@ -179,5 +181,12 @@ public class Contrato implements Serializable {
         this.entidade = entidade;
     }
 
+    public int getQtdAlbum() {
+        return qtdAlbum;
+    }
+
+    public void setQtdAlbum(int qtdAlbum) {
+        this.qtdAlbum = qtdAlbum;
+    }
 }
 

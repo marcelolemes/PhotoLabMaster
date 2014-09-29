@@ -1,5 +1,7 @@
 package br.com.login.model;
 
+import org.hibernate.annotations.Table;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,6 +15,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @ManagedBean
+@javax.persistence.Table(name = "cliente")
 public class Cliente implements Serializable {
 
 	/**

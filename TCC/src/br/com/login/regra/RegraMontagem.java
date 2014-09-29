@@ -1,11 +1,11 @@
 package br.com.login.regra;
 
 import br.com.login.Dao.RegraMontagemDao;
-import br.com.login.Dao.RelatorioMontagemDao;
+import br.com.login.Dao.RelatorioDao;
 import br.com.login.Dao.UserDao;
 import br.com.login.bean.users.UserBean;
 import br.com.login.model.Album;
-import br.com.login.model.RelatorioMontagem;
+import br.com.login.model.Relatorio;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -22,10 +22,10 @@ import java.util.Date;
 @ViewScoped
 public class RegraMontagem implements Serializable {
     UserDao userDao = new UserDao();
-    private RelatorioMontagem relatorioMontagem;
+    private Relatorio relatorio;
     private Album albumMontar;
     private RegraMontagemDao regDao = new RegraMontagemDao();
-    private RelatorioMontagemDao relatorioDao = new RelatorioMontagemDao();
+    private RelatorioDao relatorioDao = new RelatorioDao();
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
 
@@ -54,14 +54,14 @@ public class RegraMontagem implements Serializable {
     }
 
     public void btTerminarAlbum() throws Exception {
-        relatorioMontagem = new RelatorioMontagem();
+        relatorio = new Relatorio();
 
         regDao.albumTerminado(userBean.getUserLogado().getAlbumAtual());
 
-        relatorioMontagem.setAlbum(userBean.getUserLogado().getAlbumAtual());
-        relatorioMontagem.setFuncionario(userBean.getUserLogado());
-        relatorioMontagem.setDataOperacao(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
-        relatorioDao.salvarRelatorio(relatorioMontagem);
+        relatorio.setAlbum(userBean.getUserLogado().getAlbumAtual());
+        relatorio.setFuncionario(userBean.getUserLogado());
+        relatorio.setDataOperacao(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
+        relatorioDao.salvarRelatorio(relatorio);
         userBean.getUserLogado().setAlbumAtual(null);
         userDao.Update(userBean.getUserLogado());
     }

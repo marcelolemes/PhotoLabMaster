@@ -74,7 +74,7 @@ public class CadastrarAlbum implements Serializable {
 
 		System.out.println("Lista Pronta para persistencia "+listaAlbum.size());
 
-		albumDao.GravarLista(listaAlbum);
+		albumDao.GravarLista(listaAlbum,contrato);
 
 	}
 
