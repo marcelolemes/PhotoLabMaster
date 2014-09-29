@@ -1,15 +1,19 @@
 package br.com.login.regra;
 
 import br.com.login.Dao.RegraMontagemDao;
+import br.com.login.Dao.RelatorioMontagemDao;
 import br.com.login.Dao.UserDao;
 import br.com.login.bean.users.UserBean;
 import br.com.login.model.Album;
+import br.com.login.model.RelatorioMontagem;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import java.sql.Timestamp;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by marcelo on 26/09/2014.
@@ -18,9 +22,10 @@ import java.io.Serializable;
 @ViewScoped
 public class RegraMontagem implements Serializable {
     UserDao userDao = new UserDao();
-    //private Contrato contratoAtual;
+    private RelatorioMontagem relatorioMontagem;
     private Album albumMontar;
     private RegraMontagemDao regDao = new RegraMontagemDao();
+    private RelatorioMontagemDao relatorioDao = new RelatorioMontagemDao();
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
 
@@ -39,6 +44,7 @@ public class RegraMontagem implements Serializable {
     public void btPegarAlbum() throws Exception {
         userBean.getUserLogado().setAlbumAtual(regDao.NovoAlbum(userBean.getUserLogado()));
         userDao.Update(userBean.getUserLogado());
+
     }
 
     public void btCancelarAlbum() throws Exception {
@@ -48,7 +54,14 @@ public class RegraMontagem implements Serializable {
     }
 
     public void btTerminarAlbum() throws Exception {
+        relatorioMontagem = new RelatorioMontagem();
+
         regDao.albumTerminado(userBean.getUserLogado().getAlbumAtual());
+
+        relatorioMontagem.setAlbum(userBean.getUserLogado().getAlbumAtual());
+        relatorioMontagem.setFuncionario(userBean.getUserLogado());
+        relatorioMontagem.setDataOperacao(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
+        relatorioDao.salvarRelatorio(relatorioMontagem);
         userBean.getUserLogado().setAlbumAtual(null);
         userDao.Update(userBean.getUserLogado());
     }

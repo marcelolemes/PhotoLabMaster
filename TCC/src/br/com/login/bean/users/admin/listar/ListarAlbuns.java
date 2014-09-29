@@ -7,6 +7,7 @@ import br.com.login.model.Metricas;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
@@ -21,6 +22,10 @@ public class ListarAlbuns implements Serializable {
     /**
      *
      */
+
+    @ManagedProperty("#{listarCursos}")
+    ListarCursos listarCursos;
+
     AlbumDao albumDao = new AlbumDao();
     Metricas metricas = new Metricas();
     private List<Album> listaAlbuns;
@@ -30,13 +35,15 @@ public class ListarAlbuns implements Serializable {
     public void inicializarLista() {
         try {
 
-            listaAlbuns = albumDao.ListarAlbuns();
+            listaAlbuns = albumDao.ListarAlbunsContrato(listarCursos.getContratoSelecionado());
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
     }
+
+
 
     public String parserUrgencia(int urgencia) {
         return metricas.getUrgenciaLista().get(urgencia).getLabel();
@@ -62,4 +69,11 @@ public class ListarAlbuns implements Serializable {
         this.contratoSelecionado = contratoSelecionado;
     }
 
+    public ListarCursos getListarCursos() {
+        return listarCursos;
+    }
+
+    public void setListarCursos(ListarCursos listarCursos) {
+        this.listarCursos = listarCursos;
+    }
 }

@@ -55,7 +55,8 @@ public class AlbumDao implements Serializable {
 	public List<Album> ListarAlbunsContrato(Contrato contrato) throws Exception {
 		Session sessao = HibernateUtil.getSession();
 		Criteria criteria = sessao.createCriteria(Album.class);
-		criteria.add(Restrictions.eq("contrato", contrato.getCod()));
+		criteria.add(Restrictions.eq("contrato", contrato));
+        System.out.println("Contrato aqui: "+contrato.getNumeroContrato());
 		List<Album> listaRetorno = criteria.list();
 		sessao.close();
 		return listaRetorno;

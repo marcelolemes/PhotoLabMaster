@@ -1,6 +1,8 @@
 package br.com.login.bean.users.admin.listar;
 
+import br.com.login.Dao.AlbumDao;
 import br.com.login.Dao.ContratoDao;
+import br.com.login.model.Album;
 import br.com.login.model.Contrato;
 import br.com.login.model.Metricas;
 import com.lowagie.text.BadElementException;
@@ -10,6 +12,8 @@ import com.lowagie.text.PageSize;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
@@ -17,7 +21,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped //arrumar para outro tipo de escopo assim que possivel
 public class ListarCursos implements Serializable {
 
     /**
@@ -33,7 +37,8 @@ public class ListarCursos implements Serializable {
     private List<Contrato> listaContrato;
     private List<Contrato> contratosFiltrados;
     private List<String> urgencias;
-    private Contrato contratoSelecionado;
+    private Contrato contratoSelecionado = new Contrato();
+    private static Contrato contratoSelecionado2 = new Contrato();
 
     public ListarCursos() throws Exception {
 
@@ -82,6 +87,7 @@ public class ListarCursos implements Serializable {
         }
 
     }
+
 
     public void preProcessPDF(Object document) throws IOException,
             BadElementException, DocumentException {
@@ -139,4 +145,11 @@ public class ListarCursos implements Serializable {
         this.contratosFiltrados = contratosFiltrados;
     }
 
+    public static Contrato getContratoSelecionado2() {
+        return contratoSelecionado2;
+    }
+
+    public static void setContratoSelecionado2(Contrato contratoSelecionado2) {
+        ListarCursos.contratoSelecionado2 = contratoSelecionado2;
+    }
 }

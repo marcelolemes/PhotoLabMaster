@@ -3,6 +3,7 @@ package br.com.login.model;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
 
 @Entity
 @ManagedBean
-public class Montagem implements Serializable{
+public class RelatorioMontagem implements Serializable{
 
     @Id
     @Column
@@ -22,7 +23,7 @@ public class Montagem implements Serializable{
     @Column
     private Album album;
     @Column
-    private Date dataOperacao;
+    private Timestamp dataOperacao;
 
     public int getCod() {
         return cod;
@@ -48,11 +49,11 @@ public class Montagem implements Serializable{
         this.album = album;
     }
 
-    public Date getDataOperacao() {
+    public Timestamp getDataOperacao() {
         return dataOperacao;
     }
 
-    public void setDataOperacao(Date dataOperacao) {
+    public void setDataOperacao(Timestamp dataOperacao) {
         this.dataOperacao = dataOperacao;
     }
 }
