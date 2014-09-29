@@ -15,12 +15,13 @@ public class RelatorioMontagemDao  {
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();
         try {
-
+            sessao.save(relatorio);
+            transacao.commit();
         }
         catch (Exception e)
         {
-            sessao.save(relatorio);
-            transacao.commit();
+            System.out.println("Relatório não salvo");
+
 
         }
 

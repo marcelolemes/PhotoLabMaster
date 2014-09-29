@@ -18,9 +18,11 @@ public class RelatorioMontagem implements Serializable{
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int cod;
-    @Column
+    @OneToOne
+    @JoinColumn(name = "func", referencedColumnName = "cod")
     private User funcionario;
-    @Column
+    @OneToOne
+    @JoinColumn(name = "album", referencedColumnName = "cod")
     private Album album;
     @Column
     private Timestamp dataOperacao;
