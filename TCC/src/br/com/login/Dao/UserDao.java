@@ -121,7 +121,7 @@ public class UserDao implements Serializable {
 							new FacesMessage(
 									FacesMessage.SEVERITY_FATAL,
 									"Cadastro",
-									"N�o � poss�vel salvar, o apelido � muito curto, insira um nome com ao menos 4 caracteres"));
+									"Não é possível salvar, o apelido é muito curto, insira um nome com ao menos 4 caracteres"));
 			sessao.close();
 			return false;
 		} else {
@@ -133,7 +133,7 @@ public class UserDao implements Serializable {
 								null,
 								new FacesMessage(FacesMessage.SEVERITY_FATAL,
 										"Cadastro",
-										"N�o � poss�vel salvar, a senha � muito curta, insira ao menos 4 caracteres"));
+										"Não é possível salvar, a senha é muito curta, insira ao menos 4 caracteres"));
 				sessao.close();
 				return false;
 			} else {
@@ -145,7 +145,7 @@ public class UserDao implements Serializable {
 							null,
 							new FacesMessage(FacesMessage.SEVERITY_FATAL,
 									"Cadastro",
-									"N�o � poss�vel salvar, o nome j� existe"));
+									"Não é possível salvar, o nome já existe"));
 					sessao.close();
 					return false;
 				} else {

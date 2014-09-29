@@ -5,6 +5,7 @@ import br.com.login.model.User;
 import br.com.login.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class RelatorioDao {
     public List<Relatorio> ListarAlbunsFunc(User user) throws Exception {
             Session sessao = HibernateUtil.getSession();
             Criteria criteria = sessao.createCriteria(Relatorio.class);
+        criteria.addOrder(Order.desc("dataOperacao"));
         //criteria.add(Restrictions.eq("funcionario", user));
         System.out.println("Funcionário aqui: "+user.getApelido());
         List<Relatorio> listaRetorno = criteria.list();

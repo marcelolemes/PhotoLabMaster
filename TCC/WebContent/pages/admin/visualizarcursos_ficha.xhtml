@@ -72,18 +72,17 @@
             </p:column>
             <p:column style="width:3 px;text-align: center" exportable="false" >
                 <p:commandButton value="G" title="Gerar Albuns" rendered="#{contrato.qtdAlbum le 0 ? true:false}"
-                                 action="#{cadastrarAlbum.gerarAlbunsCurso(listarCursos.contratoSelecionado)}">
+                                 action="#{cadastrarAlbum.gerarAlbunsCurso(listarCursos.contratoSelecionado)}" update="@all" process="@all">
                     <f:setPropertyActionListener value="#{contrato}"
                                                  target="#{listarCursos.contratoSelecionado}" />
                 </p:commandButton>
-            </p:column>>
-            <p:column style="width:3 px;text-align: center" exportable="false">
-                <p:commandButton title="Visualizar Albuns Curso" value="V" rendered="#{contrato.qtdAlbum le 0 ? false:true}"
-                                 action="#{panelAdmin.btListarAlbunsCurso()}">
-                    <f:setPropertyActionListener value="#{contrato}"
-                                                 target="#{listarCursos.contratoSelecionado}" />
-                </p:commandButton>
+                <p:commandButton title="Visualizar Albuns Curso" value="V" rendered="#{contrato.qtdAlbum le 0 ? false:true}" update="@all" process="@all"
+                                               action="#{panelAdmin.btListarAlbunsCurso()}">
+                                  <f:setPropertyActionListener value="#{contrato}"
+                                                               target="#{listarCursos.contratoSelecionado}" />
+                              </p:commandButton>
             </p:column>
+
             <p:column headerText="Contrato" width="9%" filterBy="numeroContrato"
                       filterMatchMode="contains" sortBy="numeroContrato">
                 <h:outputText value="#{contrato.numeroContrato}" />

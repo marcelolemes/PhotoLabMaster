@@ -51,6 +51,8 @@ public class ListarAlbunsFunc implements Serializable {
 
 
 
+
+
     public List<Relatorio> getRelatorioList() {
         return relatorioList;
     }

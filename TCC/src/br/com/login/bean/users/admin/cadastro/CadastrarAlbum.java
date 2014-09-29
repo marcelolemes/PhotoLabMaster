@@ -2,11 +2,14 @@ package br.com.login.bean.users.admin.cadastro;
 
 import br.com.login.Dao.AlbumDao;
 import br.com.login.Dao.ContratoDao;
+import br.com.login.bean.users.admin.listar.ListarCursos;
 import br.com.login.model.Album;
 import br.com.login.model.Contrato;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.Serializable;
@@ -17,24 +20,24 @@ import java.util.List;
 @ViewScoped
 public class CadastrarAlbum implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6549414550211411055L;
-	ContratoDao contDao = new ContratoDao();
-	FilenameFilter pastaFilter = new FilenameFilter() {
+    /**
+     *
+     */
+    private static final long serialVersionUID = -6549414550211411055L;
+    ContratoDao contDao = new ContratoDao();
+    FilenameFilter pastaFilter = new FilenameFilter() {
 
-		@Override
-		public boolean accept(File dir, String name) {
-			String lowercaseName = name.toLowerCase();
-			if (lowercaseName.startsWith("20")) {
-				return true;
-			} else {
-				return false;
-			}
+        @Override
+        public boolean accept(File dir, String name) {
+            String lowercaseName = name.toLowerCase();
+            if (lowercaseName.startsWith("20")) {
+                return true;
+            } else {
+                return false;
+            }
 
-		}
-	};
+        }
+    };
     /**
      *
      */
@@ -43,55 +46,62 @@ public class CadastrarAlbum implements Serializable {
     private AlbumDao albumDao = new AlbumDao();
     private String contratoPesquisarNumero;
 
-	public void gerarAlbunsCurso(Contrato contrato) throws Exception {
-		File[] pastas;
+    public void gerarAlbunsCurso(Contrato contrato) throws Exception {
 
-		File diretorio = new File(contrato.getCaminho());
-		pastas = diretorio.listFiles(pastaFilter);
-		System.out.println("Albuns Gerados");
-		persistirListaAlbum(pastas, contrato);
+        File[] pastas;
+        File diretorio = new File(contrato.getCaminho());
+        pastas = diretorio.listFiles(pastaFilter);
+        System.out.println("Albuns Gerados");
+        persistirListaAlbum(pastas, contrato);
+        FacesContext
+                        .getCurrentInstance()
+                        .addMessage(
+                                null,
+                                new FacesMessage(FacesMessage.SEVERITY_INFO, //não testado
+                                        "Gerar albuns",
+                                        pastas.length + " albuns gerados, do contrato " + contrato.getNumeroContrato()));
 
-	}
+    }
 
-	public void gravarAlbum() throws Exception {
-		album.setContrato(contDao.pesquisarContrato(contratoPesquisarNumero));
-		albumDao.Gravar(album);
-	}
+    public void gravarAlbum() throws Exception {
+        album.setContrato(contDao.pesquisarContrato(contratoPesquisarNumero));
+        albumDao.Gravar(album);
+    }
 
-	public void persistirListaAlbum(File[] albuns, Contrato contrato)
-			throws Exception {
-		List<Album> listaAlbum = new ArrayList<Album>();
+    public void persistirListaAlbum(File[] albuns, Contrato contrato)
+            throws Exception {
+        List<Album> listaAlbum = new ArrayList<Album>();
 
-		for (File file : albuns) {
-			Album album = new Album();
-			album.setNumero(file.getName());
-			album.setOcupado(false);
+        for (File file : albuns) {
+            Album album = new Album();
+            album.setNumero(file.getName());
+            album.setOcupado(false);
             album.setContrato(contrato);
 
-			album.setStatus(contrato.getStatus());
-			listaAlbum.add(album);
-		}
+            album.setStatus(contrato.getStatus());
+            listaAlbum.add(album);
+        }
 
-		System.out.println("Lista Pronta para persistencia "+listaAlbum.size());
+        System.out.println("Lista Pronta para persistencia "+listaAlbum.size());
 
-		albumDao.GravarLista(listaAlbum,contrato);
+        albumDao.GravarLista(listaAlbum,contrato);
 
-	}
+    }
 
-	public Album getAlbum() {
-		return album;
-	}
+    public Album getAlbum() {
+        return album;
+    }
 
-	public void setAlbum(Album album) {
-		this.album = album;
-	}
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
 
-	public String getContratoPesquisarNumero() {
-		return contratoPesquisarNumero;
-	}
+    public String getContratoPesquisarNumero() {
+        return contratoPesquisarNumero;
+    }
 
-	public void setContratoPesquisarNumero(String contratoPesquisarNumero) {
-		this.contratoPesquisarNumero = contratoPesquisarNumero;
-	}
+    public void setContratoPesquisarNumero(String contratoPesquisarNumero) {
+        this.contratoPesquisarNumero = contratoPesquisarNumero;
+    }
 
 }
