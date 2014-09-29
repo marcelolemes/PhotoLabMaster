@@ -37,6 +37,7 @@ public class RelatorioDao {
     public List<Relatorio> ListarAlbunsFunc(User user) throws Exception {
             Session sessao = HibernateUtil.getSession();
             Criteria criteria = sessao.createCriteria(Relatorio.class);
+        criteria.add(Restrictions.eq("funcionario",user));
         criteria.addOrder(Order.desc("dataOperacao"));
         //criteria.add(Restrictions.eq("funcionario", user));
         System.out.println("Funcionário aqui: "+user.getApelido());
