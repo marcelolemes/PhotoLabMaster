@@ -1,5 +1,6 @@
 package br.com.login.regra;
 
+import br.com.login.Dao.AlbumDao;
 import br.com.login.Dao.RegraMontagemDao;
 import br.com.login.Dao.RelatorioDao;
 import br.com.login.Dao.UserDao;
@@ -24,6 +25,7 @@ public class RegraMontagem implements Serializable {
     UserDao userDao = new UserDao();
     private Relatorio relatorio;
     private Album albumMontar;
+    AlbumDao albumDao = new AlbumDao();
     private RegraMontagemDao regDao = new RegraMontagemDao();
     private RelatorioDao relatorioDao = new RelatorioDao();
     @ManagedProperty("#{userBean}")
@@ -38,6 +40,14 @@ public class RegraMontagem implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+    public void btInserirObs() throws Exception {
+       //System.out.println("Album obs "+userBean.getUserLogado().getAuxiliar());
+        //userBean.getUserLogado().getAlbumAtual().setObs(userBean.getUserLogado().getAuxiliar());
+
+        albumDao.gravar(userBean.getUserLogado().getAlbumAtual());
 
     }
 

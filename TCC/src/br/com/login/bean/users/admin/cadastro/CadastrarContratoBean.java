@@ -47,13 +47,13 @@ public class CadastrarContratoBean implements Serializable {
         if (contDao.Gravar(contratoCadastro)) {
             FacesContext.getCurrentInstance().addMessage(
                     null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravar",
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "gravar",
                             "Gravado com sucesso"));
             return "/pages/admin/visualizarcursos_ficha.xhtml?faces-redirect=true";
         } else {
             FacesContext.getCurrentInstance().addMessage(
                     null,
-                    new FacesMessage(FacesMessage.SEVERITY_FATAL, "Gravar",
+                    new FacesMessage(FacesMessage.SEVERITY_FATAL, "gravar",
                             "Falha ao gravar!!!"));
             return null;
         }

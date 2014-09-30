@@ -2,7 +2,6 @@ package br.com.login.bean.users.admin.cadastro;
 
 import br.com.login.Dao.AlbumDao;
 import br.com.login.Dao.ContratoDao;
-import br.com.login.bean.users.admin.listar.ListarCursos;
 import br.com.login.model.Album;
 import br.com.login.model.Contrato;
 
@@ -65,7 +64,7 @@ public class CadastrarAlbum implements Serializable {
 
     public void gravarAlbum() throws Exception {
         album.setContrato(contDao.pesquisarContrato(contratoPesquisarNumero));
-        albumDao.Gravar(album);
+        albumDao.gravar(album);
     }
 
     public void persistirListaAlbum(File[] albuns, Contrato contrato)

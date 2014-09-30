@@ -214,7 +214,7 @@ public class UserBean implements Serializable {
 	public void messageSucessoGravar() {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravar",
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "gravar",
 						"Cadastro realizado com sucesso, Seja bem vindo "
 								+ sessao));
 

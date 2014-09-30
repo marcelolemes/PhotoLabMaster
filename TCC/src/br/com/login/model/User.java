@@ -33,7 +33,8 @@ public class User implements Serializable {
     private Timestamp ultimoacesso;
     @Column
     private boolean logado;
-
+    @Column
+    private static String auxiliar;
     @OneToOne
     @JoinColumn(name = "album_atual", referencedColumnName = "cod")
     private Album albumAtual;
@@ -118,4 +119,19 @@ public class User implements Serializable {
         this.albumAtual = albumAtual;
     }
 
+    public int getNivelacesso() {
+        return nivelacesso;
+    }
+
+    public void setNivelacesso(int nivelacesso) {
+        this.nivelacesso = nivelacesso;
+    }
+
+    public String getAuxiliar() {
+        return auxiliar;
+    }
+
+    public void setAuxiliar(String auxiliar) {
+        this.auxiliar = auxiliar;
+    }
 }

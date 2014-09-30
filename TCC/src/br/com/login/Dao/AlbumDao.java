@@ -20,7 +20,7 @@ public class AlbumDao implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    public boolean Gravar(Album album) throws Exception {
+    public boolean gravar(Album album) throws Exception {
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();
         album.setStatus(album.getContrato().getStatus());
@@ -30,6 +30,7 @@ public class AlbumDao implements Serializable {
         return true;
 
     }
+
 
     public boolean GravarLista(List<Album> albuns,Contrato contrato) throws Exception {
         Session sessao = HibernateUtil.getSession();

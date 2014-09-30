@@ -28,13 +28,13 @@
         <p:layout>
             <p:layoutUnit position="north" resizable="true">
                 <ui:insert name="northContent" />
-               <p:panelGrid columns="2">
-                <p:commandButton value="Confirmar término do álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraMontagem.btTerminarAlbum}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
-                <p:commandButton value="Cancelar álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraMontagem.btCancelarAlbum()}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
-               </p:panelGrid>
+                <p:panelGrid columns="2">
+                    <p:commandButton value="Confirmar término do álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraMontagem.btTerminarAlbum}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
+                    <p:commandButton value="Cancelar álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraMontagem.btCancelarAlbum()}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
+                </p:panelGrid>
                 <p:panelGrid columns="1">
-                <p:commandButton value="Pegar album" actionListener="#{regraMontagem.btPegarAlbum}" rendered="#{empty panelAdmin.userBean.userLogado.albumAtual}" update="@all" />
-                <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.caminho} \ #{panelAdmin.userBean.userLogado.albumAtual.numero}" rendered="#{ not empty panelAdmin.userBean.userLogado.albumAtual}"/>
+                    <p:commandButton value="Pegar album" actionListener="#{regraMontagem.btPegarAlbum}" rendered="#{empty panelAdmin.userBean.userLogado.albumAtual}" update="@all" />
+                    <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.caminho} \ #{panelAdmin.userBean.userLogado.albumAtual.numero}" rendered="#{ not empty panelAdmin.userBean.userLogado.albumAtual}"/>
                 </p:panelGrid>
             </p:layoutUnit>
 
@@ -101,7 +101,15 @@
         </h:form>
     </ui:define>
     <ui:define name="east">
-        EAST UNIT
+        <h:form>
+            <p:panel rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" styleClass="paneeast">
+            <p:panelGrid columns="2" styleClass="paneeast">
+                <p:outputLabel value="Obs: do álbum" />
+                <p:inputTextarea value="#{panelAdmin.userBean.userLogado.albumAtual.obs}"/>
+                <p:commandButton value="inserir Obs:" actionListener="#{regraMontagem.btInserirObs()}"/>
+            </p:panelGrid>
+            </p:panel>
+        </h:form>
     </ui:define>
 
     </body>
