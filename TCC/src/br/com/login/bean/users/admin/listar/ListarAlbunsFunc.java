@@ -47,6 +47,8 @@ public class ListarAlbunsFunc implements Serializable {
         catch (Exception e)
         {
             System.out.println("Exceção Relatório");
+            e.printStackTrace();
+            e.getMessage();
 
         }
     }
