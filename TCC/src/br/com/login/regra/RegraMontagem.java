@@ -74,6 +74,8 @@ public class RegraMontagem implements Serializable {
         relatorioDao.salvarRelatorio(relatorio);
         userBean.getUserLogado().setAlbumAtual(null);
         userDao.Update(userBean.getUserLogado());
+
+        
     }
 
     public Album getAlbumMontar() {

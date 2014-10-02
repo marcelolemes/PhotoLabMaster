@@ -29,7 +29,7 @@
         <h:form>
 
             <p:dataTable id="albuns" value="#{listarAlbuns.listaAlbuns}"
-                         var="album" scrollable="true" scrollHeight="430" >
+                         var="album" scrollable="true" scrollHeight="430" sortBy="numero">
                 <f:facet name="header">
                     <h:commandLink id="tabelapdf">
                         <p:graphicImage url="/resources/images/pdf.png" />

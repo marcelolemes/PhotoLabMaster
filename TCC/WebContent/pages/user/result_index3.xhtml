@@ -32,6 +32,10 @@
                     <p:commandButton value="Confirmar término do álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraMontagem.btTerminarAlbum}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
                     <p:commandButton value="Cancelar álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraMontagem.btCancelarAlbum()}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
                 </p:panelGrid>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Média"/>
+                    <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.media}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.contrato.media}"/>
+                </p:panelGrid>
                 <p:panelGrid columns="1">
                     <p:commandButton value="Pegar album" actionListener="#{regraMontagem.btPegarAlbum}" rendered="#{empty panelAdmin.userBean.userLogado.albumAtual}" update="@all" />
                     <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.caminho} \ #{panelAdmin.userBean.userLogado.albumAtual.numero}" rendered="#{ not empty panelAdmin.userBean.userLogado.albumAtual}"/>
