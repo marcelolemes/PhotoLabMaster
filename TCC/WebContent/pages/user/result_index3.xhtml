@@ -84,6 +84,8 @@
     </ui:define>
     <ui:define name="west">
         <h:form id="west">
+            <p:outputLabel value="Albuns do dia "/>
+            <p:outputLabel value="#{listarAlbunsFunc.qtdDia}"/>
             <p:dataTable id="relatorio" var="relatorio" value="#{listarAlbunsFunc.relatorioList}">
                 <p:column headerText="Número">
                     <h:outputText value="#{relatorio.album.numero}" />

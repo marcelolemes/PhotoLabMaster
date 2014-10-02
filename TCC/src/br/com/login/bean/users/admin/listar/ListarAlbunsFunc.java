@@ -28,6 +28,7 @@ public class ListarAlbunsFunc implements Serializable {
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
 
+    private long qtdDia;
     AlbumDao albumDao = new AlbumDao();
     Relatorio relatorio = new Relatorio();
     RelatorioDao relatorioDao = new RelatorioDao();
@@ -41,6 +42,7 @@ public class ListarAlbunsFunc implements Serializable {
         try {
 
            relatorioList = relatorioDao.ListarAlbunsFunc(userBean.getUserLogado());
+            qtdDia = relatorioDao.ListarAlbunsHoje(userBean.getUserLogado());
         }
         catch (Exception e)
         {
@@ -67,5 +69,13 @@ public class ListarAlbunsFunc implements Serializable {
 
     public void setUserBean(UserBean userBean) {
         this.userBean = userBean;
+    }
+
+    public long getQtdDia() {
+        return qtdDia;
+    }
+
+    public void setQtdDia(long qtdDia) {
+        this.qtdDia = qtdDia;
     }
 }

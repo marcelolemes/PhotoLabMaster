@@ -6,8 +6,11 @@ import br.com.login.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,4 +50,14 @@ public class RelatorioDao {
             return listaRetorno;
         }
 
+    public long ListarAlbunsHoje(User user) throws Exception {
+               Session sessao = HibernateUtil.getSession();
+               Criteria criteria = sessao.createCriteria(Relatorio.class).setProjection(Projections.rowCount());
+        criteria.add(Restrictions.eq("funcionario",user)).add(Restrictions.eq("dataOperacao",new Timestamp(new Date().getTime())));
+
+        long retorno = (Long) criteria.uniqueResult();
+           System.out.println("Contagem: "+retorno);
+               sessao.close();
+               return retorno;
+           }
 }
