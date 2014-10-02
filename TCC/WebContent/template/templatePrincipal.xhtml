@@ -30,7 +30,7 @@
         <p:growl showDetail="true" autoUpdate="true" />
         <ui:insert name="content" />
     </p:layoutUnit>
-    <p:layoutUnit position="east" resizable="true">
+    <p:layoutUnit position="east" resizable="true" collapsible="true" collapsed="true" header="Extras">
         <ui:insert name="east" />
     </p:layoutUnit>
     <p:layoutUnit position="west" resizable="true" maxSize="250">
@@ -45,7 +45,7 @@
             </div>
             <div style="float: left;">
 
-                <p:panelGrid columns="4">
+                <p:panelGrid columns="4" styleClass="semBorda">
 
                     <p:commandButton icon="ui-icon-close" styleClass="botao-sair"
                                      rendered="#{not empty panelAdmin.userBean.userLogado.apelido}"
@@ -53,6 +53,9 @@
                                      action="#{panelAdmin.sairSessao()}" update="@all" process="@this" />
 
                     <p:clock pattern="HH:mm:ss" mode="server" />
+                    <p:outputLabel value="ultimo acesso" />
+                    <p:outputLabel
+                            value="#{panelAdmin.userBean.userLogado.ultimoacesso}" />
                 </p:panelGrid>
             </div>
         </h:form>

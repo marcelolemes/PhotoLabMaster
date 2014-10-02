@@ -7,6 +7,7 @@ import br.com.login.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import javax.faces.application.FacesMessage;
@@ -176,11 +177,11 @@ public class RegraMontagemDao implements Serializable {
     public void contratoPronto(Contrato contrato) throws Exception {
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();
-        Criteria criteria = sessao.createCriteria(Album.class);
+        Criteria criteria = sessao.createCriteria(Album.class).setProjection(Projections.rowCount());
         criteria.add(Restrictions.eq("ocupado", true));
         criteria.add(Restrictions.eq("status", 13));
 
-        int cont = (int) criteria.list().size();
+        long cont = (Long) criteria.uniqueResult();
         if(cont == 0) {
             try {
                 contrato.setStatus(14);
@@ -201,6 +202,7 @@ public class RegraMontagemDao implements Serializable {
 
         }
         else {
+            System.out.println(""+cont);
             try{
                 FacesContext.getCurrentInstance().addMessage(
                         null,

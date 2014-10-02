@@ -48,7 +48,10 @@ ui-layout-south {
 }
 
 
-
+.negrito {
+    font-weight: bolder ! important;
+    text-decoration: underline;
+}
 .center {
     position: absolute;
     right: 40%;
