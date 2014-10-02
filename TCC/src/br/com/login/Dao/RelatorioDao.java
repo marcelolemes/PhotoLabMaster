@@ -65,7 +65,7 @@ public class RelatorioDao {
         java.sql.Date date = new java.sql.Date(new Date(System.currentTimeMillis()).getTime());
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Relatorio.class).setProjection(Projections.rowCount());
-        criteria.add(Restrictions.ge("dataOperacao", cal.getTime()));
+        criteria.add(Restrictions.ge("dataOperacao", cal.getTime())).add(Restrictions.eq("funcionario", user));
         long retorno = (Long) criteria.uniqueResult();
         System.out.println("Contagem: "+retorno);
         System.out.println("Date aqui: "+cal.getTime());
