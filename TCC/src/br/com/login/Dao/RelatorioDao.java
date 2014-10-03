@@ -1,5 +1,7 @@
 package br.com.login.Dao;
 
+import br.com.login.model.Album;
+import br.com.login.model.Contrato;
 import br.com.login.model.Relatorio;
 import br.com.login.model.User;
 import br.com.login.util.HibernateUtil;
@@ -53,7 +55,7 @@ public class RelatorioDao {
         return listaRetorno;
     }
 
-    public long ListarAlbunsHoje(User user) throws Exception {
+    public long contarAlbunsHoje(User user) throws Exception {
         Calendar cal = Calendar.getInstance();
         cal.clear(Calendar.HOUR_OF_DAY);
         cal.clear(Calendar.HOUR);
@@ -72,4 +74,40 @@ public class RelatorioDao {
         sessao.close();
         return retorno;
     }
+    public List<Relatorio> ListarAlbunsHoje(User user) throws Exception {
+        Calendar cal = Calendar.getInstance();
+        cal.clear(Calendar.HOUR_OF_DAY);
+        cal.clear(Calendar.HOUR);
+        cal.clear(Calendar.AM_PM);
+        cal.clear(Calendar.MINUTE);
+        cal.clear(Calendar.SECOND);
+        cal.clear(Calendar.MILLISECOND);
+
+        java.sql.Date date = new java.sql.Date(new Date(System.currentTimeMillis()).getTime());
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Relatorio.class);
+        criteria.add(Restrictions.ge("dataOperacao", cal.getTime())).add(Restrictions.eq("funcionario", user));
+        List<Relatorio> listaRetorno = criteria.list();
+        System.out.println("Date aqui: "+cal.getTime());
+        sessao.close();
+        return listaRetorno;
+    }
+
+    public long AlbunsRestantesMontagem(Contrato contrato) throws Exception {
+
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Album.class).setProjection(Projections.rowCount());
+        criteria.add(Restrictions.eq("contrato",contrato));
+        System.out.println("Contrato para contagem : "+contrato.getNumeroContrato());
+        criteria.add(Restrictions.le("status",12));
+        long retorno = (Long) criteria.uniqueResult();
+        System.out.println("Contagem restantes: "+retorno);
+
+        sessao.close();
+        return retorno;
+
+
+    }
+
+
 }

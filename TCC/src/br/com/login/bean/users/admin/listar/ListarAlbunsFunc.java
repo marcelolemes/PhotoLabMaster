@@ -1,6 +1,7 @@
 package br.com.login.bean.users.admin.listar;
 
 import br.com.login.Dao.AlbumDao;
+import br.com.login.Dao.RegraMontagemDao;
 import br.com.login.Dao.RelatorioDao;
 import br.com.login.bean.users.UserBean;
 import br.com.login.model.Contrato;
@@ -29,8 +30,10 @@ public class ListarAlbunsFunc implements Serializable {
     private UserBean userBean;
 
     private long qtdDia;
+
     AlbumDao albumDao = new AlbumDao();
     Relatorio relatorio = new Relatorio();
+
     RelatorioDao relatorioDao = new RelatorioDao();
    private List<Relatorio> relatorioList;
     //    Metricas metricas = new Metricas();
@@ -41,8 +44,10 @@ public class ListarAlbunsFunc implements Serializable {
     public void listarAlbumFeito(){
         try {
 
-           relatorioList = relatorioDao.ListarAlbunsFunc(userBean.getUserLogado());
-            qtdDia = relatorioDao.ListarAlbunsHoje(userBean.getUserLogado());
+          // relatorioList = relatorioDao.ListarAlbunsFunc(userBean.getUserLogado());
+            relatorioList = relatorioDao.ListarAlbunsHoje(userBean.getUserLogado());
+            qtdDia = relatorioDao.contarAlbunsHoje(userBean.getUserLogado());
+
         }
         catch (Exception e)
         {
@@ -80,4 +85,5 @@ public class ListarAlbunsFunc implements Serializable {
     public void setQtdDia(long qtdDia) {
         this.qtdDia = qtdDia;
     }
+
 }

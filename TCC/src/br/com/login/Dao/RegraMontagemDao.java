@@ -112,13 +112,16 @@ public class RegraMontagemDao implements Serializable {
         if (album!=null){
             album.setStatus(14);
             album.setOcupado(false);
+            sessao.update(album);
+            transacao.commit();
+            FacesContext.getCurrentInstance().addMessage(
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_INFO, "Album "+album.getNumero()+" encerrado" ,
+                                    "Pegue outro album para continuar trabalhando"));
         }
-        sessao.update(album);
-        transacao.commit();
-        FacesContext.getCurrentInstance().addMessage(
-                null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "Album "+album.getNumero()+" encerrado" ,
-                        "Pegue outro album para continuar trabalhando"));
+
+
+
         try {
             sessao.close();
         }

@@ -24,10 +24,12 @@ import java.util.Date;
 public class RegraMontagem implements Serializable {
     UserDao userDao = new UserDao();
     private Relatorio relatorio;
+
     private Album albumMontar;
     AlbumDao albumDao = new AlbumDao();
     private RegraMontagemDao regDao = new RegraMontagemDao();
     private RelatorioDao relatorioDao = new RelatorioDao();
+    private long albunsRestantes;
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
 
@@ -36,9 +38,12 @@ public class RegraMontagem implements Serializable {
 
         try {
 
-            //albumMontar= regDao.NovoAlbum();
+            albunsRestantes = relatorioDao.AlbunsRestantesMontagem(regDao.contratoAtual());
+
+
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Exceção albuns restantes" );
         }
 
     }
@@ -56,6 +61,7 @@ public class RegraMontagem implements Serializable {
         try {
             userBean.getUserLogado().setAlbumAtual(regDao.NovoAlbum(userBean.getUserLogado()));
             userBean.getUserLogado().setAuxiliar(userBean.getUserLogado().getAlbumAtual().getContrato().getCaminho()+"\\"+ userBean.getUserLogado().getAlbumAtual().getNumero());
+            iniciar();
         }
         catch (Exception e)
         {
@@ -73,16 +79,23 @@ public class RegraMontagem implements Serializable {
     }
 
     public void btTerminarAlbum() throws Exception {
-        relatorio = new Relatorio();
+        try{
+            relatorio = new Relatorio();
+            relatorio.setAlbum(userBean.getUserLogado().getAlbumAtual());
+            relatorio.setFuncionario(userBean.getUserLogado());
+            relatorio.setDataOperacao(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
+            relatorioDao.salvarRelatorio(relatorio);
+            userBean.getUserLogado().setAlbumAtual(null);
+            userDao.Update(userBean.getUserLogado());
+
+            iniciar();
+
+        }
+        catch (Exception e){}
 
         regDao.albumTerminado(userBean.getUserLogado().getAlbumAtual());
 
-        relatorio.setAlbum(userBean.getUserLogado().getAlbumAtual());
-        relatorio.setFuncionario(userBean.getUserLogado());
-        relatorio.setDataOperacao(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
-        relatorioDao.salvarRelatorio(relatorio);
-        userBean.getUserLogado().setAlbumAtual(null);
-        userDao.Update(userBean.getUserLogado());
+
 
 
     }
@@ -102,5 +115,13 @@ public class RegraMontagem implements Serializable {
 
     public void setUserBean(UserBean userBean) {
         this.userBean = userBean;
+    }
+
+    public long getAlbunsRestantes() {
+        return albunsRestantes;
+    }
+
+    public void setAlbunsRestantes(long albunsRestantes) {
+        this.albunsRestantes = albunsRestantes;
     }
 }

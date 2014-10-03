@@ -60,7 +60,7 @@
     url("#{resource['primefaces-flick:images/ui-bg_highlight-soft_25_0073ea_1x100.png']}")
     50% 50% repeat-x;
     font-weight: bold;
-    color: #0073ea;
+    color: #fff;
 }
 
 .ui-state-hover a,.ui-state-hover a:hover {
@@ -1058,6 +1058,7 @@
 .ui-datatable-header ,.ui-datatable-header a {
     background-color: #ffffff !important;
     color: #fff !important;
+    border-bottom: 1px solid #ffffff;
 
 }
 
@@ -1087,7 +1088,7 @@
     text-decoration: none;
 }
 
-.ui-button:hover,.ui-button:focus {
+.ui-button:hover,.ui-button:focus { /*Cor do hover coisas clicáveis*/
     background-image: linear-gradient(bottom, rgb(79, 142, 191) 0%,
     rgb(102, 166, 214) 100%);
     background-image: -o-linear-gradient(bottom, rgb(79, 142, 191) 0%,
@@ -1099,7 +1100,8 @@
     background-image: -ms-linear-gradient(bottom, rgb(79, 142, 191) 0%,
     rgb(102, 166, 214) 100%);
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(79,
-    142, 191)), color-stop(1, rgb(102, 166, 214)));
+    142, 195)), color-stop(1, rgb(102, 166, 224)));
+    color: #ffffff !important;
 }
 
 .ui-button-default:active,.ui-button-default.active {
@@ -1126,6 +1128,7 @@
 .ui-button-primary:hover,.ui-button-primary:focus {
     background-color: #2d6ca2;
     background-position: 0 -15px
+    color: #fff;
 }
 
 .ui-button-primary:active,.ui-button-primary.active {

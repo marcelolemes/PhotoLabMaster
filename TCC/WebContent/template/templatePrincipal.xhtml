@@ -11,7 +11,7 @@
           content="text/html; charset=ISO-8859-1" />
     <title>PhotoLab Master</title>
     <link rel="shortcut icon" type="image/x-icon"
-          href="/resources/images/icone.ico" />
+          href="#{request.contextPath}/resources/images/icone.ico" />
     <f:metadata>
         <f:viewAction action="#{userBean.verificarLogado()}" />
     </f:metadata>
@@ -23,11 +23,7 @@
     </p:layoutUnit>
     <p:layoutUnit position="center" resizable="true"
                   style="overflow-y: visible !important;">
-        <audio autoplay="autoplay">
-            <source src="#{request.contextPath}/resources/audio/som.mp3"
-                    type="audio/mp3" />
-        </audio>
-        <p:growl showDetail="true" autoUpdate="true" />
+      <p:growl showDetail="true" autoUpdate="true" />
         <ui:insert name="content" />
     </p:layoutUnit>
     <p:layoutUnit position="east" resizable="true" collapsible="true" collapsed="true" header="Extras">
