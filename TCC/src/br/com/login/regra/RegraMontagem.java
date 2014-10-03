@@ -44,7 +44,7 @@ public class RegraMontagem implements Serializable {
     }
 
     public void btInserirObs() throws Exception {
-       //System.out.println("Album obs "+userBean.getUserLogado().getAuxiliar());
+        //System.out.println("Album obs "+userBean.getUserLogado().getAuxiliar());
         //userBean.getUserLogado().getAlbumAtual().setObs(userBean.getUserLogado().getAuxiliar());
 
         albumDao.gravar(userBean.getUserLogado().getAlbumAtual());
@@ -52,7 +52,16 @@ public class RegraMontagem implements Serializable {
     }
 
     public void btPegarAlbum() throws Exception {
-        userBean.getUserLogado().setAlbumAtual(regDao.NovoAlbum(userBean.getUserLogado()));
+
+        try {
+            userBean.getUserLogado().setAlbumAtual(regDao.NovoAlbum(userBean.getUserLogado()));
+            userBean.getUserLogado().setAuxiliar(userBean.getUserLogado().getAlbumAtual().getContrato().getCaminho()+"\\"+ userBean.getUserLogado().getAlbumAtual().getNumero());
+        }
+        catch (Exception e)
+        {
+
+        }
+
         userDao.Update(userBean.getUserLogado());
 
     }
@@ -74,6 +83,8 @@ public class RegraMontagem implements Serializable {
         relatorioDao.salvarRelatorio(relatorio);
         userBean.getUserLogado().setAlbumAtual(null);
         userDao.Update(userBean.getUserLogado());
+
+
     }
 
     public Album getAlbumMontar() {

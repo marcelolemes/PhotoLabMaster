@@ -34,7 +34,8 @@ public class User implements Serializable {
     @Column
     private boolean logado;
     @Column
-    private static String auxiliar;
+    private String auxiliar;
+
     @OneToOne
     @JoinColumn(name = "album_atual", referencedColumnName = "cod")
     private Album albumAtual;
