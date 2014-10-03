@@ -85,15 +85,18 @@ public class RegraMontagem implements Serializable {
             relatorio.setFuncionario(userBean.getUserLogado());
             relatorio.setDataOperacao(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
             relatorioDao.salvarRelatorio(relatorio);
+            regDao.albumTerminado(userBean.getUserLogado().getAlbumAtual());
             userBean.getUserLogado().setAlbumAtual(null);
             userDao.Update(userBean.getUserLogado());
 
             iniciar();
 
         }
-        catch (Exception e){}
+        catch (Exception e){
 
-        regDao.albumTerminado(userBean.getUserLogado().getAlbumAtual());
+        }
+
+
 
 
 

@@ -115,9 +115,9 @@ public class RegraMontagemDao implements Serializable {
             sessao.update(album);
             transacao.commit();
             FacesContext.getCurrentInstance().addMessage(
-                            null,
-                            new FacesMessage(FacesMessage.SEVERITY_INFO, "Album "+album.getNumero()+" encerrado" ,
-                                    "Pegue outro album para continuar trabalhando"));
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Album "+album.getNumero()+" encerrado" ,
+                            "Pegue outro album para continuar trabalhando"));
         }
 
 
@@ -182,7 +182,7 @@ public class RegraMontagemDao implements Serializable {
         org.hibernate.Transaction transacao = sessao.beginTransaction();
         Criteria criteria = sessao.createCriteria(Album.class).setProjection(Projections.rowCount());
         criteria.add(Restrictions.eq("ocupado", true));
-        criteria.add(Restrictions.eq("status", 13));
+        criteria.add(Restrictions.le("status", 13));
 
         long cont = (Long) criteria.uniqueResult();
         if(cont == 0) {
@@ -211,7 +211,7 @@ public class RegraMontagemDao implements Serializable {
                         null,
                         new FacesMessage(FacesMessage.SEVERITY_WARN, "Ainda não é possível encerrar esse contrato" ,
                                 "Funcionários ainda estão nesse contrato"));
-
+                contrato.setStatus(14);
                 contrato.setUrgencia(4);
                 sessao.clear();
                 sessao.update(contrato);
