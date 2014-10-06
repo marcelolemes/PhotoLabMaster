@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template/templatePrincipal.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <meta http-equiv="Content-Type"
+              content="text/html; charset=ISO-8859-1" />
+        <title></title>
+    </h:head>
+    <h:outputStylesheet library="css" name="estilo.css" />
+
+   <!-- <f:metadata>
+        <f:viewAction action="#{userBean.verificarLogado()}" />
+    </f:metadata>-->
+    <body>
+
+
+    <p:growl id="growl" showDetail="true" autoUpdate="true" />
+
+    <ui:define name="menu">
+        <ui:include src="/include/admin/menu.xhtml" />
+    </ui:define>
+    <ui:define name="content">
+        <script type="text/javascript">
+            PrimeFaces.locales['pt'] = {
+                closeText: 'Fechar',
+                prevText: 'Anterior',
+                nextText: 'Próximo',
+                currentText: 'Começo',
+                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
+                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+                dayNamesMin: ['D','S','T','Q','Q','S','S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Só Horas',
+                timeText: 'Tempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Data Atual',
+                ampm: false,
+                month: 'Mês',
+                week: 'Semana',
+                day: 'Dia',
+                allDayText : 'Todo Dia'
+            };
+        </script>
+        <h:form>
+
+            <p:panelGrid columns="2" styleClass="semBorda">
+                <p:outputLabel value="Número do contrato" />
+                <p:inputText
+                        value="#{cadastrarContratoBean.contratoCadastro.numeroContrato}" />
+                <p:outputLabel value="Curso" />
+                <p:inputText value="#{cadastrarContratoBean.contratoCadastro.curso}" />
+                <p:outputLabel value="Cidade" />
+                <p:inputText value="#{cadastrarContratoBean.contratoCadastro.cidade}" />
+                <p:outputLabel value="Entidade" />
+                <p:inputText value="#{cadastrarContratoBean.contratoCadastro.entidade}" />
+                <p:outputLabel value="Média" />
+                <p:inputText value="#{cadastrarContratoBean.contratoCadastro.media}" />
+                <p:outputLabel value="Data Entrada" />
+                <p:calendar
+                        value="#{cadastrarContratoBean.contratoCadastro.dataEntrada}"
+                        locale="pt" navigator="true" pattern="MM-dd-yyyy" />
+                <p:outputLabel value="Data Prazo" />
+                <p:calendar styleClass="calendar"
+                            value="#{cadastrarContratoBean.contratoCadastro.dataPrazo}"
+                            locale="pt" navigator="true" pattern="MM-dd-yyyy" />
+
+                <p:outputLabel value="Caminho" />
+                <p:inputText
+                        value="#{cadastrarContratoBean.contratoCadastro.caminho}" />
+                <p:outputLabel value="Status" />
+                <p:selectOneMenu value="#{cadastrarContratoBean.contratoCadastro.status}">
+                    <f:selectItems
+                            value="#{cadastrarContratoBean.metricas.statusContratoLista}" />
+                </p:selectOneMenu>
+                <p:outputLabel value="Urgencia" />
+                <p:selectOneMenu value="#{cadastrarContratoBean.contratoCadastro.urgencia}">
+                    <f:selectItems
+                            value="#{cadastrarContratoBean.metricas.urgenciaLista}" />
+                </p:selectOneMenu>
+
+                <p:outputLabel value="OBS:" />
+                <p:inputTextarea
+                        value="#{cadastrarContratoBean.contratoCadastro.obs}" />
+
+                <p:commandButton value="Salvar"
+                                 action="#{cadastrarContratoBean.gravarContrato()}" />
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+    </body>
+</ui:composition>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/templatePrincipal.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title></title>
+	</h:head>
+	<h:outputStylesheet library="css" name="estilo.css" />
+
+	<body>
+		<p:growl showDetail="true" autoUpdate="true" />
+
+		<f:metadata>
+			<f:viewAction action="#{userBean.verificarLogado()}" />
+		</f:metadata>
+
+		<ui:define name="menu">
+			<ui:include src="/include/user/menu.xhtml" />
+		</ui:define>
+		<ui:define name="content">
+
+			<p:layout>
+				<p:layoutUnit position="north" resizable="true" header="North"
+					collapsible="true" closable="true">
+					<ui:insert name="northContent" />
+				</p:layoutUnit>
+
+					<p:layoutUnit position="center"
+					header="Setor #{listaUsuariosBean.parserSetor(panelAdmin.userBean.userLogado)}">
+					<ui:insert name="centralContent" />
+					<p:panel styleClass="panecentral">
+						<p:panelGrid columns="2" styleClass="semBorda">
+							<p:outputLabel value="Usuário da sessão" />
+							<p:outputLabel value="#{panelAdmin.userBean.userLogado.apelido}" />
+							<p:outputLabel value="serviço atual" />
+							<p:outputLabel
+								value="#{panelAdmin.userBean.userLogado.servicoatual}" />
+							<p:outputLabel value="ultimo serviço" />
+							<p:outputLabel
+								value="#{panelAdmin.userBean.userLogado.servicoanterior}" />
+							<p:outputLabel value="setor" />
+							<p:outputLabel
+								value="#{listaUsuariosBean.parserSetor(panelAdmin.userBean.userLogado)}" />
+							<p:outputLabel value="Nível de acesso" />
+							<p:outputLabel
+								value="#{listaUsuariosBean.parserNivel(panelAdmin.userBean.userLogado)}" />
+							<p:outputLabel value="ultimo acesso" />
+							<p:outputLabel
+								value="#{panelAdmin.userBean.userLogado.ultimoacesso}" />
+						</p:panelGrid>
+
+					</p:panel>
+					<h:form>
+						<p:dialog header="TrocarSenha" widgetVar="TrocarSenha">
+							<p:panel id="trocarSenhaPanel">
+								<p:panelGrid columns="2" styleClass="semBorda">
+									<p:outputLabel value="insira a NOVA senha:" />
+									<h:inputSecret value="#{panelAdmin.senhaTemporaria}" />
+									<p:outputLabel value="REPITA a NOVA senha:" />
+									<h:inputSecret value="#{panelAdmin.senhaTemporaria2}" />
+									<p:commandButton value="Gravar senha"
+										action="#{panelAdmin.mudarSenha()}"
+										oncomplete="PF('TrocarSenha').hide()" />
+								</p:panelGrid>
+							</p:panel>
+						</p:dialog>
+					</h:form>
+
+				</p:layoutUnit>
+
+
+			</p:layout>
+		</ui:define>
+		<ui:define name="west">
+		WEST UNIT
+		</ui:define>
+		<ui:define name="east">
+		EAST UNIT
+		</ui:define>
+
+	</body>
+</ui:composition>

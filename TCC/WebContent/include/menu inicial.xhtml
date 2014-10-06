@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head>
+		<meta http-equiv="Content-Type"
+			content="text/html; charset=ISO-8859-1" />
+		<title></title>
+	</h:head>
+	<h:outputStylesheet library="css" name="estilo.css" />
+	<body>
+		<h:form id="menu">
+
+
+			<p:menubar>
+
+				<p:submenu label="Home">
+					<p:menuitem value="Painel Usuário" action="#{userBean.btHome()}" />
+					<p:submenu label="Configurações do usuário">
+						<p:menuitem value="Trocar senha"
+							action="#{userBean.btTrocarSenha()}" />
+					</p:submenu>
+				</p:submenu>
+
+				<p:submenu label="Contratos">
+					<p:menuitem value="Visualizar Contratos"
+						action="#{panelAdmin.btVisualizarCursos()}" />
+					<p:menuitem value="Cadastrar Contratos"
+						action="#{panelAdmin.btCadastrarCursos()}" />
+				</p:submenu>
+				<p:submenu label="Album">
+								<p:menuitem value="Cadastrar Album"
+						action="#{panelAdmin.btCadastrarAlbum()}" />
+							<p:menuitem value="Visualizar Albuns"
+						action="#{panelAdmin.btListarAlbuns()}" />
+				</p:submenu>
+
+				<p:submenu label="SysAdmin">
+					<p:menuitem value="Cadastrar Usuário"
+						action="#{panelAdmin.btCadastro()}" />
+
+					<p:menuitem value="Usuários Cadastrados"
+						action="#{panelAdmin.btListarUsers()}" />
+				</p:submenu>
+
+			</p:menubar>
+		</h:form>
+	</body>
+</ui:composition>
