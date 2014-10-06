@@ -9,7 +9,7 @@
 .ui-dialog .ui-dialog-titlebar {
 	padding: .4em .4em .4em 1em;
 	position: relative;
-	border: 0px;
+	border: 0;
 }
 
 .ui-dialog .ui-dialog-title {
