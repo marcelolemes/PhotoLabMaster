@@ -5,10 +5,7 @@ import br.com.login.Dao.ContratoDao;
 import br.com.login.model.Album;
 import br.com.login.model.Contrato;
 import br.com.login.model.Metricas;
-import com.lowagie.text.BadElementException;
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.PageSize;
+import com.lowagie.text.*;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -93,7 +90,9 @@ public class ListarCursos implements Serializable {
             BadElementException, DocumentException {
         Document pdf = (Document) document;
         pdf.open();
-        pdf.setPageSize(PageSize.A4);
+        pdf.add(new Paragraph("Contratos"));
+        pdf.setPageSize(PageSize.A4.rotate());
+
 
     }
 
