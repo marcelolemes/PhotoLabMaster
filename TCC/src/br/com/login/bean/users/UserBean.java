@@ -1,19 +1,17 @@
 package br.com.login.bean.users;
 
-import java.io.Serializable;
-import java.util.List;
+import br.com.login.Dao.UserDao;
+import br.com.login.model.Metricas;
+import br.com.login.model.User;
+import org.primefaces.context.RequestContext;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
-
-import org.primefaces.context.RequestContext;
-
-import br.com.login.Dao.UserDao;
-import br.com.login.model.Metricas;
-import br.com.login.model.User;
+import java.io.Serializable;
+import java.util.List;
 
 @ManagedBean(name = "userBean", eager = true)
 @SessionScoped
@@ -64,7 +62,7 @@ public class UserBean implements Serializable {
 				return "/pages/admin/result_index.xhtml";
 			} else {
 				return "/pages/user/result_index" + userLogado.getSetor()
-						+ ".xhtml";
+						+ ".xhtml?faces-redirect=true";
 			}
 
 		} else {
@@ -77,7 +75,7 @@ public class UserBean implements Serializable {
 				return messageSucessoLogin();
 
 			} else {
-				System.out.print("N„o encontrado");
+				System.out.print("N√£o encontrado");
 				user = new User();
 				user.setLogado(false);
 				messageErroLogin();
@@ -114,7 +112,7 @@ public class UserBean implements Serializable {
 			}
 
 		} else {
-			return "/pages/login_index.xhtml";
+			return "/pages/login_index.xhtml?";
 		}
 	}
 
@@ -190,7 +188,7 @@ public class UserBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Ativo",
-						"Sess„o ainda ativa para o usu·rio:  " + sessao));
+						"Sess√£o ainda ativa para o usu√°rio:  " + sessao));
 		// return "result.xhtml";
 		if (userLogado.getNivelAcesso() < 4) {
 			return "/pages/admin/result_index.xhtml";
@@ -203,11 +201,11 @@ public class UserBean implements Serializable {
 
 	}
 
-	public String reiniciarsess„o() {
+	public String reiniciarsessao() {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Ativo",
-						"Sess„o ativa reiniciada:  " + sessao));
+						"Sess√£o ativa reiniciada:  " + sessao));
 		// return "result.xhtml";
 		return "/pages/admin/result_index.xhtml";
 
@@ -216,7 +214,7 @@ public class UserBean implements Serializable {
 	public void messageSucessoGravar() {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravar",
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "gravar",
 						"Cadastro realizado com sucesso, Seja bem vindo "
 								+ sessao));
 
@@ -228,8 +226,8 @@ public class UserBean implements Serializable {
 				.addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login",
-								"Usu·rio/Senha incorretos, por favor, tente novamente"));
-		// remover sess„o do manage bean selecionado
+								"Usu√°rio/Senha incorretos, por favor, tente novamente"));
+		// remover sess√£o do manage bean selecionado
 		// FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 		// .remove("userBean");
 	}
@@ -240,7 +238,7 @@ public class UserBean implements Serializable {
 				.addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro",
-								"Nenhum usu·rio logado, para realizar alguma operaÁ„o, efetue seu login"));
+								"Nenhum usu√°rio logado, para realizar alguma opera√ß√£o, efetue seu login"));
 
 	}
 
@@ -251,7 +249,7 @@ public class UserBean implements Serializable {
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_WARN, userLogado
 								.getApelido(),
-								"Seu acesso ‡ esta funÁ„o n„o È permitida, acesso negado!"));
+								"Seu acesso √° esta fun√ß√£o n√£o √© permitida, portanto acesso negado!"));
 
 	}
 
