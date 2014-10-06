@@ -74,6 +74,28 @@ public class RelatorioDao {
         sessao.close();
         return retorno;
     }
+
+    public long contarFotosHoje(User user) throws Exception {
+           Calendar cal = Calendar.getInstance();
+           cal.clear(Calendar.HOUR_OF_DAY);
+           cal.clear(Calendar.HOUR);
+           cal.clear(Calendar.AM_PM);
+           cal.clear(Calendar.MINUTE);
+           cal.clear(Calendar.SECOND);
+           cal.clear(Calendar.MILLISECOND);
+
+           java.sql.Date date = new java.sql.Date(new Date(System.currentTimeMillis()).getTime());
+           Session sessao = HibernateUtil.getSession();
+           Criteria criteria = sessao.createCriteria(Relatorio.class).setProjection(Projections.sum("fotos"));
+           criteria.add(Restrictions.ge("dataOperacao", cal.getTime())).add(Restrictions.eq("funcionario", user));
+           long retorno = (Long) criteria.uniqueResult();
+           System.out.println("Contagem: "+retorno);
+           System.out.println("Date aqui: "+cal.getTime());
+           sessao.close();
+           return retorno;
+       }
+
+
     public List<Relatorio> ListarAlbunsHoje(User user) throws Exception {
         Calendar cal = Calendar.getInstance();
         cal.clear(Calendar.HOUR_OF_DAY);
@@ -87,6 +109,7 @@ public class RelatorioDao {
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Relatorio.class);
         criteria.add(Restrictions.ge("dataOperacao", cal.getTime())).add(Restrictions.eq("funcionario", user));
+        criteria.addOrder(Order.desc("dataOperacao"));
         List<Relatorio> listaRetorno = criteria.list();
         System.out.println("Date aqui: "+cal.getTime());
         sessao.close();

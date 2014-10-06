@@ -22,6 +22,8 @@ public class Album implements Serializable {
 	private String obs;
     @Column
     private boolean ocupado;
+    @Column
+    private int qtdFotos;
 
     @OneToOne (cascade = CascadeType.PERSIST, optional = true)
     @JoinColumn(name = "func_trat", referencedColumnName = "cod")
@@ -98,5 +100,13 @@ public class Album implements Serializable {
 
     public void setUserMontagem(User userMontagem) {
         this.userMontagem = userMontagem;
+    }
+
+    public int getQtdFotos() {
+        return qtdFotos;
+    }
+
+    public void setQtdFotos(int qtdFotos) {
+        this.qtdFotos = qtdFotos;
     }
 }

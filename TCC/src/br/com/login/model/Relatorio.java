@@ -26,6 +26,8 @@ public class Relatorio implements Serializable{
     @JoinColumn(name = "album", referencedColumnName = "cod")
     private Album album;
     @Column
+       private int fotos;
+    @Column
     private Timestamp dataOperacao;
 
     public int getCod() {
@@ -60,4 +62,11 @@ public class Relatorio implements Serializable{
         this.dataOperacao = dataOperacao;
     }
 
+    public int getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(int fotos) {
+        this.fotos = fotos;
+    }
 }

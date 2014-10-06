@@ -37,6 +37,19 @@ public class CadastrarAlbum implements Serializable {
 
         }
     };
+    FilenameFilter fotoFilter = new FilenameFilter() {
+
+        @Override
+        public boolean accept(File dir, String name) {
+            String lowercaseName = name.toLowerCase();
+            if (lowercaseName.endsWith(".jpg")) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }
+    };
     /**
      *
      */
@@ -74,8 +87,10 @@ public class CadastrarAlbum implements Serializable {
         for (File file : albuns) {
             Album album = new Album();
             album.setNumero(file.getName());
+            album.setQtdFotos(file.listFiles(fotoFilter).length);
             album.setOcupado(false);
             album.setContrato(contrato);
+
 
             album.setStatus(contrato.getStatus());
             listaAlbum.add(album);

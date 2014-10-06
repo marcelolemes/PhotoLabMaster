@@ -30,12 +30,13 @@ public class ListarAlbunsFunc implements Serializable {
     private UserBean userBean;
 
     private long qtdDia;
+    private long qtdDiaFotos;
 
     AlbumDao albumDao = new AlbumDao();
     Relatorio relatorio = new Relatorio();
 
     RelatorioDao relatorioDao = new RelatorioDao();
-   private List<Relatorio> relatorioList;
+    private List<Relatorio> relatorioList;
     //    Metricas metricas = new Metricas();
     //  private List<Album> listaAlbuns;
     private Contrato contratoSelecionado = new Contrato();
@@ -44,10 +45,10 @@ public class ListarAlbunsFunc implements Serializable {
     public void listarAlbumFeito(){
         try {
 
-          // relatorioList = relatorioDao.ListarAlbunsFunc(userBean.getUserLogado());
+            // relatorioList = relatorioDao.ListarAlbunsFunc(userBean.getUserLogado());
             relatorioList = relatorioDao.ListarAlbunsHoje(userBean.getUserLogado());
             qtdDia = relatorioDao.contarAlbunsHoje(userBean.getUserLogado());
-
+            qtdDiaFotos = relatorioDao.contarFotosHoje(userBean.getUserLogado());
         }
         catch (Exception e)
         {
@@ -86,4 +87,11 @@ public class ListarAlbunsFunc implements Serializable {
         this.qtdDia = qtdDia;
     }
 
+    public long getQtdDiaFotos() {
+        return qtdDiaFotos;
+    }
+
+    public void setQtdDiaFotos(long qtdDiaFotos) {
+        this.qtdDiaFotos = qtdDiaFotos;
+    }
 }

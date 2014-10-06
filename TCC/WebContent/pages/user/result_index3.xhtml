@@ -49,8 +49,8 @@
                         <p:outputLabel value="#{panelAdmin.userBean.userLogado.apelido}"  />
                         <p:outputLabel value="Contrato:" />
                         <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.numeroContrato}"  styleClass="negrito"/>
-                        <p:outputLabel value="serviço atual" />
-                        <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.numero}" styleClass="negrito" />
+                        <p:outputLabel value="serviço atual" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" />
+                        <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.numero} com #{panelAdmin.userBean.userLogado.albumAtual.qtdFotos} fotos" styleClass="negrito" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" />
 
                         <p:outputLabel value="Média" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.contrato.media}"/>
                         <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.media}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.contrato.media}"/>
@@ -85,12 +85,19 @@
     </ui:define>
     <ui:define name="west">
         <h:form id="west">
+            <p:panelGrid columns="2">
             <p:outputLabel value="Albuns de hoje: "/>
             <p:outputLabel value="#{listarAlbunsFunc.qtdDia}"/>
+            <p:outputLabel value="Fotos de hoje: "/>
+                       <p:outputLabel value="#{listarAlbunsFunc.qtdDiaFotos}"/>
+            </p:panelGrid>
             <p:dataTable id="relatorio" var="relatorio" value="#{listarAlbunsFunc.relatorioList}">
                 <p:column headerText="Número">
                     <h:outputText value="#{relatorio.album.numero}" />
                 </p:column>
+                <p:column headerText="Fotos" width="23%">
+                                    <h:outputText value="#{relatorio.album.qtdFotos}" />
+                                </p:column>
                 <p:column headerText="Data">
                     <h:outputText value="#{relatorio.dataOperacao}"  >
                         <f:convertDateTime pattern="dd-MM-yyyy"/>

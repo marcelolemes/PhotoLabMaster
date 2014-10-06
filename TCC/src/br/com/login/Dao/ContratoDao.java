@@ -66,10 +66,16 @@ public class ContratoDao implements Serializable {
         for(int x=0; x < listaRetorno.size();x++){
             Criteria criteria2 = sessao.createCriteria(Album.class).setProjection(Projections.min("status"));
             criteria2.add(Restrictions.eq("contrato",listaRetorno.get(x)));
-            status = (Integer)criteria2.uniqueResult();
-            listaRetorno.get(x).setStatus(status);
+            try {
+                status = (Integer)criteria2.uniqueResult();
+                listaRetorno.get(x).setStatus(status);
+            }
+            catch (Exception e){
+                //TODO
+            }
 
         }
+
         for(int x=0; x < listaRetorno.size();x++){
             sessao.update(listaRetorno.get(x));
         }

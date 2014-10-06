@@ -12,6 +12,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import java.io.File;
+import java.io.FilenameFilter;
 import java.sql.Timestamp;
 import java.io.Serializable;
 import java.util.Date;
@@ -81,9 +83,11 @@ public class RegraMontagem implements Serializable {
     public void btTerminarAlbum() throws Exception {
         try{
             relatorio = new Relatorio();
+            userBean.getUserLogado().getAlbumAtual().setQtdFotos(qtdFotosAtual(userBean.getUserLogado().getAlbumAtual().getContrato().getCaminho()+"\\"+userBean.getUserLogado().getAlbumAtual().getNumero()));
             relatorio.setAlbum(userBean.getUserLogado().getAlbumAtual());
             relatorio.setFuncionario(userBean.getUserLogado());
             relatorio.setDataOperacao(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
+            relatorio.setFotos(userBean.getUserLogado().getAlbumAtual().getQtdFotos());
             relatorioDao.salvarRelatorio(relatorio);
             regDao.albumTerminado(userBean.getUserLogado().getAlbumAtual());
             userBean.getUserLogado().setAlbumAtual(null);
@@ -95,13 +99,30 @@ public class RegraMontagem implements Serializable {
         catch (Exception e){
 
         }
-
-
-
-
-
-
     }
+
+    public int qtdFotosAtual(String caminho){
+        try {
+            File file = new File(caminho);
+            return file.listFiles(fotoFilter).length;
+        }
+        catch (Exception e){}
+        return 0;
+    }
+
+    FilenameFilter fotoFilter = new FilenameFilter() {
+
+        @Override
+        public boolean accept(File dir, String name) {
+            String lowercaseName = name.toLowerCase();
+            if (lowercaseName.endsWith(".jpg")) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }
+    };
 
     public Album getAlbumMontar() {
 
