@@ -32,13 +32,11 @@ public class ListarAlbunsFunc implements Serializable {
     private long qtdDia;
     private long qtdDiaFotos;
 
-    AlbumDao albumDao = new AlbumDao();
     Relatorio relatorio = new Relatorio();
 
     RelatorioDao relatorioDao = new RelatorioDao();
     private List<Relatorio> relatorioList;
-    //    Metricas metricas = new Metricas();
-    //  private List<Album> listaAlbuns;
+
     private Contrato contratoSelecionado = new Contrato();
 
     @PostConstruct

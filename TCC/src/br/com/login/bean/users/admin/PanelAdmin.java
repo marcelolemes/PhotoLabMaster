@@ -175,7 +175,7 @@ public class PanelAdmin implements Serializable {
 			} else {
                     System.out.println("Chegou no botão de cadastro!!!");
 
-				return "/pages/admin/cadastro/cadastrarcurso_index.xhtml?faces-redirect=true";
+				return "/pages/admin/cadastro/cadastrarcurso_index.xhtml";
 			}
 
 		} else {

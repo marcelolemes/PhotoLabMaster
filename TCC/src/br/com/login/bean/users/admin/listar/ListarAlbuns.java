@@ -32,11 +32,17 @@ public class ListarAlbuns implements Serializable {
     Metricas metricas = new Metricas();
     private List<Album> listaAlbuns;
     private Contrato contratoSelecionado = new Contrato();
+    private long qtdAlbuns;
+    private long qtdFotosTotal;
 
     @PostConstruct
     public void inicializarLista() {
         try {
 
+            albumDao = new AlbumDao();
+
+            qtdAlbuns = albumDao.ContarAlbunsContrato(listarCursos.getContratoSelecionado());
+            qtdFotosTotal = albumDao.ContarFotosContrato(listarCursos.getContratoSelecionado());
             listaAlbuns = albumDao.ListarAlbunsContrato(listarCursos.getContratoSelecionado());
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -46,9 +52,7 @@ public class ListarAlbuns implements Serializable {
     }
 
     public void btAtualizar() throws Exception{
-        albumDao = new AlbumDao();
-        listaAlbuns = albumDao.ListarAlbunsContrato(listarCursos.getContratoSelecionado());
-
+        inicializarLista();
     }
 
 
@@ -94,5 +98,21 @@ public class ListarAlbuns implements Serializable {
 
     public void setUserBean(UserBean userBean) {
         this.userBean = userBean;
+    }
+
+    public long getQtdAlbuns() {
+        return qtdAlbuns;
+    }
+
+    public void setQtdAlbuns(long qtdAlbuns) {
+        this.qtdAlbuns = qtdAlbuns;
+    }
+
+    public long getQtdFotosTotal() {
+        return qtdFotosTotal;
+    }
+
+    public void setQtdFotosTotal(long qtdFotosTotal) {
+        this.qtdFotosTotal = qtdFotosTotal;
     }
 }

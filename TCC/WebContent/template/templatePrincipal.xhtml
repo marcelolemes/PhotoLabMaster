@@ -12,9 +12,7 @@
     <title>PhotoLab Master</title>
     <link rel="shortcut icon" type="image/x-icon"
           href="#{request.contextPath}/resources/images/icone.ico" />
-    <f:metadata>
-        <f:viewAction action="#{userBean.verificarLogado()}" />
-    </f:metadata>
+
 </h:head>
 <body>
 <p:layout fullPage="true">
@@ -23,7 +21,7 @@
     </p:layoutUnit>
     <p:layoutUnit position="center" resizable="true"
                   style="overflow-y: visible !important;">
-      <p:growl showDetail="true" autoUpdate="true" />
+        <p:growl showDetail="true" autoUpdate="true" />
         <ui:insert name="content" />
     </p:layoutUnit>
     <p:layoutUnit position="east" resizable="true" collapsible="true" collapsed="true" header="Extras">
@@ -49,9 +47,11 @@
                                      action="#{panelAdmin.sairSessao()}" update="@all" process="@this" />
 
                     <p:clock pattern="HH:mm:ss" mode="server" />
-                    <p:outputLabel value="ultimo acesso" />
+                    <p:outputLabel value="ultimo acesso" rendered="#{not empty panelAdmin.userBean.userLogado.ultimoacesso}" />
                     <p:outputLabel
-                            value="#{panelAdmin.userBean.userLogado.ultimoacesso}" />
+                            value="#{panelAdmin.userBean.userLogado.ultimoacesso}" rendered="#{not empty panelAdmin.userBean.userLogado.ultimoacesso}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </p:outputLabel>
                 </p:panelGrid>
             </div>
         </h:form>

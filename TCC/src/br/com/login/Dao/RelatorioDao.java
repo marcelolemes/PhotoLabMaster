@@ -76,24 +76,24 @@ public class RelatorioDao {
     }
 
     public long contarFotosHoje(User user) throws Exception {
-           Calendar cal = Calendar.getInstance();
-           cal.clear(Calendar.HOUR_OF_DAY);
-           cal.clear(Calendar.HOUR);
-           cal.clear(Calendar.AM_PM);
-           cal.clear(Calendar.MINUTE);
-           cal.clear(Calendar.SECOND);
-           cal.clear(Calendar.MILLISECOND);
+        Calendar cal = Calendar.getInstance();
+        cal.clear(Calendar.HOUR_OF_DAY);
+        cal.clear(Calendar.HOUR);
+        cal.clear(Calendar.AM_PM);
+        cal.clear(Calendar.MINUTE);
+        cal.clear(Calendar.SECOND);
+        cal.clear(Calendar.MILLISECOND);
 
-           java.sql.Date date = new java.sql.Date(new Date(System.currentTimeMillis()).getTime());
-           Session sessao = HibernateUtil.getSession();
-           Criteria criteria = sessao.createCriteria(Relatorio.class).setProjection(Projections.sum("fotos"));
-           criteria.add(Restrictions.ge("dataOperacao", cal.getTime())).add(Restrictions.eq("funcionario", user));
-           long retorno = (Long) criteria.uniqueResult();
-           System.out.println("Contagem: "+retorno);
-           System.out.println("Date aqui: "+cal.getTime());
-           sessao.close();
-           return retorno;
-       }
+        java.sql.Date date = new java.sql.Date(new Date(System.currentTimeMillis()).getTime());
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Relatorio.class).setProjection(Projections.sum("fotos"));
+        criteria.add(Restrictions.ge("dataOperacao", cal.getTime())).add(Restrictions.eq("funcionario", user));
+        long retorno = (Long) criteria.uniqueResult();
+        System.out.println("Contagem: "+retorno);
+        System.out.println("Date aqui: "+cal.getTime());
+        sessao.close();
+        return retorno;
+    }
 
 
     public List<Relatorio> ListarAlbunsHoje(User user) throws Exception {
@@ -112,6 +112,38 @@ public class RelatorioDao {
         criteria.addOrder(Order.desc("dataOperacao"));
         List<Relatorio> listaRetorno = criteria.list();
         System.out.println("Date aqui: "+cal.getTime());
+        sessao.close();
+        return listaRetorno;
+    }
+    public List<Relatorio> ListarIntervalo(User user,Date date1, Date date2) throws Exception {
+        Calendar calendar1 = Calendar.getInstance();
+        Calendar calendar2 = Calendar.getInstance();
+
+        calendar1.setTime(date1);
+        calendar2.setTime(date2);
+
+        calendar1.clear(Calendar.HOUR_OF_DAY);
+        calendar1.clear(Calendar.HOUR);
+        calendar1.clear(Calendar.AM_PM);
+        calendar1.clear(Calendar.MINUTE);
+        calendar1.clear(Calendar.SECOND);
+        calendar1.clear(Calendar.MILLISECOND);
+
+        calendar2.clear(Calendar.HOUR_OF_DAY);
+        calendar2.clear(Calendar.HOUR);
+        calendar2.clear(Calendar.AM_PM);
+        calendar2.clear(Calendar.MINUTE);
+        calendar2.clear(Calendar.SECOND);
+        calendar2.clear(Calendar.MILLISECOND);
+
+        java.sql.Date date = new java.sql.Date(new Date(System.currentTimeMillis()).getTime());
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Relatorio.class);
+        criteria.add(Restrictions.ge("dataOperacao", calendar1.getTime())).add(Restrictions.eq("funcionario", user)).add(Restrictions.le("dataOperacao",calendar2.getTime()));
+        criteria.addOrder(Order.asc("dataOperacao"));
+        List<Relatorio> listaRetorno = criteria.list();
+        System.out.println("Date 1 aqui: "+calendar1.getTime());
+        System.out.println("Date 2 aqui: "+calendar2.getTime());
         sessao.close();
         return listaRetorno;
     }

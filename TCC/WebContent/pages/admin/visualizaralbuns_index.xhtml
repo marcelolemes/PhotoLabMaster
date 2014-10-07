@@ -66,6 +66,12 @@
                     <h:outputText value="#{album.obs}" />
                 </p:column>
             </p:dataTable>
+            <p:panelGrid columns="2">
+            <p:outputLabel value="Quantidade de albuns deste contrato "/>
+            <p:outputLabel value="#{listarAlbuns.qtdAlbuns}"/>
+            <p:outputLabel value="Quantidade de fotos deste contrato "/>
+            <p:outputLabel value="#{listarAlbuns.qtdFotosTotal}"/>
+            </p:panelGrid>
             <p:commandButton value="Atualizar" actionListener="#{listarAlbuns.btAtualizar}" update="@all" process="@all"/>
 
         </h:form>

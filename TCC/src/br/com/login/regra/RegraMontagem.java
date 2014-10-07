@@ -83,7 +83,7 @@ public class RegraMontagem implements Serializable {
     public void btTerminarAlbum() throws Exception {
         try{
             relatorio = new Relatorio();
-            userBean.getUserLogado().getAlbumAtual().setQtdFotos(qtdFotosAtual(userBean.getUserLogado().getAlbumAtual().getContrato().getCaminho()+"\\"+userBean.getUserLogado().getAlbumAtual().getNumero()));
+            userBean.getUserLogado().getAlbumAtual().setQtdFotos(qtdFotosAtual(userBean.getUserLogado().getAlbumAtual().getContrato().getCaminho()+File.separator+userBean.getUserLogado().getAlbumAtual().getNumero())); //inverter barras quando mudar de sistema operacional
             relatorio.setAlbum(userBean.getUserLogado().getAlbumAtual());
             relatorio.setFuncionario(userBean.getUserLogado());
             relatorio.setDataOperacao(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
@@ -106,8 +106,10 @@ public class RegraMontagem implements Serializable {
             File file = new File(caminho);
             return file.listFiles(fotoFilter).length;
         }
-        catch (Exception e){}
-        return 0;
+        catch (Exception e){
+            return 0;
+        }
+
     }
 
     FilenameFilter fotoFilter = new FilenameFilter() {

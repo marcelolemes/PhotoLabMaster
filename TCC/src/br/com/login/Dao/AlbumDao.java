@@ -6,6 +6,7 @@ import br.com.login.model.User;
 import br.com.login.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import javax.faces.bean.ViewScoped;
@@ -88,5 +89,23 @@ public class AlbumDao implements Serializable {
         List<Album> listaRetorno = criteria.list();
         sessao.close();
         return listaRetorno;
+    }
+    public long ContarAlbunsContrato(Contrato contrato) throws Exception {
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Album.class).setProjection(Projections.rowCount());
+        criteria.add(Restrictions.eq("contrato", contrato));
+        //System.out.println("Contrato aqui: "+contrato.getNumeroContrato());
+        long retorno = (Long) criteria.uniqueResult();
+        sessao.close();
+        return retorno;
+    }
+    public long ContarFotosContrato(Contrato contrato) throws Exception {
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Album.class).setProjection(Projections.sum("qtdFotos"));
+        criteria.add(Restrictions.eq("contrato", contrato));
+        //System.out.println("Contrato aqui: "+contrato.getNumeroContrato());
+        long retorno = (Long) criteria.uniqueResult();
+        sessao.close();
+        return retorno;
     }
 }

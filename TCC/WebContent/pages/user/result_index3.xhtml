@@ -9,7 +9,7 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title></title>
+
     </h:head>
     <h:outputStylesheet library="css" name="estilo.css" />
 
@@ -100,7 +100,7 @@
                                 </p:column>
                 <p:column headerText="Data">
                     <h:outputText value="#{relatorio.dataOperacao}"  >
-                        <f:convertDateTime pattern="dd-MM-yyyy"/>
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </h:outputText>
                 </p:column>
             </p:dataTable>
