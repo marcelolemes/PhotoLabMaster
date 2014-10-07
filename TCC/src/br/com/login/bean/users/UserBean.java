@@ -105,9 +105,9 @@ public class UserBean implements Serializable {
         if (user.isLogado() /* && (userBean.getUserLogado() != null) */) {
 
             if (userLogado.getNivelAcesso() > 4) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/pages/admin/result_index.jsf");
+                FacesContext.getCurrentInstance().getExternalContext().redirect( FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/admin/result_index.jsf");
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/pages/user/result_index" + userLogado.getSetor()
+                FacesContext.getCurrentInstance().getExternalContext().redirect(  FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/user/result_index" + userLogado.getSetor()
                         + ".jsf");
             }
 
@@ -143,9 +143,9 @@ public class UserBean implements Serializable {
         if (getUserLogado() != null) {
 
             if (userLogado.getNivelAcesso() > 4) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/pages/admin/result_index.jsf");
+                FacesContext.getCurrentInstance().getExternalContext().redirect( FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/admin/result_index.jsf");
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/pages/user/result_index" + userLogado.getSetor()
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/user/result_index" + userLogado.getSetor()
                         + ".jsf");
             }
 
