@@ -62,7 +62,7 @@ public class RegraMontagem implements Serializable {
 
         try {
             userBean.getUserLogado().setAlbumAtual(regDao.NovoAlbum(userBean.getUserLogado()));
-            userBean.getUserLogado().setAuxiliar(userBean.getUserLogado().getAlbumAtual().getContrato().getCaminho()+"\\"+ userBean.getUserLogado().getAlbumAtual().getNumero());
+            userBean.getUserLogado().setAuxiliar(userBean.getUserLogado().getAlbumAtual().getContrato().getCaminho()+File.separator+ userBean.getUserLogado().getAlbumAtual().getNumero());
             iniciar();
         }
         catch (Exception e)
