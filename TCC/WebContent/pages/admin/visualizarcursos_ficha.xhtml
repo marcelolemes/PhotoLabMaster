@@ -70,7 +70,7 @@
                                                  target="#{listarCursos.contratoSelecionado}" />
                 </p:commandButton>
             </p:column>
-            <p:column style="width:3 px;text-align: center" exportable="false" headerText="Album">
+            <p:column style="width:70px;text-align: center" exportable="false" headerText="Album">
                 <p:commandButton value="Gerar" title="Gerar Albuns" rendered="#{contrato.qtdAlbum le 0 ? true:false}"
                                  action="#{cadastrarAlbum.gerarAlbunsCurso(listarCursos.contratoSelecionado)}" update="@all" process="@all">
                     <f:setPropertyActionListener value="#{contrato}"

@@ -77,16 +77,16 @@
             </p:panelGrid>
 
             <p:dataTable id="relatorio" var="relatorio" value="#{relatorioUserBean.relatorioList}" emptyMessage="Relatório vazio para este intervalo de tempo">
+                <p:column headerText="Data">
+                    <h:outputText value="#{relatorio.dataOperacao}"  >
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
                 <p:column headerText="Número">
                     <h:outputText value="#{relatorio.album.numero}" />
                 </p:column>
                 <p:column headerText="Fotos" width="23%">
                     <h:outputText value="#{relatorio.fotos}" />
-                </p:column>
-                <p:column headerText="Data">
-                    <h:outputText value="#{relatorio.dataOperacao}"  >
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                    </h:outputText>
                 </p:column>
             </p:dataTable>
 

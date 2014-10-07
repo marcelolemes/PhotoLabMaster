@@ -40,14 +40,14 @@
                 <p:column headerText="Número">
                     <h:outputText value="#{album.numero}" />
                 </p:column>
-                <p:column headerText="Urgência">
+                <p:column headerText="Urgência" exportable="false">
                     <h:outputText
                             value=" #{listarAlbuns.parserUrgencia(album.contrato.urgencia)}" />
                 </p:column>
-                <p:column headerText="Contrato">
+                <p:column headerText="Contrato" width="10%">
                     <h:outputText value="#{album.contrato.numeroContrato}" />
                 </p:column>
-                <p:column headerText="Curso">
+                <p:column headerText="Curso"  exportable="false">
                     <h:outputText value="#{album.contrato.curso}" />
                 </p:column>
                 <p:column headerText="Status">

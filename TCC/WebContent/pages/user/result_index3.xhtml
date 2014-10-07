@@ -42,6 +42,9 @@
 
             <p:layoutUnit position="center"
                           header="Setor #{listaUsuariosBean.parserSetor(panelAdmin.userBean.userLogado)}">
+                <p:idleMonitor timeout="1800000"> <!-- Atualiza a cada 30 minutos-->
+                    <p:ajax event="idle" listener="#{userBean.btHome}"/>
+                    </p:idleMonitor>
                 <ui:insert name="centralContent" />
                 <p:panel styleClass="panecentral">
                     <p:panelGrid columns="2" styleClass="semBorda">
@@ -58,7 +61,7 @@
 
 
                     </p:panelGrid>
-                    <p:commandButton id="atualizarResult3" value="Atualizar" update="@all" process="@all" immediate="true"  actionListener="#{listarAlbunsFunc.listarAlbumFeito()}"/>
+                    <p:commandButton id="atualizarResult3" value="Atualizar Tudo" update="@all" process="@all" immediate="true"  actionListener="#{userBean.btHome}"/>
 
                 </p:panel>
                 <h:form>

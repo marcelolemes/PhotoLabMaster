@@ -78,6 +78,7 @@ public class RegraMontagem implements Serializable {
         regDao.albumCancelado(userBean.getUserLogado().getAlbumAtual());
         userBean.getUserLogado().setAlbumAtual(null);
         userDao.Update(userBean.getUserLogado());
+        userBean.btHome();
     }
 
     public void btTerminarAlbum() throws Exception {
@@ -93,7 +94,8 @@ public class RegraMontagem implements Serializable {
             userBean.getUserLogado().setAlbumAtual(null);
             userDao.Update(userBean.getUserLogado());
 
-            iniciar();
+
+            userBean.btHome();
 
         }
         catch (Exception e){

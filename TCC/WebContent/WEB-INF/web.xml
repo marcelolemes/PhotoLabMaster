@@ -18,4 +18,13 @@
         <param-name>primefaces.THEME</param-name>
         <param-value>estilo</param-value>
     </context-param>
+
+    <error-page>
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/pages/login_index.xhtml</location>
+    </error-page>
+
+    <session-config>
+     <session-timeout>90</session-timeout>
+   </session-config>
 </web-app>
