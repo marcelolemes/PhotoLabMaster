@@ -24,7 +24,7 @@ public class RelatorioDiario implements Serializable{
     @Column
     private int fotos;
     @Column
-    private Timestamp dataOperacao;
+    private Timestamp dataRelatorio;
 
     public int getCod() {
         return cod;
@@ -43,11 +43,11 @@ public class RelatorioDiario implements Serializable{
     }
 
     public Timestamp getDataOperacao() {
-        return dataOperacao;
+        return dataRelatorio;
     }
 
-    public void setDataOperacao(Timestamp dataOperacao) {
-        this.dataOperacao = dataOperacao;
+    public void setDataOperacao(Timestamp dataRelatorio) {
+        this.dataRelatorio = dataRelatorio;
     }
 
     public int getFotos() {

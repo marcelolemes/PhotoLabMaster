@@ -63,6 +63,11 @@ public class RegraMontagem implements Serializable {
         try {
             userBean.getUserLogado().setAlbumAtual(regDao.NovoAlbum(userBean.getUserLogado()));
             userBean.getUserLogado().setAuxiliar(userBean.getUserLogado().getAlbumAtual().getContrato().getCaminho()+File.separator+ userBean.getUserLogado().getAlbumAtual().getNumero());
+            relatorio = new Relatorio();
+            relatorio.setDataInicial(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
+            relatorio.setAlbum(userBean.getUserLogado().getAlbumAtual());
+            relatorio.setFuncionario(userBean.getUserLogado());
+            relatorioDao.salvarRelatorio(relatorio);
             iniciar();
         }
         catch (Exception e)
@@ -83,10 +88,8 @@ public class RegraMontagem implements Serializable {
 
     public void btTerminarAlbum() throws Exception {
         try{
-            relatorio = new Relatorio();
+            relatorio = relatorioDao.encontrarRelatorio(userBean.getUserLogado(),userBean.getUserLogado().getAlbumAtual());
             userBean.getUserLogado().getAlbumAtual().setQtdFotos(qtdFotosAtual(userBean.getUserLogado().getAlbumAtual().getContrato().getCaminho()+File.separator+userBean.getUserLogado().getAlbumAtual().getNumero())); //inverter barras quando mudar de sistema operacional
-            relatorio.setAlbum(userBean.getUserLogado().getAlbumAtual());
-            relatorio.setFuncionario(userBean.getUserLogado());
             relatorio.setDataOperacao(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
             relatorio.setFotos(userBean.getUserLogado().getAlbumAtual().getQtdFotos());
             relatorioDao.salvarRelatorio(relatorio);

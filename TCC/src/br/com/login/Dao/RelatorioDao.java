@@ -29,7 +29,7 @@ public class RelatorioDao {
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();
         try {
-            sessao.save(relatorio);
+            sessao.saveOrUpdate(relatorio);
             transacao.commit();
         }
         catch (Exception e)
@@ -53,6 +53,17 @@ public class RelatorioDao {
         System.out.println("Contagem: "+criteria.list().size());
         sessao.close();
         return listaRetorno;
+    }
+
+    public Relatorio encontrarRelatorio(User user,Album album) throws Exception {
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Relatorio.class);
+        criteria.add(Restrictions.eq("funcionario", user));
+        criteria.add(Restrictions.eq("album", album));
+        criteria.setMaxResults(1);
+        Relatorio retorno = (Relatorio) criteria.uniqueResult();
+        sessao.close();
+        return retorno;
     }
 
     public long contarAlbunsHoje(User user) throws Exception {
