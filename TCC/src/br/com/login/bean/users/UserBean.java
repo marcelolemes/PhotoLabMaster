@@ -115,6 +115,17 @@ public class UserBean implements Serializable {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/pages/login_index.jsf");
         }
     }
+    public void btProducao() throws Exception {
+
+           if (user.isLogado() /* && (userBean.getUserLogado() != null) */) {
+
+                   FacesContext.getCurrentInstance().getExternalContext().redirect(  FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/user/relatorio_user.jsf");
+
+           } else {
+               FacesContext.getCurrentInstance().getExternalContext().redirect("/pages/login_index.jsf");
+           }
+       }
+
 
     public void btTrocarSenha() throws Exception {
 

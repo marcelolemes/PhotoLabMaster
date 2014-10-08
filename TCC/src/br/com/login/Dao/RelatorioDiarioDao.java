@@ -21,13 +21,14 @@ import java.util.List;
 public class RelatorioDiarioDao {
     RelatorioDiario relatorio = new RelatorioDiario();
 
-    public void salvarRelatorio(Relatorio relatorio) throws Exception{
+    public void salvarRelatorio(RelatorioDiario relatorio) throws Exception{
 
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();
         try {
             sessao.saveOrUpdate(relatorio);
             transacao.commit();
+            System.out.println("Salvo");
         }
         catch (Exception e)
         {
@@ -63,7 +64,7 @@ public class RelatorioDiarioDao {
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(RelatorioDiario.class);
         criteria.add(Restrictions.eq("funcionario", user));
-        criteria.add(Restrictions.ge("dataRelatorio", calendar1.getTime())).add(Restrictions.le("dataRelatorio",calendar2.getTime()));
+        criteria.add(Restrictions.ge("dataRelatorio", calendar1.getTime())).add(Restrictions.lt("dataRelatorio",calendar2.getTime()));
         criteria.setMaxResults(1);
         System.out.println("Hoje aqui: "+calendar1.getTime());
         System.out.println("Amanhã aqui: "+calendar2.getTime());
@@ -71,6 +72,39 @@ public class RelatorioDiarioDao {
         sessao.close();
         return retorno;
     }
+
+    public List<RelatorioDiario> ListarIntervalo(User user,Date date1, Date date2) throws Exception {
+            Calendar calendar1 = Calendar.getInstance();
+            Calendar calendar2 = Calendar.getInstance();
+
+            calendar1.setTime(date1);
+            calendar2.setTime(date2);
+
+            calendar1.clear(Calendar.HOUR_OF_DAY);
+            calendar1.clear(Calendar.HOUR);
+            calendar1.clear(Calendar.AM_PM);
+            calendar1.clear(Calendar.MINUTE);
+            calendar1.clear(Calendar.SECOND);
+            calendar1.clear(Calendar.MILLISECOND);
+
+            calendar2.clear(Calendar.HOUR_OF_DAY);
+            calendar2.clear(Calendar.HOUR);
+            calendar2.clear(Calendar.AM_PM);
+            calendar2.clear(Calendar.MINUTE);
+            calendar2.clear(Calendar.SECOND);
+            calendar2.clear(Calendar.MILLISECOND);
+
+            Session sessao = HibernateUtil.getSession();
+            Criteria criteria = sessao.createCriteria(RelatorioDiario.class);
+            criteria.add(Restrictions.ge("dataRelatorio", calendar1.getTime())).add(Restrictions.eq("funcionario", user)).add(Restrictions.le("dataRelatorio",calendar2.getTime()));
+            criteria.addOrder(Order.asc("dataRelatorio"));
+            List<RelatorioDiario> listaRetorno = criteria.list();
+            System.out.println("Data 1 aqui: "+calendar1.getTime());
+            System.out.println("Data 2 aqui: "+calendar2.getTime());
+            sessao.close();
+            return listaRetorno;
+        }
+
 
 
 

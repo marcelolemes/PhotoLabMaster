@@ -1,12 +1,10 @@
 package br.com.login.regra;
 
-import br.com.login.Dao.AlbumDao;
-import br.com.login.Dao.RegraMontagemDao;
-import br.com.login.Dao.RelatorioDao;
-import br.com.login.Dao.UserDao;
+import br.com.login.Dao.*;
 import br.com.login.bean.users.UserBean;
 import br.com.login.model.Album;
 import br.com.login.model.Relatorio;
+import br.com.login.model.RelatorioDiario;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -31,6 +29,8 @@ public class RegraMontagem implements Serializable {
     AlbumDao albumDao = new AlbumDao();
     private RegraMontagemDao regDao = new RegraMontagemDao();
     private RelatorioDao relatorioDao = new RelatorioDao();
+    RelatorioDiario relatorioDiario;
+    RelatorioDiarioDao relatorioDiarioDao =new RelatorioDiarioDao();
     private long albunsRestantes;
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
@@ -72,7 +72,7 @@ public class RegraMontagem implements Serializable {
         }
         catch (Exception e)
         {
-
+            System.out.println("Exception iniciar album");
         }
 
         userDao.Update(userBean.getUserLogado());
@@ -88,21 +88,33 @@ public class RegraMontagem implements Serializable {
 
     public void btTerminarAlbum() throws Exception {
         try{
+
             relatorio = relatorioDao.encontrarRelatorio(userBean.getUserLogado(),userBean.getUserLogado().getAlbumAtual());
             userBean.getUserLogado().getAlbumAtual().setQtdFotos(qtdFotosAtual(userBean.getUserLogado().getAlbumAtual().getContrato().getCaminho()+File.separator+userBean.getUserLogado().getAlbumAtual().getNumero())); //inverter barras quando mudar de sistema operacional
-            relatorio.setDataOperacao(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
+            relatorio.setDataFinal(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
             relatorio.setFotos(userBean.getUserLogado().getAlbumAtual().getQtdFotos());
             relatorioDao.salvarRelatorio(relatorio);
             regDao.albumTerminado(userBean.getUserLogado().getAlbumAtual());
             userBean.getUserLogado().setAlbumAtual(null);
             userDao.Update(userBean.getUserLogado());
 
-
+           relatorioDiario = relatorioDiarioDao.encontrarRelatorio(userBean.getUserLogado(),new Timestamp(new Date(System.currentTimeMillis()).getTime()));
+           if (relatorioDiario == null)
+           {
+               relatorioDiario =  new RelatorioDiario();
+               relatorioDiario.setDataOperacao(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
+               relatorioDiario.setFuncionario(userBean.getUserLogado());
+           }
+            relatorioDiario.setQtdAlbuns((int) relatorioDao.contarAlbunsHoje(userBean.getUserLogado()));
+            relatorioDiario.setFotos((int) relatorioDao.contarFotosHoje(userBean.getUserLogado()));
+            relatorioDiarioDao.salvarRelatorio(relatorioDiario);
             userBean.btHome();
 
         }
         catch (Exception e){
-
+            System.out.println("Exception terminar album");
+            e.printStackTrace();
+            System.out.println("Message "+e.getMessage());
         }
     }
 

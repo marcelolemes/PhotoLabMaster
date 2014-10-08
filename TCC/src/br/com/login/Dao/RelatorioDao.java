@@ -7,15 +7,14 @@ import br.com.login.model.User;
 import br.com.login.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -29,6 +28,17 @@ public class RelatorioDao {
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();
         try {
+            if (relatorio.getDataFinal()!=null) {
+
+                relatorio.setTempoOperacao(relatorio.getDataFinal().getTime()- relatorio.getDataInicial().getTime());
+                if (relatorio.getTempoOperacao() > 50400000)
+                {
+                    relatorio.setTempoOperacao(relatorio.getTempoOperacao() - 50400000);
+                }
+
+                System.out.println("Conversão "+msToHourSecond((int)relatorio.getTempoOperacao()));
+
+            }
             sessao.saveOrUpdate(relatorio);
             transacao.commit();
         }
@@ -41,12 +51,23 @@ public class RelatorioDao {
 
         sessao.close();
     }
+    public static String msToHourSecond( int ms ) {
+        Calendar c = Calendar.getInstance();
+        c.clear(Calendar.HOUR_OF_DAY);
+        c.clear(Calendar.HOUR);
+        c.clear(Calendar.AM_PM);
+        c.clear(Calendar.MINUTE);
+        c.clear(Calendar.SECOND);
+        c.clear(Calendar.MILLISECOND);
+        c.add( Calendar.MILLISECOND , ms );
+        return new SimpleDateFormat( "HH:mm:ss" ).format( c.getTime() );
+    }
 
     public List<Relatorio> ListarAlbunsFunc(User user) throws Exception {
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Relatorio.class);
         criteria.add(Restrictions.eq("funcionario",user));
-        criteria.addOrder(Order.desc("dataOperacao"));
+        criteria.addOrder(Order.desc("dataFinal"));
         //criteria.add(Restrictions.eq("funcionario", user));
         System.out.println("Funcionário aqui: "+user.getApelido());
         List<Relatorio> listaRetorno = criteria.list();
@@ -75,10 +96,9 @@ public class RelatorioDao {
         cal.clear(Calendar.SECOND);
         cal.clear(Calendar.MILLISECOND);
 
-        java.sql.Date date = new java.sql.Date(new Date(System.currentTimeMillis()).getTime());
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Relatorio.class).setProjection(Projections.rowCount());
-        criteria.add(Restrictions.ge("dataOperacao", cal.getTime())).add(Restrictions.eq("funcionario", user));
+        criteria.add(Restrictions.ge("dataFinal", cal.getTime())).add(Restrictions.eq("funcionario", user));
         long retorno = (Long) criteria.uniqueResult();
         System.out.println("Contagem: "+retorno);
         System.out.println("Date aqui: "+cal.getTime());
@@ -98,7 +118,7 @@ public class RelatorioDao {
         java.sql.Date date = new java.sql.Date(new Date(System.currentTimeMillis()).getTime());
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Relatorio.class).setProjection(Projections.sum("fotos"));
-        criteria.add(Restrictions.ge("dataOperacao", cal.getTime())).add(Restrictions.eq("funcionario", user));
+        criteria.add(Restrictions.ge("dataFinal", cal.getTime())).add(Restrictions.eq("funcionario", user));
         long retorno = (Long) criteria.uniqueResult();
         System.out.println("Contagem: "+retorno);
         System.out.println("Date aqui: "+cal.getTime());
@@ -119,8 +139,8 @@ public class RelatorioDao {
         java.sql.Date date = new java.sql.Date(new Date(System.currentTimeMillis()).getTime());
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Relatorio.class);
-        criteria.add(Restrictions.ge("dataOperacao", cal.getTime())).add(Restrictions.eq("funcionario", user));
-        criteria.addOrder(Order.desc("dataOperacao"));
+        criteria.add(Restrictions.ge("dataFinal", cal.getTime())).add(Restrictions.eq("funcionario", user));
+        criteria.addOrder(Order.desc("dataFinal"));
         List<Relatorio> listaRetorno = criteria.list();
         System.out.println("Date aqui: "+cal.getTime());
         sessao.close();
@@ -150,8 +170,8 @@ public class RelatorioDao {
         java.sql.Date date = new java.sql.Date(new Date(System.currentTimeMillis()).getTime());
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Relatorio.class);
-        criteria.add(Restrictions.ge("dataOperacao", calendar1.getTime())).add(Restrictions.eq("funcionario", user)).add(Restrictions.le("dataOperacao",calendar2.getTime()));
-        criteria.addOrder(Order.asc("dataOperacao"));
+        criteria.add(Restrictions.ge("dataFinal", calendar1.getTime())).add(Restrictions.eq("funcionario", user)).add(Restrictions.le("dataFinal",calendar2.getTime()));
+        criteria.addOrder(Order.asc("dataFinal"));
         List<Relatorio> listaRetorno = criteria.list();
         System.out.println("Date 1 aqui: "+calendar1.getTime());
         System.out.println("Date 2 aqui: "+calendar2.getTime());
