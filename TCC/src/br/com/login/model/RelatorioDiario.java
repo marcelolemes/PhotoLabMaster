@@ -24,6 +24,8 @@ public class RelatorioDiario implements Serializable{
     @Column
     private int fotos;
     @Column
+       private int qtdAlbuns;
+    @Column
     private Timestamp dataRelatorio;
 
     public int getCod() {
@@ -56,5 +58,22 @@ public class RelatorioDiario implements Serializable{
 
     public void setFotos(int fotos) {
         this.fotos = fotos;
+    }
+
+    public int getQtdAlbuns() {
+        return qtdAlbuns;
+    }
+
+    public Timestamp getDataRelatorio() {
+        return dataRelatorio;
+    }
+
+    public void setDataRelatorio(Timestamp dataRelatorio) {
+        this.dataRelatorio = dataRelatorio;
+    }
+
+    public void setQtdAlbuns(int qtdAlbuns) {
+        this.qtdAlbuns = qtdAlbuns;
+
     }
 }

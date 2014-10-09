@@ -92,4 +92,12 @@ public class ListarAlbunsFunc implements Serializable {
     public void setQtdDiaFotos(long qtdDiaFotos) {
         this.qtdDiaFotos = qtdDiaFotos;
     }
+
+    public RelatorioDao getRelatorioDao() {
+        return relatorioDao;
+    }
+
+    public void setRelatorioDao(RelatorioDao relatorioDao) {
+        this.relatorioDao = relatorioDao;
+    }
 }

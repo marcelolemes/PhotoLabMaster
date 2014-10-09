@@ -1,16 +1,20 @@
 package br.com.login.bean.users.admin.listar;
 
-import br.com.login.Dao.AlbumDao;
 import br.com.login.Dao.RelatorioDao;
+import br.com.login.Dao.RelatorioDiarioDao;
 import br.com.login.bean.users.UserBean;
 import br.com.login.model.Relatorio;
+import br.com.login.model.RelatorioDiario;
 import br.com.login.model.User;
+import com.lowagie.text.*;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -23,27 +27,48 @@ public class RelatorioUserBean
 {
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
-    private Relatorio relatorio = new Relatorio();
-    private RelatorioDao relatorioDao = new RelatorioDao();
-    private List<Relatorio> relatorioList;
+    private RelatorioDiario relatorioDiaro = new RelatorioDiario();
+    private RelatorioDiarioDao relatorioDiarioDao = new RelatorioDiarioDao();
+    private List<RelatorioDiario> relatorioList;
     private Date dataInicial;
     private Date dataFinal;
 
 
     public RelatorioUserBean() {
-        relatorioList = new ArrayList<Relatorio>();
+        relatorioList = new ArrayList<RelatorioDiario>();
     }
 
     public void inicializarLista() throws Exception {
+
+        if (!dataInicial.before(new Date())){
+            FacesContext.getCurrentInstance().addMessage(
+                          null,
+                          new FacesMessage(FacesMessage.SEVERITY_WARN, "Relatório",
+                                  "a data inicial é inválida, a data inicial deve ser anterior à hoje por exemplo"));
+        }
+        if (!dataFinal.after(new Date())){
+            FacesContext.getCurrentInstance().addMessage(
+                                      null,
+                                      new FacesMessage(FacesMessage.SEVERITY_WARN, "Relatório",
+                                              "a data final é inválida, a data final deve ser posterior à hoje por exemplo"));
+                }
 
         albunsEspaçoTempo(userBean.getUserLogado(),dataInicial,dataFinal);
     }
 
     public void albunsEspaçoTempo(User user,Date dataInicial,Date dataFinal) throws Exception {
 
-        relatorioList =relatorioDao.ListarIntervalo(user,dataInicial,dataFinal);
+        relatorioList =relatorioDiarioDao.ListarIntervalo(user,dataInicial,dataFinal);
     }
+    public void preProcessPDF(Object document) throws IOException,
+            BadElementException, DocumentException {
+         Document pdf = (Document) document;
+         pdf.open();
+         pdf.add(new Paragraph(userBean.getUserLogado().getApelido()));
 
+
+
+     }
 
     public UserBean getUserBean() {
         return userBean;
@@ -53,27 +78,20 @@ public class RelatorioUserBean
         this.userBean = userBean;
     }
 
-    public Relatorio getRelatorio() {
-        return relatorio;
+
+    public RelatorioDiario getRelatorioDiaro() {
+        return relatorioDiaro;
     }
 
-    public void setRelatorio(Relatorio relatorio) {
-        this.relatorio = relatorio;
+    public void setRelatorioDiaro(RelatorioDiario relatorioDiaro) {
+        this.relatorioDiaro = relatorioDiaro;
     }
 
-    public RelatorioDao getRelatorioDao() {
-        return relatorioDao;
-    }
-
-    public void setRelatorioDao(RelatorioDao relatorioDao) {
-        this.relatorioDao = relatorioDao;
-    }
-
-    public List<Relatorio> getRelatorioList() {
+    public List<RelatorioDiario> getRelatorioList() {
         return relatorioList;
     }
 
-    public void setRelatorioList(List<Relatorio> relatorioList) {
+    public void setRelatorioList(List<RelatorioDiario> relatorioList) {
         this.relatorioList = relatorioList;
     }
 
@@ -92,4 +110,5 @@ public class RelatorioUserBean
     public void setDataInicial(Date dataInicial) {
         this.dataInicial = dataInicial;
     }
+
 }

@@ -26,7 +26,7 @@
     <p:growl id="growl" showDetail="true" autoUpdate="true" />
 
     <ui:define name="menu">
-        <ui:include src="/include/admin/menu.xhtml" />
+        <ui:include src="/include/user/menu.xhtml" />
     </ui:define>
 
     <ui:define name="content">
@@ -66,32 +66,46 @@
 
 
             <p:panelGrid columns="4">
+
                 <p:outputLabel value="Data Inicial" />
-                <p:calendar styleClass="calendar"
+                <p:calendar id="dataInicial" styleClass="calendar"
                             value="#{relatorioUserBean.dataInicial}"
                             locale="pt" navigator="true" pattern="dd/MM/yyyy" />
                 <p:outputLabel value="Data Final" />
-                <p:calendar styleClass="calendar"
+                <p:calendar id="dataFinal" styleClass="calendar"
                             value="#{relatorioUserBean.dataFinal}"
                             locale="pt" navigator="true" pattern="dd/MM/yyyy" />
             </p:panelGrid>
+            <p:panel styleClass="panecentraltabela">
+                <p:dataTable id="relatorioUser" var="relatorio" value="#{relatorioUserBean.relatorioList}" emptyMessage="Relatório vazio para este intervalo de tempo"  scrollable="true"
+                             scrollHeight="440">
+                    <f:facet name="header">
+                        <h:commandLink id="tabelapdf">
+                            <p:graphicImage url="/resources/images/pdf.png" />
+                            <p:dataExporter type="pdf" target="relatorioUser" fileName="produção" preProcessor="#{relatorioUserBean.preProcessPDF}"
+                                            encoding="iso-8859-1" />
+                        </h:commandLink>
+                        <h:commandLink id="tabelaexcel">
+                            <p:graphicImage url="/resources/images/excel.png" />
+                            <p:dataExporter type="xls" target="relatorioUser" fileName="produção"
+                                            encoding="iso-8859-1" />
+                        </h:commandLink>
+                    </f:facet>
+                    <p:column headerText="Data" >
+                        <h:outputText value="#{relatorio.dataOperacao}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Quantia de albuns" >
+                        <h:outputText value="#{relatorio.qtdAlbuns}" />
+                    </p:column>
+                    <p:column headerText="Quantia de fotos" >
+                        <h:outputText value="#{relatorio.fotos}" />
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
 
-            <p:dataTable id="relatorio" var="relatorio" value="#{relatorioUserBean.relatorioList}" emptyMessage="Relatório vazio para este intervalo de tempo">
-                <p:column headerText="Data">
-                    <h:outputText value="#{relatorio.dataOperacao}"  >
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                    </h:outputText>
-                </p:column>
-                <p:column headerText="Número">
-                    <h:outputText value="#{relatorio.album.numero}" />
-                </p:column>
-                <p:column headerText="Fotos" width="23%">
-                    <h:outputText value="#{relatorio.fotos}" />
-                </p:column>
-            </p:dataTable>
-
-
-            <p:commandButton value="Atualizar" actionListener="#{relatorioUserBean.inicializarLista()}" update="@all" process="@all"/>
+            <p:commandButton value="Buscar" actionListener="#{relatorioUserBean.inicializarLista()}" update="@all" process="@all"  validateClient="true"/>
 
         </h:form>
     </ui:define>

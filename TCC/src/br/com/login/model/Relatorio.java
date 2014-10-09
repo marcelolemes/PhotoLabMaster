@@ -4,7 +4,6 @@ import javax.faces.bean.ManagedBean;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * Created by marcelo on 26/09/2014.
@@ -30,7 +29,9 @@ public class Relatorio implements Serializable{
     @Column
     private Timestamp dataInicial;
     @Column
-    private Timestamp dataOperacao;
+    private Timestamp dataFinal;
+    @Column
+    private long tempoOperacao;
 
     public int getCod() {
         return cod;
@@ -56,12 +57,12 @@ public class Relatorio implements Serializable{
         this.album = album;
     }
 
-    public Timestamp getDataOperacao() {
-        return dataOperacao;
+    public Timestamp getDataFinal() {
+        return dataFinal;
     }
 
-    public void setDataOperacao(Timestamp dataOperacao) {
-        this.dataOperacao = dataOperacao;
+    public void setDataFinal(Timestamp dataOperacao) {
+        this.dataFinal = dataOperacao;
     }
 
     public int getFotos() {
@@ -78,5 +79,13 @@ public class Relatorio implements Serializable{
 
     public void setDataInicial(Timestamp dataInicial) {
         this.dataInicial = dataInicial;
+    }
+
+    public long getTempoOperacao() {
+        return tempoOperacao;
+    }
+
+    public void setTempoOperacao(long tempoOperacao) {
+        this.tempoOperacao = tempoOperacao;
     }
 }

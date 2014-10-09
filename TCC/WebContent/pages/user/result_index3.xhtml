@@ -44,7 +44,7 @@
                           header="Setor #{listaUsuariosBean.parserSetor(panelAdmin.userBean.userLogado)}">
                 <p:idleMonitor timeout="1800000"> <!-- Atualiza a cada 30 minutos-->
                     <p:ajax event="idle" listener="#{userBean.btHome}"/>
-                    </p:idleMonitor>
+                </p:idleMonitor>
                 <ui:insert name="centralContent" />
                 <p:panel styleClass="panecentral">
                     <p:panelGrid columns="2" styleClass="semBorda">
@@ -89,22 +89,25 @@
     <ui:define name="west">
         <h:form id="west">
             <p:panelGrid columns="2">
-            <p:outputLabel value="Albuns de hoje: "/>
-            <p:outputLabel value="#{listarAlbunsFunc.qtdDia}"/>
-            <p:outputLabel value="Fotos de hoje: "/>
-                       <p:outputLabel value="#{listarAlbunsFunc.qtdDiaFotos}"/>
+                <p:outputLabel value="Albuns de hoje: "/>
+                <p:outputLabel value="#{listarAlbunsFunc.qtdDia}"/>
+                <p:outputLabel value="Fotos de hoje: "/>
+                <p:outputLabel value="#{listarAlbunsFunc.qtdDiaFotos}"/>
             </p:panelGrid>
             <p:dataTable id="relatorio" var="relatorio" value="#{listarAlbunsFunc.relatorioList}">
                 <p:column headerText="Número">
                     <h:outputText value="#{relatorio.album.numero}" />
                 </p:column>
                 <p:column headerText="Fotos" width="23%">
-                                    <h:outputText value="#{relatorio.fotos}" />
-                                </p:column>
+                    <h:outputText value="#{relatorio.fotos}" />
+                </p:column>
                 <p:column headerText="Data">
-                    <h:outputText value="#{relatorio.dataOperacao}"  >
+                    <h:outputText value="#{relatorio.dataFinal}"  >
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </h:outputText>
+                </p:column>
+                <p:column headerText="Tempo gasto">
+                    <h:outputText value="#{listarAlbunsFunc.relatorioDao.msToHourSecond(relatorio.tempoOperacao)}"  />
                 </p:column>
             </p:dataTable>
 
@@ -121,6 +124,6 @@
             </p:panel>
         </h:form>
     </ui:define>
-
+    <p:ajaxExceptionHandler type="javax.faces.application.ViewExpiredException"  onexception="#{userBean.btHome}" />
     </body>
 </ui:composition>
