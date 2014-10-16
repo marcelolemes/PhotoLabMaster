@@ -26,7 +26,7 @@
     <ui:define name="content">
 
         <p:tabView>
-            <p:tab title="Tab One">
+            <p:tab title="Início">
 
                 <p:panelGrid columns="2" styleClass="semBorda">
                     <p:commandButton value="Confirmar término do álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraMontagem.btTerminarAlbum}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
@@ -84,7 +84,8 @@
 
 
             </p:tab>
-            <p:tab title="Tab Two">
+            <p:tab title="Gráfico produção mensal">
+                <p:chart type="line" model="#{relatorioUserBean.createLineModels()}"  rendered="#{not empty relatorioUserBean.createLineModels()}" style="height:300px;"/>
                     </p:tab>
         </p:tabView>
 

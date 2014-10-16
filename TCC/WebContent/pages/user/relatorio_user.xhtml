@@ -65,20 +65,9 @@
         <h:form>
 
 
-            <p:panelGrid columns="4">
-
-                <p:outputLabel value="Data Inicial" />
-                <p:calendar id="dataInicial" styleClass="calendar"
-                            value="#{relatorioUserBean.dataInicial}"
-                            locale="pt" navigator="true" pattern="dd/MM/yyyy" />
-                <p:outputLabel value="Data Final" />
-                <p:calendar id="dataFinal" styleClass="calendar"
-                            value="#{relatorioUserBean.dataFinal}"
-                            locale="pt" navigator="true" pattern="dd/MM/yyyy" />
-            </p:panelGrid>
-            <p:chart type="line" model="#{relatorioUserBean.createLineModels()}" style="height:300px;" rendered="#{not empty relatorioUserBean.relatorioList}"/>
+            <p:chart type="line" model="#{relatorioUserBean.createLineModels()}"  rendered="#{not empty relatorioUserBean.createLineModels()}" style="height:300px;"/>
             <p:panel styleClass="panecentraltabela">
-                <p:dataTable id="relatorioUser" var="relatorio" value="#{relatorioUserBean.relatorioList}" emptyMessage="Relatório vazio para este intervalo de tempo"  scrollable="true"
+                <p:dataTable id="relatorioUser" var="relatorio" value="#{relatorioUserBean.albunsMes()}" emptyMessage="Relatório vazio para este intervalo de tempo"  scrollable="true"
                              scrollHeight="440">
                     <f:facet name="header">
                         <h:commandLink id="tabelapdf">

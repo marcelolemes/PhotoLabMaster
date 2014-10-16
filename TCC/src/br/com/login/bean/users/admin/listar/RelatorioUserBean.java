@@ -33,39 +33,27 @@ public class RelatorioUserBean
     private RelatorioDiario relatorioDiaro = new RelatorioDiario();
     private RelatorioDiarioDao relatorioDiarioDao = new RelatorioDiarioDao();
     private List<RelatorioDiario> relatorioList;
-    private Date dataInicial;
-    private Date dataFinal;
+    private List<RelatorioDiario> relatorioTodosMes;
+    static int qtdMaximo =0;
 
 
-    public RelatorioUserBean() {
-        relatorioList = new ArrayList<RelatorioDiario>();
-    }
-
-    public void inicializarLista() throws Exception {
-
-        if (!dataInicial.before(new Date())){
-            FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Relatório",
-                            "a data inicial é inválida, a data inicial deve ser anterior à hoje por exemplo"));
+    public RelatorioUserBean()  {
+        try {
+            relatorioList = albunsMes(userBean.getUserLogado());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        if (!dataFinal.after(new Date())){
-            FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Relatório",
-                            "a data final é inválida, a data final deve ser posterior à hoje por exemplo"));
-        }
-
-        albunsEspaçoTempo(userBean.getUserLogado(),dataInicial,dataFinal);
     }
 
-    public void albunsEspaçoTempo(User user,Date dataInicial,Date dataFinal) throws Exception {
 
-        relatorioList =relatorioDiarioDao.ListarIntervalo(user,dataInicial,dataFinal);
+    public List<RelatorioDiario> albunsMes() throws Exception {
+
+        return relatorioDiarioDao.ListarMes(userBean.getUserLogado());
     }
-    public List<RelatorioDiario> albunsdoGrafico(User user,Date dataInicial,Date dataFinal) throws Exception {
 
-        return relatorioDiarioDao.ListarIntervalo(user,dataInicial,dataFinal);
+    public List<RelatorioDiario> albunsMes(User user) throws Exception {
+
+        return relatorioDiarioDao.ListarMes(user);
     }
 
     public void preProcessPDF(Object document) throws IOException,
@@ -84,32 +72,35 @@ public class RelatorioUserBean
         lineModel1.setTitle("Produção");
         lineModel1.setLegendPosition("e");
         lineModel1.setShowPointLabels(true);
+        lineModel1.setAnimate(true);
         Axis yAxis = lineModel1.getAxis(AxisType.Y);
         yAxis.setMin(0);
-        yAxis.setMax(1500);
+        yAxis.setMax(qtdMaximo+100);
 
         lineModel1.getAxes().put(AxisType.X, new CategoryAxis("Dias"));
         yAxis = lineModel1.getAxis(AxisType.Y);
         yAxis.setLabel("Fotos");
         yAxis.setMin(0);
-        yAxis.setMax(1500);
+        yAxis.setMax(qtdMaximo+100);
         return lineModel1;
     }
 
     private LineChartModel initCategoryModel(User user) throws Exception {
         LineChartModel model = new LineChartModel();
-
+        relatorioTodosMes = albunsMes(user);
         ChartSeries userChart = new ChartSeries();
         userChart.setLabel(user.getApelido());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd");
 
-        for (int x =0; x>= relatorioList.size();x++){
+        for (int x =1; x < relatorioTodosMes.size();x++){
+            if (relatorioTodosMes.get(x).getFotos()>qtdMaximo){
+                qtdMaximo = relatorioTodosMes.get(x).getFotos();
+            }
+            userChart.set(simpleDateFormat.format(relatorioTodosMes.get(x).getDataRelatorio()), relatorioTodosMes.get(x).getFotos());
+            System.out.println("teste aqui  "+simpleDateFormat.format(relatorioTodosMes.get(x).getDataRelatorio()) + relatorioTodosMes.get(x).getFotos());
 
-            userChart.set(simpleDateFormat.format(relatorioList.get(x).getDataRelatorio()), relatorioList.get(x).getFotos());
-            System.out.println("teste aqui  "+simpleDateFormat.format(relatorioList.get(x).getDataRelatorio()) + relatorioList.get(x).getFotos());
-            model.addSeries(userChart);
         }
-
+        model.addSeries(userChart);
 
 
         return model;
@@ -141,20 +132,6 @@ public class RelatorioUserBean
         this.relatorioList = relatorioList;
     }
 
-    public Date getDataFinal() {
-        return dataFinal;
-    }
 
-    public void setDataFinal(Date dataFinal) {
-        this.dataFinal = dataFinal;
-    }
-
-    public Date getDataInicial() {
-        return dataInicial;
-    }
-
-    public void setDataInicial(Date dataInicial) {
-        this.dataInicial = dataInicial;
-    }
 
 }

@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.sql.Timestamp;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -101,8 +102,26 @@ public class RegraMontagem implements Serializable {
            relatorioDiario = relatorioDiarioDao.encontrarRelatorio(userBean.getUserLogado(),new Timestamp(new Date(System.currentTimeMillis()).getTime()));
            if (relatorioDiario == null)
            {
+
+
                relatorioDiario =  new RelatorioDiario();
-               relatorioDiario.setDataOperacao(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
+
+
+
+               Calendar calendar1 = Calendar.getInstance();
+                     Calendar calendar2 = Calendar.getInstance();
+
+                     calendar1.setTime(new Date());
+
+
+                     calendar1.clear(Calendar.HOUR_OF_DAY);
+                     calendar1.clear(Calendar.HOUR);
+                     calendar1.clear(Calendar.AM_PM);
+                     calendar1.clear(Calendar.MINUTE);
+                     calendar1.clear(Calendar.SECOND);
+                     calendar1.clear(Calendar.MILLISECOND);
+
+               relatorioDiario.setDataOperacao(new Timestamp(calendar1.getTime().getTime()));
                relatorioDiario.setFuncionario(userBean.getUserLogado());
            }
             relatorioDiario.setQtdAlbuns((int) relatorioDao.contarAlbunsHoje(userBean.getUserLogado()));
