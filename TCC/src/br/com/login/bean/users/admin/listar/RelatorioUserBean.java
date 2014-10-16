@@ -73,6 +73,7 @@ public class RelatorioUserBean
         lineModel1.setLegendPosition("e");
         lineModel1.setShowPointLabels(true);
         lineModel1.setAnimate(true);
+        lineModel1.setZoom(true);
         Axis yAxis = lineModel1.getAxis(AxisType.Y);
         yAxis.setMin(0);
         yAxis.setMax(qtdMaximo+100);
@@ -89,7 +90,7 @@ public class RelatorioUserBean
         LineChartModel model = new LineChartModel();
         relatorioTodosMes = albunsMes(user);
         ChartSeries userChart = new ChartSeries();
-        userChart.setLabel(user.getApelido());
+         userChart.setLabel(user.getApelido());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd");
 
         for (int x =1; x < relatorioTodosMes.size();x++){

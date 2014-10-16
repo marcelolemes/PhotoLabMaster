@@ -10,6 +10,7 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
+
     </h:head>
     <h:outputStylesheet library="css" name="estilo.css" />
 
@@ -85,8 +86,26 @@
 
             </p:tab>
             <p:tab title="Gráfico produção mensal">
-                <p:chart type="line" model="#{relatorioUserBean.createLineModels()}"  rendered="#{not empty relatorioUserBean.createLineModels()}" style="height:300px;"/>
-                    </p:tab>
+                <p:chart type="line" model="#{relatorioUserBean.createLineModels()}"  rendered="#{not empty relatorioUserBean.createLineModels()}" style="height:300px;" widgetVar="grafico"/>
+                <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('grafico').resetZoom()"/>
+
+            </p:tab>
+            <p:tab title="Histórico mensal de albuns" >
+        <p:dataTable id="relatorio" var="relatorio" value="#{historicoUserBean.inicializarListaMes()}" emptyMessage="Relatório vazio para este intervalo de tempo">
+                               <p:column headerText="Data">
+                                   <h:outputText value="#{relatorio.dataFinal}"  >
+                                       <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                   </h:outputText>
+                               </p:column>
+                               <p:column headerText="Número">
+                                   <h:outputText value="#{relatorio.album.numero}" />
+                               </p:column>
+                               <p:column headerText="Fotos" width="23%">
+                                   <h:outputText value="#{relatorio.fotos}" />
+                               </p:column>
+                           </p:dataTable>
+
+            </p:tab>
         </p:tabView>
 
     </ui:define>
