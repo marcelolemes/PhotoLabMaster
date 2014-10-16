@@ -76,6 +76,7 @@
                             value="#{relatorioUserBean.dataFinal}"
                             locale="pt" navigator="true" pattern="dd/MM/yyyy" />
             </p:panelGrid>
+            <p:chart type="line" model="#{relatorioUserBean.createLineModels()}" style="height:300px;" rendered="#{not empty relatorioUserBean.relatorioList}"/>
             <p:panel styleClass="panecentraltabela">
                 <p:dataTable id="relatorioUser" var="relatorio" value="#{relatorioUserBean.relatorioList}" emptyMessage="Relatório vazio para este intervalo de tempo"  scrollable="true"
                              scrollHeight="440">
@@ -103,6 +104,7 @@
                         <h:outputText value="#{relatorio.fotos}" />
                     </p:column>
                 </p:dataTable>
+
             </p:panel>
 
             <p:commandButton value="Buscar" actionListener="#{relatorioUserBean.inicializarLista()}" update="@all" process="@all"  validateClient="true"/>

@@ -106,7 +106,7 @@ public class RelatorioUserBean
         for (int x =0; x>= relatorioList.size();x++){
 
             userChart.set(simpleDateFormat.format(relatorioList.get(x).getDataRelatorio()), relatorioList.get(x).getFotos());
-            System.out.println("teste aqui "+simpleDateFormat.format(relatorioList.get(x).getDataRelatorio()) + relatorioList.get(x).getFotos());
+            System.out.println("teste aqui  "+simpleDateFormat.format(relatorioList.get(x).getDataRelatorio()) + relatorioList.get(x).getFotos());
             model.addSeries(userChart);
         }
 

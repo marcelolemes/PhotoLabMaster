@@ -65,6 +65,13 @@ ui-layout-south {
     top: 10%;
     border: 1px solid #000;
 }
+.panecentralresult {
+    background-color: #fff;
+    position: absolute;
+    right: 40%;
+    top: 100%;
+    border: 1px solid #000;
+}
 .panecentraltabela {
     background-color: #fff;
     position: relative;
