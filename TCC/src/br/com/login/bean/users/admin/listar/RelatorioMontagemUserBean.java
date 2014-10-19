@@ -1,24 +1,21 @@
 package br.com.login.bean.users.admin.listar;
 
-import br.com.login.Dao.RelatorioDao;
 import br.com.login.Dao.RelatorioDiarioDao;
+import br.com.login.Dao.UserDao;
 import br.com.login.bean.users.UserBean;
-import br.com.login.model.Relatorio;
 import br.com.login.model.RelatorioDiario;
 import br.com.login.model.User;
-import com.lowagie.text.*;
+import com.lowagie.text.BadElementException;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Paragraph;
 import org.primefaces.model.chart.*;
 
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,7 +23,7 @@ import java.util.List;
  */
 @ManagedBean
 @ViewScoped
-public class RelatorioUserBean
+public class RelatorioMontagemUserBean
 {
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
@@ -34,12 +31,13 @@ public class RelatorioUserBean
     private RelatorioDiarioDao relatorioDiarioDao = new RelatorioDiarioDao();
     private List<RelatorioDiario> relatorioList;
     private List<RelatorioDiario> relatorioTodosMes;
+    UserDao userDao = new UserDao();
     static int qtdMaximo =0;
 
 
-    public RelatorioUserBean()  {
+    public RelatorioMontagemUserBean()  {
         try {
-            relatorioList = albunsMes(userBean.getUserLogado());
+            //relatorioList = albunsMes(userBean.getUserLogado());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,9 +66,9 @@ public class RelatorioUserBean
 
         LineChartModel lineModel1;
 
-        lineModel1= initCategoryModel(userBean.getUserLogado());
-        lineModel1.setTitle("Produção");
-        lineModel1.setLegendPosition("e");
+        lineModel1= initCategoryModel(userDao.ListarUsersMontagem());
+        lineModel1.setTitle("Produção Montagem");
+        lineModel1.setLegendPosition("w");
         lineModel1.setShowPointLabels(true);
         lineModel1.setAnimate(true);
         lineModel1.setZoom(true);
@@ -84,27 +82,43 @@ public class RelatorioUserBean
         yAxis.setMin(0);
         yAxis.setMax(qtdMaximo+100);
         return lineModel1;
-
     }
 
-    private LineChartModel initCategoryModel(User user) throws Exception {
+    private LineChartModel initCategoryModel(List<User> users) throws Exception {
         LineChartModel model = new LineChartModel();
-        relatorioTodosMes = albunsMes(user);
-        ChartSeries userChart = new ChartSeries();
-         userChart.setLabel(user.getApelido());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd");
+        ChartSeries userChart;
+        userChart = new ChartSeries();
+        userChart.setLabel("Legenda funcionários");
 
-        for (int x =0; x < relatorioTodosMes.size();x++){
-            if (relatorioTodosMes.get(x).getFotos()>qtdMaximo){
-                qtdMaximo = relatorioTodosMes.get(x).getFotos();
+        for (int x=1; x <= 31; x++){ //Estou adicionando os dias do mês "manualmente"
+            if (x>=10){
+            userChart.set(String.valueOf(x),null);
             }
-            userChart.set(simpleDateFormat.format(relatorioTodosMes.get(x).getDataRelatorio()), relatorioTodosMes.get(x).getFotos());
-            System.out.println("teste aqui  "+simpleDateFormat.format(relatorioTodosMes.get(x).getDataRelatorio()) + relatorioTodosMes.get(x).getFotos());
+            else {
+                userChart.set("0"+String.valueOf(x),null);
+            }
+
 
         }
-        
         model.addSeries(userChart);
 
+        for (int y = 0; y < users.size(); y++) {
+            relatorioTodosMes = albunsMes(users.get(y));
+            userChart = null;
+            userChart = new ChartSeries();
+            userChart.setLabel(users.get(y).getApelido());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd");
+
+            for (int x = 0; x < relatorioTodosMes.size(); x++) {
+                if (relatorioTodosMes.get(x).getFotos() > qtdMaximo) {
+                    qtdMaximo = relatorioTodosMes.get(x).getFotos();
+                }
+                userChart.set(simpleDateFormat.format(relatorioTodosMes.get(x).getDataRelatorio()), relatorioTodosMes.get(x).getFotos());
+                System.out.println("teste aqui  " + simpleDateFormat.format(relatorioTodosMes.get(x).getDataRelatorio())+" " + relatorioTodosMes.get(x).getFotos() +" " + relatorioTodosMes.get(x).getFuncionario().getApelido());
+
+            }
+            model.addSeries(userChart);
+        }
 
         return model;
     }

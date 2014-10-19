@@ -146,11 +146,12 @@ public class RelatorioDiarioDao {
 
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(RelatorioDiario.class);
-        criteria.add(Restrictions.ge("dataRelatorio", calendar1.getTime())).add(Restrictions.eq("funcionario", user)).add(Restrictions.lt("dataRelatorio",calendar2.getTime()));
+        criteria.add(Restrictions.gt("dataRelatorio", calendar1.getTime())).add(Restrictions.eq("funcionario", user)).add(Restrictions.lt("dataRelatorio",calendar2.getTime()));
         criteria.addOrder(Order.asc("dataRelatorio"));
         List<RelatorioDiario> listaRetorno = criteria.list();
         System.out.println("Mes 1 aqui: "+calendar1.getTime());
         System.out.println("Mes 2 aqui: "+calendar2.getTime());
+        System.out.println("User : "+user.getApelido()+" dias "+listaRetorno.size());
         sessao.close();
         return listaRetorno;
     }
