@@ -156,9 +156,105 @@ public class RelatorioDiarioDao {
         return listaRetorno;
     }
 
+    public double ListarMediaMes(User user) throws Exception {
+        Calendar calendar1 = Calendar.getInstance();
+        Calendar calendar2 = Calendar.getInstance();
+
+        Date date1 = new Date();
+        date1.getTime();
+        calendar1.setTime(date1);
+        calendar2.setTime(date1);
 
 
+        calendar1.clear(Calendar.DAY_OF_YEAR);
+        calendar1.clear(Calendar.DAY_OF_WEEK);
+        calendar1.clear(Calendar.DAY_OF_MONTH);
+        calendar1.clear(Calendar.DAY_OF_WEEK_IN_MONTH);
+        calendar1.clear(Calendar.HOUR_OF_DAY);
+        calendar1.clear(Calendar.WEEK_OF_YEAR);
+        calendar1.clear(Calendar.WEEK_OF_MONTH);
+        calendar1.clear(Calendar.HOUR);
+        calendar1.clear(Calendar.AM_PM);
+        calendar1.clear(Calendar.MINUTE);
+        calendar1.clear(Calendar.SECOND);
+        calendar1.clear(Calendar.MILLISECOND);
 
+
+        calendar2.clear(Calendar.DAY_OF_YEAR);
+        calendar2.clear(Calendar.DAY_OF_WEEK);
+        calendar2.clear(Calendar.DAY_OF_MONTH);
+        calendar2.clear(Calendar.DAY_OF_WEEK_IN_MONTH);
+        calendar2.clear(Calendar.WEEK_OF_YEAR);
+        calendar2.clear(Calendar.WEEK_OF_MONTH);
+        calendar2.clear(Calendar.HOUR_OF_DAY);
+        calendar2.clear(Calendar.HOUR);
+        calendar2.clear(Calendar.AM_PM);
+        calendar2.clear(Calendar.MINUTE);
+        calendar2.clear(Calendar.SECOND);
+        calendar2.clear(Calendar.MILLISECOND);
+        calendar2.add(Calendar.MONTH,1);
+
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(RelatorioDiario.class);
+        criteria.add(Restrictions.gt("dataRelatorio", calendar1.getTime())).add(Restrictions.eq("funcionario", user)).add(Restrictions.lt("dataRelatorio",calendar2.getTime())).setProjection(Projections.avg("fotos"));;
+        criteria.addOrder(Order.asc("dataRelatorio"));
+        double listaRetorno = (Double)criteria.uniqueResult();
+        System.out.println("Mes 1 aqui: "+calendar1.getTime());
+        System.out.println("Mes 2 aqui: "+calendar2.getTime());
+
+        sessao.close();
+        return listaRetorno;
+    }
+
+    public long ListarTotalMes(User user) throws Exception {
+        Calendar calendar1 = Calendar.getInstance();
+        Calendar calendar2 = Calendar.getInstance();
+
+        Date date1 = new Date();
+        date1.getTime();
+        calendar1.setTime(date1);
+        calendar2.setTime(date1);
+
+
+        calendar1.clear(Calendar.DAY_OF_YEAR);
+        calendar1.clear(Calendar.DAY_OF_WEEK);
+        calendar1.clear(Calendar.DAY_OF_MONTH);
+        calendar1.clear(Calendar.DAY_OF_WEEK_IN_MONTH);
+        calendar1.clear(Calendar.HOUR_OF_DAY);
+        calendar1.clear(Calendar.WEEK_OF_YEAR);
+        calendar1.clear(Calendar.WEEK_OF_MONTH);
+        calendar1.clear(Calendar.HOUR);
+        calendar1.clear(Calendar.AM_PM);
+        calendar1.clear(Calendar.MINUTE);
+        calendar1.clear(Calendar.SECOND);
+        calendar1.clear(Calendar.MILLISECOND);
+
+
+        calendar2.clear(Calendar.DAY_OF_YEAR);
+        calendar2.clear(Calendar.DAY_OF_WEEK);
+        calendar2.clear(Calendar.DAY_OF_MONTH);
+        calendar2.clear(Calendar.DAY_OF_WEEK_IN_MONTH);
+        calendar2.clear(Calendar.WEEK_OF_YEAR);
+        calendar2.clear(Calendar.WEEK_OF_MONTH);
+        calendar2.clear(Calendar.HOUR_OF_DAY);
+        calendar2.clear(Calendar.HOUR);
+        calendar2.clear(Calendar.AM_PM);
+        calendar2.clear(Calendar.MINUTE);
+        calendar2.clear(Calendar.SECOND);
+        calendar2.clear(Calendar.MILLISECOND);
+        calendar2.add(Calendar.MONTH,1);
+
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(RelatorioDiario.class);
+        criteria.add(Restrictions.gt("dataRelatorio", calendar1.getTime())).add(Restrictions.eq("funcionario", user)).add(Restrictions.lt("dataRelatorio",calendar2.getTime())).setProjection(Projections.sum("fotos"));;
+        criteria.addOrder(Order.asc("dataRelatorio"));
+        long listaRetorno = (Long)criteria.uniqueResult();
+        System.out.println("Mes 1 aqui: "+calendar1.getTime());
+        System.out.println("Mes 2 aqui: "+calendar2.getTime());
+
+        sessao.close();
+        return listaRetorno;
+    }
 
 
 }
