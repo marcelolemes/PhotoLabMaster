@@ -107,7 +107,7 @@ public class RelatorioMontagemMediaUserBean
             {
                 qtdMaximo = (int)mediaAlbunsMes(users.get(y));
             }
-            userChart.set("Mês "+simpleDateFormat.format(data), mediaAlbunsMes(users.get(y)));
+            userChart.set("Mês :"+simpleDateFormat.format(data), mediaAlbunsMes(users.get(y)));
             model.addSeries(userChart);
         }
 
