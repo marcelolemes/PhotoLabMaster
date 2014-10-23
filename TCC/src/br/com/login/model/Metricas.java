@@ -15,7 +15,7 @@ public class Metricas implements Serializable {
 	private List<SelectItem> urgenciaLista = new ArrayList<SelectItem>();
 	private List<SelectItem> statusContratoLista = new ArrayList<SelectItem>();
 	private List<SelectItem> setores = new ArrayList<SelectItem>();
-
+    String[] mes = {"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro" };
 	public Metricas() {
 
 		inicializarNivelAcesso();
@@ -110,4 +110,11 @@ public class Metricas implements Serializable {
 		this.setores = setores;
 	}
 
+    public String[] getMes() {
+        return mes;
+    }
+
+    public void setMes(String[] mes) {
+        this.mes = mes;
+    }
 }

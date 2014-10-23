@@ -3,6 +3,7 @@ package br.com.login.bean.users.admin.listar;
 import br.com.login.Dao.RelatorioDiarioDao;
 import br.com.login.Dao.UserDao;
 import br.com.login.bean.users.UserBean;
+import br.com.login.model.Metricas;
 import br.com.login.model.RelatorioDiario;
 import br.com.login.model.User;
 import com.lowagie.text.BadElementException;
@@ -28,15 +29,18 @@ public class RelatorioMontagemMediaUserBean
 {
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
+    Metricas metricas = new Metricas();
     private RelatorioDiario relatorioDiaro = new RelatorioDiario();
     private RelatorioDiarioDao relatorioDiarioDao = new RelatorioDiarioDao();
     private List<RelatorioDiario> relatorioList;
     UserDao userDao = new UserDao();
     static int qtdMaximo =0;
-
+    Date data;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
 
     public RelatorioMontagemMediaUserBean()  {
         try {
+            data = new Date();
             //relatorioList = albunsMes(userBean.getUserLogado());
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,7 +80,7 @@ public class RelatorioMontagemMediaUserBean
 
         BarChartModel barChartModel1;
         barChartModel1 = initBarModel1(userDao.ListarUsersMontagem());
-        barChartModel1.setTitle("Participação Media Montagem");
+        barChartModel1.setTitle("Participação Media Montagem do mês de "+metricas.getMes()[Integer.parseInt(simpleDateFormat.format(data))-1]);
         barChartModel1.setLegendPosition("w");
 
 
@@ -86,7 +90,7 @@ public class RelatorioMontagemMediaUserBean
 
         PieChartModel pieChartModel1;
         pieChartModel1 = initPieModel1(userDao.ListarUsersMontagem());
-        pieChartModel1.setTitle("Participação Total Montagem");
+        pieChartModel1.setTitle("Participação Total Montagem do mês de "+metricas.getMes()[Integer.parseInt(simpleDateFormat.format(data))-1]);
         pieChartModel1.setLegendPosition("w");
 
 
@@ -94,20 +98,21 @@ public class RelatorioMontagemMediaUserBean
     }
 
     private BarChartModel initBarModel1(List<User> users) throws Exception {
-        Date data = new Date();
+
         BarChartModel model = new BarChartModel();
         ChartSeries userChart;
 
         for (int y = 0; y < users.size(); y++) {
             userChart = new ChartSeries();
             userChart.setLabel(users.get(y).getApelido());
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
+
 
             if(qtdMaximo< mediaAlbunsMes(users.get(y)))
             {
                 qtdMaximo = (int)mediaAlbunsMes(users.get(y));
             }
-            userChart.set("Mês :"+simpleDateFormat.format(data), mediaAlbunsMes(users.get(y)));
+
+            userChart.set("Mês: "+metricas.getMes()[Integer.parseInt(simpleDateFormat.format(data))-1], mediaAlbunsMes(users.get(y)));
             model.addSeries(userChart);
         }
 

@@ -27,10 +27,17 @@
 
             <p:tabView>
 
-                <p:tab title="Gráfico produção montagem">
-                    <p:chart type="line" model="#{relatorioMontagemUserBean.createLineModels()}" style="height:300px;" widgetVar="grafico"/>
+                <p:tab title="Gráfico produção diária do mês atual">
+                    <p:chart type="line" model="#{relatorioMontagemUserBean.createLineModels()}"  style="height:300px;" widgetVar="grafico"/>
                     <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('grafico').resetZoom()"/>
 
+                </p:tab>
+                <p:tab title="Gráfico participação na produção total montagem">
+                    <p:chart type="pie" model="#{relatorioMontagemMediaUserBean.createPieModels1()}" style="height:300px;" widgetVar="graficoMedia"/>
+                 </p:tab>
+
+                <p:tab title="Gráfico média individual montagem">
+                <p:chart type="bar" model="#{relatorioMontagemMediaUserBean.createBarModels1()}" style="height:300px;" widgetVar="graficoMedia2"/>
                 </p:tab>
 
             </p:tabView>

@@ -24,11 +24,9 @@
     <ui:define name="content">
 
         <p:tabView>
-
             <p:tab title="Gráfico produção montagem">
                 <p:chart type="pie" model="#{relatorioMontagemMediaUserBean.createPieModels1()}" style="height:300px;" widgetVar="graficoMedia"/>
                 <p:chart type="bar" model="#{relatorioMontagemMediaUserBean.createBarModels1()}" style="height:300px;" widgetVar="graficoMedia2"/>
-
             </p:tab>
 
         </p:tabView>

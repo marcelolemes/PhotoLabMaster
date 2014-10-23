@@ -3,6 +3,7 @@ package br.com.login.bean.users.admin.listar;
 import br.com.login.Dao.RelatorioDiarioDao;
 import br.com.login.Dao.UserDao;
 import br.com.login.bean.users.UserBean;
+import br.com.login.model.Metricas;
 import br.com.login.model.RelatorioDiario;
 import br.com.login.model.User;
 import com.lowagie.text.BadElementException;
@@ -16,6 +17,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,16 +29,19 @@ public class RelatorioMontagemUserBean
 {
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
+    Metricas metricas = new Metricas();
     private RelatorioDiario relatorioDiaro = new RelatorioDiario();
     private RelatorioDiarioDao relatorioDiarioDao = new RelatorioDiarioDao();
     private List<RelatorioDiario> relatorioList;
     private List<RelatorioDiario> relatorioTodosMes;
     UserDao userDao = new UserDao();
     static int qtdMaximo =0;
-
+    Date data;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
 
     public RelatorioMontagemUserBean()  {
         try {
+            data = new Date();
             //relatorioList = albunsMes(userBean.getUserLogado());
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,7 +72,7 @@ public class RelatorioMontagemUserBean
         LineChartModel lineModel1;
 
         lineModel1= initCategoryModel(userDao.ListarUsersMontagem());
-        lineModel1.setTitle("Produção Montagem");
+        lineModel1.setTitle("Produção Montagem do mês: "+metricas.getMes()[Integer.parseInt(simpleDateFormat.format(data))-1]);
         lineModel1.setLegendPosition("w");
         lineModel1.setShowPointLabels(true);
         lineModel1.setAnimate(true);

@@ -159,7 +159,7 @@ public class RelatorioDiarioDao {
     public double ListarMediaMes(User user) throws Exception {
         Calendar calendar1 = Calendar.getInstance();
         Calendar calendar2 = Calendar.getInstance();
-
+        double retorno=0;
         Date date1 = new Date();
         date1.getTime();
         calendar1.setTime(date1);
@@ -198,18 +198,22 @@ public class RelatorioDiarioDao {
         Criteria criteria = sessao.createCriteria(RelatorioDiario.class);
         criteria.add(Restrictions.gt("dataRelatorio", calendar1.getTime())).add(Restrictions.eq("funcionario", user)).add(Restrictions.lt("dataRelatorio",calendar2.getTime())).setProjection(Projections.avg("fotos"));;
         criteria.addOrder(Order.asc("dataRelatorio"));
-        double listaRetorno = (Double)criteria.uniqueResult();
+
+        if((Double)criteria.uniqueResult()!=null) {
+            retorno = (Double) criteria.uniqueResult();
+        }
+
         System.out.println("Mes 1 aqui: "+calendar1.getTime());
         System.out.println("Mes 2 aqui: "+calendar2.getTime());
 
         sessao.close();
-        return listaRetorno;
+        return retorno;
     }
 
     public long ListarTotalMes(User user) throws Exception {
         Calendar calendar1 = Calendar.getInstance();
         Calendar calendar2 = Calendar.getInstance();
-
+        long retorno =0;
         Date date1 = new Date();
         date1.getTime();
         calendar1.setTime(date1);
@@ -248,12 +252,16 @@ public class RelatorioDiarioDao {
         Criteria criteria = sessao.createCriteria(RelatorioDiario.class);
         criteria.add(Restrictions.gt("dataRelatorio", calendar1.getTime())).add(Restrictions.eq("funcionario", user)).add(Restrictions.lt("dataRelatorio",calendar2.getTime())).setProjection(Projections.sum("fotos"));;
         criteria.addOrder(Order.asc("dataRelatorio"));
-        long listaRetorno = (Long)criteria.uniqueResult();
+
+        if((Long)criteria.uniqueResult()!=null) {
+            retorno = (Long) criteria.uniqueResult();
+        }
+
         System.out.println("Mes 1 aqui: "+calendar1.getTime());
         System.out.println("Mes 2 aqui: "+calendar2.getTime());
 
         sessao.close();
-        return listaRetorno;
+        return retorno;
     }
 
 
