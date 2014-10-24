@@ -10,15 +10,20 @@ import com.lowagie.text.BadElementException;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Paragraph;
+import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.*;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by marcelo on 06/10/14.
@@ -33,15 +38,18 @@ public class RelatorioMontagemMediaUserBean
     private RelatorioDiario relatorioDiaro = new RelatorioDiario();
     private RelatorioDiarioDao relatorioDiarioDao = new RelatorioDiarioDao();
     private List<RelatorioDiario> relatorioList;
+    List<User> usersMontagem = new ArrayList<User>();
     UserDao userDao = new UserDao();
     static int qtdMaximo =0;
     Date data;
+
+    PieChartModel model;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
 
     public RelatorioMontagemMediaUserBean()  {
         try {
             data = new Date();
-            //relatorioList = albunsMes(userBean.getUserLogado());
+            usersMontagem = userDao.ListarUsersMontagem();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -79,7 +87,7 @@ public class RelatorioMontagemMediaUserBean
     public BarChartModel createBarModels1() throws Exception {
 
         BarChartModel barChartModel1;
-        barChartModel1 = initBarModel1(userDao.ListarUsersMontagem());
+        barChartModel1 = initBarModel1(usersMontagem);
         barChartModel1.setTitle("Participação Media Montagem do mês de "+metricas.getMes()[Integer.parseInt(simpleDateFormat.format(data))-1]);
         barChartModel1.setLegendPosition("w");
 
@@ -87,15 +95,23 @@ public class RelatorioMontagemMediaUserBean
         return barChartModel1;
     }
     public PieChartModel createPieModels1() throws Exception {
-
-        PieChartModel pieChartModel1;
-        pieChartModel1 = initPieModel1(userDao.ListarUsersMontagem());
+        PieChartModel pieChartModel1 = new PieChartModel();
+        pieChartModel1 = initPieModel1(usersMontagem);
         pieChartModel1.setTitle("Participação Total Montagem do mês de "+metricas.getMes()[Integer.parseInt(simpleDateFormat.format(data))-1]);
         pieChartModel1.setLegendPosition("w");
 
 
         return pieChartModel1;
     }
+
+
+    public void itemSelect(ItemSelectEvent event) {
+
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                "Usuário", usersMontagem.get(event.getItemIndex()).getApelido());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
 
     private BarChartModel initBarModel1(List<User> users) throws Exception {
 
@@ -126,7 +142,7 @@ public class RelatorioMontagemMediaUserBean
     }
 
     private PieChartModel initPieModel1(List<User> users) throws Exception {
-        PieChartModel model = new PieChartModel();
+        model = new PieChartModel();
 
         for (int y = 0; y < users.size(); y++) {
 
