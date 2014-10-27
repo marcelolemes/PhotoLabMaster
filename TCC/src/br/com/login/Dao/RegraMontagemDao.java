@@ -155,8 +155,10 @@ public class RegraMontagemDao implements Serializable {
 
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();
+        int status;
+        int statusMax;
         Criteria criteria = sessao.createCriteria(Contrato.class);
-        criteria.add(Restrictions.ge("status",10));
+        criteria.add(Restrictions.ge("status",8));
         criteria.add(Restrictions.le("status", 13));
         criteria.addOrder(Order.asc("urgencia")).addOrder(Order.asc("status")).addOrder(Order.asc("cod"));
         criteria.setMaxResults(1);
@@ -166,7 +168,69 @@ public class RegraMontagemDao implements Serializable {
                 retorno.setUrgencia(0);
             }
             if (retorno.getStatus()>10 ||retorno.getStatus() <13){
-                retorno.setStatus(13);
+                //retorno.setStatus(13);
+
+                Criteria criteria2 = sessao.createCriteria(Album.class).setProjection(Projections.min("status"));
+                Criteria criteria3 = sessao.createCriteria(Album.class).setProjection(Projections.max("status"));
+                criteria2.add(Restrictions.eq("contrato",retorno));
+                criteria3.add(Restrictions.eq("contrato",retorno));
+                try {
+                    status = (Integer)criteria2.uniqueResult();
+                    statusMax = (Integer)criteria3.uniqueResult();
+                    if(status>=0){
+                        if(status<=18){
+
+                            switch (statusMax){
+                                case 8:
+                                    retorno.setStatus(statusMax);
+                                    break;
+                                case 11:
+                                    if(status != statusMax) {  // caso o st
+                                        retorno.setStatus(statusMax - 3);
+                                    }
+                                    else {
+                                        retorno.setStatus(statusMax);
+                                    }
+                                    break;
+                                case 13:
+                                    if(status != statusMax) {
+                                        if(status>=8 & status <=12) {
+                                            retorno.setStatus(9);
+                                        }
+                                    }
+                                    else {
+                                        retorno.setStatus(statusMax);
+                                    }
+                                    break;
+                                case 14:
+                                    if(status != statusMax) {
+                                        if(status>=8 & status <=12) {
+                                            retorno.setStatus(9);
+                                        }
+                                        else {
+                                            retorno.setStatus(statusMax - 1);
+                                        }
+                                    }
+                                    else {
+                                        retorno.setStatus(statusMax);
+                                    }
+                                    break;
+                                case 15:
+                                    retorno.setStatus(statusMax);
+                                    break;
+                                default:
+                                    retorno.setStatus(status);
+                                    break;
+
+                            }
+                        }
+                    }
+
+
+                }
+                catch (Exception e){
+                    //TODO
+                }
             }
             sessao.update(retorno);
             transacao.commit();

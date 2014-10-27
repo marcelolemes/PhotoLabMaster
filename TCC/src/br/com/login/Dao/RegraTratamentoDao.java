@@ -194,7 +194,14 @@ public class RegraTratamentoDao implements Serializable {
                                     }
                                     break;
                                 case 13:
-                                    retorno.setStatus(statusMax);
+                                    if(status != statusMax) {
+                                        if(status>=8 & status <=12) {
+                                            retorno.setStatus(9);
+                                        }
+                                    }
+                                    else {
+                                        retorno.setStatus(statusMax);
+                                    }
                                     break;
                                 case 14:
                                     if(status != statusMax) {
