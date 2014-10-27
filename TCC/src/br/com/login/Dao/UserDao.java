@@ -111,6 +111,23 @@ public class UserDao implements Serializable {
         return listaRetorno;
     }
 
+    public List<User> ListarUsersTratamento() throws Exception {
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(User.class);
+        criteria.add(Restrictions.eq("setor",2));
+        List<User> listaRetorno = criteria.list();
+        System.out.println(criteria.list().size()+" usuários do tratamento");
+        try{
+            sessao.close();
+        }
+        catch (Exception e){
+
+        }
+
+
+        return listaRetorno;
+    }
+
 
     public boolean Update(User user) throws Exception {
         Session sessao = HibernateUtil.getSession();

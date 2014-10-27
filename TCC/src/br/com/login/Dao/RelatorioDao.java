@@ -238,7 +238,22 @@ public class RelatorioDao {
         Criteria criteria = sessao.createCriteria(Album.class).setProjection(Projections.rowCount());
         criteria.add(Restrictions.eq("contrato",contrato));
         System.out.println("Contrato para contagem : "+contrato.getNumeroContrato());
-        criteria.add(Restrictions.le("status",12));
+        criteria.add(Restrictions.le("status",12)).add(Restrictions.ge("status",10));
+        long retorno = (Long) criteria.uniqueResult();
+        System.out.println("Contagem restantes: "+retorno);
+
+        sessao.close();
+        return retorno;
+
+
+    }
+    public long AlbunsRestantesTratamento(Contrato contrato) throws Exception {
+
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Album.class).setProjection(Projections.rowCount());
+        criteria.add(Restrictions.eq("contrato",contrato));
+        System.out.println("Contrato para contagem : "+contrato.getNumeroContrato());
+        criteria.add(Restrictions.le("status",10)).add(Restrictions.ge("status",5));
         long retorno = (Long) criteria.uniqueResult();
         System.out.println("Contagem restantes: "+retorno);
 

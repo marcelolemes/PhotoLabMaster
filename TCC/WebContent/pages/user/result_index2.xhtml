@@ -1,88 +1,156 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	template="/template/templatePrincipal.xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template/templatePrincipal.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<h:head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title></title>
-	</h:head>
-	<h:outputStylesheet library="css" name="estilo.css" />
-
-	<body>
-		<p:growl showDetail="true" autoUpdate="true" />
-
-		<f:metadata>
-			<f:viewAction action="#{userBean.verificarLogado()}" />
-		</f:metadata>
-
-		<ui:define name="menu">
-			<ui:include src="/include/user/menu.xhtml" />
-		</ui:define>
-		<ui:define name="content">
-
-			<p:layout>
-				<p:layoutUnit position="north" resizable="true" header="North"
-					collapsible="true" closable="true">
-					<ui:insert name="northContent" />
-				</p:layoutUnit>
-
-					<p:layoutUnit position="center"
-					header="Setor #{listaUsuariosBean.parserSetor(panelAdmin.userBean.userLogado)}">
-					<ui:insert name="centralContent" />
-					<p:panel styleClass="panecentral">
-						<p:panelGrid columns="2" styleClass="semBorda">
-							<p:outputLabel value="Usuário da sessão" />
-							<p:outputLabel value="#{panelAdmin.userBean.userLogado.apelido}" />
-							<p:outputLabel value="serviço atual" />
-							<p:outputLabel
-								value="#{panelAdmin.userBean.userLogado.servicoatual}" />
-							<p:outputLabel value="ultimo serviço" />
-							<p:outputLabel
-								value="#{panelAdmin.userBean.userLogado.servicoanterior}" />
-							<p:outputLabel value="setor" />
-							<p:outputLabel
-								value="#{listaUsuariosBean.parserSetor(panelAdmin.userBean.userLogado)}" />
-							<p:outputLabel value="Nível de acesso" />
-							<p:outputLabel
-								value="#{listaUsuariosBean.parserNivel(panelAdmin.userBean.userLogado)}" />
-							<p:outputLabel value="ultimo acesso" />
-							<p:outputLabel
-								value="#{panelAdmin.userBean.userLogado.ultimoacesso}" />
-						</p:panelGrid>
-
-					</p:panel>
-					<h:form>
-						<p:dialog header="TrocarSenha" widgetVar="TrocarSenha">
-							<p:panel id="trocarSenhaPanel">
-								<p:panelGrid columns="2" styleClass="semBorda">
-									<p:outputLabel value="insira a NOVA senha:" />
-									<h:inputSecret value="#{panelAdmin.senhaTemporaria}" />
-									<p:outputLabel value="REPITA a NOVA senha:" />
-									<h:inputSecret value="#{panelAdmin.senhaTemporaria2}" />
-									<p:commandButton value="Gravar senha"
-										action="#{panelAdmin.mudarSenha()}"
-										oncomplete="PF('TrocarSenha').hide()" />
-								</p:panelGrid>
-							</p:panel>
-						</p:dialog>
-					</h:form>
-
-				</p:layoutUnit>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 
-			</p:layout>
-		</ui:define>
-		<ui:define name="west">
-		WEST UNIT
-		</ui:define>
-		<ui:define name="east">
-		EAST UNIT
-		</ui:define>
+    </h:head>
+    <h:outputStylesheet library="css" name="estilo.css" />
 
-	</body>
+    <body>
+    <p:growl showDetail="true" autoUpdate="true" />
+
+    <f:metadata>
+        <f:viewAction action="#{userBean.verificarLogado()}" />
+    </f:metadata>
+
+    <ui:define name="menu">
+        <ui:include src="/include/user/menu.xhtml" />
+    </ui:define>
+    <ui:define name="content">
+
+        <p:tabView>
+            <p:tab title="Início">
+
+                <p:panelGrid columns="2" styleClass="semBorda">
+                    <p:commandButton value="Confirmar término do álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraTratamento.btTerminarAlbum}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
+                    <p:commandButton value="Cancelar álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraTratamento.btCancelarAlbum()}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
+                </p:panelGrid>
+
+                <p:panelGrid columns="1" styleClass="semBorda">
+                    <p:commandButton value="Pegar album" actionListener="#{regraTratamento.btPegarAlbum}" rendered="#{empty panelAdmin.userBean.userLogado.albumAtual}" update="@all" process="@all" />
+
+                    <p:outputLabel value="#{panelAdmin.userBean.userLogado.auxiliar}" rendered="#{ not empty panelAdmin.userBean.userLogado.albumAtual}"/>
+                </p:panelGrid>
+
+
+                <!--<p:layoutUnit position="center"
+                                                  header="Setor {listaUsuariosBean.parserSetor(panelAdmin.userBean.userLogado)}"> -->
+                <p:idleMonitor timeout="1800000"> <!-- Atualiza a cada 30 minutos-->
+                    <p:ajax event="idle" listener="#{userBean.btHome}"/>
+                </p:idleMonitor>
+
+
+                <p:panel styleClass="panecentralresult">
+                    <p:panelGrid columns="2" styleClass="semBorda">
+                        <p:outputLabel value="Usuário da sessão" />
+                        <p:outputLabel value="#{panelAdmin.userBean.userLogado.apelido}"  />
+                        <p:outputLabel value="Contrato:" />
+                        <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.numeroContrato}"  styleClass="negrito"/>
+                        <p:outputLabel value="serviço atual" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" />
+                        <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.numero} com #{panelAdmin.userBean.userLogado.albumAtual.qtdFotos} fotos" styleClass="negrito" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" />
+
+                        <p:outputLabel value="Média" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.contrato.media}"/>
+                        <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.media}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.contrato.media}"/>
+                        <p:outputLabel value="Restam #{regraTratamento.albunsRestantes} album(s) neste contrato para montagem "/>
+
+
+                    </p:panelGrid>
+                    <p:commandButton id="atualizarResult2" value="Atualizar Tudo" update="@all" process="@all" immediate="true"  actionListener="#{userBean.btHome}"/>
+
+                </p:panel>
+
+                <h:form>
+                    <p:dialog header="TrocarSenha" widgetVar="TrocarSenha">
+                        <p:panel id="trocarSenhaPanel">
+                            <p:panelGrid columns="2" styleClass="semBorda">
+                                <p:outputLabel value="insira a NOVA senha:" />
+                                <h:inputSecret value="#{panelAdmin.senhaTemporaria}" />
+                                <p:outputLabel value="REPITA a NOVA senha:" />
+                                <h:inputSecret value="#{panelAdmin.senhaTemporaria2}" />
+                                <p:commandButton value="Gravar senha"
+                                                 action="#{panelAdmin.mudarSenha()}"
+                                                 oncomplete="PF('TrocarSenha').hide()" />
+                            </p:panelGrid>
+                        </p:panel>
+                    </p:dialog>
+                </h:form>
+
+
+            </p:tab>
+            <p:tab title="Gráfico produção mensal">
+                <p:chart type="line" model="#{relatorioUserBean.createLineModels()}"  rendered="#{not empty relatorioUserBean.createLineModels()}" style="height:300px;" widgetVar="grafico"/>
+                <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('grafico').resetZoom()"/>
+
+            </p:tab>
+            <p:tab title="Histórico mensal de albuns" >
+                <p:dataTable id="relatorio" var="relatorio" value="#{historicoUserBean.inicializarListaMes()}" emptyMessage="Relatório vazio para este intervalo de tempo">
+                    <p:column headerText="Data">
+                        <h:outputText value="#{relatorio.dataFinal}"  >
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Número">
+                        <h:outputText value="#{relatorio.album.numero}" />
+                    </p:column>
+                    <p:column headerText="Fotos" width="23%">
+                        <h:outputText value="#{relatorio.fotos}" />
+                    </p:column>
+                </p:dataTable>
+
+            </p:tab>
+
+
+
+        </p:tabView>
+
+    </ui:define>
+
+    <ui:define name="west">
+        <h:form id="west">
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Albuns de hoje: "/>
+                <p:outputLabel value="#{listarAlbunsFunc.qtdDia}"/>
+                <p:outputLabel value="Fotos de hoje: "/>
+                <p:outputLabel value="#{listarAlbunsFunc.qtdDiaFotos}"/>
+            </p:panelGrid>
+            <p:dataTable id="relatorio" var="relatorio" value="#{listarAlbunsFunc.relatorioList}">
+                <p:column headerText="Número">
+                    <h:outputText value="#{relatorio.album.numero}" />
+                </p:column>
+                <p:column headerText="Fotos" width="23%">
+                    <h:outputText value="#{relatorio.fotos}" />
+                </p:column>
+                <p:column headerText="Data">
+                    <h:outputText value="#{relatorio.dataFinal}"  >
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Tempo gasto">
+                    <h:outputText value="#{listarAlbunsFunc.relatorioDao.msToHourSecond(relatorio.tempoOperacao)}"  />
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+    </ui:define>
+    <ui:define name="east">
+        <h:form>
+            <p:panel rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" styleClass="paneeast">
+                <p:panelGrid columns="2" styleClass="paneeast">
+                    <p:outputLabel value="Obs: do álbum" />
+                    <p:inputTextarea value="#{panelAdmin.userBean.userLogado.albumAtual.obs}"/>
+                    <p:commandButton value="inserir Obs:" actionListener="#{regraMontagem.btInserirObs()}"/>
+                </p:panelGrid>
+            </p:panel>
+        </h:form>
+    </ui:define>
+    <p:ajaxExceptionHandler type="javax.faces.application.ViewExpiredException"  onexception="#{userBean.btHome}" />
+    </body>
 </ui:composition>

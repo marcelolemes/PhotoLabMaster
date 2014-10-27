@@ -1,4 +1,4 @@
-package br.com.login.bean.users.admin.listar;
+package br.com.login.bean.users.admin.listar.tratamento;
 
 import br.com.login.Dao.RelatorioDiarioDao;
 import br.com.login.Dao.UserDao;
@@ -25,7 +25,7 @@ import java.util.List;
  */
 @ManagedBean
 @ViewScoped
-public class RelatorioMontagemUserBean
+public class RelatorioTratamentoUserBean
 {
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
@@ -39,10 +39,9 @@ public class RelatorioMontagemUserBean
     Date data;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
 
-    public RelatorioMontagemUserBean()  {
+    public RelatorioTratamentoUserBean()  {
         try {
             data = new Date();
-            //relatorioList = albunsMes(userBean.getUserLogado());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -71,8 +70,8 @@ public class RelatorioMontagemUserBean
 
         LineChartModel lineModel1;
 
-        lineModel1= initCategoryModel(userDao.ListarUsersMontagem());
-        lineModel1.setTitle("Produção Montagem do mês: "+metricas.getMes()[Integer.parseInt(simpleDateFormat.format(data))-1]);
+        lineModel1= initCategoryModel(userDao.ListarUsersTratamento());
+        lineModel1.setTitle("Produção Tratamento do mês: "+metricas.getMes()[Integer.parseInt(simpleDateFormat.format(data))-1]);
         lineModel1.setLegendPosition("w");
         lineModel1.setShowPointLabels(true);
         lineModel1.setAnimate(true);
@@ -97,7 +96,7 @@ public class RelatorioMontagemUserBean
 
         for (int x=1; x <= 31; x++){ //Estou adicionando os dias do mês "manualmente"
             if (x>=10){
-            userChart.set(String.valueOf(x),null);
+                userChart.set(String.valueOf(x),null);
             }
             else {
                 userChart.set("0"+String.valueOf(x),null);
@@ -119,7 +118,6 @@ public class RelatorioMontagemUserBean
                     qtdMaximo = relatorioTodosMes.get(x).getFotos();
                 }
                 userChart.set(simpleDateFormat.format(relatorioTodosMes.get(x).getDataRelatorio()), relatorioTodosMes.get(x).getFotos());
-                System.out.println("teste aqui  " + simpleDateFormat.format(relatorioTodosMes.get(x).getDataRelatorio())+" " + relatorioTodosMes.get(x).getFotos() +" " + relatorioTodosMes.get(x).getFuncionario().getApelido());
 
             }
             model.addSeries(userChart);

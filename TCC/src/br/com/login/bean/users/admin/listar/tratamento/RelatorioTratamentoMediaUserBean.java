@@ -1,4 +1,4 @@
-package br.com.login.bean.users.admin.listar;
+package br.com.login.bean.users.admin.listar.tratamento;
 
 import br.com.login.Dao.RelatorioDiarioDao;
 import br.com.login.Dao.UserDao;
@@ -23,14 +23,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by marcelo on 06/10/14.
  */
 @ManagedBean
 @ViewScoped
-public class RelatorioMontagemMediaUserBean
+public class RelatorioTratamentoMediaUserBean
 {
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
@@ -38,7 +37,7 @@ public class RelatorioMontagemMediaUserBean
     private RelatorioDiario relatorioDiaro = new RelatorioDiario();
     private RelatorioDiarioDao relatorioDiarioDao = new RelatorioDiarioDao();
     private List<RelatorioDiario> relatorioList;
-    List<User> usersMontagem = new ArrayList<User>();
+    List<User> usersTratamento = new ArrayList<User>();
     UserDao userDao = new UserDao();
     static int qtdMaximo =0;
     Date data;
@@ -46,10 +45,10 @@ public class RelatorioMontagemMediaUserBean
     PieChartModel model;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
 
-    public RelatorioMontagemMediaUserBean()  {
+    public RelatorioTratamentoMediaUserBean()  {
         try {
             data = new Date();
-            usersMontagem = userDao.ListarUsersMontagem();
+            usersTratamento = userDao.ListarUsersTratamento();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,8 +86,8 @@ public class RelatorioMontagemMediaUserBean
     public BarChartModel createBarModels1() throws Exception {
 
         BarChartModel barChartModel1;
-        barChartModel1 = initBarModel1(usersMontagem);
-        barChartModel1.setTitle("Participação Media Montagem do mês de "+metricas.getMes()[Integer.parseInt(simpleDateFormat.format(data))-1]);
+        barChartModel1 = initBarModel1(usersTratamento);
+        barChartModel1.setTitle("Participação Media Tratamento do mês de "+metricas.getMes()[Integer.parseInt(simpleDateFormat.format(data))-1]);
         barChartModel1.setLegendPosition("w");
 
 
@@ -96,8 +95,8 @@ public class RelatorioMontagemMediaUserBean
     }
     public PieChartModel createPieModels1() throws Exception {
         PieChartModel pieChartModel1 = new PieChartModel();
-        pieChartModel1 = initPieModel1(usersMontagem);
-        pieChartModel1.setTitle("Participação Total Montagem do mês de "+metricas.getMes()[Integer.parseInt(simpleDateFormat.format(data))-1]);
+        pieChartModel1 = initPieModel1(usersTratamento);
+        pieChartModel1.setTitle("Participação Total Tratamento do mês de "+metricas.getMes()[Integer.parseInt(simpleDateFormat.format(data))-1]);
         pieChartModel1.setLegendPosition("w");
 
 
@@ -108,7 +107,7 @@ public class RelatorioMontagemMediaUserBean
     public void itemSelect(ItemSelectEvent event) {
 
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-                "Usuário", usersMontagem.get(event.getItemIndex()).getApelido());
+                "Usuário", usersTratamento.get(event.getItemIndex()).getApelido());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
