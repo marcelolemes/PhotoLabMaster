@@ -158,9 +158,9 @@ public class RegraMontagemDao implements Serializable {
         int status;
         int statusMax;
         Criteria criteria = sessao.createCriteria(Contrato.class);
-        criteria.add(Restrictions.ge("status",8));
+        criteria.add(Restrictions.ge("status",10));
         criteria.add(Restrictions.le("status", 13));
-        criteria.addOrder(Order.asc("urgencia")).addOrder(Order.asc("status")).addOrder(Order.asc("cod"));
+        criteria.addOrder(Order.asc("urgencia")).addOrder(Order.desc("status")).addOrder(Order.asc("cod"));
         criteria.setMaxResults(1);
         Contrato retorno = (Contrato) criteria.uniqueResult();
         if (retorno != null ) {
@@ -195,7 +195,7 @@ public class RegraMontagemDao implements Serializable {
                                 case 13:
                                     if(status != statusMax) {
                                         if(status>=6 & status <=12) {
-                                            retorno.setStatus(9);
+                                            retorno.setStatus(10);
                                         }
                                     }
                                     else {
@@ -205,7 +205,7 @@ public class RegraMontagemDao implements Serializable {
                                 case 14:
                                     if(status != statusMax) {
                                         if(status>=6 & status <=12) {
-                                            retorno.setStatus(9);
+                                            retorno.setStatus(10);
                                         }
                                         else {
                                             retorno.setStatus(statusMax - 1);
