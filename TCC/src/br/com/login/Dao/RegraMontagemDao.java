@@ -167,7 +167,7 @@ public class RegraMontagemDao implements Serializable {
             if (retorno.getUrgencia() > 0) {
                 retorno.setUrgencia(0);
             }
-            if (retorno.getStatus()>10 ||retorno.getStatus() <13){
+            if (retorno.getStatus()>10 ||retorno.getStatus() <=13){
                 //retorno.setStatus(13);
 
                 Criteria criteria2 = sessao.createCriteria(Album.class).setProjection(Projections.min("status"));
@@ -194,7 +194,7 @@ public class RegraMontagemDao implements Serializable {
                                     break;
                                 case 13:
                                     if(status != statusMax) {
-                                        if(status>=8 & status <=12) {
+                                        if(status>=6 & status <=12) {
                                             retorno.setStatus(9);
                                         }
                                     }
@@ -204,7 +204,7 @@ public class RegraMontagemDao implements Serializable {
                                     break;
                                 case 14:
                                     if(status != statusMax) {
-                                        if(status>=8 & status <=12) {
+                                        if(status>=6 & status <=12) {
                                             retorno.setStatus(9);
                                         }
                                         else {
@@ -275,8 +275,8 @@ public class RegraMontagemDao implements Serializable {
                         null,
                         new FacesMessage(FacesMessage.SEVERITY_WARN, "Ainda não é possível encerrar esse contrato" ,
                                 "Funcionários ainda estão nesse contrato"));
-                contrato.setStatus(14);
-                contrato.setUrgencia(4);
+               // contrato.setStatus(14);
+                contrato.setUrgencia(contrato.getUrgencia()+1);
                 sessao.clear();
                 sessao.update(contrato);
                 transacao.commit();
