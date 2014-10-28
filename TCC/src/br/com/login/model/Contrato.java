@@ -45,6 +45,8 @@ public class Contrato implements Serializable {
     @Column
     private String obs;
     @Column
+    private boolean ocupado;
+    @Column
     private Date dataBackup;
     @ManyToOne(cascade = CascadeType.PERSIST, optional = true)
     @JoinColumn(name = "ficha_id", referencedColumnName = "cod")
@@ -187,6 +189,14 @@ public class Contrato implements Serializable {
 
     public void setQtdAlbum(int qtdAlbum) {
         this.qtdAlbum = qtdAlbum;
+    }
+
+    public boolean isOcupado() {
+        return ocupado;
+    }
+
+    public void setOcupado(boolean ocupado) {
+        this.ocupado = ocupado;
     }
 }
 
