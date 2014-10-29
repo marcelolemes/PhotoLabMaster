@@ -100,6 +100,30 @@ ui-layout-south {
     /*background-color: #000 ! important;*/
     height: 50px ! important;
     width: 300px ! important;
+
+
+    display: inline-block;
+       text-decoration: none;
+       color: #fff;
+       font-weight: bold;
+       font-size: 30px;
+       background-color: #538fbe ! important;
+       border: 1px solid #2d6898 ! important;
+       background-image: linear-gradient(bottom, rgb(73, 132, 180) 0%,
+       rgb(97, 155, 203) 100%);
+       background-image: -o-linear-gradient(bottom, rgb(73, 132, 180) 0%,
+       rgb(97, 155, 203) 100%);
+       background-image: -moz-linear-gradient(bottom, rgb(73, 132, 180) 0%,
+       rgb(97, 155, 203) 100%);
+       background-image: -webkit-linear-gradient(bottom, rgb(73, 132, 180) 0%,
+       rgb(97, 155, 203) 100%);
+       background-image: -ms-linear-gradient(bottom, rgb(73, 132, 180) 0%,
+       rgb(97, 155, 203) 100%);
+       background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(73,
+       132, 180)), color-stop(1, rgb(97, 155, 203)));
+       background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(73,
+       132, 180)), color-stop(1, rgb(97, 155, 203)))!important;
+       text-decoration: none;
 }
 
 .button-login:hover,.ui-button-login:hover {
@@ -107,6 +131,21 @@ ui-layout-south {
     /*background-color: #000 ! important;*/
     height: 50px ! important;
     width: 300px ! important;
+
+
+    background-image: linear-gradient(bottom, rgb(79, 142, 191) 0%,
+        rgb(102, 166, 214) 100%);
+        background-image: -o-linear-gradient(bottom, rgb(79, 142, 191) 0%,
+        rgb(102, 166, 214) 100%);
+        background-image: -moz-linear-gradient(bottom, rgb(79, 142, 191) 0%,
+        rgb(102, 166, 214) 100%);
+        background-image: -webkit-linear-gradient(bottom, rgb(79, 242, 191) 0%,
+        rgb(102, 166, 214) 100%);
+        background-image: -ms-linear-gradient(bottom, rgb(79, 142, 191) 0%,
+        rgb(102, 166, 214) 100%);
+        background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(79,
+        142, 195)), color-stop(1, rgb(102, 166, 224)));
+        color: #000000 !important;
 }
 
 .titulologin {
@@ -179,10 +218,15 @@ ui-layout-south {
 
 .botao-sair {
     background-color: red !important;
+    background-image: none !important;
+    color: #ffffff !important;
+
 }
 
 .botao-sair-hover .botao-sair:hover {
     background-color: black !important;
+    background-image: none !important;
+
 }
 
 body,.ui-layout-unit-content,.ui-layout-unit-centralContent {
