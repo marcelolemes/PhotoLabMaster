@@ -64,7 +64,7 @@ public class ContratoDao implements Serializable {
         Criteria criteria = sessao.createCriteria(Contrato.class);
         criteria.add(Restrictions.eq("ficha", ficha));
         List<Contrato> listaRetorno = criteria.list();
-        for(int x=0; x < listaRetorno.size();x++){
+       /* for(int x=0; x < listaRetorno.size();x++){
             Criteria criteria2 = sessao.createCriteria(Album.class).setProjection(Projections.min("status"));
             Criteria criteria3 = sessao.createCriteria(Album.class).setProjection(Projections.max("status"));
             criteria2.add(Restrictions.eq("contrato",listaRetorno.get(x)));
@@ -117,10 +117,13 @@ public class ContratoDao implements Serializable {
 
         }
 
+
         for(int x=0; x < listaRetorno.size();x++){
             sessao.update(listaRetorno.get(x));
         }
+
         transacao.commit();
+        */
         sessao.close();
         return listaRetorno;
 
