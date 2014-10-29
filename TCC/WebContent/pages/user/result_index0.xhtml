@@ -33,7 +33,7 @@
 
                         <p:tab title="Gráfico produção diária do mês atual">
                             <p:chart type="line" model="#{relatorioMontagemUserBean.createLineModels()}"  style="height:300px;" widgetVar="graficoMontagem"/>
-                            <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('graficoMontagem').resetZoom()"/>
+                            <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('graficoMontagem').resetZoom()" styleClass="button-comun"/>
 
                         </p:tab>
                         <p:tab title="Gráfico participação na produção total montagem">
