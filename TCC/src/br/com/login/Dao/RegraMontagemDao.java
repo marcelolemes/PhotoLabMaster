@@ -194,7 +194,7 @@ public class RegraMontagemDao implements Serializable {
                                     break;
                                 case 13:
                                     if(status != statusMax) {
-                                        if(status>=6 & status <=12) {
+                                        if(status>=6 & status <=10) {
                                             retorno.setStatus(10);
                                         }
                                     }
@@ -204,7 +204,7 @@ public class RegraMontagemDao implements Serializable {
                                     break;
                                 case 14:
                                     if(status != statusMax) {
-                                        if(status>=6 & status <=12) {
+                                        if(status>=6 & status <=10) {
                                             retorno.setStatus(10);
                                         }
                                         else {
