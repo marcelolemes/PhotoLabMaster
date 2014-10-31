@@ -84,7 +84,7 @@ public class RegraTratamentoDao implements Serializable {
             }
             else {
                 if (user != null){
-                    retorno.setUserMontagem(user);
+                    retorno.setUserTratamento(user);
                 }
 
                 retorno.setStatus(8);

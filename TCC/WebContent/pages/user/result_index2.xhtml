@@ -121,7 +121,7 @@
                 <p:outputLabel value="Fotos de hoje: "/>
                 <p:outputLabel value="#{listarAlbunsFunc.qtdDiaFotos}"/>
             </p:panelGrid>
-            <p:dataTable id="relatorio" var="relatorio" value="#{listarAlbunsFunc.relatorioList}">
+            <p:dataTable id="relatorio" var="relatorio" value="#{listarAlbunsFunc.relatorioList}" emptyMessage="Relatório vazio para este intervalo de tempo">
                 <p:column headerText="Número">
                     <h:outputText value="#{relatorio.album.numero}" />
                 </p:column>
