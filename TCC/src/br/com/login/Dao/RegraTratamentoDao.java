@@ -198,6 +198,7 @@ public class RegraTratamentoDao implements Serializable {
                                         if(status>=6 & status <=10) {
                                             retorno.setStatus(10);
                                         }
+
                                     }
                                     else {
                                         retorno.setStatus(statusMax);
@@ -254,7 +255,7 @@ public class RegraTratamentoDao implements Serializable {
         if(cont == 0) {
             try {
                 contrato.setStatus(11);
-                contrato.setUrgencia(contrato.getUrgencia()+1);
+                contrato.setUrgencia(4);
                 sessao.update(contrato);
                 transacao.commit();
                 sessao.close();
@@ -278,7 +279,7 @@ public class RegraTratamentoDao implements Serializable {
                         new FacesMessage(FacesMessage.SEVERITY_WARN, "Ainda não é possível encerrar esse contrato" ,
                                 "Funcionários ainda estão nesse contrato"));
                 //contrato.setStatus(11);
-                contrato.setUrgencia(contrato.getUrgencia()+1);
+                contrato.setUrgencia(4);
                 sessao.clear();
                 sessao.update(contrato);
                 transacao.commit();

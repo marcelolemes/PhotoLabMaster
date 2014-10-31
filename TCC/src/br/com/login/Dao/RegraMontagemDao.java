@@ -197,6 +197,9 @@ public class RegraMontagemDao implements Serializable {
                                         if(status>=6 & status <=10) {
                                             retorno.setStatus(10);
                                         }
+                                        else { //alteração 31-10
+                                            retorno.setStatus(statusMax);
+                                        }
                                     }
                                     else {
                                         retorno.setStatus(statusMax);
@@ -219,7 +222,7 @@ public class RegraMontagemDao implements Serializable {
                                     retorno.setStatus(statusMax);
                                     break;
                                 default:
-                                    retorno.setStatus(status);
+                                    retorno.setStatus(statusMax);
                                     break;
 
                             }
@@ -275,8 +278,7 @@ public class RegraMontagemDao implements Serializable {
                         null,
                         new FacesMessage(FacesMessage.SEVERITY_WARN, "Ainda não é possível encerrar esse contrato" ,
                                 "Funcionários ainda estão nesse contrato"));
-               // contrato.setStatus(14);
-                contrato.setUrgencia(contrato.getUrgencia()+1);
+                contrato.setUrgencia(4);
                 sessao.clear();
                 sessao.update(contrato);
                 transacao.commit();
