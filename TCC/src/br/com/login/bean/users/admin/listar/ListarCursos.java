@@ -38,7 +38,7 @@ public class ListarCursos implements Serializable {
     private static Contrato contratoSelecionado2 = new Contrato();
 
     public ListarCursos() throws Exception {
-
+        contDao = new ContratoDao();
         listaContrato = contDao.listarContratos();
 
     }
