@@ -109,6 +109,10 @@ public class RegraTratamentoDao implements Serializable {
     public void albumTerminado(Album album) throws Exception {
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();
+        int status =0;
+        int statusMax =0;
+        Contrato contrato = album.getContrato();
+
         if (album!=null){
             album.setStatus(11);
             album.setOcupado(false);
@@ -118,11 +122,77 @@ public class RegraTratamentoDao implements Serializable {
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Album "+album.getNumero()+" encerrado" ,
                             "Pegue outro album para continuar trabalhando"));
+
+
+            Criteria criteria2 = sessao.createCriteria(Album.class).setProjection(Projections.min("status"));
+            Criteria criteria3 = sessao.createCriteria(Album.class).setProjection(Projections.max("status"));
+            criteria2.add(Restrictions.eq("contrato",contrato));
+            criteria3.add(Restrictions.eq("contrato",contrato));
+
+            try {
+                status = (Integer)criteria2.uniqueResult();
+                statusMax = (Integer)criteria3.uniqueResult();
+                if(status>=0){
+                    if(status<=18){
+                        System.out.println("Alterar status ao fechar");
+                        switch (statusMax){
+
+                            case 8:
+                                contrato.setStatus(statusMax);
+                                break;
+                            case 11:
+                                if(status != statusMax) {  // caso o st
+                                    contrato.setStatus(statusMax - 3);
+                                }
+                                else {
+                                    contrato.setStatus(statusMax);
+                                }
+                                break;
+                            case 13:
+                                if(status != statusMax) {
+                                    if(status>=6 & status <=10) {
+                                        contrato.setStatus(10);
+                                    }
+
+                                }
+                                else {
+                                    contrato.setStatus(statusMax);
+                                }
+                                break;
+                            case 14:
+                                if(status != statusMax) {
+                                    if(status>=6 & status <=10) {
+                                        contrato.setStatus(10);
+                                    }
+                                    else {
+                                        contrato.setStatus(statusMax - 1);
+                                    }
+                                }
+                                else {
+                                    contrato.setStatus(statusMax);
+                                }
+                                break;
+                            case 15:
+                                contrato.setStatus(statusMax);
+                                break;
+                            default:
+                                contrato.setStatus(status);
+                                break;
+
+                        }
+
+                    }
+                }
+
+
+            }
+            catch (Exception e){
+                //TODO
+            }
         }
-
-
-
         try {
+            sessao.update(contrato);
+            transacao.commit();
             sessao.close();
         }
         catch (Exception e) {
@@ -134,10 +204,15 @@ public class RegraTratamentoDao implements Serializable {
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();
         if (album!=null){
+            if(album.getContrato().getStatus() == 11 ){
+                album.getContrato().setStatus(7);
+            }
             album.setStatus(7);
             album.setOcupado(false);
         }
+        sessao.update(album.getContrato());
         sessao.update(album);
+
         transacao.commit();
         FacesContext.getCurrentInstance().addMessage(
                 null,
@@ -168,7 +243,7 @@ public class RegraTratamentoDao implements Serializable {
                 retorno.setUrgencia(0);
             }
             if (retorno.getStatus()>5 ||retorno.getStatus() <10){
-//                retorno.setStatus(10);
+                //                retorno.setStatus(10);
 
 
                 Criteria criteria2 = sessao.createCriteria(Album.class).setProjection(Projections.min("status"));
@@ -249,13 +324,13 @@ public class RegraTratamentoDao implements Serializable {
         org.hibernate.Transaction transacao = sessao.beginTransaction();
         Criteria criteria = sessao.createCriteria(Album.class).setProjection(Projections.rowCount());
         criteria.add(Restrictions.eq("ocupado", true));
-        criteria.add(Restrictions.le("status", 10));
 
         long cont = (Long) criteria.uniqueResult();
         if(cont == 0) {
             try {
-                contrato.setStatus(11);
                 contrato.setUrgencia(4);
+                contrato.setStatus(11);
+
                 sessao.update(contrato);
                 transacao.commit();
                 sessao.close();
@@ -274,13 +349,14 @@ public class RegraTratamentoDao implements Serializable {
         else {
             System.out.println(""+cont);
             try{
+
                 FacesContext.getCurrentInstance().addMessage(
                         null,
-                        new FacesMessage(FacesMessage.SEVERITY_WARN, "Ainda não é possível encerrar esse contrato" ,
-                                "Funcionários ainda estão nesse contrato"));
-                //contrato.setStatus(11);
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Contrato encerrado" ,
+                                "Informe ao seu superior"));
+
+                contrato.setStatus(11);
                 contrato.setUrgencia(4);
-                sessao.clear();
                 sessao.update(contrato);
                 transacao.commit();
                 sessao.close();

@@ -51,6 +51,7 @@ public class ListarCursos implements Serializable {
         try {
             listaContrato.clear();
             contDao.listarContratos().clear();
+            listaContrato = contDao.listarContratos();
         } catch (Exception ex) {
         }
         listaContrato = contDao.listarContratos();
