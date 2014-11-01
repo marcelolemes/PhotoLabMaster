@@ -18,7 +18,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @ManagedBean
-@SessionScoped //arrumar para outro tipo de escopo assim que possivel
+@SessionScoped //arrumar para outro tipo de escopo assim que possivel, mas manter pois ele precisa do contrato
 public class ListarCursos implements Serializable {
 
     /**
@@ -38,7 +38,7 @@ public class ListarCursos implements Serializable {
     private static Contrato contratoSelecionado2 = new Contrato();
 
     public ListarCursos() throws Exception {
-
+        contDao = new ContratoDao();
         listaContrato = contDao.listarContratos();
 
     }
@@ -51,6 +51,7 @@ public class ListarCursos implements Serializable {
         try {
             listaContrato.clear();
             contDao.listarContratos().clear();
+            listaContrato = contDao.listarContratos();
         } catch (Exception ex) {
         }
         listaContrato = contDao.listarContratos();

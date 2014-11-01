@@ -17,7 +17,7 @@ import java.io.Serializable;
 /**
  * Created by marcelo on 27/09/2014.
  */
-public class RegraMontagemDao implements Serializable {
+public class RegraTratamentoDao implements Serializable {
 
     public Album NovoAlbum() throws Exception {
 
@@ -28,8 +28,8 @@ public class RegraMontagemDao implements Serializable {
             Criteria criteria = sessao.createCriteria(Album.class);
             criteria.add(Restrictions.eq("contrato", contrato));
             criteria.add(Restrictions.eq("ocupado", false));
-            criteria.add(Restrictions.ge("status", 10));
-            criteria.add(Restrictions.le("status", 12));
+            criteria.add(Restrictions.ge("status", 5));
+            criteria.add(Restrictions.le("status", 10));
             criteria.addOrder(Order.asc("numero"));
             criteria.setMaxResults(1);
             Album retorno = (Album) criteria.uniqueResult();
@@ -37,12 +37,12 @@ public class RegraMontagemDao implements Serializable {
                 contratoPronto(contrato);
                 FacesContext.getCurrentInstance().addMessage(
                         null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Contrato terminado",
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "TRATAMENTO!",
                                 "Contrato "+contrato.getNumeroContrato()+" terminado, tente pegar album novamente para iniciar um novo contrato disponível"));
             }
             else {
 
-                retorno.setStatus(13);
+                retorno.setStatus(11);
                 retorno.setOcupado(true);
                 sessao.update(retorno);
                 transacao.commit();
@@ -70,24 +70,24 @@ public class RegraMontagemDao implements Serializable {
             Criteria criteria = sessao.createCriteria(Album.class);
             criteria.add(Restrictions.eq("contrato", contrato));
             criteria.add(Restrictions.eq("ocupado", false));
-            criteria.add(Restrictions.ge("status", 10));
-            criteria.add(Restrictions.le("status", 12));
+            criteria.add(Restrictions.ge("status", 5));
+            criteria.add(Restrictions.le("status", 10));
             criteria.addOrder(Order.asc("numero"));
             criteria.setMaxResults(1);
             Album retorno = (Album) criteria.uniqueResult();
             if (retorno == null) {
                 contratoPronto(contrato);
-                FacesContext.getCurrentInstance().addMessage(
-                        null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Contrato terminado",
-                                "Contrato "+contrato.getNumeroContrato()+" terminado, tente pegar album novamente para iniciar um novo contrato disponível"));
+                //   FacesContext.getCurrentInstance().addMessage(
+                //         null,
+                //       new FacesMessage(FacesMessage.SEVERITY_INFO, "Contrato terminado",
+                //             "Contrato "+contrato.getNumeroContrato()+" terminado, tente pegar album novamente para iniciar um novo contrato disponível"));
             }
             else {
                 if (user != null){
-                    retorno.setUserMontagem(user);
+                    retorno.setUserTratamento(user);
                 }
 
-                retorno.setStatus(13);
+                retorno.setStatus(8);
                 retorno.setOcupado(true);
                 sessao.update(retorno);
                 transacao.commit();
@@ -109,8 +109,12 @@ public class RegraMontagemDao implements Serializable {
     public void albumTerminado(Album album) throws Exception {
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();
+        int status =0;
+        int statusMax =0;
+        Contrato contrato = album.getContrato();
+
         if (album!=null){
-            album.setStatus(14);
+            album.setStatus(11);
             album.setOcupado(false);
             sessao.update(album);
             transacao.commit();
@@ -118,11 +122,77 @@ public class RegraMontagemDao implements Serializable {
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Album "+album.getNumero()+" encerrado" ,
                             "Pegue outro album para continuar trabalhando"));
+
+
+            Criteria criteria2 = sessao.createCriteria(Album.class).setProjection(Projections.min("status"));
+            Criteria criteria3 = sessao.createCriteria(Album.class).setProjection(Projections.max("status"));
+            criteria2.add(Restrictions.eq("contrato",contrato));
+            criteria3.add(Restrictions.eq("contrato",contrato));
+
+            try {
+                status = (Integer)criteria2.uniqueResult();
+                statusMax = (Integer)criteria3.uniqueResult();
+                if(status>=0){
+                    if(status<=18){
+                        System.out.println("Alterar status ao fechar");
+                        switch (statusMax){
+
+                            case 8:
+                                contrato.setStatus(statusMax);
+                                break;
+                            case 11:
+                                if(status != statusMax) {  // caso o st
+                                    contrato.setStatus(statusMax - 3);
+                                }
+                                else {
+                                    contrato.setStatus(statusMax);
+                                }
+                                break;
+                            case 13:
+                                if(status != statusMax) {
+                                    if(status>=6 & status <=10) {
+                                        contrato.setStatus(10);
+                                    }
+
+                                }
+                                else {
+                                    contrato.setStatus(statusMax);
+                                }
+                                break;
+                            case 14:
+                                if(status != statusMax) {
+                                    if(status>=6 & status <=10) {
+                                        contrato.setStatus(10);
+                                    }
+                                    else {
+                                        contrato.setStatus(statusMax - 1);
+                                    }
+                                }
+                                else {
+                                    contrato.setStatus(statusMax);
+                                }
+                                break;
+                            case 15:
+                                contrato.setStatus(statusMax);
+                                break;
+                            default:
+                                contrato.setStatus(status);
+                                break;
+
+                        }
+
+                    }
+                }
+
+
+            }
+            catch (Exception e){
+                //TODO
+            }
         }
-
-
-
         try {
+            sessao.update(contrato);
+            transacao.commit();
             sessao.close();
         }
         catch (Exception e) {
@@ -134,10 +204,15 @@ public class RegraMontagemDao implements Serializable {
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();
         if (album!=null){
-            album.setStatus(12);
+            if(album.getContrato().getStatus() == 11 ){
+                album.getContrato().setStatus(7);
+            }
+            album.setStatus(7);
             album.setOcupado(false);
         }
+        sessao.update(album.getContrato());
         sessao.update(album);
+
         transacao.commit();
         FacesContext.getCurrentInstance().addMessage(
                 null,
@@ -158,17 +233,18 @@ public class RegraMontagemDao implements Serializable {
         int status;
         int statusMax;
         Criteria criteria = sessao.createCriteria(Contrato.class);
-        criteria.add(Restrictions.ge("status",10));
-        criteria.add(Restrictions.le("status", 13));
-        criteria.addOrder(Order.asc("urgencia")).addOrder(Order.desc("status")).addOrder(Order.asc("cod"));
+        criteria.add(Restrictions.ge("status",5));
+        criteria.add(Restrictions.le("status", 10));
+        criteria.addOrder(Order.asc("urgencia")).addOrder(Order.asc("status")).addOrder(Order.asc("cod"));
         criteria.setMaxResults(1);
         Contrato retorno = (Contrato) criteria.uniqueResult();
         if (retorno != null ) {
             if (retorno.getUrgencia() > 0) {
                 retorno.setUrgencia(0);
             }
-            if (retorno.getStatus()>10 ||retorno.getStatus() <=13){
-                //retorno.setStatus(13);
+            if (retorno.getStatus()>5 ||retorno.getStatus() <10){
+                //                retorno.setStatus(10);
+
 
                 Criteria criteria2 = sessao.createCriteria(Album.class).setProjection(Projections.min("status"));
                 Criteria criteria3 = sessao.createCriteria(Album.class).setProjection(Projections.max("status"));
@@ -197,9 +273,7 @@ public class RegraMontagemDao implements Serializable {
                                         if(status>=6 & status <=10) {
                                             retorno.setStatus(10);
                                         }
-                                        else { //alteração 31-10
-                                            retorno.setStatus(statusMax);
-                                        }
+
                                     }
                                     else {
                                         retorno.setStatus(statusMax);
@@ -222,7 +296,7 @@ public class RegraMontagemDao implements Serializable {
                                     retorno.setStatus(statusMax);
                                     break;
                                 default:
-                                    retorno.setStatus(statusMax);
+                                    retorno.setStatus(status);
                                     break;
 
                             }
@@ -234,6 +308,7 @@ public class RegraMontagemDao implements Serializable {
                 catch (Exception e){
                     //TODO
                 }
+
             }
             sessao.update(retorno);
             transacao.commit();
@@ -249,13 +324,13 @@ public class RegraMontagemDao implements Serializable {
         org.hibernate.Transaction transacao = sessao.beginTransaction();
         Criteria criteria = sessao.createCriteria(Album.class).setProjection(Projections.rowCount());
         criteria.add(Restrictions.eq("ocupado", true));
-        criteria.add(Restrictions.le("status", 13));
 
         long cont = (Long) criteria.uniqueResult();
         if(cont == 0) {
             try {
-                contrato.setStatus(14);
                 contrato.setUrgencia(4);
+                contrato.setStatus(11);
+
                 sessao.update(contrato);
                 transacao.commit();
                 sessao.close();
@@ -274,12 +349,14 @@ public class RegraMontagemDao implements Serializable {
         else {
             System.out.println(""+cont);
             try{
+
                 FacesContext.getCurrentInstance().addMessage(
                         null,
-                        new FacesMessage(FacesMessage.SEVERITY_WARN, "Ainda não é possível encerrar esse contrato" ,
-                                "Funcionários ainda estão nesse contrato"));
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Contrato encerrado" ,
+                                "Informe ao seu superior"));
+
+                contrato.setStatus(11);
                 contrato.setUrgencia(4);
-                sessao.clear();
                 sessao.update(contrato);
                 transacao.commit();
                 sessao.close();

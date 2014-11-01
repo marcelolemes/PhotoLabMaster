@@ -12,8 +12,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.io.File;
 import java.io.FilenameFilter;
-import java.sql.Timestamp;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -22,13 +22,13 @@ import java.util.Date;
  */
 @ManagedBean
 @ViewScoped
-public class RegraMontagem implements Serializable {
+public class RegraTratamento implements Serializable {
     UserDao userDao = new UserDao();
     private Relatorio relatorio;
 
     private Album albumMontar;
     AlbumDao albumDao = new AlbumDao();
-    private RegraMontagemDao regDao = new RegraMontagemDao();
+    private RegraTratamentoDao regDao = new RegraTratamentoDao();
     private RelatorioDao relatorioDao = new RelatorioDao();
     RelatorioDiario relatorioDiario;
     RelatorioDiarioDao relatorioDiarioDao =new RelatorioDiarioDao();
@@ -41,7 +41,7 @@ public class RegraMontagem implements Serializable {
 
         try {
 
-            albunsRestantes = relatorioDao.AlbunsRestantesMontagem(regDao.contratoAtual());
+            albunsRestantes = relatorioDao.AlbunsRestantesTratamento(regDao.contratoAtual());
 
 
         } catch (Exception e) {

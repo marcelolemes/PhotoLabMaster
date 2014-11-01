@@ -53,8 +53,31 @@ public class ContratoDao implements Serializable {
         List<Contrato> listaRetorno = criteria.list();
         sessao.close();
         return listaRetorno;
-
     }
+
+    public List<Contrato> listarContratosStatus(int min, int max) throws Exception {
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Contrato.class);
+        criteria.add(Restrictions.ge("status", min)).add(Restrictions.le("status", max));
+        List<Contrato> listaRetorno = criteria.list();
+        sessao.close();
+        return listaRetorno;
+    }
+
+    public List<Contrato> listarContratosStatus(int unique) throws Exception {
+            Session sessao = HibernateUtil.getSession();
+            Criteria criteria = sessao.createCriteria(Contrato.class);
+            criteria.add(Restrictions.eq("status", unique));
+            List<Contrato> listaRetorno = criteria.list();
+            sessao.close();
+            return listaRetorno;
+        }
+
+
+
+
+
+
     public List<Contrato> listarContratosPorFicha(Ficha ficha) throws Exception {
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();
@@ -64,7 +87,7 @@ public class ContratoDao implements Serializable {
         Criteria criteria = sessao.createCriteria(Contrato.class);
         criteria.add(Restrictions.eq("ficha", ficha));
         List<Contrato> listaRetorno = criteria.list();
-        for(int x=0; x < listaRetorno.size();x++){
+       /* for(int x=0; x < listaRetorno.size();x++){
             Criteria criteria2 = sessao.createCriteria(Album.class).setProjection(Projections.min("status"));
             Criteria criteria3 = sessao.createCriteria(Album.class).setProjection(Projections.max("status"));
             criteria2.add(Restrictions.eq("contrato",listaRetorno.get(x)));
@@ -117,10 +140,13 @@ public class ContratoDao implements Serializable {
 
         }
 
+
         for(int x=0; x < listaRetorno.size();x++){
             sessao.update(listaRetorno.get(x));
         }
+
         transacao.commit();
+        */
         sessao.close();
         return listaRetorno;
 

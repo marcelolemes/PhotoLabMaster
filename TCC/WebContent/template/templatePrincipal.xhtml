@@ -15,24 +15,32 @@
 
 </h:head>
 <body>
+<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <p:graphicImage url="/resources/images/ajaxloadingbar.gif" />
+        </p:dialog>
+
 <p:layout fullPage="true">
-    <p:layoutUnit position="north" resizable="true">
+    <p:layoutUnit position="north" size="30" maxSize="30">
         <ui:insert name="menu" />
     </p:layoutUnit>
-    <p:layoutUnit position="center" resizable="true"
-                  style="overflow-y: visible !important;">
+    <p:layoutUnit position="center" resizable="false" rendered="true">
         <p:growl showDetail="true" autoUpdate="true" />
         <ui:insert name="content" />
     </p:layoutUnit>
-    <p:layoutUnit position="east" resizable="true" collapsible="true" collapsed="true" header="Extras">
+    <p:layoutUnit position="east" resizable="true" collapsible="true"  maxSize="450">
         <ui:insert name="east" />
     </p:layoutUnit>
-    <p:layoutUnit position="west" resizable="true" maxSize="400">
+    <p:layoutUnit position="west" resizable="true"  maxSize="410">
         <ui:insert name="west" />
     </p:layoutUnit>
-    <p:layoutUnit position="south" resizable="true" size="10%">
+    <p:layoutUnit position="south" resizable="true" size="50" maxSize="50">
 
         <h:form id="footer">
+
+
+
 
             <div style="float: right;">
                 <p:graphicImage url="/resources/images/footer.png" />

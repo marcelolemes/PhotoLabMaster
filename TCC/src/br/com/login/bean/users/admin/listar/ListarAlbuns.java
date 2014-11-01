@@ -2,6 +2,7 @@ package br.com.login.bean.users.admin.listar;
 
 import br.com.login.Dao.AlbumDao;
 import br.com.login.bean.users.UserBean;
+import br.com.login.bean.users.admin.listar.ListarCursos;
 import br.com.login.model.Album;
 import br.com.login.model.Contrato;
 import br.com.login.model.Metricas;

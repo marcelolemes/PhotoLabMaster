@@ -65,6 +65,13 @@ ui-layout-south {
     top: 10%;
     border: 1px solid #000;
 }
+.panecentralresult {
+    background-color: #fff;
+    position: absolute;
+    right: 40%;
+    top: 100%;
+    border: 1px solid #000;
+}
 .panecentraltabela {
     background-color: #fff;
     position: relative;
@@ -83,16 +90,96 @@ ui-layout-south {
 .ui-button-text-only .ui-button-text {
 
 }
+.input-login,.ui-input-login {
+    font-size: 20px ! important;
+    background-color: #ffffff ! important;
+    height: 50px ! important;
+    width: 300px ! important;
 
-.button:hover {
 
 }
+
+.input-login:hover,.ui-input-login:hover {
+    font-size: 20px ! important;
+    background-color: #fff8da ! important;
+    height: 50px ! important;
+    width: 300px ! important;
+
+}
+
+
+.button-comun,.ui-button-comun {
+    display: inline-block;
+       text-decoration: none;
+       color: #000 ! important;
+       font-weight: bold;
+       font-size: 30px;
+       background-color: #538fbe ! important;
+       border: 1px solid #2d6898 ! important;
+       background-image: linear-gradient(bottom, rgb(73, 132, 180) 0%,
+       rgb(97, 155, 203) 100%);
+       background-image: -o-linear-gradient(bottom, rgb(73, 132, 180) 0%,
+       rgb(97, 155, 203) 100%);
+       background-image: -moz-linear-gradient(bottom, rgb(73, 132, 180) 0%,
+       rgb(97, 155, 203) 100%);
+       background-image: -webkit-linear-gradient(bottom, rgb(73, 132, 180) 0%,
+       rgb(97, 155, 203) 100%);
+       background-image: -ms-linear-gradient(bottom, rgb(73, 132, 180) 0%,
+       rgb(97, 155, 203) 100%);
+       background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(73,
+       132, 180)), color-stop(1, rgb(97, 155, 203)));
+       background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(73,
+       132, 180)), color-stop(1, rgb(97, 155, 203)))!important;
+       text-decoration: none;
+}
+
+.button-comun:hover,.ui-button-comun:hover {
+background-image: linear-gradient(bottom, rgb(79, 142, 191) 0%,
+        rgb(102, 166, 214) 100%)!important;
+        background-image: -o-linear-gradient(bottom, rgb(79, 142, 191) 0%,
+        rgb(102, 166, 214) 100%)!important;
+        background-image: -moz-linear-gradient(bottom, rgb(79, 142, 191) 0%,
+        rgb(102, 166, 214) 100%)!important;
+        background-image: -webkit-linear-gradient(bottom, rgb(79, 142, 191) 0%,
+        rgb(102, 166, 214) 100%)!important;
+        background-image: -ms-linear-gradient(bottom, rgb(79, 142, 191) 0%,
+        rgb(102, 166, 214) 100%)!important;;
+        background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(79,
+        142, 195)), color-stop(1, rgb(102, 166, 224)));
+        color: #000000 !important;
+}
+
+
 
 .button-login,.ui-button-login {
     font-size: 20px ! important;
     /*background-color: #000 ! important;*/
     height: 50px ! important;
     width: 300px ! important;
+
+
+    display: inline-block;
+       text-decoration: none;
+       color: #fff;
+       font-weight: bold;
+       font-size: 30px;
+       background-color: #538fbe ! important;
+       border: 1px solid #2d6898 ! important;
+       background-image: linear-gradient(bottom, rgb(73, 132, 180) 0%,
+       rgb(97, 155, 203) 100%);
+       background-image: -o-linear-gradient(bottom, rgb(73, 132, 180) 0%,
+       rgb(97, 155, 203) 100%);
+       background-image: -moz-linear-gradient(bottom, rgb(73, 132, 180) 0%,
+       rgb(97, 155, 203) 100%);
+       background-image: -webkit-linear-gradient(bottom, rgb(73, 132, 180) 0%,
+       rgb(97, 155, 203) 100%);
+       background-image: -ms-linear-gradient(bottom, rgb(73, 132, 180) 0%,
+       rgb(97, 155, 203) 100%);
+       background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(73,
+       132, 180)), color-stop(1, rgb(97, 155, 203)));
+       background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(73,
+       132, 180)), color-stop(1, rgb(97, 155, 203)))!important;
+       text-decoration: none;
 }
 
 .button-login:hover,.ui-button-login:hover {
@@ -100,7 +187,25 @@ ui-layout-south {
     /*background-color: #000 ! important;*/
     height: 50px ! important;
     width: 300px ! important;
+
+
+    background-image: linear-gradient(bottom, rgb(79, 142, 191) 0%,
+        rgb(102, 166, 214) 100%)!important;
+        background-image: -o-linear-gradient(bottom, rgb(79, 142, 191) 0%,
+        rgb(102, 166, 214) 100%)!important;
+        background-image: -moz-linear-gradient(bottom, rgb(79, 142, 191) 0%,
+        rgb(102, 166, 214) 100%)!important;
+        background-image: -webkit-linear-gradient(bottom, rgb(79, 142, 191) 0%,
+        rgb(102, 166, 214) 100%)!important;
+        background-image: -ms-linear-gradient(bottom, rgb(79, 142, 191) 0%,
+        rgb(102, 166, 214) 100%)!important;;
+        background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(79,
+        142, 195)), color-stop(1, rgb(102, 166, 224)));
+        color: #000000 !important;
 }
+
+
+
 
 .titulologin {
     font-size: 50px ! important;
@@ -172,10 +277,15 @@ ui-layout-south {
 
 .botao-sair {
     background-color: red !important;
+    background-image: none !important;
+    color: #ffffff !important;
+
 }
 
-.botao-sair-hover .botao-sair:hover {
+.botao-sair:hover, .ui-botao-sair:hover {
     background-color: black !important;
+    background-image: none !important;
+
 }
 
 body,.ui-layout-unit-content,.ui-layout-unit-centralContent {

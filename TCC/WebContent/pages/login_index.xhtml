@@ -1,25 +1,65 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	template="/template/templatePrincipal.xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template/templatePrincipal.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<h:head>
-		<meta http-equiv="Content-Type"
-			content="text/html; charset=ISO-8859-1" />
-		<title></title>
-	</h:head>
-	<h:outputStylesheet library="css" name="estilo.css" />
+    <h:head>
+        <meta http-equiv="Content-Type"
+              content="text/html; charset=ISO-8859-1" />
+        <title></title>
+    </h:head>
+    <h:outputStylesheet library="css" name="estilo.css" />
 
-    <f:event type="preRenderView" listener="#{userBean.loginRedirect()}" />
-	<body>
-    <p:growl showDetail="true" autoUpdate="true" />
-		<ui:define name="content">
-		<!-- teste commit-->
-				<ui:include src="/pages/login/login.xhtml" />
-		</ui:define>
-	</body>
+    <f:metadata>
+        <f:viewAction action="#{userBean.loginRedirect()}" />
+    </f:metadata>
+
+
+    <p:growl showDetail="true" autoUpdate="true" rendered="true" redisplay="true" for="login"/>
+    <body>
+
+    <ui:define name="content">
+
+        <p:growl showDetail="true" autoUpdate="true" />
+
+        <h:form id="login">
+          <p:panel styleClass="panecentral">
+                <div align="center">
+                    <h:graphicImage styleClass="profile-img"
+                                    value="/resources/images/photo.png" />
+                    <p:panelGrid columns="1" styleClass="semBorda">
+                        <div align="center">
+                            <h2 class="titulologin">login</h2>
+                        </div>
+                        <p:inputText id="apelidoInput" value="#{userBean.user.apelido}"
+                                     styleClass="input-login" />
+                        <p:password id="senhaInput" value="#{userBean.user.senha}"
+                                    styleClass="input-login" />
+                    </p:panelGrid>
+                    <p:commandButton styleClass="button-login" value="Entrar"
+                                     action="#{userBean.logar()}"/>
+                </div>
+                <p:panelGrid columns="1" styleClass="semBorda">
+
+
+
+                    <p:watermark for="apelidoInput" value="Insira seu apelido"
+                                 id="watermarkApelido" />
+                    <p:watermark for="senhaInput" value="Insira sua senha"
+                                 id="watermarkSenha" />
+                </p:panelGrid>
+
+            </p:panel>
+
+        </h:form>
+
+    </ui:define>
+    <ui:define name="south">
+    </ui:define>
+
+    </body>
 </ui:composition>

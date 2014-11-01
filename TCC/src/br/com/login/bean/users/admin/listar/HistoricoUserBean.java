@@ -38,6 +38,10 @@ public class HistoricoUserBean
 
         albunsEspaçoTempo(userBean.getUserLogado(),dataInicial,dataFinal);
     }
+    public List<Relatorio> inicializarListaMes() throws Exception {
+
+          return relatorioDao.ListarAlbunsMes(userBean.getUserLogado());
+      }
 
     public void albunsEspaçoTempo(User user,Date dataInicial,Date dataFinal) throws Exception {
 
