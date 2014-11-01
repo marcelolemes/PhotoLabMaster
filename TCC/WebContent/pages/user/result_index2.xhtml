@@ -32,6 +32,7 @@
                 <p:panelGrid columns="2" styleClass="semBorda">
                     <p:commandButton value="Confirmar término do álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraTratamento.btTerminarAlbum}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
                     <p:commandButton value="Cancelar álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraTratamento.btCancelarAlbum()}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
+                    <p:commandButton value="Inserir obs em:  #{panelAdmin.userBean.userLogado.albumAtual.numero}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" oncomplete="PF('obs').show()"/>
                 </p:panelGrid>
 
                 <p:panelGrid columns="1" styleClass="semBorda">
@@ -63,6 +64,13 @@
 
 
                     </p:panelGrid>
+                    <p:separator/>
+                    <p:panelGrid columns="2" styleClass="semBorda">
+                        <p:outputLabel value="Observação do curso:" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.contrato.obs}" />
+                        <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.obs}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.contrato.obs}"  />
+                        <p:outputLabel value="Observação do album:" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.obs}" />
+                        <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.obs}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.obs}" />
+                    </p:panelGrid>
                     <p:commandButton id="atualizarResult2" value="Atualizar Tudo" update="@all" process="@all" immediate="true"  actionListener="#{userBean.btHome}"/>
 
                 </p:panel>
@@ -83,6 +91,17 @@
                     </p:dialog>
                 </h:form>
 
+                <h:form>
+                    <p:dialog header="Inserir observação do álbum" widgetVar="obs">
+                        <p:panel rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" styleClass="paneeast">
+                            <p:panelGrid columns="2" styleClass="paneeast">
+                                <p:outputLabel value="Obs: do álbum" />
+                                <p:inputTextarea value="#{panelAdmin.userBean.userLogado.albumAtual.obs}"/>
+                                <p:commandButton value="inserir Obs:" actionListener="#{regraMontagem.btInserirObs()}" oncomplete="PF('obs').hide()" update="@all"/>
+                            </p:panelGrid>
+                        </p:panel>
+                    </p:dialog>
+                </h:form>
 
             </p:tab>
             <p:tab title="Gráfico produção mensal">
@@ -121,19 +140,19 @@
                 <p:outputLabel value="Fotos de hoje: "/>
                 <p:outputLabel value="#{listarAlbunsFunc.qtdDiaFotos}"/>
             </p:panelGrid>
-            <p:dataTable id="relatorio" var="relatorio" value="#{listarAlbunsFunc.relatorioList}" emptyMessage="Relatório vazio para este intervalo de tempo">
-                <p:column headerText="Número">
+            <p:dataTable id="relatorio" var="relatorio" value="#{listarAlbunsFunc.relatorioList}" emptyMessage="Relatório vazio para este intervalo de tempo" resizableColumns="true">
+                <p:column headerText="Número" width="22%">
                     <h:outputText value="#{relatorio.album.numero}" />
                 </p:column>
-                <p:column headerText="Fotos" width="23%">
+                <p:column headerText="Fotos" width="15%">
                     <h:outputText value="#{relatorio.fotos}" />
                 </p:column>
-                <p:column headerText="Data">
+                <p:column headerText="Data" width="25%">
                     <h:outputText value="#{relatorio.dataFinal}"  >
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </h:outputText>
                 </p:column>
-                <p:column headerText="Tempo gasto">
+                <p:column headerText="Tempo gasto" width="23%">
                     <h:outputText value="#{listarAlbunsFunc.relatorioDao.msToHourSecond(relatorio.tempoOperacao)}"  />
                 </p:column>
             </p:dataTable>
@@ -142,12 +161,33 @@
     </ui:define>
     <ui:define name="east">
         <h:form>
-            <p:panel rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" styleClass="paneeast">
-                <p:panelGrid columns="2" styleClass="paneeast">
-                    <p:outputLabel value="Obs: do álbum" />
-                    <p:inputTextarea value="#{panelAdmin.userBean.userLogado.albumAtual.obs}"/>
-                    <p:commandButton value="inserir Obs:" actionListener="#{regraMontagem.btInserirObs()}"/>
-                </p:panelGrid>
+            <p:panel rendered="#{panelAdmin.userBean.userLogado.nivelAcesso ge 4? true:false}" styleClass="paneeast">
+                <p:dataTable value="#{listarCursosTratamento.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
+                    <f:facet name="header">Contratos em espera</f:facet>
+                    <p:column headerText="contrato">
+                        #{contrato.numeroContrato}
+                    </p:column>
+                    <p:column headerText="curso">
+                        #{contrato.curso}
+                    </p:column>
+                    <p:column headerText="albuns">
+                        #{contrato.qtdAlbum}
+                    </p:column>
+                </p:dataTable>
+
+
+                <p:dataTable value="#{listarCursosTratamento.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
+                    <f:facet name="header">Contratos prontos</f:facet>
+                    <p:column headerText="contrato">
+                        #{contrato.numeroContrato}
+                    </p:column>
+                    <p:column headerText="curso">
+                        #{contrato.curso}
+                    </p:column>
+                    <p:column headerText="albuns">
+                        #{contrato.qtdAlbum}
+                    </p:column>
+                </p:dataTable>
             </p:panel>
         </h:form>
     </ui:define>

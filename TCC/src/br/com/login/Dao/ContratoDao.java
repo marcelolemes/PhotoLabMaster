@@ -53,8 +53,31 @@ public class ContratoDao implements Serializable {
         List<Contrato> listaRetorno = criteria.list();
         sessao.close();
         return listaRetorno;
-
     }
+
+    public List<Contrato> listarContratosStatus(int min, int max) throws Exception {
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Contrato.class);
+        criteria.add(Restrictions.ge("status", min)).add(Restrictions.le("status", max));
+        List<Contrato> listaRetorno = criteria.list();
+        sessao.close();
+        return listaRetorno;
+    }
+
+    public List<Contrato> listarContratosStatus(int unique) throws Exception {
+            Session sessao = HibernateUtil.getSession();
+            Criteria criteria = sessao.createCriteria(Contrato.class);
+            criteria.add(Restrictions.eq("status", unique));
+            List<Contrato> listaRetorno = criteria.list();
+            sessao.close();
+            return listaRetorno;
+        }
+
+
+
+
+
+
     public List<Contrato> listarContratosPorFicha(Ficha ficha) throws Exception {
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();

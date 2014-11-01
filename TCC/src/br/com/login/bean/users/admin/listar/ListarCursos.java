@@ -18,7 +18,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @ManagedBean
-@SessionScoped //arrumar para outro tipo de escopo assim que possivel
+@ViewScoped //arrumar para outro tipo de escopo assim que possivel
 public class ListarCursos implements Serializable {
 
     /**
