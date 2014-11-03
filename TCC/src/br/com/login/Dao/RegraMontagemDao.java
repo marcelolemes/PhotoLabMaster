@@ -32,7 +32,7 @@ public class RegraMontagemDao implements Serializable {
 
     public Album NovoAlbum(User user) throws Exception { //sobrecarga com "USER"
         Album retorno = null;
-        Contrato contrato =  contDao.listarContratoStatus(11, 13, 0);
+        Contrato contrato =  contDao.listarContratoStatus(10, 13, 1);
 
         if (contrato!= null) {
             contrato = contDao.atualizarContratoRetorna(contrato);
@@ -41,8 +41,6 @@ public class RegraMontagemDao implements Serializable {
 
             System.out.println("Contrato atual teste atualizado "+contrato.isOcupado());
             retorno = albumDao.ProximoAlbum(contrato);
-
-            System.out.println("Retorno album "+retorno.getNumero());
 
             if (retorno != null) {
                 if (user != null){
@@ -55,6 +53,17 @@ public class RegraMontagemDao implements Serializable {
                 Session sessao = HibernateUtil.getSession();
                 org.hibernate.Transaction transacao = sessao.beginTransaction();
                 sessao.update(retorno);
+                sessao.update(contrato);
+                transacao.commit();
+                sessao.close();
+            }
+            else
+            {
+                contrato = contDao.atualizarContratoRetorna(contrato);
+                contrato.setUrgencia(4);
+                contrato.setOcupado(false);
+                Session sessao = HibernateUtil.getSession();
+                org.hibernate.Transaction transacao = sessao.beginTransaction();
                 sessao.update(contrato);
                 transacao.commit();
                 sessao.close();
@@ -116,6 +125,7 @@ public class RegraMontagemDao implements Serializable {
                         "por favor, mova-o para a pasta 'Menos de vinte'"));
         try {
             sessao.close();
+            contDao.atualizarContrato(album.getContrato());
         }
         catch (Exception e) {
         }
@@ -138,6 +148,7 @@ public class RegraMontagemDao implements Serializable {
                         "Informe ao seu superior"));
         try {
             sessao.close();
+            contDao.atualizarContrato(album.getContrato());
         }
         catch (Exception e) {
         }
@@ -145,77 +156,4 @@ public class RegraMontagemDao implements Serializable {
     }
 
 
-
-    public Contrato contratoAtual() throws Exception {
-
-        Session sessao = HibernateUtil.getSession();
-        org.hibernate.Transaction transacao = sessao.beginTransaction();
-
-        Contrato retorno = contDao.listarContratoStatus(11, 13, 0);
-
-        if (retorno != null ) {
-            retorno =contDao.atualizarContratoRetorna(retorno);
-            System.out.println(retorno.getCurso() + "Contrato atual teste");
-            retorno.setUrgencia(0);
-            retorno.setOcupado(true);
-
-            sessao.update(retorno);
-            transacao.commit();
-            sessao.close();
-
-        }
-        return retorno;
-    }
-    public void contratoPronto(Contrato contrato) throws Exception {
-        Session sessao = HibernateUtil.getSession();
-        org.hibernate.Transaction transacao = sessao.beginTransaction();
-        Criteria criteria = sessao.createCriteria(Album.class).setProjection(Projections.rowCount());
-        criteria.add(Restrictions.le("status", 13));
-        contrato.setOcupado(false);
-        long cont = (Long) criteria.uniqueResult();
-        if(cont == 0) {
-            try {
-                contrato.setStatus(14);
-                contrato.setUrgencia(4);
-                sessao.update(contrato);
-                transacao.commit();
-                sessao.close();
-
-                FacesContext.getCurrentInstance().addMessage(
-                        null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Contrato encerrado" ,
-                                "Informe ao seu superior"));
-            }
-            catch (Exception e){
-
-            }
-
-
-        }
-        else {
-            System.out.println(""+cont);
-            try{
-                Criteria criteria2 = sessao.createCriteria(Album.class).setProjection(Projections.rowCount());
-                criteria2.add(Restrictions.le("status", 13));
-                criteria2.add(Restrictions.le("ocupado", false));
-                long cont2 = (Long) criteria2.uniqueResult();
-                if(cont2 == 0) {
-                    contrato.setUrgencia(4);
-                    sessao.clear();
-                    sessao.update(contrato);
-                    transacao.commit();
-                    sessao.close();
-                }
-                contrato.setUrgencia(4);
-            }
-            catch (Exception e){
-                FacesContext.getCurrentInstance().addMessage(
-                        null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Algo deu errado" ,
-                                "Tente outra vez"));
-                System.out.println("Deu ruim");
-            }
-        }
-
-    }
-}
+   }

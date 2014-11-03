@@ -125,6 +125,8 @@ public class ContratoDao implements Serializable {
                             else {
                                 retorno.setStatus(statusMax);
                                 retorno.setUrgencia(4);
+                                retorno.setOcupado(false);
+
                             }
                             break;
                         case 13:
@@ -202,6 +204,7 @@ public class ContratoDao implements Serializable {
                             else {
                                 retorno.setStatus(statusMax);
                                 retorno.setUrgencia(4);
+                                retorno.setOcupado(false);
                             }
                             break;
                         case 13:
@@ -229,6 +232,7 @@ public class ContratoDao implements Serializable {
                             else {
                                 retorno.setStatus(statusMax);
                                 retorno.setUrgencia(4);
+                                retorno.setOcupado(false);
                             }
                             break;
                         case 15:
@@ -265,66 +269,7 @@ public class ContratoDao implements Serializable {
         Criteria criteria = sessao.createCriteria(Contrato.class);
         criteria.add(Restrictions.eq("ficha", ficha));
         List<Contrato> listaRetorno = criteria.list();
-       /* for(int x=0; x < listaRetorno.size();x++){
-            Criteria criteria2 = sessao.createCriteria(Album.class).setProjection(Projections.min("status"));
-            Criteria criteria3 = sessao.createCriteria(Album.class).setProjection(Projections.max("status"));
-            criteria2.add(Restrictions.eq("contrato",listaRetorno.get(x)));
-            criteria3.add(Restrictions.eq("contrato",listaRetorno.get(x)));
-            try {
-                status = (Integer)criteria2.uniqueResult();
-                statusMax = (Integer)criteria3.uniqueResult();
-                if(status>=0){
-                    if(status<=18){
 
-                        switch (statusMax){
-                            case 8:
-                                listaRetorno.get(x).setStatus(statusMax);
-                                break;
-                            case 11:
-                                if(status != statusMax) {  // caso o st
-                                    listaRetorno.get(x).setStatus(statusMax - 3);
-                                }
-                                else {
-                                    listaRetorno.get(x).setStatus(statusMax);
-                                }
-                                break;
-                            case 13:
-                                listaRetorno.get(x).setStatus(statusMax);
-                                break;
-                            case 14:
-                                if(status != statusMax) {
-                                    listaRetorno.get(x).setStatus(statusMax - 1);
-                                }
-                                else {
-                                    listaRetorno.get(x).setStatus(statusMax);
-                                }
-                                break;
-                            case 15:
-                                listaRetorno.get(x).setStatus(statusMax);
-                                break;
-                            default:
-                                listaRetorno.get(x).setStatus(status);
-                                break;
-
-                        }
-                    }
-                }
-
-
-            }
-            catch (Exception e){
-                //TODO
-            }
-
-        }
-
-
-        for(int x=0; x < listaRetorno.size();x++){
-            sessao.update(listaRetorno.get(x));
-        }
-
-        transacao.commit();
-        */
         sessao.close();
         return listaRetorno;
 

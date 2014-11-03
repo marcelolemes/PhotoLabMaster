@@ -79,7 +79,7 @@
                       filterMatchMode="contains" sortBy="cidade">
                 <h:outputText value="#{contrato.cidade}" />
             </p:column>
-            <p:column headerText="Ficha" width="8%">
+            <p:column headerText="Ficha" width="8%" sortBy="ficha.numero">
                 <h:outputText value="#{contrato.ficha.numero}/#{contrato.ficha.ano}" rendered="#{not empty contrato.ficha.numero}" />
             </p:column>
             <p:column headerText="Status" width="20%" sortBy="status"

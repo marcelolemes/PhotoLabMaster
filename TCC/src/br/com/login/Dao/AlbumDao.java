@@ -134,8 +134,6 @@ public class AlbumDao implements Serializable {
         criteria.add(Restrictions.le("status",12)).add(Restrictions.ge("status",10));
         criteria.setMaxResults(1);
         Album retorno = (Album) criteria.uniqueResult();
-        System.out.println("album retornado: "+retorno.getNumero());
-
         sessao.close();
         return retorno;
     }

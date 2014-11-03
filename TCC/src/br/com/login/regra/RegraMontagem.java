@@ -3,6 +3,7 @@ package br.com.login.regra;
 import br.com.login.Dao.*;
 import br.com.login.bean.users.UserBean;
 import br.com.login.model.Album;
+import br.com.login.model.Contrato;
 import br.com.login.model.Relatorio;
 import br.com.login.model.RelatorioDiario;
 
@@ -40,14 +41,15 @@ public class RegraMontagem implements Serializable {
     private UserBean userBean;
     ContratoDao contDao;
     private String cont;
+    Contrato contratoAtual;
     @PostConstruct
     public void iniciar(){
 
         try {
             contDao = new ContratoDao();
-
-            albunsRestantes = albumDao.AlbunsRestantesMontagem(contDao.listarContratoStatus(11, 13,0));
-            cont =contDao.listarContratoStatus(11, 13,0).getNumeroContrato();
+            contratoAtual= contDao.listarContratoStatus(10, 13, 1);
+            albunsRestantes = albumDao.AlbunsRestantesMontagem(contratoAtual);
+            cont =contratoAtual.getNumeroContrato();
 
 
         } catch (Exception e) {
@@ -67,6 +69,9 @@ public class RegraMontagem implements Serializable {
 
     public void btPegarAlbum() throws Exception {
 
+
+
+
         try {
             userBean.getUserLogado().setAlbumAtual(regDao.NovoAlbum(userBean.getUserLogado()));
             userBean.getUserLogado().setAuxiliar(userBean.getUserLogado().getAlbumAtual().getContrato().getCaminho()+File.separator+ userBean.getUserLogado().getAlbumAtual().getNumero());
@@ -82,8 +87,8 @@ public class RegraMontagem implements Serializable {
         {
             FacesContext.getCurrentInstance().addMessage(
                     null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Sem contratos para o seu setor",
-                            "Sem contratos para o seu setor, informe o seu superior imediatamente!"));
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Algum erro ocorreu",
+                            "Informe o seu superior imediatamente!"));
         }
 
 
