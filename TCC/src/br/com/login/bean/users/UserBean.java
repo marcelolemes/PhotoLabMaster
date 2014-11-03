@@ -1,6 +1,7 @@
 package br.com.login.bean.users;
 
 import br.com.login.Dao.UserDao;
+import br.com.login.model.Contrato;
 import br.com.login.model.Metricas;
 import br.com.login.model.User;
 import org.primefaces.context.RequestContext;
@@ -23,6 +24,7 @@ public class UserBean implements Serializable {
     private List<SelectItem> nivelAcessoCadastro = new Metricas()
             .getNivelAcesso();
     private List<SelectItem> setores = new Metricas().getSetores();
+    private Contrato contratoSelecionado= new Contrato();
 
     public UserBean() {
 
@@ -370,6 +372,11 @@ public class UserBean implements Serializable {
         this.userDao = userDao;
     }
 
+    public Contrato getContratoSelecionado() {
+        return contratoSelecionado;
+    }
 
-
+    public void setContratoSelecionado(Contrato contratoSelecionado) {
+        this.contratoSelecionado = contratoSelecionado;
+    }
 }

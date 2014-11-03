@@ -9,11 +9,13 @@ import br.com.login.model.Metricas;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class ListarFichas implements Serializable {
     /**
      *
@@ -27,6 +29,7 @@ public class ListarFichas implements Serializable {
     Metricas metricas = new Metricas();
     ContratoDao contDao = new ContratoDao();
     private List<Ficha> listaFichas;
+    List<Contrato> contratosFiltrados = new ArrayList<Contrato>();
 
     public static Ficha getFichaSelecionada() {
         return fichaSelecionada;
@@ -56,8 +59,6 @@ public class ListarFichas implements Serializable {
     }
 
     public List<Contrato> listarCursosFicha() throws Exception {
-        System.out.println("Chegou na Ficha");
-        System.out.println("FICHA : " + fichaSelecionada.getNumero());
 
         List<Contrato> lista_contratos = contDao.listarContratosPorFicha(fichaSelecionada);
 
@@ -86,4 +87,11 @@ public class ListarFichas implements Serializable {
         this.listaFichas = listaFichas;
     }
 
+    public List<Contrato> getContratosFiltrados() {
+        return contratosFiltrados;
+    }
+
+    public void setContratosFiltrados(List<Contrato> contratosFiltrados) {
+        this.contratosFiltrados = contratosFiltrados;
+    }
 }

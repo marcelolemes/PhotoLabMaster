@@ -29,11 +29,11 @@ public class RegraTratamento implements Serializable {
     private Relatorio relatorio;
 
     private Album albumMontar;
-    AlbumDao albumDao = new AlbumDao();
     private RegraTratamentoDao regDao = new RegraTratamentoDao();
     private RelatorioDao relatorioDao = new RelatorioDao();
     RelatorioDiario relatorioDiario;
     RelatorioDiarioDao relatorioDiarioDao =new RelatorioDiarioDao();
+    AlbumDao albumDao = new AlbumDao();
     private long albunsRestantes;
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
@@ -43,7 +43,7 @@ public class RegraTratamento implements Serializable {
 
         try {
 
-            albunsRestantes = relatorioDao.AlbunsRestantesTratamento(regDao.contratoAtual());
+            albunsRestantes = albumDao.AlbunsRestantesTratamento(regDao.contratoAtual());
 
 
         } catch (Exception e) {

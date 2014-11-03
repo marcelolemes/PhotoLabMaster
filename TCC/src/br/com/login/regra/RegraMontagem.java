@@ -29,11 +29,12 @@ public class RegraMontagem implements Serializable {
     private Relatorio relatorio;
 
     private Album albumMontar;
-    AlbumDao albumDao = new AlbumDao();
     private RegraMontagemDao regDao = new RegraMontagemDao();
     private RelatorioDao relatorioDao = new RelatorioDao();
     RelatorioDiario relatorioDiario;
     RelatorioDiarioDao relatorioDiarioDao =new RelatorioDiarioDao();
+    AlbumDao albumDao = new AlbumDao();
+
     private long albunsRestantes;
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
@@ -45,8 +46,8 @@ public class RegraMontagem implements Serializable {
         try {
             contDao = new ContratoDao();
 
-            albunsRestantes = relatorioDao.AlbunsRestantesMontagem(contDao.listarContratosStatus(11, 13,0).get(0));
-            cont =contDao.listarContratosStatus(11, 13,0).get(0).getNumeroContrato();
+            albunsRestantes = albumDao.AlbunsRestantesMontagem(contDao.listarContratoStatus(11, 13,0));
+            cont =contDao.listarContratoStatus(11, 13,0).getNumeroContrato();
 
 
         } catch (Exception e) {

@@ -60,7 +60,7 @@ public class ContratoDao implements Serializable {
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Contrato.class);
         criteria.add(Restrictions.ge("status", min)).add(Restrictions.le("status", max));
-
+        criteria.addOrder(Order.desc("ocupado")); // ordenar os ocupados primeiro
         if (order==0){
             criteria.addOrder(Order.desc("status"));
         }
@@ -76,7 +76,7 @@ public class ContratoDao implements Serializable {
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Contrato.class);
         criteria.add(Restrictions.ge("status", min)).add(Restrictions.le("status", max));
-
+        criteria.addOrder(Order.desc("ocupado")); // ordenar os ocupados primeiro
         if (order==0){
             criteria.addOrder(Order.desc("status"));
         }

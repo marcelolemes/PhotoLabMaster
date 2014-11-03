@@ -18,7 +18,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @ManagedBean
-@SessionScoped //arrumar para outro tipo de escopo assim que possivel, mas manter pois ele precisa do contrato
+@ViewScoped //arrumar para outro tipo de escopo assim que possivel, mas manter pois ele precisa do contrato
 public class ListarCursos implements Serializable {
 
     /**
@@ -34,7 +34,7 @@ public class ListarCursos implements Serializable {
     private List<Contrato> listaContrato;
     private List<Contrato> contratosFiltrados;
     private List<String> urgencias;
-    private Contrato contratoSelecionado = new Contrato();
+
     private static Contrato contratoSelecionado2 = new Contrato();
 
     public ListarCursos() throws Exception {
@@ -47,16 +47,19 @@ public class ListarCursos implements Serializable {
         return "/pages/conteudo/editarcursos_index.xhtml";
     }
 
-    public String atualizar() throws Exception {
+
+
+
+    public void atualizar() throws Exception {
         try {
-            listaContrato.clear();
-            contDao.listarContratos().clear();
-            listaContrato = contDao.listarContratos();
+            this.listaContrato.clear();
+            this. contDao.listarContratos().clear();
+            this.listaContrato = contDao.listarContratos();
         } catch (Exception ex) {
         }
         listaContrato = contDao.listarContratos();
 
-        return "/pages/conteudo/visualizarcursos_index.xhtml";
+
     }
 
     public String parserStatus(Contrato contrato) {
@@ -129,13 +132,6 @@ public class ListarCursos implements Serializable {
         this.urgencias = urgencias;
     }
 
-    public Contrato getContratoSelecionado() {
-        return contratoSelecionado;
-    }
-
-    public void setContratoSelecionado(Contrato contratoSelecionado) {
-        this.contratoSelecionado = contratoSelecionado;
-    }
 
     public List<Contrato> getContratosFiltrados() {
         return contratosFiltrados;

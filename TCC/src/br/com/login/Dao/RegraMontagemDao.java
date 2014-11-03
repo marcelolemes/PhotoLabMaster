@@ -26,104 +26,49 @@ public class RegraMontagemDao implements Serializable {
     private UserBean userBean;
     ContratoDao contDao = new ContratoDao();
     RelatorioDao relatorioDao = new RelatorioDao();
+    AlbumDao albumDao = new AlbumDao();
 
-    public Album NovoAlbum() throws Exception {
 
-        Contrato contrato = contratoAtual();
-        System.out.println("novo album");
-        if (contrato!= null) {
-            System.out.println("contrato não nulo"+contrato.getNumeroContrato());
-            Session sessao = HibernateUtil.getSession();
-            org.hibernate.Transaction transacao = sessao.beginTransaction();
-            Criteria criteria = sessao.createCriteria(Album.class);
-            criteria.add(Restrictions.eq("contrato", contrato));
-            criteria.add(Restrictions.eq("ocupado", false));
-            criteria.add(Restrictions.ge("status", 10));
-            criteria.add(Restrictions.le("status", 12));
-            criteria.addOrder(Order.asc("numero"));
-            criteria.setMaxResults(1);
-            System.out.println("Pesquisa de albuns");
-            Album retorno = (Album) criteria.uniqueResult();
-            System.out.println("Retorno album "+retorno.getNumero());
-            if (retorno == null) {
-                contratoPronto(contrato);
-                FacesContext.getCurrentInstance().addMessage(
-                        null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Contrato terminado",
-                                "Contrato "+contrato.getNumeroContrato()+" terminado, tente pegar album novamente para iniciar um novo contrato disponível"));
-            }
-            else {
-
-                retorno.setStatus(13);
-                retorno.setOcupado(true);
-                sessao.update(retorno);
-                transacao.commit();
-            }
-            try {
-                sessao.close();
-
-            }
-            catch (Exception e){}
-            return retorno;
-        }
-        else {
-            FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Sem contratos para o seu setor",
-                            "Sem contratos para o seu setor, informe o seu superior imediatamente!"));
-            return null;
-        }
-    }
 
     public Album NovoAlbum(User user) throws Exception { //sobrecarga com "USER"
-        Session sessao = HibernateUtil.getSession();
-        org.hibernate.Transaction transacao = sessao.beginTransaction();
-
-        System.out.println("metodo novo album");
+        Album retorno = null;
         Contrato contrato =  contDao.listarContratoStatus(11, 13, 0);
-        System.out.println("novo album");
 
         if (contrato!= null) {
-            System.out.println("contrato não nulo "+contrato.getNumeroContrato());
             contrato = contDao.atualizarContratoRetorna(contrato);
-            System.out.println(contrato.getCurso() + "Contrato atual teste");
             contrato.setUrgencia(0);
             contrato.setOcupado(true);
-            Album retorno = relatorioDao.ProximoAlbum(contrato);
+
+            System.out.println("Contrato atual teste atualizado "+contrato.isOcupado());
+            retorno = albumDao.ProximoAlbum(contrato);
 
             System.out.println("Retorno album "+retorno.getNumero());
 
-            if (retorno == null) {
-                contratoPronto(contrato);
-                FacesContext.getCurrentInstance().addMessage(
-                        null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Contrato terminado",
-                                "Contrato "+contrato.getNumeroContrato()+" terminado, tente pegar album novamente para iniciar um novo contrato disponível"));
-            }
-            else {
+            if (retorno != null) {
                 if (user != null){
                     retorno.setUserMontagem(user);
                 }
 
                 retorno.setStatus(13);
                 retorno.setOcupado(true);
+
+                Session sessao = HibernateUtil.getSession();
+                org.hibernate.Transaction transacao = sessao.beginTransaction();
                 sessao.update(retorno);
                 sessao.update(contrato);
                 transacao.commit();
-            }
-            try {
                 sessao.close();
-
             }
-            catch (Exception e){}
+
             return retorno;
         }
         else {
             FacesContext.getCurrentInstance().addMessage(
                     null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Sem contratos para o seu setor",
-                            "Sem contratos para o seu setor, informe o seu superior imediatamente!"));
-            return null;
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Sem albuns para o seu setor",
+                            "Sem albuns para o seu setor, informe o seu superior imediatamente!"));
+
+            return retorno;
         }
     }
 

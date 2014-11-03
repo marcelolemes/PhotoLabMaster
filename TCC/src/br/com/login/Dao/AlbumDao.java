@@ -6,6 +6,7 @@ import br.com.login.model.User;
 import br.com.login.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -108,4 +109,52 @@ public class AlbumDao implements Serializable {
         sessao.close();
         return retorno;
     }
+
+
+    public long AlbunsRestantesMontagem(Contrato contrato) throws Exception {
+
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Album.class).setProjection(Projections.rowCount());
+        criteria.add(Restrictions.eq("contrato",contrato));
+        System.out.println("Contrato para contagem : "+contrato.getNumeroContrato());
+        criteria.add(Restrictions.le("status",12)).add(Restrictions.ge("status",10));
+        long retorno = (Long) criteria.uniqueResult();
+        System.out.println("Contagem restantes: "+retorno);
+
+        sessao.close();
+        return retorno;
+    }
+
+    public Album ProximoAlbum(Contrato contrato) throws Exception {
+
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Album.class).addOrder(Order.asc("numero"));
+        criteria.add(Restrictions.eq("contrato",contrato));
+        System.out.println("Contrato para contagem2 : "+contrato.getNumeroContrato());
+        criteria.add(Restrictions.le("status",12)).add(Restrictions.ge("status",10));
+        criteria.setMaxResults(1);
+        Album retorno = (Album) criteria.uniqueResult();
+        System.out.println("album retornado: "+retorno.getNumero());
+
+        sessao.close();
+        return retorno;
+    }
+
+    public long AlbunsRestantesTratamento(Contrato contrato) throws Exception {
+
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Album.class).setProjection(Projections.rowCount());
+        criteria.add(Restrictions.eq("contrato",contrato));
+        System.out.println("Contrato para contagem : "+contrato.getNumeroContrato());
+        criteria.add(Restrictions.le("status",10)).add(Restrictions.ge("status",5));
+        long retorno = (Long) criteria.uniqueResult();
+        System.out.println("Contagem restantes: "+retorno);
+
+        sessao.close();
+        return retorno;
+
+
+    }
+
+
 }
