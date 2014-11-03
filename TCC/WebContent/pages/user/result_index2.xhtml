@@ -7,205 +7,205 @@
                 template="/template/templatePrincipal.xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 
-    </h:head>
-    <h:outputStylesheet library="css" name="estilo.css" />
+</h:head>
+<h:outputStylesheet library="css" name="estilo.css" />
 
-    <body>
-    <p:growl showDetail="true" autoUpdate="true" />
+<body>
+<p:growl showDetail="true" autoUpdate="true" />
 
-    <f:metadata>
-        <f:viewAction action="#{userBean.verificarLogado()}" />
-    </f:metadata>
+<f:metadata>
+    <f:viewAction action="#{userBean.verificarLogado()}" />
+</f:metadata>
 
-    <ui:define name="menu">
-        <ui:include src="/include/user/menu.xhtml" />
-    </ui:define>
-    <ui:define name="content">
+<ui:define name="menu">
+    <ui:include src="/include/user/menu.xhtml" />
+</ui:define>
+<ui:define name="content">
 
-        <p:tabView>
-            <p:tab title="Início">
+    <p:tabView>
+        <p:tab title="Início">
 
-                <p:panelGrid columns="2" styleClass="semBorda">
-                    <p:commandButton value="Confirmar término do álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraTratamento.btTerminarAlbum}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
-                    <p:commandButton value="Cancelar álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraTratamento.btCancelarAlbum()}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
-                    <p:commandButton value="Inserir obs em:  #{panelAdmin.userBean.userLogado.albumAtual.numero}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" oncomplete="PF('obs').show()"/>
-                    <p:commandButton value="Menos de 20" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" actionListener="#{regraTratamento.btMenosDeVinte()}" oncomplete="PF('menosde20').show()" />
-                </p:panelGrid>
-
-                <p:panelGrid columns="1" styleClass="semBorda">
-                    <p:commandButton value="Pegar album" actionListener="#{regraTratamento.btPegarAlbum}" rendered="#{empty panelAdmin.userBean.userLogado.albumAtual}" update="@all" process="@all" />
-
-                    <p:outputLabel value="#{panelAdmin.userBean.userLogado.auxiliar}" rendered="#{ not empty panelAdmin.userBean.userLogado.albumAtual}"/>
-                </p:panelGrid>
-
-
-                <!--<p:layoutUnit position="center"
-                                                  header="Setor {listaUsuariosBean.parserSetor(panelAdmin.userBean.userLogado)}"> -->
-                <p:idleMonitor timeout="1800000"> <!-- Atualiza a cada 30 minutos-->
-                    <p:ajax event="idle" listener="#{userBean.btHome}"/>
-                </p:idleMonitor>
-
-
-                <p:panel styleClass="panecentralresult">
-                    <p:panelGrid columns="2" styleClass="semBorda">
-                        <p:outputLabel value="Usuário da sessão" />
-                        <p:outputLabel value="#{panelAdmin.userBean.userLogado.apelido}"  />
-                        <p:outputLabel value="Contrato:" />
-                        <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.numeroContrato}"  styleClass="negrito"/>
-                        <p:outputLabel value="serviço atual" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" />
-                        <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.numero} com #{panelAdmin.userBean.userLogado.albumAtual.qtdFotos} fotos" styleClass="negrito" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" />
-
-                        <p:outputLabel value="Média" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.contrato.media}"/>
-                        <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.media}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.contrato.media}"/>
-                        <p:outputLabel value="Restam #{regraTratamento.albunsRestantes} album(s) neste contrato para o tratamento "/>
-
-
-                    </p:panelGrid>
-                    <p:separator/>
-                    <p:panelGrid columns="2" styleClass="semBorda">
-                        <p:outputLabel value="Observação do curso:" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.contrato.obs}" />
-                        <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.obs}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.contrato.obs}"  />
-                        <p:outputLabel value="Observação do album:" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.obs}" />
-                        <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.obs}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.obs}" />
-                    </p:panelGrid>
-                    <p:commandButton id="atualizarResult2" value="Atualizar Tudo" update="@all" process="@all" immediate="true"  actionListener="#{userBean.btHome}"/>
-
-                </p:panel>
-
-                <h:form>
-                    <p:dialog header="TrocarSenha" widgetVar="TrocarSenha">
-                        <p:panel id="trocarSenhaPanel">
-                            <p:panelGrid columns="2" styleClass="semBorda">
-                                <p:outputLabel value="insira a NOVA senha:" />
-                                <h:inputSecret value="#{panelAdmin.senhaTemporaria}" />
-                                <p:outputLabel value="REPITA a NOVA senha:" />
-                                <h:inputSecret value="#{panelAdmin.senhaTemporaria2}" />
-                                <p:commandButton value="Gravar senha"
-                                                 action="#{panelAdmin.mudarSenha()}"
-                                                 oncomplete="PF('TrocarSenha').hide()" />
-                            </p:panelGrid>
-                        </p:panel>
-                    </p:dialog>
-                </h:form>
-
-                <h:form>
-                    <p:dialog header="Inserir observação do álbum" widgetVar="obs">
-                        <p:panel rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" styleClass="paneeast">
-                            <p:panelGrid columns="2" styleClass="paneeast">
-                                <p:outputLabel value="Obs: do álbum" />
-                                <p:inputTextarea value="#{panelAdmin.userBean.userLogado.albumAtual.obs}"/>
-                                <p:commandButton value="inserir Obs:" actionListener="#{regraMontagem.btInserirObs()}" oncomplete="PF('obs').hide()" update="@all"/>
-                            </p:panelGrid>
-                        </p:panel>
-                    </p:dialog>
-                </h:form>
-
-                <h:form>
-                                <p:dialog header="Atenção" widgetVar="menosde20">
-
-                                    <p:panel rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" styleClass="paneeast">
-                                        <p:panelGrid columns="1" styleClass="semBorda">
-                                            <p:outputLabel value="Favor mover o album para a pasta 'menos de 20' dentro do contrato, favor, não esquecer" />
-                                            <p:commandButton value="OK" oncomplete="PF('obs').hide()" update="@all"/>
-                                        </p:panelGrid>
-                                    </p:panel>
-
-                                </p:dialog>
-                            </h:form>
-
-
-            </p:tab>
-            <p:tab title="Gráfico produção mensal">
-                <p:chart type="line" model="#{relatorioUserBean.createLineModels()}"  rendered="#{not empty relatorioUserBean.createLineModels()}" style="height:300px;" widgetVar="grafico"/>
-                <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('grafico').resetZoom()"/>
-
-            </p:tab>
-            <p:tab title="Histórico mensal de albuns" >
-                <p:dataTable id="relatorio" var="relatorio" value="#{historicoUserBean.inicializarListaMes()}" emptyMessage="Relatório vazio para este intervalo de tempo">
-                    <p:column headerText="Data">
-                        <h:outputText value="#{relatorio.dataFinal}"  >
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </h:outputText>
-                    </p:column>
-                    <p:column headerText="Número">
-                        <h:outputText value="#{relatorio.album.numero}" />
-                    </p:column>
-                    <p:column headerText="Fotos" width="23%">
-                        <h:outputText value="#{relatorio.fotos}" />
-                    </p:column>
-                </p:dataTable>
-
-            </p:tab>
-
-
-
-        </p:tabView>
-
-    </ui:define>
-
-    <ui:define name="west">
-        <h:form id="west">
-            <p:panelGrid columns="2">
-                <p:outputLabel value="Albuns de hoje: "/>
-                <p:outputLabel value="#{listarAlbunsFunc.qtdDia}"/>
-                <p:outputLabel value="Fotos de hoje: "/>
-                <p:outputLabel value="#{listarAlbunsFunc.qtdDiaFotos}"/>
+            <p:panelGrid columns="2" styleClass="semBorda">
+                <p:commandButton value="Confirmar término do álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraTratamento.btTerminarAlbum}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
+                <p:commandButton value="Cancelar álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraTratamento.btCancelarAlbum()}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
+                <p:commandButton value="Inserir obs em:  #{panelAdmin.userBean.userLogado.albumAtual.numero}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" oncomplete="PF('obs').show()"/>
+                <p:commandButton value="Menos de 20" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" actionListener="#{regraTratamento.btMenosDeVinte()}" oncomplete="PF('menosde20').show()" />
             </p:panelGrid>
-            <p:dataTable id="relatorio" var="relatorio" value="#{listarAlbunsFunc.relatorioList}" emptyMessage="Relatório vazio para este intervalo de tempo" resizableColumns="true">
-                <p:column headerText="Número" width="22%">
-                    <h:outputText value="#{relatorio.album.numero}" />
-                </p:column>
-                <p:column headerText="Fotos" width="15%">
-                    <h:outputText value="#{relatorio.fotos}" />
-                </p:column>
-                <p:column headerText="Data" width="25%">
+
+            <p:panelGrid columns="1" styleClass="semBorda">
+                <p:commandButton value="Pegar album" actionListener="#{regraTratamento.btPegarAlbum}" rendered="#{empty panelAdmin.userBean.userLogado.albumAtual}" update="@all" process="@all" />
+
+                <p:outputLabel value="#{panelAdmin.userBean.userLogado.auxiliar}" rendered="#{ not empty panelAdmin.userBean.userLogado.albumAtual}"/>
+            </p:panelGrid>
+
+
+            <!--<p:layoutUnit position="center"
+                                              header="Setor {listaUsuariosBean.parserSetor(panelAdmin.userBean.userLogado)}"> -->
+            <p:idleMonitor timeout="1800000"> <!-- Atualiza a cada 30 minutos-->
+                <p:ajax event="idle" listener="#{userBean.btHome}"/>
+            </p:idleMonitor>
+
+
+            <p:panel styleClass="panecentralresult">
+                <p:panelGrid columns="2" styleClass="semBorda">
+                    <p:outputLabel value="Usuário da sessão" />
+                    <p:outputLabel value="#{panelAdmin.userBean.userLogado.apelido}"  />
+                    <p:outputLabel value="Contrato:" />
+                    <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.numeroContrato}"  styleClass="negrito"/>
+                    <p:outputLabel value="serviço atual" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" />
+                    <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.numero} com #{panelAdmin.userBean.userLogado.albumAtual.qtdFotos} fotos" styleClass="negrito" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" />
+
+                    <p:outputLabel value="Média" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.contrato.media}"/>
+                    <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.media}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.contrato.media}"/>
+                    <p:outputLabel value="Restam #{regraTratamento.albunsRestantes} album(s) neste contrato para o tratamento "/>
+
+
+                </p:panelGrid>
+                <p:separator/>
+                <p:panelGrid columns="2" styleClass="semBorda">
+                    <p:outputLabel value="Observação do curso:" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.contrato.obs}" />
+                    <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.obs}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.contrato.obs}"  />
+                    <p:outputLabel value="Observação do album:" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.obs}" />
+                    <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.obs}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.obs}" />
+                </p:panelGrid>
+                <p:commandButton id="atualizarResult2" value="Atualizar Tudo" update="@all" process="@all" immediate="true"  actionListener="#{userBean.btHome}"/>
+
+            </p:panel>
+
+            <h:form>
+                <p:dialog header="TrocarSenha" widgetVar="TrocarSenha">
+                    <p:panel id="trocarSenhaPanel">
+                        <p:panelGrid columns="2" styleClass="semBorda">
+                            <p:outputLabel value="insira a NOVA senha:" />
+                            <h:inputSecret value="#{panelAdmin.senhaTemporaria}" />
+                            <p:outputLabel value="REPITA a NOVA senha:" />
+                            <h:inputSecret value="#{panelAdmin.senhaTemporaria2}" />
+                            <p:commandButton value="Gravar senha"
+                                             action="#{panelAdmin.mudarSenha()}"
+                                             oncomplete="PF('TrocarSenha').hide()" />
+                        </p:panelGrid>
+                    </p:panel>
+                </p:dialog>
+            </h:form>
+
+            <h:form>
+                <p:dialog header="Inserir observação do álbum" widgetVar="obs">
+                    <p:panel rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" styleClass="paneeast">
+                        <p:panelGrid columns="2" styleClass="paneeast">
+                            <p:outputLabel value="Obs: do álbum" />
+                            <p:inputTextarea value="#{panelAdmin.userBean.userLogado.albumAtual.obs}"/>
+                            <p:commandButton value="inserir Obs:" actionListener="#{regraMontagem.btInserirObs()}" oncomplete="PF('obs').hide()" update="@all"/>
+                        </p:panelGrid>
+                    </p:panel>
+                </p:dialog>
+            </h:form>
+
+            <h:form>
+                <p:dialog header="Atenção" widgetVar="menosde20">
+
+                    <p:panel rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" styleClass="paneeast">
+                        <p:panelGrid columns="1" styleClass="semBorda">
+                            <p:outputLabel value="Favor mover o album para a pasta 'menos de 20' dentro do contrato, favor, não esquecer" />
+                            <p:commandButton value="OK" oncomplete="PF('obs').hide()" update="@all"/>
+                        </p:panelGrid>
+                    </p:panel>
+
+                </p:dialog>
+            </h:form>
+
+
+        </p:tab>
+        <p:tab title="Gráfico produção mensal">
+            <p:chart type="line" model="#{relatorioUserBean.createLineModels()}"  rendered="#{not empty relatorioUserBean.createLineModels()}" style="height:300px;" widgetVar="grafico"/>
+            <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('grafico').resetZoom()"/>
+
+        </p:tab>
+        <p:tab title="Histórico mensal de albuns" >
+            <p:dataTable id="relatorio" var="relatorio" value="#{historicoUserBean.inicializarListaMes()}" emptyMessage="Relatório vazio para este intervalo de tempo">
+                <p:column headerText="Data">
                     <h:outputText value="#{relatorio.dataFinal}"  >
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </h:outputText>
                 </p:column>
-                <p:column headerText="Tempo gasto" width="23%">
-                    <h:outputText value="#{listarAlbunsFunc.relatorioDao.msToHourSecond(relatorio.tempoOperacao)}"  />
+                <p:column headerText="Número">
+                    <h:outputText value="#{relatorio.album.numero}" />
+                </p:column>
+                <p:column headerText="Fotos" width="23%">
+                    <h:outputText value="#{relatorio.fotos}" />
                 </p:column>
             </p:dataTable>
 
-        </h:form>
-    </ui:define>
-    <ui:define name="east">
-        <h:form>
-            <p:panel rendered="#{panelAdmin.userBean.userLogado.nivelAcesso ge 4? true:false}" styleClass="paneeast">
-                <p:dataTable value="#{listarCursosTratamento.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
-                    <f:facet name="header">Contratos em espera</f:facet>
-                    <p:column headerText="contrato">
-                        #{contrato.numeroContrato}
-                    </p:column>
-                    <p:column headerText="curso">
-                        #{contrato.curso}
-                    </p:column>
-                    <p:column headerText="albuns">
-                        #{contrato.qtdAlbum}
-                    </p:column>
-                </p:dataTable>
+        </p:tab>
 
 
-                <p:dataTable value="#{listarCursosTratamento.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
-                    <f:facet name="header">Contratos prontos</f:facet>
-                    <p:column headerText="contrato">
-                        #{contrato.numeroContrato}
-                    </p:column>
-                    <p:column headerText="curso">
-                        #{contrato.curso}
-                    </p:column>
-                    <p:column headerText="albuns">
-                        #{contrato.qtdAlbum}
-                    </p:column>
-                </p:dataTable>
-            </p:panel>
-        </h:form>
-    </ui:define>
-    <p:ajaxExceptionHandler type="javax.faces.application.ViewExpiredException"  onexception="#{userBean.btHome}" />
-    </body>
+
+    </p:tabView>
+
+</ui:define>
+
+<ui:define name="west">
+    <h:form id="west">
+        <p:panelGrid columns="2">
+            <p:outputLabel value="Albuns de hoje: "/>
+            <p:outputLabel value="#{listarAlbunsFunc.qtdDia}"/>
+            <p:outputLabel value="Fotos de hoje: "/>
+            <p:outputLabel value="#{listarAlbunsFunc.qtdDiaFotos}"/>
+        </p:panelGrid>
+        <p:dataTable id="relatorio" var="relatorio" value="#{listarAlbunsFunc.relatorioList}" emptyMessage="Relatório vazio para este intervalo de tempo" resizableColumns="true">
+            <p:column headerText="Número" width="22%">
+                <h:outputText value="#{relatorio.album.numero}" />
+            </p:column>
+            <p:column headerText="Fotos" width="15%">
+                <h:outputText value="#{relatorio.fotos}" />
+            </p:column>
+            <p:column headerText="Data" width="25%">
+                <h:outputText value="#{relatorio.dataFinal}"  >
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:outputText>
+            </p:column>
+            <p:column headerText="Tempo" width="23%">
+                <h:outputText value="#{listarAlbunsFunc.relatorioDao.msToHourSecond(relatorio.tempoOperacao)}"  />
+            </p:column>
+        </p:dataTable>
+
+    </h:form>
+</ui:define>
+<ui:define name="east">
+    <h:form>
+        <p:panel rendered="#{panelAdmin.userBean.userLogado.nivelAcesso ge 4? true:false}" styleClass="paneeast">
+            <p:dataTable value="#{listarCursosTratamento.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
+                <f:facet name="header">Contratos em espera</f:facet>
+                <p:column headerText="contrato" width="22%">
+                    #{contrato.numeroContrato}
+                </p:column>
+                <p:column headerText="curso">
+                    #{contrato.curso}
+                </p:column>
+                <p:column headerText="albuns" width="18%">
+                    #{contrato.qtdAlbum}
+                </p:column>
+            </p:dataTable>
+
+
+            <p:dataTable value="#{listarCursosTratamento.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
+                <f:facet name="header">Contratos prontos</f:facet>
+                <p:column headerText="contrato" width="22%">
+                    #{contrato.numeroContrato}
+                </p:column>
+                <p:column headerText="curso">
+                    #{contrato.curso}
+                </p:column>
+                <p:column headerText="albuns" width="18%">
+                    #{contrato.qtdAlbum}
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+</ui:define>
+<p:ajaxExceptionHandler type="javax.faces.application.ViewExpiredException"  onexception="#{userBean.btHome}" />
+</body>
 </ui:composition>
