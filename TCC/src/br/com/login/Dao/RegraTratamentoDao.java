@@ -1,5 +1,6 @@
 package br.com.login.Dao;
 
+import br.com.login.bean.users.UserBean;
 import br.com.login.model.Album;
 import br.com.login.model.Contrato;
 import br.com.login.model.User;
@@ -11,6 +12,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 
@@ -18,6 +20,9 @@ import java.io.Serializable;
  * Created by marcelo on 27/09/2014.
  */
 public class RegraTratamentoDao implements Serializable {
+
+    @ManagedProperty("#{userBean}")
+        private UserBean userBean;
 
     public Album NovoAlbum() throws Exception {
 
@@ -260,6 +265,13 @@ public class RegraTratamentoDao implements Serializable {
         criteria.addOrder(Order.asc("urgencia")).addOrder(Order.asc("status")).addOrder(Order.asc("cod"));
         criteria.setMaxResults(1);
         Contrato retorno = (Contrato) criteria.uniqueResult();
+
+        if (retorno != null & retorno != userBean.getUserLogado().getAlbumAtual().getContrato() )
+        {
+            contratoPronto(userBean.getUserLogado().getAlbumAtual().getContrato());
+            System.out.println("Contrato antigo encerrado");
+        }
+
         if (retorno != null ) {
             if (retorno.getUrgencia() > 0) {
                 retorno.setUrgencia(0);

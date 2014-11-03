@@ -1,5 +1,6 @@
 package br.com.login.Dao;
 
+import br.com.login.bean.users.UserBean;
 import br.com.login.model.Album;
 import br.com.login.model.Contrato;
 import br.com.login.model.User;
@@ -11,6 +12,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 
@@ -18,7 +20,8 @@ import java.io.Serializable;
  * Created by marcelo on 27/09/2014.
  */
 public class RegraMontagemDao implements Serializable {
-
+    @ManagedProperty("#{userBean}")
+    private UserBean userBean;
     public Album NovoAlbum() throws Exception {
 
         Contrato contrato = contratoAtual();
@@ -114,6 +117,7 @@ public class RegraMontagemDao implements Serializable {
             album.setOcupado(false);
             sessao.update(album);
             transacao.commit();
+            contratoPronto(album.getContrato());
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Album "+album.getNumero()+" encerrado" ,
@@ -123,6 +127,8 @@ public class RegraMontagemDao implements Serializable {
 
 
         try {
+
+
             sessao.close();
         }
         catch (Exception e) {
@@ -130,47 +136,47 @@ public class RegraMontagemDao implements Serializable {
 
     }
 
-       public void albumDeletado(Album album) throws Exception {
-           Session sessao = HibernateUtil.getSession();
-           org.hibernate.Transaction transacao = sessao.beginTransaction();
-           if (album!=null){
-               sessao.delete(album);
-           }
+    public void albumDeletado(Album album) throws Exception {
+        Session sessao = HibernateUtil.getSession();
+        org.hibernate.Transaction transacao = sessao.beginTransaction();
+        if (album!=null){
+            sessao.delete(album);
+        }
 
-           transacao.commit();
-           FacesContext.getCurrentInstance().addMessage(
-                   null,
-                   new FacesMessage(FacesMessage.SEVERITY_INFO, "Album "+album.getNumero()+" Removido" ,
-                           "por favor, mova-o para a pasta 'Menos de vinte'"));
-           try {
-               sessao.close();
-           }
-           catch (Exception e) {
-           }
+        transacao.commit();
+        FacesContext.getCurrentInstance().addMessage(
+                null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Album "+album.getNumero()+" Removido" ,
+                        "por favor, mova-o para a pasta 'Menos de vinte'"));
+        try {
+            sessao.close();
+        }
+        catch (Exception e) {
+        }
 
-       }
+    }
 
 
     public void  albumCancelado(Album album) throws Exception {
-           Session sessao = HibernateUtil.getSession();
-           org.hibernate.Transaction transacao = sessao.beginTransaction();
-           if (album!=null){
-               album.setStatus(12);
-               album.setOcupado(false);
-           }
-           sessao.update(album);
-           transacao.commit();
-           FacesContext.getCurrentInstance().addMessage(
-                   null,
-                   new FacesMessage(FacesMessage.SEVERITY_INFO, "Album "+album.getNumero()+" cancelado" ,
-                           "Informe ao seu superior"));
-           try {
-               sessao.close();
-           }
-           catch (Exception e) {
-           }
+        Session sessao = HibernateUtil.getSession();
+        org.hibernate.Transaction transacao = sessao.beginTransaction();
+        if (album!=null){
+            album.setStatus(12);
+            album.setOcupado(false);
+        }
+        sessao.update(album);
+        transacao.commit();
+        FacesContext.getCurrentInstance().addMessage(
+                null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Album "+album.getNumero()+" cancelado" ,
+                        "Informe ao seu superior"));
+        try {
+            sessao.close();
+        }
+        catch (Exception e) {
+        }
 
-       }
+    }
 
 
 
@@ -186,6 +192,11 @@ public class RegraMontagemDao implements Serializable {
         criteria.addOrder(Order.asc("urgencia")).addOrder(Order.desc("status")).addOrder(Order.asc("cod"));
         criteria.setMaxResults(1);
         Contrato retorno = (Contrato) criteria.uniqueResult();
+        if (retorno != null & retorno != userBean.getUserLogado().getAlbumAtual().getContrato() )
+        {
+            contratoPronto(userBean.getUserLogado().getAlbumAtual().getContrato());
+            System.out.println("Contrato antigo encerrado");
+        }
         if (retorno != null ) {
             if (retorno.getUrgencia() > 0) {
                 retorno.setUrgencia(0);
@@ -271,7 +282,6 @@ public class RegraMontagemDao implements Serializable {
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();
         Criteria criteria = sessao.createCriteria(Album.class).setProjection(Projections.rowCount());
-        criteria.add(Restrictions.eq("ocupado", true));
         criteria.add(Restrictions.le("status", 13));
 
         long cont = (Long) criteria.uniqueResult();
@@ -297,21 +307,24 @@ public class RegraMontagemDao implements Serializable {
         else {
             System.out.println(""+cont);
             try{
-                FacesContext.getCurrentInstance().addMessage(
-                        null,
-                        new FacesMessage(FacesMessage.SEVERITY_WARN, "Ainda não é possível encerrar esse contrato" ,
-                                "Funcionários ainda estão nesse contrato"));
-                contrato.setUrgencia(4);
-                sessao.clear();
-                sessao.update(contrato);
-                transacao.commit();
-                sessao.close();
+                Criteria criteria2 = sessao.createCriteria(Album.class).setProjection(Projections.rowCount());
+                criteria2.add(Restrictions.le("status", 13));
+                criteria2.add(Restrictions.le("ocupado", false));
+                long cont2 = (Long) criteria2.uniqueResult();
+                if(cont2 == 0) {
+                    contrato.setUrgencia(4);
+                    sessao.clear();
+                    sessao.update(contrato);
+                    transacao.commit();
+                    sessao.close();
+                }
             }
             catch (Exception e){
                 FacesContext.getCurrentInstance().addMessage(
                         null,
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Algo deu errado" ,
                                 "Tente outra vez"));
+                System.out.println("Deu ruim");
             }
         }
 
