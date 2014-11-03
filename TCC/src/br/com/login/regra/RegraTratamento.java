@@ -48,7 +48,7 @@ public class RegraTratamento implements Serializable {
         try {
             contDao = new ContratoDao();
             contratoAtual= contDao.listarContratoStatus(5, 10,1);
-            albunsRestantes = albumDao.AlbunsRestantesMontagem(contratoAtual);
+            albunsRestantes = albumDao.AlbunsRestantesTratamento(contratoAtual);
             cont =contratoAtual.getNumeroContrato();
 
 

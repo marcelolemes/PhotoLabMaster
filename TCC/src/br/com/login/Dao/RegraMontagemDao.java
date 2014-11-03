@@ -40,7 +40,7 @@ public class RegraMontagemDao implements Serializable {
             contrato.setOcupado(true);
 
             System.out.println("Contrato atual teste atualizado "+contrato.isOcupado());
-            retorno = albumDao.ProximoAlbum(contrato);
+            retorno = albumDao.ProximoAlbum(contrato,10,12);
 
             if (retorno != null) {
                 if (user != null){

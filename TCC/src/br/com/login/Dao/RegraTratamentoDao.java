@@ -40,7 +40,7 @@ public class RegraTratamentoDao implements Serializable {
             contrato.setOcupado(true);
 
             System.out.println("Contrato atual teste atualizado "+contrato.isOcupado());
-            retorno = albumDao.ProximoAlbum(contrato);
+            retorno = albumDao.ProximoAlbum(contrato,5,10);
 
             if (retorno != null) {
                 if (user != null){

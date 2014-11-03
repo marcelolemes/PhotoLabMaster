@@ -125,13 +125,13 @@ public class AlbumDao implements Serializable {
         return retorno;
     }
 
-    public Album ProximoAlbum(Contrato contrato) throws Exception {
+    public Album ProximoAlbum(Contrato contrato,int min, int max) throws Exception {
 
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Album.class).addOrder(Order.asc("numero"));
         criteria.add(Restrictions.eq("contrato",contrato));
         System.out.println("Contrato para contagem2 : "+contrato.getNumeroContrato());
-        criteria.add(Restrictions.le("status",12)).add(Restrictions.ge("status",10));
+        criteria.add(Restrictions.le("status",max)).add(Restrictions.ge("status",min)).add(Restrictions.eq("ocupado",false));
         criteria.setMaxResults(1);
         Album retorno = (Album) criteria.uniqueResult();
         sessao.close();
