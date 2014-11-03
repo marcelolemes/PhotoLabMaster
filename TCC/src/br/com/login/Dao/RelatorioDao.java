@@ -51,6 +51,19 @@ public class RelatorioDao {
 
         sessao.close();
     }
+
+
+    public void deletarRelatorio(Relatorio relatorio) throws Exception{
+
+        Session sessao = HibernateUtil.getSession();
+        org.hibernate.Transaction transacao = sessao.beginTransaction();
+        sessao.delete(relatorio);
+        System.out.println("Relatório deletado");
+        transacao.commit();
+        sessao.close();
+    }
+
+
     public static String msToHourSecond( int ms ) {
         Calendar c = Calendar.getInstance();
         c.clear(Calendar.HOUR_OF_DAY);
@@ -120,8 +133,11 @@ public class RelatorioDao {
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Relatorio.class).setProjection(Projections.sum("fotos"));
         criteria.add(Restrictions.ge("dataFinal", cal.getTime())).add(Restrictions.eq("funcionario", user));
-        if((Long) criteria.uniqueResult()>0){
-        retorno =(Long) criteria.uniqueResult();
+        try{
+            retorno =(Long) criteria.uniqueResult();
+        }
+        catch (Exception ex){
+            retorno =0;
         }
         System.out.println("Contagem: "+retorno);
         System.out.println("Date aqui: "+cal.getTime());

@@ -33,6 +33,7 @@
                     <p:commandButton value="Confirmar término do álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraTratamento.btTerminarAlbum}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
                     <p:commandButton value="Cancelar álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraTratamento.btCancelarAlbum()}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
                     <p:commandButton value="Inserir obs em:  #{panelAdmin.userBean.userLogado.albumAtual.numero}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" oncomplete="PF('obs').show()"/>
+                    <p:commandButton value="Menos de 20" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" actionListener="#{regraTratamento.btMenosDeVinte()}" oncomplete="PF('menosde20').show()" />
                 </p:panelGrid>
 
                 <p:panelGrid columns="1" styleClass="semBorda">
@@ -102,6 +103,20 @@
                         </p:panel>
                     </p:dialog>
                 </h:form>
+
+                <h:form>
+                                <p:dialog header="Atenção" widgetVar="menosde20">
+
+                                    <p:panel rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" styleClass="paneeast">
+                                        <p:panelGrid columns="1" styleClass="semBorda">
+                                            <p:outputLabel value="Favor mover o album para a pasta 'menos de 20' dentro do contrato, favor, não esquecer" />
+                                            <p:commandButton value="OK" oncomplete="PF('obs').hide()" update="@all"/>
+                                        </p:panelGrid>
+                                    </p:panel>
+
+                                </p:dialog>
+                            </h:form>
+
 
             </p:tab>
             <p:tab title="Gráfico produção mensal">

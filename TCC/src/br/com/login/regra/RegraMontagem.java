@@ -7,9 +7,11 @@ import br.com.login.model.Relatorio;
 import br.com.login.model.RelatorioDiario;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.sql.Timestamp;
@@ -69,22 +71,38 @@ public class RegraMontagem implements Serializable {
             relatorio.setAlbum(userBean.getUserLogado().getAlbumAtual());
             relatorio.setFuncionario(userBean.getUserLogado());
             relatorioDao.salvarRelatorio(relatorio);
+            userDao.Update(userBean.getUserLogado());
             iniciar();
         }
         catch (Exception e)
         {
-            System.out.println("Exception iniciar album");
+            FacesContext.getCurrentInstance().addMessage(
+                              null,
+                              new FacesMessage(FacesMessage.SEVERITY_WARN, "Sem contratos para o seu setor",
+                                      "Sem contratos para o seu setor, informe o seu superior imediatamente!"));
         }
 
-        userDao.Update(userBean.getUserLogado());
+
 
     }
 
     public void btCancelarAlbum() throws Exception {
         regDao.albumCancelado(userBean.getUserLogado().getAlbumAtual());
+        relatorio = relatorioDao.encontrarRelatorio(userBean.getUserLogado(),userBean.getUserLogado().getAlbumAtual());
+        relatorioDao.deletarRelatorio(relatorio);
         userBean.getUserLogado().setAlbumAtual(null);
         userDao.Update(userBean.getUserLogado());
-        userBean.btHome();
+        //userBean.btHome();
+    }
+
+    public void btMenosDeVinte() throws Exception {
+        Album album =userBean.getUserLogado().getAlbumAtual();
+        userBean.getUserLogado().setAlbumAtual(null);
+        userDao.Update(userBean.getUserLogado());
+        relatorio = relatorioDao.encontrarRelatorio(userBean.getUserLogado(),album);
+        relatorioDao.deletarRelatorio(relatorio);
+        regDao.albumDeletado(album);
+        //   userBean.btHome();
     }
 
     public void btTerminarAlbum() throws Exception {
@@ -99,31 +117,31 @@ public class RegraMontagem implements Serializable {
             userBean.getUserLogado().setAlbumAtual(null);
             userDao.Update(userBean.getUserLogado());
 
-           relatorioDiario = relatorioDiarioDao.encontrarRelatorio(userBean.getUserLogado(),new Timestamp(new Date(System.currentTimeMillis()).getTime()));
-           if (relatorioDiario == null)
-           {
+            relatorioDiario = relatorioDiarioDao.encontrarRelatorio(userBean.getUserLogado(),new Timestamp(new Date(System.currentTimeMillis()).getTime()));
+            if (relatorioDiario == null)
+            {
 
 
-               relatorioDiario =  new RelatorioDiario();
+                relatorioDiario =  new RelatorioDiario();
 
 
 
-               Calendar calendar1 = Calendar.getInstance();
-                     Calendar calendar2 = Calendar.getInstance();
+                Calendar calendar1 = Calendar.getInstance();
+                Calendar calendar2 = Calendar.getInstance();
 
-                     calendar1.setTime(new Date());
+                calendar1.setTime(new Date());
 
 
-                     calendar1.clear(Calendar.HOUR_OF_DAY);
-                     calendar1.clear(Calendar.HOUR);
-                     calendar1.clear(Calendar.AM_PM);
-                     calendar1.clear(Calendar.MINUTE);
-                     calendar1.clear(Calendar.SECOND);
-                     calendar1.clear(Calendar.MILLISECOND);
+                calendar1.clear(Calendar.HOUR_OF_DAY);
+                calendar1.clear(Calendar.HOUR);
+                calendar1.clear(Calendar.AM_PM);
+                calendar1.clear(Calendar.MINUTE);
+                calendar1.clear(Calendar.SECOND);
+                calendar1.clear(Calendar.MILLISECOND);
 
-               relatorioDiario.setDataOperacao(new Timestamp(calendar1.getTime().getTime()));
-               relatorioDiario.setFuncionario(userBean.getUserLogado());
-           }
+                relatorioDiario.setDataOperacao(new Timestamp(calendar1.getTime().getTime()));
+                relatorioDiario.setFuncionario(userBean.getUserLogado());
+            }
             relatorioDiario.setQtdAlbuns((int) relatorioDao.contarAlbunsHoje(userBean.getUserLogado()));
             relatorioDiario.setFotos((int) relatorioDao.contarFotosHoje(userBean.getUserLogado()));
             relatorioDiarioDao.salvarRelatorio(relatorioDiario);

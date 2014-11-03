@@ -226,6 +226,28 @@ public class RegraTratamentoDao implements Serializable {
 
     }
 
+
+    public void albumDeletado(Album album) throws Exception {
+              Session sessao = HibernateUtil.getSession();
+              org.hibernate.Transaction transacao = sessao.beginTransaction();
+              if (album!=null){
+                  sessao.delete(album);
+              }
+
+              transacao.commit();
+              FacesContext.getCurrentInstance().addMessage(
+                      null,
+                      new FacesMessage(FacesMessage.SEVERITY_INFO, "Album "+album.getNumero()+" Removido" ,
+                              "por favor, mova-o para a pasta 'Menos de vinte'"));
+              try {
+                  sessao.close();
+              }
+              catch (Exception e) {
+              }
+
+          }
+
+
     public Contrato contratoAtual() throws Exception {
 
         Session sessao = HibernateUtil.getSession();

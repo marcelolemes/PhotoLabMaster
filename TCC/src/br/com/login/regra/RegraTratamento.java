@@ -7,9 +7,11 @@ import br.com.login.model.Relatorio;
 import br.com.login.model.RelatorioDiario;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.Serializable;
@@ -69,23 +71,39 @@ public class RegraTratamento implements Serializable {
             relatorio.setAlbum(userBean.getUserLogado().getAlbumAtual());
             relatorio.setFuncionario(userBean.getUserLogado());
             relatorioDao.salvarRelatorio(relatorio);
+            userDao.Update(userBean.getUserLogado());
             iniciar();
         }
         catch (Exception e)
         {
-            System.out.println("Exception iniciar album");
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Sem contratos para o seu setor",
+                            "Sem contratos para o seu setor, informe o seu superior imediatamente!"));
         }
 
-        userDao.Update(userBean.getUserLogado());
+
 
     }
 
     public void btCancelarAlbum() throws Exception {
-        regDao.albumCancelado(userBean.getUserLogado().getAlbumAtual());
-        userBean.getUserLogado().setAlbumAtual(null);
-        userDao.Update(userBean.getUserLogado());
-        userBean.btHome();
-    }
+            regDao.albumCancelado(userBean.getUserLogado().getAlbumAtual());
+            relatorio = relatorioDao.encontrarRelatorio(userBean.getUserLogado(),userBean.getUserLogado().getAlbumAtual());
+            relatorioDao.deletarRelatorio(relatorio);
+            userBean.getUserLogado().setAlbumAtual(null);
+            userDao.Update(userBean.getUserLogado());
+            //userBean.btHome();
+        }
+
+    public void btMenosDeVinte() throws Exception {
+            Album album =userBean.getUserLogado().getAlbumAtual();
+            userBean.getUserLogado().setAlbumAtual(null);
+            userDao.Update(userBean.getUserLogado());
+            relatorio = relatorioDao.encontrarRelatorio(userBean.getUserLogado(),album);
+            relatorioDao.deletarRelatorio(relatorio);
+            regDao.albumDeletado(album);
+            //   userBean.btHome();
+        }
 
     public void btTerminarAlbum() throws Exception {
         try{
