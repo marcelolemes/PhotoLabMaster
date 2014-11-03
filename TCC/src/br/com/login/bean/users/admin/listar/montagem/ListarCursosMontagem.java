@@ -32,7 +32,7 @@ public class ListarCursosMontagem implements Serializable {
 
     public ListarCursosMontagem() throws Exception {
         contDao = new ContratoDao();
-        listaContratoEmEspera = contDao.listarContratosStatus(11, 12);
+        listaContratoEmEspera = contDao.listarContratosStatus(11, 12,0);
         listaContratoPronto = contDao.listarContratosStatus(14);
     }
 
@@ -42,7 +42,7 @@ public class ListarCursosMontagem implements Serializable {
             listaContratoEmEspera.clear();
             listaContratoPronto.clear();
             contDao = new ContratoDao();
-            listaContratoEmEspera = contDao.listarContratosStatus(11, 12);
+            listaContratoEmEspera = contDao.listarContratosStatus(11, 12,0);
             listaContratoPronto = contDao.listarContratosStatus(14);
         } catch (Exception ex) {
 

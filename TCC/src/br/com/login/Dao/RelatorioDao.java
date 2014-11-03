@@ -260,9 +260,22 @@ public class RelatorioDao {
 
         sessao.close();
         return retorno;
-
-
     }
+
+    public Album ProximoAlbum(Contrato contrato) throws Exception {
+
+           Session sessao = HibernateUtil.getSession();
+           Criteria criteria = sessao.createCriteria(Album.class).addOrder(Order.asc("numero"));
+           criteria.add(Restrictions.eq("contrato",contrato));
+           System.out.println("Contrato para contagem : "+contrato.getNumeroContrato());
+           criteria.add(Restrictions.le("status",12)).add(Restrictions.ge("status",10));
+           Album retorno = (Album) criteria.uniqueResult();
+           System.out.println("album retornado: "+retorno.getNumero());
+
+           sessao.close();
+           return retorno;
+       }
+
     public long AlbunsRestantesTratamento(Contrato contrato) throws Exception {
 
         Session sessao = HibernateUtil.getSession();

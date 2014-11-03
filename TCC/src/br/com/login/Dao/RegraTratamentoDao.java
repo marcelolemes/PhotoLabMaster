@@ -24,6 +24,7 @@ public class RegraTratamentoDao implements Serializable {
     @ManagedProperty("#{userBean}")
         private UserBean userBean;
 
+
     public Album NovoAlbum() throws Exception {
 
         Contrato contrato = contratoAtual();
@@ -269,7 +270,6 @@ public class RegraTratamentoDao implements Serializable {
         if (retorno != null & retorno != userBean.getUserLogado().getAlbumAtual().getContrato() )
         {
             contratoPronto(userBean.getUserLogado().getAlbumAtual().getContrato());
-            System.out.println("Contrato antigo encerrado");
         }
 
         if (retorno != null ) {

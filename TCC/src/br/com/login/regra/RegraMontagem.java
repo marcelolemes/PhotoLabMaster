@@ -37,13 +37,16 @@ public class RegraMontagem implements Serializable {
     private long albunsRestantes;
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
-
+    ContratoDao contDao;
+    private String cont;
     @PostConstruct
     public void iniciar(){
 
         try {
+            contDao = new ContratoDao();
 
-            albunsRestantes = relatorioDao.AlbunsRestantesMontagem(regDao.contratoAtual());
+            albunsRestantes = relatorioDao.AlbunsRestantesMontagem(contDao.listarContratosStatus(11, 13,0).get(0));
+            cont =contDao.listarContratosStatus(11, 13,0).get(0).getNumeroContrato();
 
 
         } catch (Exception e) {
@@ -77,9 +80,9 @@ public class RegraMontagem implements Serializable {
         catch (Exception e)
         {
             FacesContext.getCurrentInstance().addMessage(
-                              null,
-                              new FacesMessage(FacesMessage.SEVERITY_WARN, "Sem contratos para o seu setor",
-                                      "Sem contratos para o seu setor, informe o seu superior imediatamente!"));
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Sem contratos para o seu setor",
+                            "Sem contratos para o seu setor, informe o seu superior imediatamente!"));
         }
 
 
@@ -203,5 +206,13 @@ public class RegraMontagem implements Serializable {
 
     public void setAlbunsRestantes(long albunsRestantes) {
         this.albunsRestantes = albunsRestantes;
+    }
+
+    public String getCont() {
+        return cont;
+    }
+
+    public void setCont(String cont) {
+        this.cont = cont;
     }
 }
