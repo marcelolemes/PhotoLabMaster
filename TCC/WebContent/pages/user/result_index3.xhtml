@@ -131,7 +131,7 @@
 
         </p:tab>
         <p:tab title="Histórico mensal de albuns" >
-            <p:dataTable id="relatorio" var="relatorio" value="#{historicoUserBean.inicializarListaMes()}" emptyMessage="Relatório vazio para este intervalo de tempo">
+            <p:dataTable id="relatorioid" var="relatorio" value="#{historicoUserBean.inicializarListaMes()}" emptyMessage="Relatório vazio para este intervalo de tempo">
                 <p:column headerText="Data">
                     <h:outputText value="#{relatorio.dataFinal}"  >
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
@@ -154,7 +154,7 @@
 </ui:define>
 
 <ui:define name="west">
-    <f:facet name="header">Área de apoio</f:facet>
+    <f:facet name="header">Área de apoio ao usuário</f:facet>
     <h:form id="west">
         <p:panelGrid columns="2">
             <p:outputLabel value="Albuns de hoje: "/>
@@ -183,7 +183,7 @@
     </h:form>
 </ui:define>
 <ui:define name="east">
-    <f:facet name="header">Área de apoio</f:facet>
+    <f:facet name="#{panelAdmin.userBean.userLogado.nivelAcesso eq 2 ?'header':null}" >"#{panelAdmin.userBean.userLogado.nivelAcesso eq 2? "Área de apoio ao gestor":null}"</f:facet>
     <h:form>
         <p:panel rendered="#{panelAdmin.userBean.userLogado.nivelAcesso eq 2? true:false}" styleClass="paneeast">
             <p:dataTable value="#{listarCursosMontagem.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
