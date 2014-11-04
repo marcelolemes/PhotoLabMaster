@@ -35,25 +35,23 @@ public class RegraTratamentoDao implements Serializable {
         Contrato contrato =  contDao.listarContratoStatus(5, 10, 1);
 
         if (contrato!= null) {
-            contrato = contDao.atualizarContratoRetorna(contrato);
-            contrato.setUrgencia(0);
-            contrato.setOcupado(true);
 
-            System.out.println("Contrato atual teste atualizado "+contrato.isOcupado());
             retorno = albumDao.ProximoAlbum(contrato,5,10);
 
             if (retorno != null) {
                 if (user != null){
-                    retorno.setUserMontagem(user);
+                    retorno.setUserTratamento(user);
                 }
 
                 retorno.setStatus(8);
                 retorno.setOcupado(true);
-
+                contrato = contDao.atualizarContratoRetorna(contrato);
+                contrato.setUrgencia(0);
+                contrato.setOcupado(true);
                 Session sessao = HibernateUtil.getSession();
                 org.hibernate.Transaction transacao = sessao.beginTransaction();
-                sessao.update(retorno);
                 sessao.update(contrato);
+                sessao.update(retorno);
                 transacao.commit();
                 sessao.close();
             }

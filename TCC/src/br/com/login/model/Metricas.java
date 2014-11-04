@@ -14,6 +14,7 @@ public class Metricas implements Serializable {
 	private List<SelectItem> nivelAcesso = new ArrayList<SelectItem>();
 	private List<SelectItem> urgenciaLista = new ArrayList<SelectItem>();
 	private List<SelectItem> statusContratoLista = new ArrayList<SelectItem>();
+    private List<SelectItem> ocupadoEditar = new ArrayList<SelectItem>();
 	private List<SelectItem> setores = new ArrayList<SelectItem>();
     String[] mes = {"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro" };
 
@@ -23,15 +24,21 @@ public class Metricas implements Serializable {
 		inicializarUrgenciaLista();
 		iniciarStatusLista();
 		inicializarSetores();
+        inicializarOcupado();
 	}
 
-	public void inicializarNivelAcesso() {
+	public void inicializarOcupado() {
+        ocupadoEditar.add(new SelectItem(false, "Não"));
+        ocupadoEditar.add(new SelectItem(true, "Sim"));
+		}
+
+    public void inicializarNivelAcesso() {
         nivelAcesso.add(new SelectItem(0, "Patrão"));
         nivelAcesso.add(new SelectItem(1, "Usuário"));
-		nivelAcesso.add(new SelectItem(2, "Gestor"));
-		nivelAcesso.add(new SelectItem(3, "Admin"));
+        nivelAcesso.add(new SelectItem(2, "Gestor"));
+        nivelAcesso.add(new SelectItem(3, "Admin"));
 
-	}
+    }
 
 	public void inicializarSetores() {
 		setores.add(new SelectItem(0, "Cadastro"));
@@ -116,5 +123,13 @@ public class Metricas implements Serializable {
 
     public void setMes(String[] mes) {
         this.mes = mes;
+    }
+
+    public List<SelectItem> getOcupadoEditar() {
+        return ocupadoEditar;
+    }
+
+    public void setOcupadoEditar(List<SelectItem> ocupadoEditar) {
+        this.ocupadoEditar = ocupadoEditar;
     }
 }

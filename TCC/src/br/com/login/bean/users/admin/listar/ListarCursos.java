@@ -72,6 +72,16 @@ public class ListarCursos implements Serializable {
                 .getLabel();
     }
 
+    public String parserOcupado(Contrato contrato) {
+        if (contrato.isOcupado()){
+            return  metricas.getOcupadoEditar().get(1).getLabel();
+        }
+        else
+            return  metricas.getOcupadoEditar().get(0).getLabel();
+    }
+
+
+
     public String updateContrato(Contrato contrato) throws Exception {
         if (contDao.Update(contrato)) {
             FacesContext.getCurrentInstance().addMessage(

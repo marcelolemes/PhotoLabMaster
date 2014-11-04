@@ -35,11 +35,6 @@ public class RegraMontagemDao implements Serializable {
         Contrato contrato =  contDao.listarContratoStatus(10, 13, 1);
 
         if (contrato!= null) {
-            contrato = contDao.atualizarContratoRetorna(contrato);
-            contrato.setUrgencia(0);
-            contrato.setOcupado(true);
-
-            System.out.println("Contrato atual teste atualizado "+contrato.isOcupado());
             retorno = albumDao.ProximoAlbum(contrato,10,12);
 
             if (retorno != null) {
@@ -49,11 +44,14 @@ public class RegraMontagemDao implements Serializable {
 
                 retorno.setStatus(13);
                 retorno.setOcupado(true);
-
+                contrato = contDao.atualizarContratoRetorna(contrato);
+                contrato.setUrgencia(0);
+                contrato.setOcupado(true);
                 Session sessao = HibernateUtil.getSession();
                 org.hibernate.Transaction transacao = sessao.beginTransaction();
-                sessao.update(retorno);
+                System.out.println("Contrato update regra montagem");
                 sessao.update(contrato);
+                sessao.update(retorno);
                 transacao.commit();
                 sessao.close();
             }
@@ -156,4 +154,4 @@ public class RegraMontagemDao implements Serializable {
     }
 
 
-   }
+}

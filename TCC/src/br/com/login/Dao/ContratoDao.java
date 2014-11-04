@@ -61,12 +61,14 @@ public class ContratoDao implements Serializable {
         Criteria criteria = sessao.createCriteria(Contrato.class);
         criteria.add(Restrictions.ge("status", min)).add(Restrictions.le("status", max));
         criteria.addOrder(Order.desc("ocupado")); // ordenar os ocupados primeiro
+        criteria.addOrder(Order.asc("urgencia")); // ordenar por urgencia
         if (order==0){
             criteria.addOrder(Order.desc("status"));
         }
         else {
             criteria.addOrder(Order.asc("status"));
         }
+
         List<Contrato> listaRetorno = criteria.list();
         sessao.close();
         return listaRetorno;
@@ -77,6 +79,7 @@ public class ContratoDao implements Serializable {
         Criteria criteria = sessao.createCriteria(Contrato.class);
         criteria.add(Restrictions.ge("status", min)).add(Restrictions.le("status", max));
         criteria.addOrder(Order.desc("ocupado")); // ordenar os ocupados primeiro
+        criteria.addOrder(Order.asc("urgencia")); // ordenar por urgencia
         if (order==0){
             criteria.addOrder(Order.desc("status"));
         }
@@ -94,7 +97,7 @@ public class ContratoDao implements Serializable {
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Contrato.class);
         criteria.add(Restrictions.eq("status", unique));
-        criteria.addOrder(Order.desc("urgencia"));
+        criteria.addOrder(Order.asc("urgencia"));
         List<Contrato> listaRetorno = criteria.list();
         sessao.close();
         return listaRetorno;

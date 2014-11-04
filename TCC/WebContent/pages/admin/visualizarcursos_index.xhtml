@@ -100,6 +100,9 @@
                 <h:outputText value="#{listarCursos.parserUrgencia(contrato)}" />
             </p:column>
 
+            <p:column headerText="Ocupado" width="15%" sortBy="ocupado">
+                <h:outputText value="#{listarCursos.parserOcupado(contrato)}" />
+            </p:column>
 
             <p:column headerText="Qtd albuns" width="7%">
                 <h:outputText value="#{contrato.qtdAlbum}" />
@@ -202,6 +205,11 @@
                             value="#{userBean.contratoSelecionado.urgencia}">
                         <f:selectItems
                                 value="#{cadastrarContratoBean.metricas.urgenciaLista}" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Ocupado" />
+                    <p:selectOneMenu value="#{userBean.contratoSelecionado.ocupado}">
+                        <f:selectItems
+                                value="#{cadastrarContratoBean.metricas.ocupadoEditar}" />
                     </p:selectOneMenu>
 
                     <p:outputLabel value="OBS:" />
