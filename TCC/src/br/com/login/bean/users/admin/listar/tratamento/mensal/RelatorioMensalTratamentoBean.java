@@ -1,4 +1,4 @@
-package br.com.login.bean.users.admin.listar.montagem;
+package br.com.login.bean.users.admin.listar.tratamento.mensal;
 
 import br.com.login.Dao.RelatorioDiarioDao;
 import br.com.login.Dao.UserDao;
@@ -7,16 +7,11 @@ import br.com.login.model.Mes;
 import br.com.login.model.Metricas;
 import br.com.login.model.RelatorioDiario;
 import br.com.login.model.User;
-import com.lowagie.text.BadElementException;
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Paragraph;
 import org.primefaces.model.chart.*;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,10 +20,11 @@ import java.util.List;
 
 /**
  * Created by marcelo on 06/10/14.
+ * Com algumas pequenas alterações, serve para outros setores tbm, não será feito o reuso, pois não se faz necessário
  */
 @ManagedBean
 @ViewScoped
-public class RelatorioMensalMontagemBean
+public class RelatorioMensalTratamentoBean
 {
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
@@ -40,6 +36,7 @@ public class RelatorioMensalMontagemBean
     private List<Calendar> mesesApos= new ArrayList<Calendar>();
     private List<Mes> meses;
     UserDao userDao = new UserDao();
+    List<User> usersTratamento = new ArrayList<User>();
     static int qtdMaximo =0;
     //private static int mesSelecionado =0;
     Date data;
@@ -47,12 +44,9 @@ public class RelatorioMensalMontagemBean
     Calendar calendar2;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
 
-    public RelatorioMensalMontagemBean()  {
-
-
-
+    public RelatorioMensalTratamentoBean(){
         try {
-
+            usersTratamento = userDao.ListarUsersTratamento();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -103,8 +97,8 @@ public class RelatorioMensalMontagemBean
 
         LineChartModel lineModel1;
 
-        lineModel1= initCategoryModel(userDao.ListarUsersMontagem());
-        lineModel1.setTitle("Produção Montagem do mês: " +userBean.getMesSelecionado().getNome()+" de "+ userBean.getAnoSelecionado());
+        lineModel1= initCategoryModel(usersTratamento);
+        lineModel1.setTitle("Produção Tratamento do mês: " +userBean.getMesSelecionado().getNome()+" de "+ userBean.getAnoSelecionado());
         lineModel1.setLegendPosition("sw");
         lineModel1.setShowPointLabels(true);
         lineModel1.setAnimate(true);
@@ -150,7 +144,7 @@ public class RelatorioMensalMontagemBean
                     qtdMaximo = relatorioTodosMes.get(x).getFotos();
                 }
                 userChart.set(simpleDateFormat.format(relatorioTodosMes.get(x).getDataRelatorio()), relatorioTodosMes.get(x).getFotos());
-                System.out.println("teste aqui montagem " + simpleDateFormat.format(relatorioTodosMes.get(x).getDataRelatorio())+" " + relatorioTodosMes.get(x).getFotos() +" " + relatorioTodosMes.get(x).getFuncionario().getApelido());
+
 
             }
             model.addSeries(userChart);

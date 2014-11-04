@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -8,45 +8,43 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <h:head>
-        <meta http-equiv="Content-Type"
-              content="text/html; charset=ISO-8859-1" />
-        <link rel="shortcut icon" type="image/x-icon"
-              href="/resources/images/icone.ico" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title></title>
     </h:head>
     <h:outputStylesheet library="css" name="estilo.css" />
-    <h:outputStylesheet library="css" name="dialog.css" />
 
     <body>
-    <p:growl id="growl" showDetail="true" autoUpdate="true" />
+
+    <p:growl showDetail="true" autoUpdate="true" />
+
     <f:metadata>
         <f:viewAction action="#{userBean.resultRedirectAdmin}" />
     </f:metadata>
 
     <ui:define name="menu">
-        <ui:include src="/include/admin/menu.xhtml" />
+        <ui:include src="/include/user/menu_patrao.xhtml"/>
     </ui:define>
-
     <ui:define name="content">
-
         <h:form>
-            <p:dataGrid var="ficha" value="#{listarFichas.listaFichas}" columns="3" layout="grid"
-                        id="fichas">
+
+            <p:dataGrid var="mes" value="#{listarMeseslBean.meses}" columns="3" layout="grid"
+                        id="meses">
                 <f:facet name="header">
-                    Fichas Ativas
+                    Produção do ano de <p:inputText value="#{userBean.anoSelecionado}"/>
                 </f:facet>
-                <p:panel header="Ficha: #{ficha.numero}/#{ficha.ano} (#{ficha.cliente.nome})" style="text-align:center">
+                <p:panel header="#{mes.nome}" style="text-align:center">
                     <h:panelGrid columns="1" style="width:100%">
-                        <h:commandLink title="Abrir Ficha" action="#{listarFichas.btListarCursosFicha()}" value="Abrir Ficha"  >
-                            <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;"  />
-                            <f:setPropertyActionListener value="#{ficha}" target="#{listarFichas.fichaSelecionada}" />
-                        </h:commandLink>
+                        <p:commandLink title="Abrir produção mensal" action="#{listarMeseslBean.btProducaoMensalMontagem()}" value="Abrir produção mensal"  >
+                                                   <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;"  />
+                                                   <f:setPropertyActionListener value="#{mes}" target="#{userBean.mesSelecionado}" />
+                                               </p:commandLink>
                     </h:panelGrid>
                 </p:panel>
 
             </p:dataGrid>
             <p:commandButton value="Atualizar" actionListener="#{listarFichas.atualizar}" update="@all" process="@all"/>
         </h:form>
+
     </ui:define>
 
 

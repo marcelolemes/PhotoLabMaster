@@ -1,4 +1,4 @@
-package br.com.login.bean.users.admin.listar.montagem;
+package br.com.login.bean.users.admin.listar.tratamento.mensal;
 
 import br.com.login.Dao.RelatorioDiarioDao;
 import br.com.login.Dao.UserDao;
@@ -6,10 +6,6 @@ import br.com.login.bean.users.UserBean;
 import br.com.login.model.Metricas;
 import br.com.login.model.RelatorioDiario;
 import br.com.login.model.User;
-import com.lowagie.text.BadElementException;
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Paragraph;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.*;
 
@@ -18,7 +14,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,10 +22,11 @@ import java.util.List;
 
 /**
  * Created by marcelo on 06/10/14.
+ * Com algumas pequenas alterações, serve para outros setores tbm, não será feito o reuso, pois não se faz necessário
  */
 @ManagedBean
 @ViewScoped
-public class RelatorioMensalMontagemMediaBean
+public class RelatorioMensalTratamentoMediaBean
 {
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
@@ -38,7 +34,7 @@ public class RelatorioMensalMontagemMediaBean
     private RelatorioDiario relatorioDiaro = new RelatorioDiario();
     private RelatorioDiarioDao relatorioDiarioDao = new RelatorioDiarioDao();
     private List<RelatorioDiario> relatorioList;
-    List<User> usersMontagem = new ArrayList<User>();
+    List<User> usersTratamento = new ArrayList<User>();
     UserDao userDao = new UserDao();
     static int qtdMaximo =0;
     Date data;
@@ -47,10 +43,9 @@ public class RelatorioMensalMontagemMediaBean
     PieChartModel model;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
 
-    public RelatorioMensalMontagemMediaBean()  {
+    public RelatorioMensalTratamentoMediaBean()  {
         try {
-            data = new Date();
-            usersMontagem = userDao.ListarUsersMontagem();
+            usersTratamento = userDao.ListarUsersTratamento();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -205,7 +200,7 @@ public class RelatorioMensalMontagemMediaBean
     public BarChartModel createBarModels1() throws Exception {
 
         BarChartModel barChartModel1;
-        barChartModel1 = initBarModel1(usersMontagem);
+        barChartModel1 = initBarModel1(usersTratamento);
         barChartModel1.setTitle("Participação Media Montagem do mês de "+userBean.getMesSelecionado().getNome()+" de "+ userBean.getAnoSelecionado());
         barChartModel1.setLegendPosition("ws");
 
@@ -214,7 +209,7 @@ public class RelatorioMensalMontagemMediaBean
     }
     public PieChartModel createPieModels1() throws Exception {
         PieChartModel pieChartModel1 = new PieChartModel();
-        pieChartModel1 = initPieModel1(usersMontagem);
+        pieChartModel1 = initPieModel1(usersTratamento);
         pieChartModel1.setTitle("Participação Total Montagem do mês de "+userBean.getMesSelecionado().getNome()+" de "+ userBean.getAnoSelecionado());
         pieChartModel1.setLegendPosition("ws");
 
@@ -226,7 +221,7 @@ public class RelatorioMensalMontagemMediaBean
     public void itemSelect(ItemSelectEvent event) {
 
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-                "Usuário", usersMontagem.get(event.getItemIndex()).getApelido());
+                "Usuário", usersTratamento.get(event.getItemIndex()).getApelido());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
@@ -252,7 +247,7 @@ public class RelatorioMensalMontagemMediaBean
                 qtdMaximo = (int)aux;
             }
 
-            userChart.set("Mês: "+userBean.getMesSelecionado().getNome(),aux);
+            userChart.set("Mês: " + userBean.getMesSelecionado().getNome(), aux);
             model.addSeries(userChart);
         }
 

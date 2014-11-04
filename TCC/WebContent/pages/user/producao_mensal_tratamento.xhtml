@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template/templatePrincipal.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title></title>
+    </h:head>
+    <h:outputStylesheet library="css" name="estilo.css" />
+
+    <body>
+
+    <p:growl showDetail="true" autoUpdate="true" />
+
+    <f:metadata>
+        <f:viewAction action="#{userBean.resultRedirectAdmin}" />
+    </f:metadata>
+
+    <ui:define name="menu">
+        <ui:include src="/include/user/menu_patrao.xhtml"/>
+    </ui:define>
+    <ui:define name="content">
+        <h:form>
+
+            <p:tabView id="patraoView">
+                <p:tab id="tratamentotab" title="Tratamento">
+                    <p:tabView>
+
+                        <p:tab title="Gráfico produção diária do mês atual">
+                            <p:chart type="line" model="#{relatorioMensalTratamentoBean.createLineModels()}"  style="height:300px;" widgetVar="graficoMontagem"/>
+                            <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('graficoMontagem').resetZoom()" styleClass="button-comun"/>
+
+                        </p:tab>
+                        <p:tab title="Gráfico participação na produção total tratamento">
+                            <p:chart type="pie" model="#{relatorioMensalTratamentoMediaBean.createPieModels1()}" style="height:300px;" widgetVar="graficoMontagemTotal">
+                                <p:ajax event="itemSelect" listener="#{relatorioMensalTratamentoMediaBean.itemSelect}" />
+                            </p:chart>
+                        </p:tab>
+
+                        <p:tab title="Gráfico média individual tratamento">
+                            <p:chart type="bar" model="#{relatorioMensalTratamentoMediaBean.createBarModels1()}" style="height:300px;" widgetVar="graficoMontagemMedia"/>
+                        </p:tab>
+
+                    </p:tabView>
+                </p:tab>
+
+            </p:tabView>
+        </h:form>
+    </ui:define>
+
+
+    </body>
+</ui:composition>

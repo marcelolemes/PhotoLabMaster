@@ -109,13 +109,23 @@ public class PanelAdmin implements Serializable {
 
         if (userBean.getUser().isLogado() /* && (userBean.getUserLogado() != null) */) {
 
-            FacesContext.getCurrentInstance().getExternalContext().redirect(  FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/user/producao_anual.jsf");
+            FacesContext.getCurrentInstance().getExternalContext().redirect(  FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/user/producao_anual_montagem.jsf");
 
         } else {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/pages/login_index.jsf");
         }
     }
 
+    public void btGraficoProducaoMensalTratamento() throws Exception {
+
+           if (userBean.getUser().isLogado() /* && (userBean.getUserLogado() != null) */) {
+
+               FacesContext.getCurrentInstance().getExternalContext().redirect(  FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/user/producao_anual_tratamento.jsf");
+
+           } else {
+               FacesContext.getCurrentInstance().getExternalContext().redirect("/pages/login_index.jsf");
+           }
+       }
 
     public String btCadastrarFicha(){
 
