@@ -210,7 +210,7 @@ public class RelatorioMensalTratamentoMediaBean
     public PieChartModel createPieModels1() throws Exception {
         PieChartModel pieChartModel1 = new PieChartModel();
         pieChartModel1 = initPieModel1(usersTratamento);
-        pieChartModel1.setTitle("Participação Total Montagem do mês de "+userBean.getMesSelecionado().getNome()+" de "+ userBean.getAnoSelecionado());
+        pieChartModel1.setTitle("Participação Total Tratamento do mês de "+userBean.getMesSelecionado().getNome()+" de "+ userBean.getAnoSelecionado());
         pieChartModel1.setLegendPosition("ws");
 
 
@@ -225,6 +225,12 @@ public class RelatorioMensalTratamentoMediaBean
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
+    public void itemSelect2(ItemSelectEvent event) {
+
+         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                 "Usuário", usersTratamento.get(event.getSeriesIndex()).getApelido());
+         FacesContext.getCurrentInstance().addMessage(null, msg);
+     }
 
     private BarChartModel initBarModel1(List<User> users) throws Exception {
         double aux=0;

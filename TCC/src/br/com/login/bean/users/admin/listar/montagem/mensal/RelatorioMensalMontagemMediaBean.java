@@ -230,6 +230,13 @@ public class RelatorioMensalMontagemMediaBean
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
+    public void itemSelect2(ItemSelectEvent event) {
+
+         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                 "Usuário", usersMontagem.get(event.getSeriesIndex()).getApelido());
+         FacesContext.getCurrentInstance().addMessage(null, msg);
+     }
+
 
     private BarChartModel initBarModel1(List<User> users) throws Exception {
         double aux=0;

@@ -43,7 +43,9 @@
                         </p:tab>
 
                         <p:tab title="Gráfico média individual montagem">
-                            <p:chart type="bar" model="#{relatorioMensalMontagemMediaBean.createBarModels1()}" style="height:300px;" widgetVar="graficoMontagemMedia"/>
+                            <p:chart type="bar" model="#{relatorioMensalMontagemMediaBean.createBarModels1()}" style="height:300px;" widgetVar="graficoMontagemMedia">
+                                <p:ajax event="itemSelect" listener="#{relatorioMensalMontagemMediaBean.itemSelect2}" />
+                            </p:chart>
                         </p:tab>
 
                     </p:tabView>
