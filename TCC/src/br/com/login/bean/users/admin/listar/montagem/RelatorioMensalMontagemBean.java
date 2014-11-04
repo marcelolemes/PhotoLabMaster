@@ -28,7 +28,7 @@ import java.util.List;
  */
 @ManagedBean
 @ViewScoped
-public class RelatorioMensalMontagemUserBean
+public class RelatorioMensalMontagemBean
 {
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
@@ -47,57 +47,11 @@ public class RelatorioMensalMontagemUserBean
     Calendar calendar2;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
 
-    public RelatorioMensalMontagemUserBean()  {
+    public RelatorioMensalMontagemBean()  {
 
 
 
         try {
-
-
-
-
-
-
-
-            /*for (int x =0;x<12;x++){
-
-
-                calendar = Calendar.getInstance();
-                calendar.clear(Calendar.DAY_OF_YEAR);
-                calendar.clear(Calendar.DAY_OF_WEEK);
-                calendar.clear(Calendar.DAY_OF_MONTH);
-                calendar.clear(Calendar.DAY_OF_WEEK_IN_MONTH);
-                calendar.clear(Calendar.HOUR_OF_DAY);
-                calendar.clear(Calendar.WEEK_OF_YEAR);
-                calendar.clear(Calendar.WEEK_OF_MONTH);
-                calendar.clear(Calendar.HOUR);
-                calendar.clear(Calendar.AM_PM);
-                calendar.clear(Calendar.MINUTE);
-                calendar.clear(Calendar.SECOND);
-                calendar.clear(Calendar.MILLISECOND);
-                calendar.set(Calendar.MONTH,x);
-
-                calendar2 = Calendar.getInstance();
-                calendar2.clear(Calendar.DAY_OF_YEAR);
-                calendar2.clear(Calendar.DAY_OF_WEEK);
-                calendar2.clear(Calendar.DAY_OF_MONTH);
-                calendar2.clear(Calendar.DAY_OF_WEEK_IN_MONTH);
-                calendar2.clear(Calendar.HOUR_OF_DAY);
-                calendar2.clear(Calendar.WEEK_OF_YEAR);
-                calendar2.clear(Calendar.WEEK_OF_MONTH);
-                calendar2.clear(Calendar.HOUR);
-                calendar2.clear(Calendar.AM_PM);
-                calendar2.clear(Calendar.MINUTE);
-                calendar2.clear(Calendar.SECOND);
-                calendar2.clear(Calendar.MILLISECOND);
-                calendar2.set(Calendar.MONTH,x+1);
-
-                meses.add(calendar);
-                mesesApos.add(calendar2);
-
-}
-*/
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -144,20 +98,6 @@ public class RelatorioMensalMontagemUserBean
         return relatorioDiarioDao.ListarMes(user,calendar,calendar2);
     }
 
-    public List<RelatorioDiario> albunsMes(User user) throws Exception {
-
-        return relatorioDiarioDao.ListarMes(user);
-    }
-
-    public void preProcessPDF(Object document) throws IOException,
-            BadElementException, DocumentException {
-        Document pdf = (Document) document;
-        pdf.open();
-        pdf.add(new Paragraph(userBean.getUserLogado().getApelido()));
-    }
-
-
-
 
     public LineChartModel createLineModels() throws Exception {
 
@@ -165,7 +105,7 @@ public class RelatorioMensalMontagemUserBean
 
         lineModel1= initCategoryModel(userDao.ListarUsersMontagem());
         lineModel1.setTitle("Produção Montagem do mês: " +userBean.getMesSelecionado().getNome()+" de "+ userBean.getAnoSelecionado());
-        lineModel1.setLegendPosition("s");
+        lineModel1.setLegendPosition("sw");
         lineModel1.setShowPointLabels(true);
         lineModel1.setAnimate(true);
         lineModel1.setZoom(true);

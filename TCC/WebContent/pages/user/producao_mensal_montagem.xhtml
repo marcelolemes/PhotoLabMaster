@@ -32,11 +32,19 @@
                     <p:tabView>
 
                         <p:tab title="Gráfico produção diária do mês atual">
-                            <p:chart type="line" model="#{relatorioMensalMontagemUserBean.createLineModels()}"  style="height:300px;" widgetVar="graficoMontagem"/>
+                            <p:chart type="line" model="#{relatorioMensalMontagemBean.createLineModels()}"  style="height:300px;" widgetVar="graficoMontagem"/>
                             <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('graficoMontagem').resetZoom()" styleClass="button-comun"/>
 
                         </p:tab>
+                        <p:tab title="Gráfico participação na produção total montagem">
+                            <p:chart type="pie" model="#{relatorioMensalMontagemMediaBean.createPieModels1()}" style="height:300px;" widgetVar="graficoMontagemTotal">
+                                <p:ajax event="itemSelect" listener="#{relatorioMensalMontagemMediaBean.itemSelect}" />
+                            </p:chart>
+                        </p:tab>
 
+                        <p:tab title="Gráfico média individual montagem">
+                            <p:chart type="bar" model="#{relatorioMensalMontagemMediaBean.createBarModels1()}" style="height:300px;" widgetVar="graficoMontagemMedia"/>
+                        </p:tab>
 
                     </p:tabView>
                 </p:tab>

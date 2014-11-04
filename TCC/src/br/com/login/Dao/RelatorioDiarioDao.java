@@ -256,6 +256,26 @@ public class RelatorioDiarioDao {
         return retorno;
     }
 
+
+    public double ListarMediaMes(User user,Calendar calendar1,Calendar calendar2) throws Exception {
+        double retorno=0;
+
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(RelatorioDiario.class);
+        criteria.add(Restrictions.gt("dataRelatorio", calendar1.getTime())).add(Restrictions.eq("funcionario", user)).add(Restrictions.lt("dataRelatorio",calendar2.getTime())).setProjection(Projections.avg("fotos"));;
+        criteria.addOrder(Order.asc("dataRelatorio"));
+
+        if((Double)criteria.uniqueResult()!=null) {
+            retorno = (Double) criteria.uniqueResult();
+        }
+
+        System.out.println("Mes teste media 1 aqui: "+calendar1.getTime());
+        System.out.println("Mes teste media 2 aqui: "+calendar2.getTime());
+
+        sessao.close();
+        return retorno;
+    }
+
     public long ListarTotalMes(User user) throws Exception {
         Calendar calendar1 = Calendar.getInstance();
         Calendar calendar2 = Calendar.getInstance();
@@ -305,6 +325,24 @@ public class RelatorioDiarioDao {
 
         System.out.println("Mes 1 aqui: "+calendar1.getTime());
         System.out.println("Mes 2 aqui: "+calendar2.getTime());
+
+        sessao.close();
+        return retorno;
+    }
+    public long ListarTotalMes(User user, Calendar calendar1, Calendar calendar2) throws Exception {
+        long retorno =0;
+
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(RelatorioDiario.class);
+        criteria.add(Restrictions.gt("dataRelatorio", calendar1.getTime())).add(Restrictions.eq("funcionario", user)).add(Restrictions.lt("dataRelatorio",calendar2.getTime())).setProjection(Projections.sum("fotos"));;
+        criteria.addOrder(Order.asc("dataRelatorio"));
+
+        if((Long)criteria.uniqueResult()!=null) {
+            retorno = (Long) criteria.uniqueResult();
+        }
+
+        System.out.println("teste total participação Mes 1 aqui: "+calendar1.getTime());
+        System.out.println("teste total participação Mes 2 aqui: "+calendar2.getTime());
 
         sessao.close();
         return retorno;
