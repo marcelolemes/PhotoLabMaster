@@ -16,6 +16,7 @@ public class Metricas implements Serializable {
 	private List<SelectItem> statusContratoLista = new ArrayList<SelectItem>();
 	private List<SelectItem> setores = new ArrayList<SelectItem>();
     String[] mes = {"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro" };
+
 	public Metricas() {
 
 		inicializarNivelAcesso();
@@ -25,12 +26,11 @@ public class Metricas implements Serializable {
 	}
 
 	public void inicializarNivelAcesso() {
-		nivelAcesso.add(new SelectItem(0, "Patrão"));
-		nivelAcesso.add(new SelectItem(1, "Usuário Júnior"));
-		nivelAcesso.add(new SelectItem(2, "Usuário Comum"));
-		nivelAcesso.add(new SelectItem(3, "Usuário Avançado"));
-		nivelAcesso.add(new SelectItem(4, "Gestor"));
-		nivelAcesso.add(new SelectItem(5, "SysAdmin"));
+        nivelAcesso.add(new SelectItem(0, "Patrão"));
+        nivelAcesso.add(new SelectItem(1, "Usuário"));
+		nivelAcesso.add(new SelectItem(2, "Gestor"));
+		nivelAcesso.add(new SelectItem(3, "Admin"));
+
 	}
 
 	public void inicializarSetores() {

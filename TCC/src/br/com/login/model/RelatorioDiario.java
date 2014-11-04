@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 
 @Entity
 @ManagedBean
-@Table(name = "relatorioDiario")
+@Table(name = "relatoriodiario")
 public class RelatorioDiario implements Serializable{
 
     @Id

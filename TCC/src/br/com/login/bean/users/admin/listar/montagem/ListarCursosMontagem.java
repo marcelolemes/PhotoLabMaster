@@ -25,6 +25,7 @@ public class ListarCursosMontagem implements Serializable {
     private Metricas metricas = new Metricas();
     private List<Contrato> listaContratoEmEspera;
     private List<Contrato> listaContratoPronto;
+    private List<Contrato> listaContratoFazendo;
     private List<Contrato> contratosFiltrados;
     private List<String> urgencias;
     private Contrato contratoSelecionado = new Contrato();
@@ -32,6 +33,7 @@ public class ListarCursosMontagem implements Serializable {
 
     public ListarCursosMontagem() throws Exception {
         contDao = new ContratoDao();
+        listaContratoFazendo = contDao.listarContratosStatus(13);
         listaContratoEmEspera = contDao.listarContratosStatus(11, 12,0);
         listaContratoPronto = contDao.listarContratosStatus(14);
     }
@@ -42,6 +44,7 @@ public class ListarCursosMontagem implements Serializable {
             listaContratoEmEspera.clear();
             listaContratoPronto.clear();
             contDao = new ContratoDao();
+            listaContratoFazendo = contDao.listarContratosStatus(13);
             listaContratoEmEspera = contDao.listarContratosStatus(11, 12,0);
             listaContratoPronto = contDao.listarContratosStatus(14);
         } catch (Exception ex) {
@@ -111,5 +114,13 @@ public class ListarCursosMontagem implements Serializable {
 
     public void setListaContratoPronto(List<Contrato> listaContratoPronto) {
         this.listaContratoPronto = listaContratoPronto;
+    }
+
+    public List<Contrato> getListaContratoFazendo() {
+        return listaContratoFazendo;
+    }
+
+    public void setListaContratoFazendo(List<Contrato> listaContratoFazendo) {
+        this.listaContratoFazendo = listaContratoFazendo;
     }
 }

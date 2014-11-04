@@ -106,10 +106,9 @@ public class RelatorioMensalMontagemBean
 
         lineModel1= initCategoryModel(userDao.ListarUsersMontagem());
         lineModel1.setTitle("Produção Montagem do mês: " +userBean.getMesSelecionado().getNome()+" de "+ userBean.getAnoSelecionado());
-        lineModel1.setLegendPosition("sw");
-        lineModel1.setShowPointLabels(true);
         lineModel1.setAnimate(true);
         lineModel1.setZoom(true);
+        lineModel1.setShowDatatip(true);
         Axis yAxis = lineModel1.getAxis(AxisType.Y);
         yAxis.setMin(0);
         yAxis.setMax(qtdMaximo+100);

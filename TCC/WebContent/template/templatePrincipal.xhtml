@@ -21,6 +21,7 @@
             <p:graphicImage url="/resources/images/ajaxloadingbar.gif" />
         </p:dialog>
 
+
 <p:layout fullPage="true">
     <p:layoutUnit position="north" size="20%" maxSize="45">
         <ui:insert name="menu" />
@@ -29,10 +30,10 @@
         <p:growl showDetail="true" autoUpdate="true" />
         <ui:insert name="content" />
     </p:layoutUnit>
-    <p:layoutUnit position="east" resizable="true" collapsible="true"  maxSize="450">
+    <p:layoutUnit position="east" resizable="true" maxSize="450" collapsible="true">
         <ui:insert name="east" />
     </p:layoutUnit>
-    <p:layoutUnit position="west" resizable="true"  maxSize="410">
+    <p:layoutUnit position="west" resizable="true"  maxSize="410" collapsible="true">
         <ui:insert name="west" />
     </p:layoutUnit>
     <p:layoutUnit position="south" resizable="true" size="50" maxSize="50">

@@ -30,8 +30,8 @@
         <p:tab title="Início">
 
             <p:panelGrid columns="2" styleClass="semBorda">
-                <p:commandButton value="Confirmar término do álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraMontagem.btTerminarAlbum}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
-                <p:commandButton value="Cancelar álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraMontagem.btCancelarAlbum()}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" update="@all"/>
+                <p:commandButton value="Confirmar término do álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraMontagem.btTerminarAlbum}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}"/>
+                <p:commandButton value="Cancelar álbum #{panelAdmin.userBean.userLogado.albumAtual.numero}" actionListener="#{regraMontagem.btCancelarAlbum()}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}"/>
                 <p:commandButton value="Inserir obs em:  #{panelAdmin.userBean.userLogado.albumAtual.numero}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" oncomplete="PF('obs').show()"/>
                 <p:commandButton value="Menos de 20" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" actionListener="#{regraMontagem.btMenosDeVinte()}" oncomplete="PF('menosde20').show()" />
             </p:panelGrid>
@@ -154,6 +154,7 @@
 </ui:define>
 
 <ui:define name="west">
+    <f:facet name="header">Área de apoio</f:facet>
     <h:form id="west">
         <p:panelGrid columns="2">
             <p:outputLabel value="Albuns de hoje: "/>
@@ -182,8 +183,9 @@
     </h:form>
 </ui:define>
 <ui:define name="east">
+    <f:facet name="header">Área de apoio</f:facet>
     <h:form>
-        <p:panel rendered="#{panelAdmin.userBean.userLogado.nivelAcesso ge 4? true:false}" styleClass="paneeast">
+        <p:panel rendered="#{panelAdmin.userBean.userLogado.nivelAcesso eq 2? true:false}" styleClass="paneeast">
             <p:dataTable value="#{listarCursosMontagem.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
                 <f:facet name="header">Contratos em espera</f:facet>
                 <p:column headerText="contrato" width="22%">

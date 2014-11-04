@@ -57,11 +57,11 @@ public class PanelAdmin implements Serializable {
     public String btVisualizarCursos() {
 
         if (userBean.getUser().isLogado()) {
-            if (userBean.getUserLogado().getNivelAcesso() < 4) {
+            if (userBean.getUserLogado().getNivelAcesso() <= 2) {
 
                 userBean.autoridadeInsuficiente();
 
-                if (userBean.getUserLogado().getNivelAcesso() > 4) {
+                if (userBean.getUserLogado().getNivelAcesso() > 2) {
                     return "/pages/admin/result_index.xhtml";
                 } else {
                     return "/pages/user/result_index"
@@ -82,11 +82,11 @@ public class PanelAdmin implements Serializable {
     public String btVisualizarFichas() {
 
         if (userBean.getUser().isLogado()) {
-            if (userBean.getUserLogado().getNivelAcesso() < 4) {
+            if (userBean.getUserLogado().getNivelAcesso() <= 2) {
 
                 userBean.autoridadeInsuficiente();
 
-                if (userBean.getUserLogado().getNivelAcesso() > 4) {
+                if (userBean.getUserLogado().getNivelAcesso() > 2) {
                     return "/pages/admin/result_index.xhtml";
                 } else {
                     return "/pages/user/result_index"
@@ -131,11 +131,11 @@ public class PanelAdmin implements Serializable {
 
 
         if (userBean.getUser().isLogado()) {
-            if (userBean.getUserLogado().getNivelAcesso() < 4) {
+            if (userBean.getUserLogado().getNivelAcesso() <= 2) {
 
                 userBean.autoridadeInsuficiente();
 
-                if (userBean.getUserLogado().getNivelAcesso() > 4) {
+                if (userBean.getUserLogado().getNivelAcesso() > 2) {
                     return "/pages/admin/result_index.xhtml";
                 } else {
                     return "/pages/user/result_index"
@@ -157,12 +157,12 @@ public class PanelAdmin implements Serializable {
     public String btCadastro() {
 
         if (userBean.getUser().isLogado()) {
-            if (userBean.getUserLogado().getNivelAcesso() < 4) {
+            if (userBean.getUserLogado().getNivelAcesso() <= 2) {
 
                 userBean.autoridadeInsuficiente();
                 // return "result.xhtml";
 
-                if (userBean.getUserLogado().getNivelAcesso() > 4) {
+                if (userBean.getUserLogado().getNivelAcesso() > 2) {
                     return "/pages/admin/result_index.xhtml";
                 } else {
                     return "/pages/user/result_index"
@@ -188,7 +188,7 @@ public class PanelAdmin implements Serializable {
 
                 userBean.autoridadeInsuficiente();
 
-                if (userBean.getUserLogado().getNivelAcesso() > 4) {
+                if (userBean.getUserLogado().getNivelAcesso() > 2) {
                     return "/pages/admin/result_index.xhtml";
                 } else {
                     return "/pages/user/result_index"
@@ -215,7 +215,7 @@ public class PanelAdmin implements Serializable {
 
                 userBean.autoridadeInsuficiente();
 
-                if (userBean.getUserLogado().getNivelAcesso() > 4) {
+                if (userBean.getUserLogado().getNivelAcesso() > 2) {
                     return "/pages/admin/result_index.xhtml";
                 } else {
                     return "/pages/user/result_index"
@@ -237,11 +237,11 @@ public class PanelAdmin implements Serializable {
     public String btCadastrarAlbum() {
 
         if (userBean.getUser().isLogado()) {
-            if (userBean.getUserLogado().getNivelAcesso() < 4) {
+            if (userBean.getUserLogado().getNivelAcesso()  <= 2) {
 
                 userBean.autoridadeInsuficiente();
 
-                if (userBean.getUserLogado().getNivelAcesso() > 4) {
+                if (userBean.getUserLogado().getNivelAcesso() > 2) {
                     return "/pages/admin/result_index.xhtml";
                 } else {
                     return "/pages/user/result_index"
@@ -263,11 +263,11 @@ public class PanelAdmin implements Serializable {
     public String btListarAlbuns() {
 
         if (userBean.getUser().isLogado()) {
-            if (userBean.getUserLogado().getNivelAcesso() < 4) {
+            if (userBean.getUserLogado().getNivelAcesso()  <= 2) {
 
                 userBean.autoridadeInsuficiente();
 
-                if (userBean.getUserLogado().getNivelAcesso() > 4) {
+                if (userBean.getUserLogado().getNivelAcesso() > 2) {
                     return "/pages/admin/result_index.xhtml";
                 } else {
                     return "/pages/user/result_index"
@@ -289,11 +289,11 @@ public class PanelAdmin implements Serializable {
     public String btListarAlbunsCurso() {
 
         if (userBean.getUser().isLogado()) {
-            if (userBean.getUserLogado().getNivelAcesso() < 4) {
+            if (userBean.getUserLogado().getNivelAcesso()  <= 2) {
 
                 userBean.autoridadeInsuficiente();
 
-                if (userBean.getUserLogado().getNivelAcesso() > 4) {
+                if (userBean.getUserLogado().getNivelAcesso() > 2) {
                     return "/pages/admin/result_index.xhtml";
                 } else {
                     return "/pages/user/result_index"
@@ -315,12 +315,12 @@ public class PanelAdmin implements Serializable {
     public String btListarUsers() {
 
         if (userBean.getUser().isLogado()) {
-            if (userBean.getUserLogado().getNivelAcesso() < 4) {
+            if (userBean.getUserLogado().getNivelAcesso() <= 2) {
 
                 userBean.autoridadeInsuficiente();
                 // return "result.xhtml";
 
-                if (userBean.getUserLogado().getNivelAcesso() > 4) {
+                if (userBean.getUserLogado().getNivelAcesso() > 2) {
                     return "/pages/admin/result_index.xhtml";
                 } else {
                     return "/pages/user/result_index"

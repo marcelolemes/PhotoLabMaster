@@ -63,7 +63,7 @@ public class UserBean implements Serializable {
     public String logar() throws Exception {
         if (user.isLogado()) {
             loginAtivo();
-            if (userLogado.getNivelAcesso() > 4) {
+            if (userLogado.getNivelAcesso() > 2) {
                 return "/pages/admin/result_index.xhtml";
             } else {
                 return "/pages/user/result_index" + userLogado.getSetor()
@@ -93,7 +93,7 @@ public class UserBean implements Serializable {
 
         if (user.isLogado() /* && (userBean.getUserLogado() != null) */) {
 
-            if (userLogado.getNivelAcesso() > 4) {
+            if (userLogado.getNivelAcesso() > 2) {
                 return "/pages/admin/result_index.xhtml";
             } else {
                 return "/pages/user/result_index" + userLogado.getSetor()
@@ -109,7 +109,7 @@ public class UserBean implements Serializable {
 
         if (user.isLogado() /* && (userBean.getUserLogado() != null) */) {
 
-            if (userLogado.getNivelAcesso() > 4) {
+            if (userLogado.getNivelAcesso() > 2) {
                 FacesContext.getCurrentInstance().getExternalContext().redirect( FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/admin/result_index.jsf");
             } else {
                 FacesContext.getCurrentInstance().getExternalContext().redirect(  FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/user/result_index" + userLogado.getSetor()
@@ -160,7 +160,7 @@ public class UserBean implements Serializable {
 
         if (getUserLogado() != null) {
 
-            if (userLogado.getNivelAcesso() > 4) {
+            if (userLogado.getNivelAcesso() > 2) {
                 FacesContext.getCurrentInstance().getExternalContext().redirect( FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/admin/result_index.jsf");
             } else {
                 FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/user/result_index" + userLogado.getSetor()
@@ -176,7 +176,7 @@ public class UserBean implements Serializable {
 
         if (getUserLogado() != null) {
 
-            if (userLogado.getNivelAcesso() > 4) {
+            if (userLogado.getNivelAcesso() > 2 || userLogado.getNivelAcesso() == 0) {
                 return "";
             } else {
                 return "/pages/user/result_index" + userLogado.getSetor()
@@ -192,7 +192,7 @@ public class UserBean implements Serializable {
 
         if (getUserLogado() != null) {
 
-            if (userLogado.getNivelAcesso() > 4) {
+            if (userLogado.getNivelAcesso() > 2) {
                 return "/pages/admin/result_index.xhtml";
             } else {
                 return "";
@@ -239,7 +239,7 @@ public class UserBean implements Serializable {
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Login",
                         "Seja bem vindo " + sessao));
 
-        if (userLogado.getNivelAcesso() > 4) {
+        if (userLogado.getNivelAcesso() > 2) {
             return "/pages/admin/result_index.xhtml";
         }
 

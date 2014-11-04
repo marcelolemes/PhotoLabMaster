@@ -32,18 +32,20 @@
                     <p:tabView>
 
                         <p:tab title="Gráfico produção diária do mês atual">
-                            <p:chart type="line" model="#{relatorioMensalTratamentoBean.createLineModels()}"  style="height:300px;" widgetVar="graficoMontagem"/>
-                            <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('graficoMontagem').resetZoom()" styleClass="button-comun"/>
+                            <p:chart type="line" model="#{relatorioMensalTratamentoBean.createLineModels()}"  style="height:300px;" widgetVar="graficoTratamento">
+                                <p:ajax event="itemSelect" listener="#{relatorioMensalTratamentoMediaBean.itemSelect2}" />
+                            </p:chart>
+                            <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('graficoTratamento').resetZoom()" styleClass="button-comun"/>
 
                         </p:tab>
                         <p:tab title="Gráfico participação na produção total tratamento">
-                            <p:chart type="pie" model="#{relatorioMensalTratamentoMediaBean.createPieModels1()}" style="height:300px;" widgetVar="graficoMontagemTotal">
+                            <p:chart type="pie" model="#{relatorioMensalTratamentoMediaBean.createPieModels1()}" style="height:300px;" widgetVar="graficoTratamentoTotal">
                                 <p:ajax event="itemSelect" listener="#{relatorioMensalTratamentoMediaBean.itemSelect}" />
                             </p:chart>
                         </p:tab>
 
                         <p:tab title="Gráfico média individual tratamento">
-                            <p:chart type="bar" model="#{relatorioMensalTratamentoMediaBean.createBarModels1()}" style="height:300px;" widgetVar="graficoMontagemMedia">
+                            <p:chart type="bar" model="#{relatorioMensalTratamentoMediaBean.createBarModels1()}" style="height:300px;" widgetVar="graficoTratamentoMedia">
                                 <p:ajax event="itemSelect" listener="#{relatorioMensalTratamentoMediaBean.itemSelect2}" />
                             </p:chart>
                         </p:tab>

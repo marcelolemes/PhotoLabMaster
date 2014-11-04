@@ -72,7 +72,7 @@
                     <p:outputLabel value="Observação do album:" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.obs}" />
                     <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.obs}" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual.obs}" />
                 </p:panelGrid>
-                <p:commandButton id="atualizarResult2" value="Atualizar Tudo" update="@all" process="@all" immediate="true"  actionListener="#{userBean.btHome}"/>
+                <p:commandButton id="atualizarResult2" value="Atualizar Tudo" update="@all" process="@all" immediate="true"  action="#{userBean.btHome}"/>
 
             </p:panel>
 
@@ -148,6 +148,7 @@
 </ui:define>
 
 <ui:define name="west">
+    <f:facet name="header">Área de apoio</f:facet>
     <h:form id="west">
         <p:panelGrid columns="2">
             <p:outputLabel value="Albuns de hoje: "/>
@@ -175,8 +176,9 @@
     </h:form>
 </ui:define>
 <ui:define name="east">
+    <f:facet name="header">Área de apoio</f:facet>
     <h:form>
-        <p:panel rendered="#{panelAdmin.userBean.userLogado.nivelAcesso ge 4? true:false}" styleClass="paneeast">
+        <p:panel rendered="#{panelAdmin.userBean.userLogado.nivelAcesso eq 2? true:false}" styleClass="paneeast">
             <p:dataTable value="#{listarCursosTratamento.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
                 <f:facet name="header">Contratos em espera</f:facet>
                 <p:column headerText="contrato" width="22%">

@@ -94,6 +94,7 @@ public class ContratoDao implements Serializable {
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Contrato.class);
         criteria.add(Restrictions.eq("status", unique));
+        criteria.addOrder(Order.desc("urgencia"));
         List<Contrato> listaRetorno = criteria.list();
         sessao.close();
         return listaRetorno;

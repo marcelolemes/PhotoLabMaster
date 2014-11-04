@@ -69,6 +69,18 @@
                     </p:column>
                 </p:dataTable>
 
+                <p:dataTable value="#{listarCursosTratamento.listaContratoFazendo}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em tratamento">
+                    <f:facet name="header">Contratos em tratamento de pele</f:facet>
+                    <p:column headerText="contrato" width="22%">
+                        #{contrato.numeroContrato}
+                    </p:column>
+                    <p:column headerText="curso">
+                        #{contrato.curso}
+                    </p:column>
+                    <p:column headerText="albuns" width="18%">
+                        #{contrato.qtdAlbum}
+                    </p:column>
+                </p:dataTable>
 
                 <p:dataTable value="#{listarCursosTratamento.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
                     <f:facet name="header">Contratos prontos</f:facet>
@@ -89,8 +101,9 @@
         Montagem
         <h:form>
             <p:panel rendered="#{panelAdmin.userBean.userLogado.nivelAcesso eq 0? true:false}" styleClass="paneeast">
-                <p:dataTable value="#{listarCursosMontagem.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
-                    <f:facet name="header">Contratos em espera</f:facet>
+
+                <p:dataTable value="#{listarCursosMontagem.listaContratoFazendo}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato sendo montado">
+                    <f:facet name="header">Contratos em montagem</f:facet>
                     <p:column headerText="contrato" width="22%">
                         #{contrato.numeroContrato}
                     </p:column>

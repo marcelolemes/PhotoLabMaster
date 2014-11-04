@@ -30,6 +30,7 @@ public class ListarCursosTratamento implements Serializable {
     private Metricas metricas = new Metricas();
     private List<Contrato> listaContratoEmEspera;
     private List<Contrato> listaContratoPronto;
+    private List<Contrato> listaContratoFazendo;
     private List<Contrato> contratosFiltrados;
     private List<String> urgencias;
     private Contrato contratoSelecionado = new Contrato();
@@ -38,6 +39,7 @@ public class ListarCursosTratamento implements Serializable {
     public ListarCursosTratamento() throws Exception {
         contDao = new ContratoDao();
         listaContratoEmEspera = contDao.listarContratosStatus(5, 7,1);
+        listaContratoFazendo  = contDao.listarContratosStatus(8);
         listaContratoPronto = contDao.listarContratosStatus(11);
     }
 
@@ -47,7 +49,8 @@ public class ListarCursosTratamento implements Serializable {
             listaContratoEmEspera.clear();
             listaContratoPronto.clear();
             contDao = new ContratoDao();
-            listaContratoEmEspera = contDao.listarContratosStatus(6, 10,1);
+            listaContratoFazendo  = contDao.listarContratosStatus(8);
+            listaContratoEmEspera = contDao.listarContratosStatus(5, 7,1);
             listaContratoPronto = contDao.listarContratosStatus(11);
         } catch (Exception ex) {
 
@@ -116,5 +119,13 @@ public class ListarCursosTratamento implements Serializable {
 
     public void setListaContratoPronto(List<Contrato> listaContratoPronto) {
         this.listaContratoPronto = listaContratoPronto;
+    }
+
+    public List<Contrato> getListaContratoFazendo() {
+        return listaContratoFazendo;
+    }
+
+    public void setListaContratoFazendo(List<Contrato> listaContratoFazendo) {
+        this.listaContratoFazendo = listaContratoFazendo;
     }
 }

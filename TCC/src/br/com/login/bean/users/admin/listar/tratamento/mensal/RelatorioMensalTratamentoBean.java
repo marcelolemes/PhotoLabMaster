@@ -99,10 +99,9 @@ public class RelatorioMensalTratamentoBean
 
         lineModel1= initCategoryModel(usersTratamento);
         lineModel1.setTitle("Produção Tratamento do mês: " +userBean.getMesSelecionado().getNome()+" de "+ userBean.getAnoSelecionado());
-        lineModel1.setLegendPosition("sw");
-        lineModel1.setShowPointLabels(true);
         lineModel1.setAnimate(true);
         lineModel1.setZoom(true);
+        lineModel1.setShowDatatip(true);
         Axis yAxis = lineModel1.getAxis(AxisType.Y);
         yAxis.setMin(0);
         yAxis.setMax(qtdMaximo+100);
