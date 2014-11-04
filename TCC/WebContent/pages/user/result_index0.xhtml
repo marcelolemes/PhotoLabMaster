@@ -89,7 +89,7 @@
         Montagem
         <h:form>
             <p:panel rendered="#{panelAdmin.userBean.userLogado.nivelAcesso eq 0? true:false}" styleClass="paneeast">
-                <p:dataTable value="#{listarCursosTratamento.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
+                <p:dataTable value="#{listarCursosMontagem.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
                     <f:facet name="header">Contratos em espera</f:facet>
                     <p:column headerText="contrato" width="22%">
                         #{contrato.numeroContrato}
@@ -103,7 +103,7 @@
                 </p:dataTable>
 
 
-                <p:dataTable value="#{listarCursosTratamento.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
+                <p:dataTable value="#{listarCursosMontagem.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
                     <f:facet name="header">Contratos prontos</f:facet>
                     <p:column headerText="contrato" width="22%">
                         #{contrato.numeroContrato}
