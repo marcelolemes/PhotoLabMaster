@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template/templatePrincipal.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title></title>
+    </h:head>
+    <h:outputStylesheet library="css" name="estilo.css" />
+
+    <body>
+
+    <p:growl showDetail="true" autoUpdate="true" />
+
+    <f:metadata>
+        <f:viewAction action="#{userBean.resultRedirectAdmin}" />
+    </f:metadata>
+
+    <ui:define name="menu">
+        <ui:include src="/include/user/menu.xhtml" />
+    </ui:define>
+    <ui:define name="content">
+        <h:form>
+            <p:dataGrid var="mes" value="#{relatorioAnualMontagemUserBean.mesesAno}" columns="3" layout="grid"
+                        id="meses">
+                <f:facet name="header">
+                    Fichas Ativas
+                </f:facet>
+                <p:panel header="#" style="text-align:center">
+                    <h:panelGrid columns="1" style="width:100%">
+                        <p:outputLabel value="#{relatorioAnualMontagemUserBean.parseMes(mes)}"/>
+                    </h:panelGrid>
+                </p:panel>
+
+            </p:dataGrid>
+            <p:commandButton value="Atualizar" actionListener="#{listarFichas.atualizar}" update="@all" process="@all"/>
+        </h:form>
+
+    </ui:define>
+
+
+    </body>
+</ui:composition>

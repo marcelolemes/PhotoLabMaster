@@ -66,8 +66,7 @@ public class ListarFichas implements Serializable {
     }
 
     public String btListarCursosFicha() {
-        System.out.println("Chegou no botão");
-        return "/pages/admin/visualizarcursos_ficha.xhtml?redirect=false";
+        return "/pages/admin/visualizarcursos_ficha.xhtml?redirect=false"; //não mexer
     }
 
     public String parserUrgencia(int urgencia) {

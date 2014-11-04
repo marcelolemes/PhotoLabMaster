@@ -8,6 +8,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,8 @@ import java.util.List;
  */
 public class RelatorioDiarioDao {
     RelatorioDiario relatorio = new RelatorioDiario();
+    private List<Calendar> meses= new ArrayList<Calendar>();
+    private List<Calendar> mesesApos= new ArrayList<Calendar>();
 
     public void salvarRelatorio(RelatorioDiario relatorio) throws Exception{
 
@@ -143,6 +146,21 @@ public class RelatorioDiarioDao {
         calendar2.clear(Calendar.SECOND);
         calendar2.clear(Calendar.MILLISECOND);
         calendar2.add(Calendar.MONTH,1);
+
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(RelatorioDiario.class);
+        criteria.add(Restrictions.gt("dataRelatorio", calendar1.getTime())).add(Restrictions.eq("funcionario", user)).add(Restrictions.lt("dataRelatorio",calendar2.getTime()));
+        criteria.addOrder(Order.asc("dataRelatorio"));
+        List<RelatorioDiario> listaRetorno = criteria.list();
+        System.out.println("Mes 1 aqui: "+calendar1.getTime());
+        System.out.println("Mes 2 aqui: "+calendar2.getTime());
+        System.out.println("User : "+user.getApelido()+" dias "+listaRetorno.size());
+        sessao.close();
+        return listaRetorno;
+    }
+    public List<RelatorioDiario> ListarMes(User user, Calendar calendar1,Calendar calendar2) throws Exception { //testando
+
+
 
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(RelatorioDiario.class);
