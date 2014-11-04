@@ -152,12 +152,13 @@ public class RelatorioDiarioDao {
         criteria.add(Restrictions.gt("dataRelatorio", calendar1.getTime())).add(Restrictions.eq("funcionario", user)).add(Restrictions.lt("dataRelatorio",calendar2.getTime()));
         criteria.addOrder(Order.asc("dataRelatorio"));
         List<RelatorioDiario> listaRetorno = criteria.list();
-        System.out.println("Mes 1 aqui: "+calendar1.getTime());
-        System.out.println("Mes 2 aqui: "+calendar2.getTime());
+        System.out.println("a Mes 1 aqui: "+calendar1.getTime()); //sem uso, sobrecarga a
+        System.out.println("a Mes 2 aqui: "+calendar2.getTime());
         System.out.println("User : "+user.getApelido()+" dias "+listaRetorno.size());
         sessao.close();
         return listaRetorno;
     }
+
     public List<RelatorioDiario> ListarMes(User user, Calendar calendar1,Calendar calendar2) throws Exception { //testando
 
 
@@ -249,8 +250,8 @@ public class RelatorioDiarioDao {
             retorno = (Double) criteria.uniqueResult();
         }
 
-        System.out.println("Mes 1 aqui: "+calendar1.getTime());
-        System.out.println("Mes 2 aqui: "+calendar2.getTime());
+        System.out.println("b Mes 1 aqui: "+calendar1.getTime()); // sem uso, sobrecarga b
+        System.out.println("b Mes 2 aqui: "+calendar2.getTime());
 
         sessao.close();
         return retorno;
@@ -323,8 +324,8 @@ public class RelatorioDiarioDao {
             retorno = (Long) criteria.uniqueResult();
         }
 
-        System.out.println("Mes 1 aqui: "+calendar1.getTime());
-        System.out.println("Mes 2 aqui: "+calendar2.getTime());
+        System.out.println("c Mes 1 aqui: "+calendar1.getTime()); //sem uso, sobrecarga b
+        System.out.println("c Mes 2 aqui: "+calendar2.getTime());
 
         sessao.close();
         return retorno;

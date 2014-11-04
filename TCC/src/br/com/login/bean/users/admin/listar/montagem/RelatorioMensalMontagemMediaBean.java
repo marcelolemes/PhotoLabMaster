@@ -232,7 +232,7 @@ public class RelatorioMensalMontagemMediaBean
 
 
     private BarChartModel initBarModel1(List<User> users) throws Exception {
-
+        double aux=0;
         BarChartModel model = new BarChartModel();
         ChartSeries userChart;
 
@@ -240,13 +240,19 @@ public class RelatorioMensalMontagemMediaBean
             userChart = new ChartSeries();
             userChart.setLabel(users.get(y).getApelido());
 
-
-            if(qtdMaximo< mediaAlbunsMes(users.get(y)))
+            try {
+                aux = mediaAlbunsMes(users.get(y),userBean.getMesSelecionado().getNumero(),userBean.getAnoSelecionado());
+            }
+            catch (Exception ex)
             {
-                qtdMaximo = (int)mediaAlbunsMes(users.get(y),userBean.getMesSelecionado().getNumero(),userBean.getAnoSelecionado());
+                aux=0;
+            }
+            if(qtdMaximo< aux)
+            {
+                qtdMaximo = (int)aux;
             }
 
-            userChart.set("Mês: "+userBean.getMesSelecionado().getNome(), mediaAlbunsMes(users.get(y),userBean.getMesSelecionado().getNumero(),userBean.getAnoSelecionado()));
+            userChart.set("Mês: "+userBean.getMesSelecionado().getNome(),aux);
             model.addSeries(userChart);
         }
 
@@ -254,7 +260,7 @@ public class RelatorioMensalMontagemMediaBean
         Axis yAxis = model.getAxis(AxisType.Y);
         yAxis.setLabel("Fotos");
         yAxis.setMin(0);
-        yAxis.setMax(qtdMaximo+50);
+        yAxis.setMax(qtdMaximo + 50);
 
         return model;
     }
@@ -264,7 +270,7 @@ public class RelatorioMensalMontagemMediaBean
 
         for (int y = 0; y < users.size(); y++) {
 
-            model.set(users.get(y).getApelido(), totalAlbunsMes(users.get(y),userBean.getMesSelecionado().getNumero(),userBean.getAnoSelecionado()));
+            model.set(users.get(y).getApelido(), totalAlbunsMes(users.get(y), userBean.getMesSelecionado().getNumero(), userBean.getAnoSelecionado()));
 
         }
 

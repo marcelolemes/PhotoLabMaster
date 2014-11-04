@@ -34,7 +34,7 @@
                 </f:facet>
                 <p:panel header="#{mes.nome}" style="text-align:center">
                     <h:panelGrid columns="1" style="width:100%">
-                        <p:commandLink title="Abrir produção mensal" actionListener="#{listarMeseslBean.btProducaoMensalMontagem()}" value="Abrir produção mensal"  >
+                        <p:commandLink title="Abrir produção mensal" action="#{listarMeseslBean.btProducaoMensalMontagem()}" value="Abrir produção mensal"  >
                                                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;"  />
                                                    <f:setPropertyActionListener value="#{mes}" target="#{userBean.mesSelecionado}" />
                                                </p:commandLink>

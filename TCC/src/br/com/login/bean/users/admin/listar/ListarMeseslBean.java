@@ -52,8 +52,8 @@ public class ListarMeseslBean
         }
     }
 
-    public void btProducaoMensalMontagem() throws IOException {
-        FacesContext.getCurrentInstance().getExternalContext().redirect( FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/user/producao_mensal_montagem.jsf");
+    public String btProducaoMensalMontagem(){
+        return "/pages/user/producao_mensal_montagem.jsf";
     }
 
     public List<Mes> getMeses() {
