@@ -2,6 +2,7 @@ package br.com.login.bean.users;
 
 import br.com.login.Dao.UserDao;
 import br.com.login.model.Contrato;
+import br.com.login.model.Mes;
 import br.com.login.model.Metricas;
 import br.com.login.model.User;
 import org.primefaces.context.RequestContext;
@@ -12,6 +13,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 
 @ManagedBean(name = "userBean", eager = true)
@@ -25,7 +27,8 @@ public class UserBean implements Serializable {
             .getNivelAcesso();
     private List<SelectItem> setores = new Metricas().getSetores();
     private Contrato contratoSelecionado= new Contrato();
-
+    private Mes mesSelecionado= new Mes();
+    private int anoSelecionado= Calendar.getInstance().get(Calendar.YEAR);
     public UserBean() {
 
         user = new User();
@@ -119,14 +122,16 @@ public class UserBean implements Serializable {
     }
     public void btProducao() throws Exception {
 
-           if (user.isLogado() /* && (userBean.getUserLogado() != null) */) {
+        if (user.isLogado() /* && (userBean.getUserLogado() != null) */) {
 
-                   FacesContext.getCurrentInstance().getExternalContext().redirect(  FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/user/relatorio_user.jsf");
+            FacesContext.getCurrentInstance().getExternalContext().redirect(  FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/user/relatorio_user.jsf");
 
-           } else {
-               FacesContext.getCurrentInstance().getExternalContext().redirect("/pages/login_index.jsf");
-           }
-       }
+        } else {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/pages/login_index.jsf");
+        }
+    }
+
+
 
 
     public void btTrocarSenha() throws Exception {
@@ -378,5 +383,21 @@ public class UserBean implements Serializable {
 
     public void setContratoSelecionado(Contrato contratoSelecionado) {
         this.contratoSelecionado = contratoSelecionado;
+    }
+
+    public Mes getMesSelecionado() {
+        return mesSelecionado;
+    }
+
+    public void setMesSelecionado(Mes mesSelecionado) {
+        this.mesSelecionado = mesSelecionado;
+    }
+
+    public int getAnoSelecionado() {
+        return anoSelecionado;
+    }
+
+    public void setAnoSelecionado(int anoSelecionado) {
+        this.anoSelecionado = anoSelecionado;
     }
 }

@@ -54,7 +54,7 @@
                 <p:panelGrid columns="2" styleClass="semBorda">
                     <p:outputLabel value="Usuário da sessão" />
                     <p:outputLabel value="#{panelAdmin.userBean.userLogado.apelido}"  />
-                    <p:outputLabel value="Contrato:" />
+                    <p:outputLabel value="Contrato:" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" />
                     <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.contrato.numeroContrato}"  styleClass="negrito"/>
                     <p:outputLabel value="serviço atual" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" />
                     <p:outputLabel value="#{panelAdmin.userBean.userLogado.albumAtual.numero} com #{panelAdmin.userBean.userLogado.albumAtual.qtdFotos} fotos" styleClass="negrito" rendered="#{not empty panelAdmin.userBean.userLogado.albumAtual}" />

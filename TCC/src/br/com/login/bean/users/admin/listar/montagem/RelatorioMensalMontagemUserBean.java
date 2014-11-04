@@ -16,17 +16,19 @@ import org.primefaces.model.chart.*;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by marcelo on 06/10/14.
  */
 @ManagedBean
 @ViewScoped
-public class RelatorioAnualMontagemUserBean
+public class RelatorioMensalMontagemUserBean
 {
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
@@ -39,32 +41,19 @@ public class RelatorioAnualMontagemUserBean
     private List<Mes> meses;
     UserDao userDao = new UserDao();
     static int qtdMaximo =0;
-    private static int mesSelecionado =0;
+    //private static int mesSelecionado =0;
     Date data;
     Calendar calendar;
     Calendar calendar2;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
 
-    public RelatorioAnualMontagemUserBean()  {
+    public RelatorioMensalMontagemUserBean()  {
 
 
 
         try {
-            data = new Date();
 
-            meses = new ArrayList<Mes>();
-            meses.add(new Mes(0,"Janeiro"));
-            meses.add(new Mes(1,"Fevereiro"));
-            meses.add(new Mes(2,"Março"));
-            meses.add(new Mes(3,"Abril"));
-            meses.add(new Mes(4,"Maio"));
-            meses.add(new Mes(5,"Junho"));
-            meses.add(new Mes(6,"Julho"));
-            meses.add(new Mes(7,"Agosto"));
-            meses.add(new Mes(8,"Setembro"));
-            meses.add(new Mes(9,"Outubro"));
-            meses.add(new Mes(10,"Novembro"));
-            meses.add(new Mes(11,"Dezembro"));
+
 
 
 
@@ -116,9 +105,10 @@ public class RelatorioAnualMontagemUserBean
     }
 
 
-    public List<RelatorioDiario> albunsMes(User user,int mes) throws Exception { // fazer classe com nome  e numero do mEs
+    public List<RelatorioDiario> albunsMes(User user,int mes,int ano) throws Exception { // fazer classe com nome  e numero do mEs
 
         calendar = Calendar.getInstance();
+        calendar.clear(Calendar.YEAR);
         calendar.clear(Calendar.DAY_OF_YEAR);
         calendar.clear(Calendar.DAY_OF_WEEK);
         calendar.clear(Calendar.DAY_OF_MONTH);
@@ -132,14 +122,27 @@ public class RelatorioAnualMontagemUserBean
         calendar.clear(Calendar.SECOND);
         calendar.clear(Calendar.MILLISECOND);
         calendar.set(Calendar.MONTH,mes);
+        calendar.set(Calendar.YEAR,ano);
 
-        return relatorioDiarioDao.ListarMes(user,calendar);
+        calendar2 = Calendar.getInstance();
+        calendar2.clear(Calendar.YEAR);
+        calendar2.clear(Calendar.DAY_OF_YEAR);
+        calendar2.clear(Calendar.DAY_OF_WEEK);
+        calendar2.clear(Calendar.DAY_OF_MONTH);
+        calendar2.clear(Calendar.DAY_OF_WEEK_IN_MONTH);
+        calendar2.clear(Calendar.HOUR_OF_DAY);
+        calendar2.clear(Calendar.WEEK_OF_YEAR);
+        calendar2.clear(Calendar.WEEK_OF_MONTH);
+        calendar2.clear(Calendar.HOUR);
+        calendar2.clear(Calendar.AM_PM);
+        calendar2.clear(Calendar.MINUTE);
+        calendar2.clear(Calendar.SECOND);
+        calendar2.clear(Calendar.MILLISECOND);
+        calendar2.set(Calendar.MONTH,mes+1);
+        calendar2.set(Calendar.YEAR,ano);
+
+        return relatorioDiarioDao.ListarMes(user,calendar,calendar2);
     }
-
-    public void btProducaoMensal() throws IOException {
-        //return "/pages/user/producao_mensal.xhtml?redirect=true"; //não mexer
-        FacesContext.getCurrentInstance().getExternalContext().redirect( FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/user/producao_mensal.jsf");
-        }
 
     public List<RelatorioDiario> albunsMes(User user) throws Exception {
 
@@ -161,8 +164,8 @@ public class RelatorioAnualMontagemUserBean
         LineChartModel lineModel1;
 
         lineModel1= initCategoryModel(userDao.ListarUsersMontagem());
-        lineModel1.setTitle("Produção Montagem do mês: "+meses.get(mesSelecionado).getNome());
-        lineModel1.setLegendPosition("w");
+        lineModel1.setTitle("Produção Montagem do mês: " +userBean.getMesSelecionado().getNome()+" de "+ userBean.getAnoSelecionado());
+        lineModel1.setLegendPosition("s");
         lineModel1.setShowPointLabels(true);
         lineModel1.setAnimate(true);
         lineModel1.setZoom(true);
@@ -197,8 +200,7 @@ public class RelatorioAnualMontagemUserBean
         model.addSeries(userChart);
 
         for (int y = 0; y < users.size(); y++) {
-            relatorioTodosMes = albunsMes(users.get(y),mesSelecionado);
-            userChart = null;
+            relatorioTodosMes = albunsMes(users.get(y),userBean.getMesSelecionado().getNumero(),userBean.getAnoSelecionado());
             userChart = new ChartSeries();
             userChart.setLabel(users.get(y).getApelido());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd");

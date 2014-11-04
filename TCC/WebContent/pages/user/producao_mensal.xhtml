@@ -22,7 +22,7 @@
     </f:metadata>
 
     <ui:define name="menu">
-        <ui:include src="/include/user/menu.xhtml" />
+        <ui:include src="/include/user/menu_patrao.xhtml"/>
     </ui:define>
     <ui:define name="content">
         <h:form>
@@ -32,42 +32,15 @@
                     <p:tabView>
 
                         <p:tab title="Gráfico produção diária do mês atual">
-                            <p:chart type="line" model="#{relatorioMontagemUserBean.createLineModels()}"  style="height:300px;" widgetVar="graficoMontagem"/>
+                            <p:chart type="line" model="#{relatorioMensalMontagemUserBean.createLineModels()}"  style="height:300px;" widgetVar="graficoMontagem"/>
                             <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('graficoMontagem').resetZoom()" styleClass="button-comun"/>
 
                         </p:tab>
-                        <p:tab title="Gráfico participação na produção total montagem">
-                            <p:chart type="pie" model="#{relatorioMontagemMediaUserBean.createPieModels1()}" style="height:300px;" widgetVar="graficoMontagemTotal">
-                                <p:ajax event="itemSelect" listener="#{relatorioMontagemMediaUserBean.itemSelect}" />
-                            </p:chart>
-                        </p:tab>
 
-                        <p:tab title="Gráfico média individual montagem">
-                            <p:chart type="bar" model="#{relatorioMontagemMediaUserBean.createBarModels1()}" style="height:300px;" widgetVar="graficoMontagemMedia"/>
-                        </p:tab>
 
                     </p:tabView>
                 </p:tab>
-                <p:tab id="tratamentoTab" title="Tratamento">
-                    <p:tabView>
 
-                        <p:tab title="Gráfico produção diária do mês atual">
-                            <p:chart type="line" model="#{relatorioTratamentoUserBean.createLineModels()}"  style="height:300px;" widgetVar="graficoTratamento"/>
-                            <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('graficoTratamento').resetZoom()"/>
-
-                        </p:tab>
-                        <p:tab title="Gráfico participação na produção total tratamento">
-                            <p:chart type="pie" model="#{relatorioTratamentoMediaUserBean.createPieModels1()}" style="height:300px;" widgetVar="graficoTratamentoTotal">
-                                <p:ajax event="itemSelect" listener="#{relatorioTratamentoMediaUserBean.itemSelect}" />
-                            </p:chart>
-                        </p:tab>
-
-                        <p:tab title="Gráfico média individual montagem">
-                            <p:chart type="bar" model="#{relatorioTratamentoMediaUserBean.createBarModels1()}" style="height:300px;" widgetVar="graficoTratamentoMedia"/>
-                        </p:tab>
-
-                    </p:tabView>
-                </p:tab>
             </p:tabView>
         </h:form>
     </ui:define>

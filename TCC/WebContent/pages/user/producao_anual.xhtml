@@ -22,18 +22,22 @@
     </f:metadata>
 
     <ui:define name="menu">
-        <ui:include src="/include/user/menu.xhtml" />
+        <ui:include src="/include/user/menu_patrao.xhtml"/>
     </ui:define>
     <ui:define name="content">
         <h:form>
-            <p:dataGrid var="mes" value="#{relatorioAnualMontagemUserBean.mesesAno}" columns="3" layout="grid"
+
+            <p:dataGrid var="mes" value="#{relatorioAnualMontagemUserBean.meses}" columns="3" layout="grid"
                         id="meses">
                 <f:facet name="header">
-                    Fichas Ativas
+                    Produção do ano de <p:inputText value="#{userBean.anoSelecionado}"/>
                 </f:facet>
-                <p:panel header="#" style="text-align:center">
+                <p:panel header="#{mes.nome}" style="text-align:center">
                     <h:panelGrid columns="1" style="width:100%">
-                        <p:outputLabel value="#{relatorioAnualMontagemUserBean.parseMes(mes)}"/>
+                        <p:commandLink title="Abrir produção mensal" actionListener="#{relatorioAnualMontagemUserBean.btProducaoMensal()}" value="Abrir produção mensal"  >
+                                                   <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;"  />
+                                                   <f:setPropertyActionListener value="#{mes}" target="#{userBean.mesSelecionado}" />
+                                               </p:commandLink>
                     </h:panelGrid>
                 </p:panel>
 

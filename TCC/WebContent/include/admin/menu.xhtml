@@ -46,10 +46,12 @@
                             action="#{panelAdmin.btVisualizarCursos()}" />
 
             </p:submenu>
-            <p:submenu label="Pesquisar">
-                <p:menuitem value="Pesquisar Album"
-                            action="#" />
 
+            <p:submenu label="Produção">
+                <p:submenu label="Produção montagem">
+                    <p:menuitem value="Gráfico produção diária"
+                                                action="#{panelAdmin.btGraficoProducaoMensalMontagem()}" />
+                </p:submenu>
             </p:submenu>
 
             <p:submenu label="SysAdmin">

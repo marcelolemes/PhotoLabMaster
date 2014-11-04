@@ -105,6 +105,18 @@ public class PanelAdmin implements Serializable {
 
     }
 
+    public void btGraficoProducaoMensalMontagem() throws Exception {
+
+        if (userBean.getUser().isLogado() /* && (userBean.getUserLogado() != null) */) {
+
+            FacesContext.getCurrentInstance().getExternalContext().redirect(  FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/user/producao_anual.jsf");
+
+        } else {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/pages/login_index.jsf");
+        }
+    }
+
+
     public String btCadastrarFicha(){
 
 
