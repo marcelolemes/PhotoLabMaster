@@ -25,53 +25,98 @@
         <ui:include src="/include/user/menu_patrao.xhtml"/>
     </ui:define>
     <ui:define name="content">
+        <ui:insert name="centralContent" />
+        <p:panel styleClass="panecentral">
+            <p:panelGrid columns="2" styleClass="semBorda">
+                <p:outputLabel value="Usuário da sessão" />
+                <p:outputLabel value="#{panelAdmin.userBean.userLogado.apelido}" />
+                <p:outputLabel value="ultimo acesso" />
+                <p:outputLabel
+                        value="#{panelAdmin.userBean.userLogado.ultimoacesso}" />
+            </p:panelGrid>
+
+        </p:panel>
         <h:form>
-
-            <p:tabView id="patraoView">
-                <p:tab id="montagemTab" title="Montagem">
-                    <p:tabView>
-
-                        <p:tab title="Gráfico produção diária do mês atual">
-                            <p:chart type="line" model="#{relatorioMontagemUserBean.createLineModels()}"  style="height:300px;" widgetVar="graficoMontagem"/>
-                            <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('graficoMontagem').resetZoom()" styleClass="button-comun"/>
-
-                        </p:tab>
-                        <p:tab title="Gráfico participação na produção total montagem">
-                            <p:chart type="pie" model="#{relatorioMontagemMediaUserBean.createPieModels1()}" style="height:300px;" widgetVar="graficoMontagemTotal">
-                                <p:ajax event="itemSelect" listener="#{relatorioMontagemMediaUserBean.itemSelect}" />
-                            </p:chart>
-                        </p:tab>
-
-                        <p:tab title="Gráfico média individual montagem">
-                            <p:chart type="bar" model="#{relatorioMontagemMediaUserBean.createBarModels1()}" style="height:300px;" widgetVar="graficoMontagemMedia"/>
-                        </p:tab>
-
-                    </p:tabView>
-                </p:tab>
-                <p:tab id="tratamentoTab" title="Tratamento">
-                    <p:tabView>
-
-                        <p:tab title="Gráfico produção diária do mês atual">
-                            <p:chart type="line" model="#{relatorioTratamentoUserBean.createLineModels()}"  style="height:300px;" widgetVar="graficoTratamento"/>
-                            <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('graficoTratamento').resetZoom()"/>
-
-                        </p:tab>
-                        <p:tab title="Gráfico participação na produção total tratamento">
-                            <p:chart type="pie" model="#{relatorioTratamentoMediaUserBean.createPieModels1()}" style="height:300px;" widgetVar="graficoTratamentoTotal">
-                                <p:ajax event="itemSelect" listener="#{relatorioTratamentoMediaUserBean.itemSelect}" />
-                            </p:chart>
-                        </p:tab>
-
-                        <p:tab title="Gráfico média individual montagem">
-                            <p:chart type="bar" model="#{relatorioTratamentoMediaUserBean.createBarModels1()}" style="height:300px;" widgetVar="graficoTratamentoMedia"/>
-                        </p:tab>
-
-                    </p:tabView>
-                </p:tab>
-            </p:tabView>
+            <p:dialog header="TrocarSenha" widgetVar="TrocarSenha">
+                <p:panel id="trocarSenhaPanel">
+                    <p:panelGrid columns="2" styleClass="semBorda">
+                        <p:outputLabel value="insira a NOVA senha:" />
+                        <h:inputSecret value="#{panelAdmin.senhaTemporaria}" />
+                        <p:outputLabel value="REPITA a NOVA senha:" />
+                        <h:inputSecret value="#{panelAdmin.senhaTemporaria2}" />
+                        <p:commandButton value="Gravar senha"
+                                         action="#{panelAdmin.mudarSenha()}"
+                                         oncomplete="PF('TrocarSenha').hide()" />
+                    </p:panelGrid>
+                </p:panel>
+            </p:dialog>
         </h:form>
     </ui:define>
+    <ui:define name="east">
+        Tratamento
+        <h:form>
+            <p:panel rendered="#{panelAdmin.userBean.userLogado.nivelAcesso eq 0? true:false}" styleClass="paneeast">
+                <p:dataTable value="#{listarCursosTratamento.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
+                    <f:facet name="header">Contratos em espera</f:facet>
+                    <p:column headerText="contrato" width="22%">
+                        #{contrato.numeroContrato}
+                    </p:column>
+                    <p:column headerText="curso">
+                        #{contrato.curso}
+                    </p:column>
+                    <p:column headerText="albuns" width="18%">
+                        #{contrato.qtdAlbum}
+                    </p:column>
+                </p:dataTable>
 
 
+                <p:dataTable value="#{listarCursosTratamento.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
+                    <f:facet name="header">Contratos prontos</f:facet>
+                    <p:column headerText="contrato" width="22%">
+                        #{contrato.numeroContrato}
+                    </p:column>
+                    <p:column headerText="curso">
+                        #{contrato.curso}
+                    </p:column>
+                    <p:column headerText="albuns" width="18%">
+                        #{contrato.qtdAlbum}
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+    <ui:define name="west">
+        Montagem
+        <h:form>
+            <p:panel rendered="#{panelAdmin.userBean.userLogado.nivelAcesso eq 0? true:false}" styleClass="paneeast">
+                <p:dataTable value="#{listarCursosTratamento.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
+                    <f:facet name="header">Contratos em espera</f:facet>
+                    <p:column headerText="contrato" width="22%">
+                        #{contrato.numeroContrato}
+                    </p:column>
+                    <p:column headerText="curso">
+                        #{contrato.curso}
+                    </p:column>
+                    <p:column headerText="albuns" width="18%">
+                        #{contrato.qtdAlbum}
+                    </p:column>
+                </p:dataTable>
+
+
+                <p:dataTable value="#{listarCursosTratamento.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
+                    <f:facet name="header">Contratos prontos</f:facet>
+                    <p:column headerText="contrato" width="22%">
+                        #{contrato.numeroContrato}
+                    </p:column>
+                    <p:column headerText="curso">
+                        #{contrato.curso}
+                    </p:column>
+                    <p:column headerText="albuns" width="18%">
+                        #{contrato.qtdAlbum}
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
     </body>
 </ui:composition>
