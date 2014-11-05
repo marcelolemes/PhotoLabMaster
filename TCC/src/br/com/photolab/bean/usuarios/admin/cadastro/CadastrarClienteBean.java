@@ -19,7 +19,7 @@ public class CadastrarClienteBean implements Serializable {
 
     public String gravarCliente() throws Exception {
         clienteDao.Gravar(cliente);
-        return "/pages/admin/result_index.xhtml";
+        return "/pages/admin/pagina_principal_admin.xhtml";
     }
 
     public Cliente getCliente() {

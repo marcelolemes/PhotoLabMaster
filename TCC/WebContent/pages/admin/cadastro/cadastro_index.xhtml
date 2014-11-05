@@ -3,6 +3,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
                 template="/template/templatePrincipal.xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
@@ -20,10 +21,35 @@
 
 
 		<ui:define name="menu">
-            <ui:include src="/include/admin/menu.xhtml" />
+			<ui:include src="/include/menu%20inicial.xhtml" />
 		</ui:define>
 		<ui:define name="content">
-			<ui:include src="/pages/login/cadastro.xhtml" />
+            <h:form id="cadastro">
+
+                <div align="center"></div>
+                <p:panel styleClass="center">
+                    <p:panelGrid columns="2" styleClass="semBorda">
+                        <p:outputLabel value="Apelido" />
+                        <p:inputText id="apelidoInput" value="#{usuarioBean.usuario.apelido}" />
+                        <p:outputLabel value="Senha" />
+                        <p:password value="#{usuarioBean.usuario.senha}" />
+                        <p:outputLabel value="Nível de acesso" />
+                        <p:selectOneMenu id="nivelacessoinput"
+                                         value="#{usuarioBean.usuario.nivelAcesso}">
+                            <f:selectItems value="#{usuarioBean.nivelAcessoCadastro}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Setor" />
+                        <p:selectOneMenu id="setorinput" value="#{usuarioBean.usuario.setor}">
+                            <f:selectItems value="#{usuarioBean.setores}" />
+                        </p:selectOneMenu>
+
+
+                    </p:panelGrid>
+                    <p:commandButton value="Gravar" action="#{usuarioBean.gravar()}"
+                                     update="@all" />
+                </p:panel>
+
+            </h:form>
 		</ui:define>
 	</body>
 </ui:composition>

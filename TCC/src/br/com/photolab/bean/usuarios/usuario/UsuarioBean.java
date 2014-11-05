@@ -57,16 +57,16 @@ public class UsuarioBean implements Serializable {
 
         usuarioLogado = usuarioDao.atualizar(usuarioLogado);
         // return "result.xhtml";
-        return "/pages/result_index.xhtml";
+        return "/pages/admin/conteudo/pagina_principal_admin.xhtml";
     }
 
     public String logar() throws Exception {
         if (usuario.isLogado()) {
             loginAtivo();
             if (usuarioLogado.getNivelAcesso() > 2) {
-                return "/pages/admin/result_index.xhtml";
+                return "/pages/admin/conteudo/pagina_principal_admin.xhtml";
             } else {
-                return "/pages/usuario/result_index" + usuarioLogado.getSetor()
+                return "/pages/usuario/pagina_principal/pagina_inicial_setor_" + usuarioLogado.getSetor()
                         + ".xhtml?faces-redirect=true";
             }
 
@@ -94,9 +94,9 @@ public class UsuarioBean implements Serializable {
         if (usuario.isLogado() /* && (userBean.getUsuarioLogado() != null) */) {
 
             if (usuarioLogado.getNivelAcesso() > 2) {
-                return "/pages/admin/result_index.xhtml";
+                return "/pages/admin/conteudo/pagina_principal_admin.xhtml";
             } else {
-                return "/pages/usuario/result_index" + usuarioLogado.getSetor()
+                return "/pages/usuario/pagina_principal/pagina_inicial_setor_" + usuarioLogado.getSetor()
                         + ".xhtml";
             }
 
@@ -110,9 +110,9 @@ public class UsuarioBean implements Serializable {
         if (usuario.isLogado() /* && (userBean.getUsuarioLogado() != null) */) {
 
             if (usuarioLogado.getNivelAcesso() > 2) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect( FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/admin/result_index.jsf");
+                FacesContext.getCurrentInstance().getExternalContext().redirect( FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/admin/conteudo/pagina_principal_admin.jsf");
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(  FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/usuario/result_index" + usuarioLogado.getSetor()
+                FacesContext.getCurrentInstance().getExternalContext().redirect(  FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/usuario/pagina_principal/pagina_inicial_setor_" + usuarioLogado.getSetor()
                         + ".jsf");
             }
 
@@ -149,10 +149,10 @@ public class UsuarioBean implements Serializable {
 
         if (getUsuarioLogado() != null && getUsuarioLogado().getNivelAcesso() < 2) {
 
-            return "/pages/admin/visualizarcursos_index.xhtml";
+            return "/pages/admin/conteudo/visualizarcursos_index.xhtml";
 
         } else {
-            return "/pages/admin/result_index.xhtml";
+            return "/pages/admin/conteudo/pagina_principal_admin.xhtml";
         }
     }
 
@@ -161,9 +161,9 @@ public class UsuarioBean implements Serializable {
         if (getUsuarioLogado() != null) {
 
             if (usuarioLogado.getNivelAcesso() > 2) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect( FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/admin/result_index.jsf");
+                FacesContext.getCurrentInstance().getExternalContext().redirect( FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/admin/conteudo/pagina_principal_admin.jsf");
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/usuario/result_index" + usuarioLogado.getSetor()
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/usuario/pagina_principal/pagina_inicial_setor_" + usuarioLogado.getSetor()
                         + ".jsf");
             }
 
@@ -179,7 +179,7 @@ public class UsuarioBean implements Serializable {
             if (usuarioLogado.getNivelAcesso() > 2 || usuarioLogado.getNivelAcesso() == 0) {
                 return "";
             } else {
-                return "/pages/usuario/result_index" + usuarioLogado.getSetor()
+                return "/pages/usuario/pagina_principal/pagina_inicial_setor_" + usuarioLogado.getSetor()
                         + ".xhtml";
             }
 
@@ -193,7 +193,7 @@ public class UsuarioBean implements Serializable {
         if (getUsuarioLogado() != null) {
 
             if (usuarioLogado.getNivelAcesso() > 2) {
-                return "/pages/admin/result_index.xhtml";
+                return "/pages/admin/conteudo/pagina_principal_admin.xhtml";
             } else {
                 return "";
             }
@@ -212,7 +212,7 @@ public class UsuarioBean implements Serializable {
                 usuario = new Usuario();
                 usuario.setLogado(true);
             }
-            return "/pages/admin/result_index.xhtml";
+            return "/pages/admin/conteudo/pagina_principal_admin.xhtml";
 
         } catch (Exception ex) {
             messageErroCadastro();
@@ -240,11 +240,11 @@ public class UsuarioBean implements Serializable {
                         "Seja bem vindo " + sessao));
 
         if (usuarioLogado.getNivelAcesso() > 2) {
-            return "/pages/admin/result_index.xhtml";
+            return "/pages/admin/conteudo/pagina_principal_admin.xhtml";
         }
 
         else {
-            return "/pages/usuario/result_index" + usuarioLogado.getSetor()
+            return "/pages/usuario/pagina_principal/pagina_inicial_setor_" + usuarioLogado.getSetor()
                     + ".xhtml";
         }
 
@@ -257,11 +257,11 @@ public class UsuarioBean implements Serializable {
                         "Sessão ainda ativa para o usuário:  " + sessao));
         // return "result.xhtml";
         if (usuarioLogado.getNivelAcesso() < 4) {
-            return "/pages/admin/result_index.xhtml";
+            return "/pages/admin/conteudo/pagina_principal_admin.xhtml";
         }
 
         else {
-            return "/pages/usuario/result_index" + usuarioLogado.getSetor()
+            return "/pages/usuario/pagina_principal/pagina_inicial_setor_" + usuarioLogado.getSetor()
                     + ".xhtml";
         }
 
@@ -273,7 +273,7 @@ public class UsuarioBean implements Serializable {
                 new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Ativo",
                         "Sessão ativa reiniciada:  " + sessao));
         // return "result.xhtml";
-        return "/pages/admin/result_index.xhtml";
+        return "/pages/admin/conteudo/pagina_principal_admin.xhtml";
 
     }
 
