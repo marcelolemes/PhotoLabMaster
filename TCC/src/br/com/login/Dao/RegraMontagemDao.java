@@ -42,16 +42,21 @@ public class RegraMontagemDao implements Serializable {
                     retorno.setUserMontagem(user);
                 }
 
-                retorno.setStatus(13);
+                retorno.setStatus(8); //Marca o album como "montagem"
                 retorno.setOcupado(true);
-                contrato = contDao.atualizarContratoRetorna(contrato);
-                contrato.setUrgencia(0);
-                contrato.setOcupado(true);
                 Session sessao = HibernateUtil.getSession();
                 org.hibernate.Transaction transacao = sessao.beginTransaction();
-                System.out.println("Contrato update regra montagem");
-                sessao.update(contrato);
                 sessao.update(retorno);
+                transacao.commit();
+                sessao.close();
+
+                contrato = contDao.atualizarContratoRetorna(contrato); //Verifica qual a condição geral do contrato, baseado no status dos albuns
+                contrato.setUrgencia(0);
+                contrato.setOcupado(true);
+
+                sessao = HibernateUtil.getSession(); //Registra a condição atual do contrato
+                transacao = sessao.beginTransaction();
+                sessao.update(contrato);
                 transacao.commit();
                 sessao.close();
             }

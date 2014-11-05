@@ -43,15 +43,21 @@ public class RegraTratamentoDao implements Serializable {
                     retorno.setUserTratamento(user);
                 }
 
-                retorno.setStatus(8);
+                retorno.setStatus(8); //Marca o album como "em tratamento"
                 retorno.setOcupado(true);
-                contrato = contDao.atualizarContratoRetorna(contrato);
-                contrato.setUrgencia(0);
-                contrato.setOcupado(true);
                 Session sessao = HibernateUtil.getSession();
                 org.hibernate.Transaction transacao = sessao.beginTransaction();
-                sessao.update(contrato);
                 sessao.update(retorno);
+                transacao.commit();
+                sessao.close();
+
+                contrato = contDao.atualizarContratoRetorna(contrato); //Verifica qual a condição geral do contrato, baseado no status dos albuns
+                contrato.setUrgencia(0);
+                contrato.setOcupado(true);
+
+                sessao = HibernateUtil.getSession(); //Registra a condição atual do contrato
+                transacao = sessao.beginTransaction();
+                sessao.update(contrato);
                 transacao.commit();
                 sessao.close();
             }

@@ -207,8 +207,15 @@ public class ContratoDao implements Serializable {
                                     retorno.setUrgencia(4);
                                     retorno.setOcupado(false);
                                 }
+                                else if(status == 7){
+                                    retorno.setStatus(7);
+                                    retorno.setUrgencia(4);
+                                    retorno.setOcupado(false);
+                                }
                                 else {
-                                    retorno.setStatus(statusMax - 3);
+                                    retorno.setStatus(statusMax - 8);
+                                    retorno.setUrgencia(0);
+                                    retorno.setOcupado(true);
                                 }
                             }
                             else {
@@ -231,6 +238,7 @@ public class ContratoDao implements Serializable {
                                 retorno.setStatus(statusMax);
                             }
                             break;
+
                         case 14:
                             if(status != statusMax) {
                                 if(status>=6 & status <=10) {

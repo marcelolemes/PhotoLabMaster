@@ -70,8 +70,6 @@ public class RegraMontagem implements Serializable {
     public void btPegarAlbum() throws Exception {
 
 
-
-
         try {
             userBean.getUserLogado().setAlbumAtual(regDao.NovoAlbum(userBean.getUserLogado()));
             userBean.getUserLogado().setAuxiliar(userBean.getUserLogado().getAlbumAtual().getContrato().getCaminho()+File.separator+ userBean.getUserLogado().getAlbumAtual().getNumero());
@@ -88,7 +86,7 @@ public class RegraMontagem implements Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "Algum erro ocorreu",
-                            "Informe o seu superior imediatamente!"));
+                            "Não foi possivel pegar o album, tente atualizar a página"));
         }
 
 
@@ -101,7 +99,7 @@ public class RegraMontagem implements Serializable {
         relatorioDao.deletarRelatorio(relatorio);
         userBean.getUserLogado().setAlbumAtual(null);
         userDao.Update(userBean.getUserLogado());
-        //userBean.btHome();
+        userBean.btHome();
     }
 
     public void btMenosDeVinte() throws Exception {
