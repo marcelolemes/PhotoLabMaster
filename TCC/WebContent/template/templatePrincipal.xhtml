@@ -48,14 +48,14 @@
             <div style="float: left;">
                 <p:panelGrid columns="5" styleClass="semBorda">
                     <p:commandButton icon="ui-icon-close" styleClass="botao-sair"
-                                     rendered="#{not empty panelAdmin.userBean.userLogado.apelido}"
-                                     value="#{panelAdmin.userBean.userLogado.apelido} (sair)"
+                                     rendered="#{not empty panelAdmin.usuarioBean.usuarioLogado.apelido}"
+                                     value="#{panelAdmin.usuarioBean.usuarioLogado.apelido} (sair)"
                                      action="#{panelAdmin.sairSessao()}" update="@all" process="@this" />
 
                     <p:clock pattern="HH:mm:ss" mode="server" />
-                    <p:outputLabel value="ultimo acesso" rendered="#{not empty panelAdmin.userBean.userLogado.ultimoacesso}" />
+                    <p:outputLabel value="ultimo acesso" rendered="#{not empty panelAdmin.usuarioBean.usuarioLogado.ultimoacesso}" />
                     <p:outputLabel
-                            value="#{panelAdmin.userBean.userLogado.ultimoacesso}" rendered="#{not empty panelAdmin.userBean.userLogado.ultimoacesso}" >
+                            value="#{panelAdmin.usuarioBean.usuarioLogado.ultimoacesso}" rendered="#{not empty panelAdmin.usuarioBean.usuarioLogado.ultimoacesso}" >
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </p:outputLabel>
                 </p:panelGrid>

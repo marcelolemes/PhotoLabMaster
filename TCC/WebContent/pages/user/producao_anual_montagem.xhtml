@@ -18,11 +18,11 @@
     <p:growl showDetail="true" autoUpdate="true" />
 
     <f:metadata>
-        <f:viewAction action="#{userBean.resultRedirectAdmin}" />
+        <f:viewAction action="#{usuarioBean.resultRedirectAdmin}" />
     </f:metadata>
 
     <ui:define name="menu">
-        <ui:include src="/include/user/menu_patrao.xhtml"/>
+        <ui:include src="/include/usuario/menu_patrao.xhtml"/>
     </ui:define>
     <ui:define name="content">
         <h:form>
@@ -30,13 +30,13 @@
             <p:dataGrid var="mes" value="#{listarMeseslBean.meses}" columns="3" layout="grid"
                         id="meses">
                 <f:facet name="header">
-                    Produção do ano de <p:inputText value="#{userBean.anoSelecionado}"/>
+                    Produção do ano de <p:inputText value="#{usuarioBean.anoSelecionado}"/>
                 </f:facet>
                 <p:panel header="#{mes.nome}" style="text-align:center">
                     <h:panelGrid columns="1" style="width:100%">
                         <p:commandLink title="Abrir produção mensal" action="#{listarMeseslBean.btProducaoMensalMontagem()}" value="Abrir produção mensal"  >
                                                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;"  />
-                                                   <f:setPropertyActionListener value="#{mes}" target="#{userBean.mesSelecionado}" />
+                                                   <f:setPropertyActionListener value="#{mes}" target="#{usuarioBean.mesSelecionado}" />
                                                </p:commandLink>
                     </h:panelGrid>
                 </p:panel>

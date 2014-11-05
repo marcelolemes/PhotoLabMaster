@@ -16,7 +16,7 @@
     <body>
 
     <f:metadata>
-        <f:viewAction action="#{userBean.resultRedirectAdmin}" />
+        <f:viewAction action="#{usuarioBean.resultRedirectAdmin}" />
     </f:metadata>
     <p:growl showDetail="true" autoUpdate="true" />
 
@@ -33,21 +33,21 @@
             </p:layoutUnit>
 
             <p:layoutUnit position="center"
-                          header="Admin do #{listaUsuariosBean.parserSetor(panelAdmin.userBean.userLogado)}">
+                          header="Admin do #{listaUsuariosBean.parserSetor(panelAdmin.usuarioBean.usuarioLogado)}">
                 <ui:insert name="centralContent" />
                 <p:panel styleClass="panecentral">
                     <p:panelGrid columns="2" styleClass="semBorda">
                         <p:outputLabel value="Usuário da sessão" />
-                        <p:outputLabel value="#{panelAdmin.userBean.userLogado.apelido}" />
+                        <p:outputLabel value="#{panelAdmin.usuarioBean.usuarioLogado.apelido}" />
                         <p:outputLabel value="setor" />
                         <p:outputLabel
-                                value="#{listaUsuariosBean.parserSetor(panelAdmin.userBean.userLogado)}" />
+                                value="#{listaUsuariosBean.parserSetor(panelAdmin.usuarioBean.usuarioLogado)}" />
                         <p:outputLabel value="Nível de acesso" />
                         <p:outputLabel
-                                value="#{listaUsuariosBean.parserNivel(panelAdmin.userBean.userLogado)}" />
+                                value="#{listaUsuariosBean.parserNivel(panelAdmin.usuarioBean.usuarioLogado)}" />
                         <p:outputLabel value="ultimo acesso" />
                         <p:outputLabel
-                                value="#{panelAdmin.userBean.userLogado.ultimoacesso}" />
+                                value="#{panelAdmin.usuarioBean.usuarioLogado.ultimoacesso}" />
                     </p:panelGrid>
                     <p:separator/>
                     <p:outputLabel value="este aplicativo (não é action do photoshop), está em fase de testes, para evitar a fadiga, atualize a tela antes de qualquer operação" />

@@ -15,7 +15,7 @@
     <h:outputStylesheet library="css" name="estilo.css" />
 
     <f:metadata>
-        <f:viewAction action="#{userBean.loginRedirect()}" />
+        <f:viewAction action="#{usuarioBean.loginRedirect()}" />
     </f:metadata>
 
 
@@ -35,13 +35,13 @@
                         <div align="center">
                             <h2 class="titulologin">login</h2>
                         </div>
-                        <p:inputText id="apelidoInput" value="#{userBean.user.apelido}"
+                        <p:inputText id="apelidoInput" value="#{usuarioBean.usuario.apelido}"
                                      styleClass="input-login" />
-                        <p:password id="senhaInput" value="#{userBean.user.senha}"
+                        <p:password id="senhaInput" value="#{usuarioBean.usuario.senha}"
                                     styleClass="input-login" />
                     </p:panelGrid>
                     <p:commandButton styleClass="button-login" value="Entrar"
-                                     action="#{userBean.logar()}"/>
+                                     action="#{usuarioBean.logar()}"/>
                 </div>
                 <p:panelGrid columns="1" styleClass="semBorda">
 

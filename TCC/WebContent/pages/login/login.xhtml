@@ -12,7 +12,7 @@
 </h:head>
 <h:outputStylesheet library="css" name="estilo.css" />
 
-<f:event type="preRenderView" listener="#{userBean.loginRedirect()}" />
+<f:event type="preRenderView" listener="#{usuarioBean.loginRedirect()}" />
 
 <body>
 	<!-- 		<h:graphicImage value="/resources/images/logo.png" width="100%"
@@ -34,13 +34,13 @@
 					<div align="center">
 						<h2 class="titulologin">login</h2>
 					</div>
-					<p:inputText id="apelidoInput" value="#{userBean.user.apelido}"
+					<p:inputText id="apelidoInput" value="#{usuarioBean.usuario.apelido}"
 						styleClass="button-login" />
-					<p:password id="senhaInput" value="#{userBean.user.senha}"
+					<p:password id="senhaInput" value="#{usuarioBean.usuario.senha}"
 						styleClass="button-login" />
 				</p:panelGrid>
 				<p:commandButton styleClass="button-login" value="Entrar"
-					action="#{userBean.logar()}" update="@all" process="@all"/>
+					action="#{usuarioBean.logar()}" update="@all" process="@all"/>
 			</div>
 			<p:panelGrid columns="1" styleClass="semBorda">
 

@@ -28,7 +28,7 @@
 
 <f:metadata>
     <f:viewAction
-            action="#{userBean.verificarAutoridadeLoginVisualizarCursos()}" />
+            action="#{usuarioBean.verificarAutoridadeLoginVisualizarCursos()}" />
 </f:metadata>
 <p:growl id="growl" showDetail="true" autoUpdate="true" />
 
@@ -57,7 +57,7 @@
                                  oncomplete="PF('contratoEdit').show()" icon="ui-icon-wrench"
                                  title="Editar">
                     <f:setPropertyActionListener value="#{contrato}"
-                                                 target="#{userBean.contratoSelecionado}" />
+                                                 target="#{usuarioBean.contratoSelecionado}" />
                 </p:commandButton>
             </p:column>
             <p:column style="width:32px;text-align: center" width="30px"
@@ -67,19 +67,19 @@
                                  oncomplete="PF('contratoDialogo').show()" icon="ui-icon-info"
                                  title="Info">
                     <f:setPropertyActionListener value="#{contrato}"
-                                                 target="#{userBean.contratoSelecionado}" />
+                                                 target="#{usuarioBean.contratoSelecionado}" />
                 </p:commandButton>
             </p:column>
             <p:column style="width:70px;text-align: center" exportable="false" headerText="Album">
                 <p:commandButton value="Gerar" title="Gerar Albuns" rendered="#{contrato.qtdAlbum le 0 ? true:false}"
-                                 action="#{cadastrarAlbum.gerarAlbunsCurso(userBean.contratoSelecionado)}" update="@all" process="@all">
+                                 action="#{cadastrarAlbum.gerarAlbunsCurso(usuarioBean.contratoSelecionado)}" update="@all" process="@all">
                     <f:setPropertyActionListener value="#{contrato}"
-                                                 target="#{userBean.contratoSelecionado}" />
+                                                 target="#{usuarioBean.contratoSelecionado}" />
                 </p:commandButton>
                 <p:commandButton title="Visualizar Albuns Curso" value="Ver" rendered="#{contrato.qtdAlbum le 0 ? false:true}" update="@all" process="@all"
                                                action="#{panelAdmin.btListarAlbunsCurso()}">
                                   <f:setPropertyActionListener value="#{contrato}"
-                                                               target="#{userBean.contratoSelecionado}" />
+                                                               target="#{usuarioBean.contratoSelecionado}" />
                               </p:commandButton>
             </p:column>
 
@@ -134,25 +134,25 @@
                   closeOnEscape="true" style="text-align:center;">
             <p:outputPanel id="contratoDetalhe" style="text-align:center;">
                 <p:panelGrid columns="2"
-                             rendered="#{not empty userBean.contratoSelecionado}">
+                             rendered="#{not empty usuarioBean.contratoSelecionado}">
                     <p:outputLabel value="Curso:" />
-                    <h:outputText value="#{userBean.contratoSelecionado.curso}" />
+                    <h:outputText value="#{usuarioBean.contratoSelecionado.curso}" />
                     <p:outputLabel value="Contrato:" />
                     <h:outputText
-                            value="#{userBean.contratoSelecionado.numeroContrato}" />
+                            value="#{usuarioBean.contratoSelecionado.numeroContrato}" />
                     <p:outputLabel value="Data Prazo:" />
-                    <h:outputText value="#{userBean.contratoSelecionado.dataPrazo}">
+                    <h:outputText value="#{usuarioBean.contratoSelecionado.dataPrazo}">
                         <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:outputText>
                     <p:outputLabel value="Caminho:" />
-                    <h:outputText value="#{userBean.contratoSelecionado.caminho}" />
+                    <h:outputText value="#{usuarioBean.contratoSelecionado.caminho}" />
                     <p:outputLabel value="OBS:" />
-                    <h:outputText value="#{userBean.contratoSelecionado.obs}" />
+                    <h:outputText value="#{usuarioBean.contratoSelecionado.obs}" />
                     <p:outputLabel value="Entidade:" />
-                    <h:outputText value="#{userBean.contratoSelecionado.entidade}" />
+                    <h:outputText value="#{usuarioBean.contratoSelecionado.entidade}" />
 
                     <p:outputLabel value="Média de fotos" />
-                    <h:outputText value="#{userBean.contratoSelecionado.media}" />
+                    <h:outputText value="#{usuarioBean.contratoSelecionado.media}" />
 
                     <h:commandLink id="infopdf">
                         <p:graphicImage url="/resources/images/pdf.png" />
@@ -188,51 +188,51 @@
         <h:form id="editarForm">
             <p:outputPanel id="contratoEditar" style="text-align:center;">
                 <p:panelGrid columns="4"
-                             rendered="#{not empty userBean.contratoSelecionado}"
+                             rendered="#{not empty usuarioBean.contratoSelecionado}"
                              styleClass="semBorda">
                     <p:outputLabel value="Número do contrato" />
                     <p:inputText
-                            value="#{userBean.contratoSelecionado.numeroContrato}" />
+                            value="#{usuarioBean.contratoSelecionado.numeroContrato}" />
                     <p:outputLabel value="Curso" />
-                    <p:inputText value="#{userBean.contratoSelecionado.curso}" />
+                    <p:inputText value="#{usuarioBean.contratoSelecionado.curso}" />
                     <p:outputLabel value="Cidade" />
-                    <p:inputText value="#{userBean.contratoSelecionado.cidade}" />
+                    <p:inputText value="#{usuarioBean.contratoSelecionado.cidade}" />
                     <p:outputLabel value="Entidade" />
-                    <p:inputText value="#{userBean.contratoSelecionado.entidade}" />
+                    <p:inputText value="#{usuarioBean.contratoSelecionado.entidade}" />
                     <p:outputLabel value="Média" />
-                    <p:inputText value="#{userBean.contratoSelecionado.media}" />
+                    <p:inputText value="#{usuarioBean.contratoSelecionado.media}" />
                     <p:outputLabel value="Data Entrada" />
-                    <p:calendar value="#{userBean.contratoSelecionado.dataEntrada}"
+                    <p:calendar value="#{usuarioBean.contratoSelecionado.dataEntrada}"
                                 locale="pt" navigator="true" pattern="MM-dd-yyyy" />
                     <p:outputLabel value="Data Prazo" />
                     <p:calendar styleClass="calendar"
-                                value="#{userBean.contratoSelecionado.dataPrazo}" locale="pt"
+                                value="#{usuarioBean.contratoSelecionado.dataPrazo}" locale="pt"
                                 navigator="true" pattern="MM-dd-yyyy" />
 
                     <p:outputLabel value="Caminho" />
-                    <p:inputText value="#{userBean.contratoSelecionado.caminho}" />
+                    <p:inputText value="#{usuarioBean.contratoSelecionado.caminho}" />
                     <p:outputLabel value="Status" />
-                    <p:selectOneMenu value="#{userBean.contratoSelecionado.status}">
+                    <p:selectOneMenu value="#{usuarioBean.contratoSelecionado.status}">
                         <f:selectItems
                                 value="#{cadastrarContratoBean.metricas.statusContratoLista}" />
                     </p:selectOneMenu>
                     <p:outputLabel value="Urgencia" />
                     <p:selectOneMenu
-                            value="#{userBean.contratoSelecionado.urgencia}">
+                            value="#{usuarioBean.contratoSelecionado.urgencia}">
                         <f:selectItems
                                 value="#{cadastrarContratoBean.metricas.urgenciaLista}" />
                     </p:selectOneMenu>
 
                     <p:outputLabel value="Ocupado" />
-                    <p:selectOneMenu value="#{userBean.contratoSelecionado.ocupado}">
+                    <p:selectOneMenu value="#{usuarioBean.contratoSelecionado.ocupado}">
                         <f:selectItems
                                 value="#{cadastrarContratoBean.metricas.ocupadoEditar}" />
                     </p:selectOneMenu>
 
                     <p:outputLabel value="OBS:" />
-                    <p:inputTextarea value="#{userBean.contratoSelecionado.obs}" />
+                    <p:inputTextarea value="#{usuarioBean.contratoSelecionado.obs}" />
                     <p:commandButton value="Salvar"
-                                     action="#{listarCursos.updateContrato(userBean.contratoSelecionado)}"
+                                     action="#{listarCursos.updateContrato(usuarioBean.contratoSelecionado)}"
                                      oncomplete="PF('contratoEdit').hide()" update=":cursos:contratos" />
                     <p:commandButton value="Cancelar" process="@all" update="@all"
                                      immediate="true" oncomplete="PF('contratoEdit').hide()" />

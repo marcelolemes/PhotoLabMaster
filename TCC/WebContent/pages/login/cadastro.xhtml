@@ -16,22 +16,22 @@
 		<p:panel styleClass="center">
 			<p:panelGrid columns="2" styleClass="semBorda">
 				<p:outputLabel value="Apelido" />
-				<p:inputText id="apelidoInput" value="#{userBean.user.apelido}" />
+				<p:inputText id="apelidoInput" value="#{usuarioBean.usuario.apelido}" />
 				<p:outputLabel value="Senha" />
-				<p:password value="#{userBean.user.senha}" />
+				<p:password value="#{usuarioBean.usuario.senha}" />
 				<p:outputLabel value="Nível de acesso" />
 				<p:selectOneMenu id="nivelacessoinput"
-					value="#{userBean.user.nivelAcesso}">
-					<f:selectItems value="#{userBean.nivelAcessoCadastro}" />
+					value="#{usuarioBean.usuario.nivelAcesso}">
+					<f:selectItems value="#{usuarioBean.nivelAcessoCadastro}" />
 				</p:selectOneMenu>
 				<p:outputLabel value="Setor" />
-				<p:selectOneMenu id="setorinput" value="#{userBean.user.setor}">
-					<f:selectItems value="#{userBean.setores}" />
+				<p:selectOneMenu id="setorinput" value="#{usuarioBean.usuario.setor}">
+					<f:selectItems value="#{usuarioBean.setores}" />
 				</p:selectOneMenu>
 
 
 			</p:panelGrid>
-			<p:commandButton value="Gravar" action="#{userBean.gravar()}"
+			<p:commandButton value="Gravar" action="#{usuarioBean.gravar()}"
 				update="@all" />
 		</p:panel>
 

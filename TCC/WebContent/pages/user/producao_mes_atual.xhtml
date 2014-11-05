@@ -18,11 +18,11 @@
     <p:growl showDetail="true" autoUpdate="true" />
 
     <f:metadata>
-        <f:viewAction action="#{userBean.resultRedirectAdmin}" />
+        <f:viewAction action="#{usuarioBean.resultRedirectAdmin}" />
     </f:metadata>
 
     <ui:define name="menu">
-        <ui:include src="/include/user/menu.xhtml" />
+        <ui:include src="/include/usuario/menu.xhtml" />
     </ui:define>
     <ui:define name="content">
         <h:form>
@@ -52,18 +52,18 @@
                     <p:tabView>
 
                         <p:tab title="Gráfico produção diária do mês atual">
-                            <p:chart type="line" model="#{relatorioTratamentoUserBean.createLineModels()}"  style="height:300px;" widgetVar="graficoTratamento"/>
+                            <p:chart type="line" model="#{relatorioTratamentoUsuarioBean.createLineModels()}"  style="height:300px;" widgetVar="graficoTratamento"/>
                             <p:commandButton type="button" value="Reset Zoom" icon="ui-icon-cancel" onclick="PF('graficoTratamento').resetZoom()"/>
 
                         </p:tab>
                         <p:tab title="Gráfico participação na produção total tratamento">
-                            <p:chart type="pie" model="#{relatorioTratamentoMediaUserBean.createPieModels1()}" style="height:300px;" widgetVar="graficoTratamentoTotal">
-                                <p:ajax event="itemSelect" listener="#{relatorioTratamentoMediaUserBean.itemSelect}" />
+                            <p:chart type="pie" model="#{relatorioTratamentoMediaUsuarioBean.createPieModels1()}" style="height:300px;" widgetVar="graficoTratamentoTotal">
+                                <p:ajax event="itemSelect" listener="#{relatorioTratamentoMediaUsuarioBean.itemSelect}" />
                             </p:chart>
                         </p:tab>
 
                         <p:tab title="Gráfico média individual montagem">
-                            <p:chart type="bar" model="#{relatorioTratamentoMediaUserBean.createBarModels1()}" style="height:300px;" widgetVar="graficoTratamentoMedia"/>
+                            <p:chart type="bar" model="#{relatorioTratamentoMediaUsuarioBean.createBarModels1()}" style="height:300px;" widgetVar="graficoTratamentoMedia"/>
                         </p:tab>
 
                     </p:tabView>

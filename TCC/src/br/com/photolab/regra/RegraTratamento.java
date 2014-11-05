@@ -1,11 +1,16 @@
-package br.com.login.regra;
+package br.com.photolab.regra;
 
-import br.com.login.Dao.*;
-import br.com.login.bean.users.UserBean;
-import br.com.login.model.Album;
-import br.com.login.model.Contrato;
-import br.com.login.model.Relatorio;
-import br.com.login.model.RelatorioDiario;
+import br.com.photolab.dao.modelo.AlbumDao;
+import br.com.photolab.dao.modelo.ContratoDao;
+import br.com.photolab.dao.modelo.UsuarioDao;
+import br.com.photolab.bean.usuarios.usuario.UsuarioBean;
+import br.com.photolab.dao.regra.RegraTratamentoDao;
+import br.com.photolab.dao.relatorio.RelatorioDao;
+import br.com.photolab.dao.relatorio.RelatorioDiarioDao;
+import br.com.photolab.modelo.Album;
+import br.com.photolab.modelo.Contrato;
+import br.com.photolab.relatorio.Relatorio;
+import br.com.photolab.relatorio.RelatorioDiario;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -26,7 +31,7 @@ import java.util.Date;
 @ManagedBean
 @ViewScoped
 public class RegraTratamento implements Serializable {
-    UserDao userDao = new UserDao();
+    UsuarioDao usuarioDao = new UsuarioDao();
     private Relatorio relatorio;
 
     private Album albumMontar;
@@ -37,8 +42,8 @@ public class RegraTratamento implements Serializable {
     AlbumDao albumDao = new AlbumDao();
 
     private long albunsRestantes;
-    @ManagedProperty("#{userBean}")
-    private UserBean userBean;
+    @ManagedProperty("#{usuarioBean}")
+    private UsuarioBean usuarioBean;
     ContratoDao contDao;
     private String cont;
     Contrato contratoAtual;
@@ -60,10 +65,10 @@ public class RegraTratamento implements Serializable {
     }
 
     public void btInserirObs() throws Exception {
-        //System.out.println("Album obs "+userBean.getUserLogado().getAuxiliar());
-        //userBean.getUserLogado().getAlbumAtual().setObs(userBean.getUserLogado().getAuxiliar());
+        //System.out.println("Album obs "+usuarioBean.getUsuarioLogado().getAuxiliar());
+        //usuarioBean.getUsuarioLogado().getAlbumAtual().setObs(usuarioBean.getUsuarioLogado().getAuxiliar());
 
-        albumDao.gravar(userBean.getUserLogado().getAlbumAtual());
+        albumDao.gravar(usuarioBean.getUsuarioLogado().getAlbumAtual());
 
     }
 
@@ -72,14 +77,14 @@ public class RegraTratamento implements Serializable {
 
 
         try {
-            userBean.getUserLogado().setAlbumAtual(regDao.NovoAlbum(userBean.getUserLogado()));
-            userBean.getUserLogado().setAuxiliar(userBean.getUserLogado().getAlbumAtual().getContrato().getCaminho()+File.separator+ userBean.getUserLogado().getAlbumAtual().getNumero());
+            usuarioBean.getUsuarioLogado().setAlbumAtual(regDao.NovoAlbum(usuarioBean.getUsuarioLogado()));
+            usuarioBean.getUsuarioLogado().setAuxiliar(usuarioBean.getUsuarioLogado().getAlbumAtual().getContrato().getCaminho()+File.separator+ usuarioBean.getUsuarioLogado().getAlbumAtual().getNumero());
             relatorio = new Relatorio();
             relatorio.setDataInicial(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
-            relatorio.setAlbum(userBean.getUserLogado().getAlbumAtual());
-            relatorio.setFuncionario(userBean.getUserLogado());
+            relatorio.setAlbum(usuarioBean.getUsuarioLogado().getAlbumAtual());
+            relatorio.setFuncionario(usuarioBean.getUsuarioLogado());
             relatorioDao.salvarRelatorio(relatorio);
-            userDao.Update(userBean.getUserLogado());
+            usuarioDao.Update(usuarioBean.getUsuarioLogado());
             iniciar();
         }
         catch (Exception e)
@@ -95,37 +100,37 @@ public class RegraTratamento implements Serializable {
     }
 
     public void btCancelarAlbum() throws Exception {
-        regDao.albumCancelado(userBean.getUserLogado().getAlbumAtual());
-        relatorio = relatorioDao.encontrarRelatorio(userBean.getUserLogado(),userBean.getUserLogado().getAlbumAtual());
+        regDao.albumCancelado(usuarioBean.getUsuarioLogado().getAlbumAtual());
+        relatorio = relatorioDao.encontrarRelatorio(usuarioBean.getUsuarioLogado(), usuarioBean.getUsuarioLogado().getAlbumAtual());
         relatorioDao.deletarRelatorio(relatorio);
-        userBean.getUserLogado().setAlbumAtual(null);
-        userDao.Update(userBean.getUserLogado());
-        userBean.btHome();
+        usuarioBean.getUsuarioLogado().setAlbumAtual(null);
+        usuarioDao.Update(usuarioBean.getUsuarioLogado());
+        usuarioBean.btHome();
     }
 
     public void btMenosDeVinte() throws Exception {
-        Album album =userBean.getUserLogado().getAlbumAtual();
-        userBean.getUserLogado().setAlbumAtual(null);
-        userDao.Update(userBean.getUserLogado());
-        relatorio = relatorioDao.encontrarRelatorio(userBean.getUserLogado(),album);
+        Album album = usuarioBean.getUsuarioLogado().getAlbumAtual();
+        usuarioBean.getUsuarioLogado().setAlbumAtual(null);
+        usuarioDao.Update(usuarioBean.getUsuarioLogado());
+        relatorio = relatorioDao.encontrarRelatorio(usuarioBean.getUsuarioLogado(),album);
         relatorioDao.deletarRelatorio(relatorio);
         regDao.albumDeletado(album);
-        //   userBean.btHome();
+        //   usuarioBean.btHome();
     }
 
     public void btTerminarAlbum() throws Exception {
         try{
 
-            relatorio = relatorioDao.encontrarRelatorio(userBean.getUserLogado(),userBean.getUserLogado().getAlbumAtual());
-            userBean.getUserLogado().getAlbumAtual().setQtdFotos(qtdFotosAtual(userBean.getUserLogado().getAlbumAtual().getContrato().getCaminho()+File.separator+userBean.getUserLogado().getAlbumAtual().getNumero())); //inverter barras quando mudar de sistema operacional
+            relatorio = relatorioDao.encontrarRelatorio(usuarioBean.getUsuarioLogado(), usuarioBean.getUsuarioLogado().getAlbumAtual());
+            usuarioBean.getUsuarioLogado().getAlbumAtual().setQtdFotos(qtdFotosAtual(usuarioBean.getUsuarioLogado().getAlbumAtual().getContrato().getCaminho()+File.separator+ usuarioBean.getUsuarioLogado().getAlbumAtual().getNumero())); //inverter barras quando mudar de sistema operacional
             relatorio.setDataFinal(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
-            relatorio.setFotos(userBean.getUserLogado().getAlbumAtual().getQtdFotos());
+            relatorio.setFotos(usuarioBean.getUsuarioLogado().getAlbumAtual().getQtdFotos());
             relatorioDao.salvarRelatorio(relatorio);
-            regDao.albumTerminado(userBean.getUserLogado().getAlbumAtual());
-            userBean.getUserLogado().setAlbumAtual(null);
-            userDao.Update(userBean.getUserLogado());
+            regDao.albumTerminado(usuarioBean.getUsuarioLogado().getAlbumAtual());
+            usuarioBean.getUsuarioLogado().setAlbumAtual(null);
+            usuarioDao.Update(usuarioBean.getUsuarioLogado());
 
-            relatorioDiario = relatorioDiarioDao.encontrarRelatorio(userBean.getUserLogado(),new Timestamp(new Date(System.currentTimeMillis()).getTime()));
+            relatorioDiario = relatorioDiarioDao.encontrarRelatorio(usuarioBean.getUsuarioLogado(),new Timestamp(new Date(System.currentTimeMillis()).getTime()));
             if (relatorioDiario == null)
             {
 
@@ -148,12 +153,12 @@ public class RegraTratamento implements Serializable {
                 calendar1.clear(Calendar.MILLISECOND);
 
                 relatorioDiario.setDataOperacao(new Timestamp(calendar1.getTime().getTime()));
-                relatorioDiario.setFuncionario(userBean.getUserLogado());
+                relatorioDiario.setFuncionario(usuarioBean.getUsuarioLogado());
             }
-            relatorioDiario.setQtdAlbuns((int) relatorioDao.contarAlbunsHoje(userBean.getUserLogado()));
-            relatorioDiario.setFotos((int) relatorioDao.contarFotosHoje(userBean.getUserLogado()));
+            relatorioDiario.setQtdAlbuns((int) relatorioDao.contarAlbunsHoje(usuarioBean.getUsuarioLogado()));
+            relatorioDiario.setFotos((int) relatorioDao.contarFotosHoje(usuarioBean.getUsuarioLogado()));
             relatorioDiarioDao.salvarRelatorio(relatorioDiario);
-            userBean.btHome();
+            usuarioBean.btHome();
 
         }
         catch (Exception e){
@@ -197,12 +202,12 @@ public class RegraTratamento implements Serializable {
         this.albumMontar = albumMontar;
     }
 
-    public UserBean getUserBean() {
-        return userBean;
+    public UsuarioBean getUsuarioBean() {
+        return usuarioBean;
     }
 
-    public void setUserBean(UserBean userBean) {
-        this.userBean = userBean;
+    public void setUsuarioBean(UsuarioBean usuarioBean) {
+        this.usuarioBean = usuarioBean;
     }
 
     public long getAlbunsRestantes() {

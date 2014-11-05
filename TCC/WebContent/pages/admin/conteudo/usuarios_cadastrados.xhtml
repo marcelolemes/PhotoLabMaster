@@ -10,31 +10,31 @@
 </h:head>
 <h:outputStylesheet library="css" name="estilo.css" />
 <f:metadata>
-	<f:viewAction action="#{userBean.verificarLogado()}" />
+	<f:viewAction action="#{usuarioBean.verificarLogado()}" />
 </f:metadata>
 <body>
 
 	<form>
 
 
-		<p:dataTable var="users" value="#{listaUsuariosBean.listaUsers}">
+		<p:dataTable var="usuarios" value="#{listaUsuariosBean.listaUsuarios}">
 			<p:column headerText="Apelido">
-				<h:outputText value="#{users.apelido}" />
+				<h:outputText value="#{usuarios.apelido}" />
 			</p:column>
 
 			<p:column headerText="Serviço Atual">
-				<h:outputText value="#{users.servicoatual}" />
+				<h:outputText value="#{usuarios.servicoatual}" />
 			</p:column>
 
 			<p:column headerText="Nivel de acesso">
-				<h:outputText value="#{listaUsuariosBean.parserNivel(users)}" />
+				<h:outputText value="#{listaUsuariosBean.parserNivel(usuarios)}" />
 			</p:column>
 			<p:column headerText="Setor">
-				<h:outputText value="#{listaUsuariosBean.parserSetor(users)}"
-					rendered="#{not empty users.setor}" />
+				<h:outputText value="#{listaUsuariosBean.parserSetor(usuarios)}"
+					rendered="#{not empty usuarios.setor}" />
 			</p:column>
 			<p:column headerText="Ultimo Acesso">
-				<h:outputText value="#{users.ultimoacesso}" />
+				<h:outputText value="#{usuarios.ultimoacesso}" />
 			</p:column>
 		</p:dataTable>
 

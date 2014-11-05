@@ -17,11 +17,11 @@
 		<p:growl showDetail="true" autoUpdate="true" />
 
 		<f:metadata>
-			<f:viewAction action="#{userBean.verificarLogado()}" />
+			<f:viewAction action="#{usuarioBean.verificarLogado()}" />
 		</f:metadata>
 
 		<ui:define name="menu">
-			<ui:include src="/include/user/menu.xhtml" />
+			<ui:include src="/include/usuario/menu.xhtml" />
 		</ui:define>
 		<ui:define name="content">
 
@@ -32,22 +32,22 @@
 				</p:layoutUnit>
 
 					<p:layoutUnit position="center"
-					header="Setor #{listaUsuariosBean.parserSetor(panelAdmin.userBean.userLogado)}">
+					header="Setor #{listaUsuariosBean.parserSetor(panelAdmin.usuarioBean.usuarioLogado)}">
 					<ui:insert name="centralContent" />
 					<p:panel styleClass="panecentral">
 						<p:panelGrid columns="2" styleClass="semBorda">
 							<p:outputLabel value="Usuário da sessão" />
-							<p:outputLabel value="#{panelAdmin.userBean.userLogado.apelido}" />
+							<p:outputLabel value="#{panelAdmin.usuarioBean.usuarioLogado.apelido}" />
 							<p:outputLabel value="serviço atual" />
 							<p:outputLabel value="setor" />
 							<p:outputLabel
-								value="#{listaUsuariosBean.parserSetor(panelAdmin.userBean.userLogado)}" />
+								value="#{listaUsuariosBean.parserSetor(panelAdmin.usuarioBean.usuarioLogado)}" />
 							<p:outputLabel value="Nível de acesso" />
 							<p:outputLabel
-								value="#{listaUsuariosBean.parserNivel(panelAdmin.userBean.userLogado)}" />
+								value="#{listaUsuariosBean.parserNivel(panelAdmin.usuarioBean.usuarioLogado)}" />
 							<p:outputLabel value="ultimo acesso" />
 							<p:outputLabel
-								value="#{panelAdmin.userBean.userLogado.ultimoacesso}" />
+								value="#{panelAdmin.usuarioBean.usuarioLogado.ultimoacesso}" />
 						</p:panelGrid>
 
 					</p:panel>
