@@ -57,6 +57,7 @@ public class RegraMontagemDao implements Serializable {
                 sessao = HibernateUtil.getSession(); //Registra a condição atual do contrato
                 transacao = sessao.beginTransaction();
                 sessao.update(contrato);
+                retorno.setContrato(contrato); //Atualiza contrato do album atual
                 transacao.commit();
                 sessao.close();
             }

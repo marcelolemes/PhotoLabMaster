@@ -43,7 +43,7 @@ public class RegraTratamentoDao implements Serializable {
                     retorno.setUserTratamento(user);
                 }
 
-                retorno.setStatus(8); //Marca o album como "em tratamento"
+                retorno.setStatus(8); //Marca o album como "montagem"
                 retorno.setOcupado(true);
                 Session sessao = HibernateUtil.getSession();
                 org.hibernate.Transaction transacao = sessao.beginTransaction();
@@ -58,6 +58,7 @@ public class RegraTratamentoDao implements Serializable {
                 sessao = HibernateUtil.getSession(); //Registra a condição atual do contrato
                 transacao = sessao.beginTransaction();
                 sessao.update(contrato);
+                retorno.setContrato(contrato); //Atualiza contrato do album atual
                 transacao.commit();
                 sessao.close();
             }

@@ -134,8 +134,6 @@ public class RegraMontagem implements Serializable {
 
 
                 Calendar calendar1 = Calendar.getInstance();
-                Calendar calendar2 = Calendar.getInstance();
-
                 calendar1.setTime(new Date());
 
 
