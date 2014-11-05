@@ -65,7 +65,7 @@ public class ListarFichas implements Serializable {
     }
 
     public String btListarCursosFicha() {
-        return "/pages/admin/visualizarcursos_ficha.xhtml?redirect=false"; //não mexer
+        return "/pages/admin/conteudo/visualizarcursos_ficha.xhtml?redirect=false"; //não mexer
     }
 
     public String parserUrgencia(int urgencia) {

@@ -68,7 +68,7 @@ public class PaginaPrincipalBean implements Serializable {
                 }
             } else {
 
-                return "/pages/admin/visualizarcursos_index.xhtml";
+                return "/pages/admin/conteudo/visualizarcursos_index.xhtml";
             }
 
         } else {
@@ -92,7 +92,7 @@ public class PaginaPrincipalBean implements Serializable {
                 }
             } else {
 
-                return "/pages/admin/visualizafichas_index.xhtml";
+                return "/pages/admin/conteudo/visualizafichas_index.xhtml";
             }
 
         } else {
@@ -273,7 +273,7 @@ public class PaginaPrincipalBean implements Serializable {
                 }
             } else {
 
-                return "/pages/admin/visualizaralbuns_index.xhtml";
+                return "/pages/admin/conteudo/visualizaralbuns_index.xhtml";
             }
 
         } else {
@@ -299,7 +299,7 @@ public class PaginaPrincipalBean implements Serializable {
                 }
             } else {
 
-                return "/pages/admin/visualizaralbuns_index.xhtml";
+                return "/pages/admin/conteudo/visualizaralbuns_index.xhtml";
             }
 
         } else {
