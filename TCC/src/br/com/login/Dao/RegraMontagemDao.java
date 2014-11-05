@@ -42,7 +42,7 @@ public class RegraMontagemDao implements Serializable {
                     retorno.setUserMontagem(user);
                 }
 
-                retorno.setStatus(8); //Marca o album como "montagem"
+                retorno.setStatus(13); //Marca o album como "montagem"
                 retorno.setOcupado(true);
                 Session sessao = HibernateUtil.getSession();
                 org.hibernate.Transaction transacao = sessao.beginTransaction();
