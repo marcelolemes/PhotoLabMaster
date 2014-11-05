@@ -17,10 +17,9 @@
 <body>
 <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
 
-        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-            <p:graphicImage url="/resources/images/ajaxloadingbar.gif" />
-        </p:dialog>
-
+<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+    <p:graphicImage url="/resources/images/ajaxloadingbar.gif" />
+</p:dialog>
 
 <p:layout fullPage="true">
     <p:layoutUnit position="north" size="20%" maxSize="45">
@@ -36,7 +35,7 @@
     <p:layoutUnit position="west" resizable="true"  maxSize="410" collapsible="true">
         <ui:insert name="west" />
     </p:layoutUnit>
-    <p:layoutUnit position="south" resizable="true" size="50" maxSize="50">
+    <p:layoutUnit position="south" resizable="true" maxSize="90"> <!--maxSize="50"-->
 
         <h:form id="footer">
 
@@ -47,9 +46,7 @@
                 <p:graphicImage url="/resources/images/footer.png" />
             </div>
             <div style="float: left;">
-
-                <p:panelGrid columns="4" styleClass="semBorda">
-
+                <p:panelGrid columns="5" styleClass="semBorda">
                     <p:commandButton icon="ui-icon-close" styleClass="botao-sair"
                                      rendered="#{not empty panelAdmin.userBean.userLogado.apelido}"
                                      value="#{panelAdmin.userBean.userLogado.apelido} (sair)"

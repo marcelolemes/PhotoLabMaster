@@ -134,7 +134,7 @@ public class ContratoDao implements Serializable {
                                     retorno.setOcupado(false);
                                 }
                                 else {
-                                    retorno.setStatus(statusMax - 8);
+                                    retorno.setStatus(8);
                                     retorno.setUrgencia(0);
                                     retorno.setOcupado(true);
                                 }
@@ -225,7 +225,7 @@ public class ContratoDao implements Serializable {
                                     retorno.setOcupado(false);
                                 }
                                 else {
-                                    retorno.setStatus(statusMax - 8);
+                                    retorno.setStatus(8);
                                     retorno.setUrgencia(0);
                                     retorno.setOcupado(true);
                                 }
