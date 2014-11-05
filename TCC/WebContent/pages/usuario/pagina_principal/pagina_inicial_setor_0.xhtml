@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template/templatePrincipal.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title></title>
+    </h:head>
+    <h:outputStylesheet library="css" name="estilo.css" />
+
+    <body>
+
+    <p:growl showDetail="true" autoUpdate="true" />
+
+    <f:metadata>
+        <f:viewAction action="#{usuarioBean.resultRedirectAdmin}" />
+    </f:metadata>
+
+    <ui:define name="menu">
+        <ui:include src="/include/usuario/menu_patrao.xhtml"/>
+    </ui:define>
+    <ui:define name="content">
+        <ui:insert name="centralContent" />
+        <p:panel styleClass="panecentral">
+            <p:panelGrid columns="2" styleClass="semBorda">
+                <p:outputLabel value="Usuário da sessão" />
+                <p:outputLabel value="#{paginaPrincipalBean.usuarioBean.usuarioLogado.apelido}" />
+                <p:outputLabel value="ultimo acesso" />
+                <p:outputLabel
+                        value="#{paginaPrincipalBean.usuarioBean.usuarioLogado.ultimoacesso}" />
+            </p:panelGrid>
+
+        </p:panel>
+        <h:form>
+            <p:dialog header="TrocarSenha" widgetVar="TrocarSenha">
+                <p:panel id="trocarSenhaPanel">
+                    <p:panelGrid columns="2" styleClass="semBorda">
+                        <p:outputLabel value="insira a NOVA senha:" />
+                        <h:inputSecret value="#{paginaPrincipalBean.senhaTemporaria}" />
+                        <p:outputLabel value="REPITA a NOVA senha:" />
+                        <h:inputSecret value="#{paginaPrincipalBean.senhaTemporaria2}" />
+                        <p:commandButton value="Gravar senha"
+                                         action="#{paginaPrincipalBean.mudarSenha()}"
+                                         oncomplete="PF('TrocarSenha').hide()" />
+                    </p:panelGrid>
+                </p:panel>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+    <ui:define name="east">
+        Tratamento
+        <h:form>
+            <p:panel rendered="#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 0? true:false}" styleClass="paneeast">
+                <p:dataTable value="#{listarContratoTratamento.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
+                    <f:facet name="header">Contratos em espera</f:facet>
+                    <p:column headerText="contrato" width="22%">
+                        #{contrato.numeroContrato}
+                    </p:column>
+                    <p:column headerText="curso">
+                        #{contrato.curso}
+                    </p:column>
+                    <p:column headerText="albuns" width="18%">
+                        #{contrato.qtdAlbum}
+                    </p:column>
+                </p:dataTable>
+
+                <p:dataTable value="#{listarContratoTratamento.listaContratoFazendo}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em tratamento">
+                    <f:facet name="header">Contratos em tratamento de pele</f:facet>
+                    <p:column headerText="contrato" width="22%">
+                        #{contrato.numeroContrato}
+                    </p:column>
+                    <p:column headerText="curso">
+                        #{contrato.curso}
+                    </p:column>
+                    <p:column headerText="albuns" width="18%">
+                        #{contrato.qtdAlbum}
+                    </p:column>
+                </p:dataTable>
+
+                <p:dataTable value="#{listarContratoTratamento.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
+                    <f:facet name="header">Contratos prontos</f:facet>
+                    <p:column headerText="contrato" width="22%">
+                        #{contrato.numeroContrato}
+                    </p:column>
+                    <p:column headerText="curso">
+                        #{contrato.curso}
+                    </p:column>
+                    <p:column headerText="albuns" width="18%">
+                        #{contrato.qtdAlbum}
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+    <ui:define name="west">
+        Montagem
+        <h:form>
+            <p:panel rendered="#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 0? true:false}" styleClass="paneeast">
+
+                <p:dataTable value="#{listarContratoMontagem.listaContratoFazendo}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato sendo montado">
+                    <f:facet name="header">Contratos em montagem</f:facet>
+                    <p:column headerText="contrato" width="22%">
+                        #{contrato.numeroContrato}
+                    </p:column>
+                    <p:column headerText="curso">
+                        #{contrato.curso}
+                    </p:column>
+                    <p:column headerText="albuns" width="18%">
+                        #{contrato.qtdAlbum}
+                    </p:column>
+                </p:dataTable>
+
+
+                <p:dataTable value="#{listarContratoMontagem.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
+                    <f:facet name="header">Contratos prontos</f:facet>
+                    <p:column headerText="contrato" width="23%">
+                        #{contrato.numeroContrato}
+                    </p:column>
+                    <p:column headerText="curso">
+                        #{contrato.curso}
+                    </p:column>
+                    <p:column headerText="albuns" width="18%">
+                        #{contrato.qtdAlbum}
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+    </body>
+</ui:composition>
