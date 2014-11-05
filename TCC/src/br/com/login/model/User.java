@@ -25,11 +25,7 @@ public class User implements Serializable {
     private String apelido;
     @Column
     private String senha;
-    @Column
-    private String servicoatual;
-    @Column
-    private String servicoanterior;
-    @Column
+   @Column
     private Timestamp ultimoacesso;
     @Column
     private boolean logado;
@@ -46,22 +42,6 @@ public class User implements Serializable {
 
     public void setUltimoacesso(Timestamp ultimoacesso) {
         this.ultimoacesso = ultimoacesso;
-    }
-
-    public String getServicoanterior() {
-        return servicoanterior;
-    }
-
-    public void setServicoanterior(String servicoanterior) {
-        this.servicoanterior = servicoanterior;
-    }
-
-    public String getServicoatual() {
-        return servicoatual;
-    }
-
-    public void setServicoatual(String servicoatual) {
-        this.servicoatual = servicoatual;
     }
 
     public int getCod() {
