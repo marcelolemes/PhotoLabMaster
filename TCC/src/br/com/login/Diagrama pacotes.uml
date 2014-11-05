@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="547.5" y="346.0">br.com.login.model</node>
+    <node x="316.5" y="465.0">br.com.login.util</node>
+    <node x="552.0" y="106.0">br.com.login.Dao</node>
+    <node x="68.5" y="186.0">br.com.login.regra</node>
+    <node x="268.5" y="186.0">br.com.login.bean.users</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="br.com.login.Dao" target="br.com.login.Dao">
+      <point x="0.0" y="-14.0" />
+      <point x="600.0" y="0.0" />
+      <point x="760.0" y="0.0" />
+      <point x="760.0" y="120.0" />
+      <point x="48.0" y="0.0" />
+    </edge>
+    <edge source="br.com.login.regra" target="br.com.login.Dao">
+      <point x="40.0" y="-14.0" />
+      <point x="160.0" y="120.0" />
+      <point x="-48.0" y="0.0" />
+    </edge>
+    <edge source="br.com.login.Dao" target="br.com.login.bean.users">
+      <point x="-40.0" y="14.0" />
+      <point x="560.0" y="200.0" />
+      <point x="51.5" y="0.0" />
+    </edge>
+    <edge source="br.com.login.Dao" target="br.com.login.model">
+      <point x="0.0" y="14.0" />
+      <point x="0.0" y="-14.0" />
+    </edge>
+    <edge source="br.com.login.regra" target="br.com.login.bean.users">
+      <point x="51.5" y="0.0" />
+      <point x="-51.5" y="0.0" />
+    </edge>
+    <edge source="br.com.login.regra" target="br.com.login.model">
+      <point x="0.0" y="14.0" />
+      <point x="120.0" y="360.0" />
+      <point x="-52.5" y="0.0" />
+    </edge>
+    <edge source="br.com.login.model" target="br.com.login.model">
+      <point x="52.5" y="8.571428571428555" />
+      <point x="720.0" y="368.57142857142856" />
+      <point x="720.0" y="440.0" />
+      <point x="640.0" y="440.0" />
+      <point x="40.0" y="14.0" />
+    </edge>
+    <edge source="br.com.login.bean.users" target="br.com.login.model">
+      <point x="40.0" y="14.0" />
+      <point x="360.0" y="280.0" />
+      <point x="560.0" y="280.0" />
+      <point x="-40.0" y="-14.0" />
+    </edge>
+    <edge source="br.com.login.bean.users" target="br.com.login.Dao">
+      <point x="51.5" y="-4.285714285714278" />
+      <point x="480.0" y="195.71428571428572" />
+      <point x="480.0" y="128.57142857142858" />
+      <point x="-48.0" y="8.571428571428584" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="298.0" y="360.5" />
+  <SelectedNodes>
+    <node>br.com.login.util</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
