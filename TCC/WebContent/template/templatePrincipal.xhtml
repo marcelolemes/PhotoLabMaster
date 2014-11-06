@@ -15,7 +15,7 @@
 
 </h:head>
 <body>
-<p:ajaxStatus onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
 
 <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
 
@@ -30,6 +30,11 @@
     <p:layoutUnit position="center" resizable="false" rendered="true">
         <p:growl showDetail="true" autoUpdate="true" />
         <ui:insert name="content" />
+        <p:ajaxExceptionHandler type="javax.faces.application.ViewExpiredException"
+                                onexception="alert('Tempo de login expirado para prosseguir, pressione F5, e refaça o seu login')"/>
+
+        <p:ajaxExceptionHandler id="exception" type="java.lang.NullPointerException"
+                                onexception="alert('Uma exceção ocorreu, por favor atualize a página e tente novamente')"/>
     </p:layoutUnit>
     <p:layoutUnit position="east" resizable="true" maxSize="450" collapsible="true">
         <ui:insert name="east" />
