@@ -30,7 +30,9 @@
             <p:dataGrid var="mes" value="#{listarMeseslBean.meses}" columns="3" layout="grid"
                         id="meses">
                 <f:facet name="header">
-                    Produção do ano de <p:inputText value="#{usuarioBean.anoSelecionado}"/>
+                    Produção do setor da montagem do ano: <p:inputText id="ano" value="#{usuarioBean.anoSelecionado}" validatorMessage="Insira um valor de 2013 à 2020" required="true" requiredMessage="Por favor, insira o ano desejado">
+                    <f:validateDoubleRange maximum="2020" minimum="2013"/>
+                </p:inputText>
                 </f:facet>
                 <p:panel header="#{mes.nome}" style="text-align:center">
                     <h:panelGrid columns="1" style="width:100%">

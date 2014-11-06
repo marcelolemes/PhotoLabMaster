@@ -27,13 +27,13 @@ public class CadastrarContratoBean implements Serializable {
     private Contrato contratoCadastro = new Contrato();
     private Metricas metricas = new Metricas();
 
-    private Ficha fichaSelecionada;
+    private static Ficha fichaSelecionada;
 
     {
         fichaSelecionada = ListarFichas.getFichaSelecionada();
     }
 
-    public Ficha getFichaSelecionada() {
+    public static Ficha getFichaSelecionada() {
         return fichaSelecionada;
     }
 

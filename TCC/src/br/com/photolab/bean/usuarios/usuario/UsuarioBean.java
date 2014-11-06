@@ -62,9 +62,9 @@ public class UsuarioBean implements Serializable {
 
     public String logar() throws Exception {
         if (usuario.isLogado()) {
-            loginAtivo();
+            //loginAtivo();
             if (usuarioLogado.getNivelAcesso() > 2) {
-                return "/pages/admin/conteudo/pagina_principal_admin.xhtml";
+                return "/pages/admin/conteudo/pagina_principal_admin.xhtml?faces-redirect=true";
             } else {
                 return "/pages/usuario/pagina_principal/pagina_inicial_setor_" + usuarioLogado.getSetor()
                         + ".xhtml?faces-redirect=true";
@@ -231,12 +231,12 @@ public class UsuarioBean implements Serializable {
                         "Seja bem vindo " + sessao));
 
         if (usuarioLogado.getNivelAcesso() > 2) {
-            return "/pages/admin/conteudo/pagina_principal_admin.xhtml";
+            return "/pages/admin/conteudo/pagina_principal_admin.xhtml?faces-redirect=true";
         }
 
         else {
             return "/pages/usuario/pagina_principal/pagina_inicial_setor_" + usuarioLogado.getSetor()
-                    + ".xhtml";
+                    + ".xhtml?faces-redirect=true";
         }
 
     }

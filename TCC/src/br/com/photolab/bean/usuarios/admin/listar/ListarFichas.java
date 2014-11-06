@@ -92,4 +92,5 @@ public class ListarFichas implements Serializable {
     public void setContratosFiltrados(List<Contrato> contratosFiltrados) {
         this.contratosFiltrados = contratosFiltrados;
     }
+
 }

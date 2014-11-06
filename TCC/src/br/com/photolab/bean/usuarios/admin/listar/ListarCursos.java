@@ -100,7 +100,7 @@ public class ListarCursos implements Serializable {
             BadElementException, DocumentException {
         Document pdf = (Document) document;
         pdf.open();
-        pdf.add(new Paragraph("Contratos"));
+        pdf.add(new Paragraph("Ficha: "+new ListarFichas().getFichaSelecionada().getNumero()+"/"+new ListarFichas().getFichaSelecionada().getAno()));
         pdf.setPageSize(PageSize.A4.rotate());
 
 
