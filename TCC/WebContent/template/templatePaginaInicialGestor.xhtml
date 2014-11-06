@@ -36,13 +36,18 @@
         <p:ajaxExceptionHandler id="exception" type="java.lang.NullPointerException"
                                 onexception="alert('Uma exceção ocorreu, por favor atualize a página e tente novamente')"/>
     </p:layoutUnit>
-
-    <p:layoutUnit position="west" resizable="true"  maxSize="410" collapsible="true">
+    <p:layoutUnit position="east" resizable="true" maxSize="450" collapsible="true" collapsed="true">
+        <ui:insert name="east" />
+    </p:layoutUnit>
+    <p:layoutUnit position="west" resizable="true"  maxSize="410" collapsible="true" collapsed="true">
         <ui:insert name="west" />
     </p:layoutUnit>
     <p:layoutUnit position="south" resizable="true" maxSize="90"> <!--maxSize="50"-->
 
         <h:form id="footer">
+
+
+
 
             <div style="float: right;">
                 <p:graphicImage url="/resources/images/footer.png" />

@@ -57,7 +57,7 @@ public class ListarContratoImpressao implements Serializable {
             BadElementException, DocumentException {
         Document pdf = (Document) document;
         pdf.open();
-        pdf.add(new Paragraph("Setor montagem:  "));
+        pdf.add(new Paragraph("Setor impressão:  "));
         pdf.add(new Paragraph(" "));
         pdf.setPageSize(PageSize.A4.rotate());
 
