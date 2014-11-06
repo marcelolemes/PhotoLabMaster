@@ -26,10 +26,6 @@ public class ListarContratoMontagem implements Serializable {
     private List<Contrato> listaContratoEmEspera;
     private List<Contrato> listaContratoPronto;
     private List<Contrato> listaContratoFazendo;
-    private List<Contrato> contratosFiltrados;
-    private List<String> urgencias;
-    private Contrato contratoSelecionado = new Contrato();
-    private static Contrato contratoSelecionado2 = new Contrato();
 
     public ListarContratoMontagem() throws Exception {
         contDao = new ContratoDao();
@@ -68,37 +64,6 @@ public class ListarContratoMontagem implements Serializable {
         this.metricas = metricas;
     }
 
-    public List<String> getUrgencias() {
-        return urgencias;
-    }
-
-    public void setUrgencias(List<String> urgencias) {
-        this.urgencias = urgencias;
-    }
-
-    public Contrato getContratoSelecionado() {
-        return contratoSelecionado;
-    }
-
-    public void setContratoSelecionado(Contrato contratoSelecionado) {
-        this.contratoSelecionado = contratoSelecionado;
-    }
-
-    public List<Contrato> getContratosFiltrados() {
-        return contratosFiltrados;
-    }
-
-    public void setContratosFiltrados(List<Contrato> contratosFiltrados) {
-        this.contratosFiltrados = contratosFiltrados;
-    }
-
-    public static Contrato getContratoSelecionado2() {
-        return contratoSelecionado2;
-    }
-
-    public static void setContratoSelecionado2(Contrato contratoSelecionado2) {
-        ListarContratoMontagem.contratoSelecionado2 = contratoSelecionado2;
-    }
 
     public List<Contrato> getListaContratoEmEspera() {
         return listaContratoEmEspera;

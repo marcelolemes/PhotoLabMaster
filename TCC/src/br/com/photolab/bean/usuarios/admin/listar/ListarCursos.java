@@ -29,10 +29,6 @@ public class ListarCursos implements Serializable {
     private Metricas metricas = new Metricas();
     private List<Contrato> listaContrato;
     private List<Contrato> contratosFiltrados;
-    private List<String> urgencias;
-
-    private static Contrato contratoSelecionado2 = new Contrato();
-
     public ListarCursos() throws Exception {
         contDao = new ContratoDao();
         listaContrato = contDao.listarContratos();
@@ -130,14 +126,6 @@ public class ListarCursos implements Serializable {
         this.listaContrato = listaContrato;
     }
 
-    public List<String> getUrgencias() {
-        return urgencias;
-    }
-
-    public void setUrgencias(List<String> urgencias) {
-        this.urgencias = urgencias;
-    }
-
 
     public List<Contrato> getContratosFiltrados() {
         return contratosFiltrados;
@@ -147,11 +135,5 @@ public class ListarCursos implements Serializable {
         this.contratosFiltrados = contratosFiltrados;
     }
 
-    public static Contrato getContratoSelecionado2() {
-        return contratoSelecionado2;
-    }
 
-    public static void setContratoSelecionado2(Contrato contratoSelecionado2) {
-        ListarCursos.contratoSelecionado2 = contratoSelecionado2;
-    }
 }

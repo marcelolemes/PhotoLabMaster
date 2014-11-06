@@ -11,12 +11,12 @@ import java.util.*;
  */
 @ManagedBean
 @ViewScoped
-public class ListarMeseslBean
+public class ListarMesesBean
 {
 
     private List<Mes> meses;
 
-    public ListarMeseslBean()  {
+    public ListarMesesBean()  {
         try {
             meses = new ArrayList<Mes>();
             meses.add(new Mes(0,"Janeiro"));

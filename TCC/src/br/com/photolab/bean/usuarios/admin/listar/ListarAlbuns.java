@@ -31,7 +31,6 @@ public class ListarAlbuns implements Serializable {
     AlbumDao albumDao = new AlbumDao();
     Metricas metricas = new Metricas();
     private List<Album> listaAlbuns;
-    private Contrato contratoSelecionado = new Contrato();
     private long qtdAlbuns;
     private long qtdFotosTotal;
 
@@ -74,22 +73,6 @@ public class ListarAlbuns implements Serializable {
 
     public void setListaAlbuns(List<Album> listaAlbuns) {
         this.listaAlbuns = listaAlbuns;
-    }
-
-    public Contrato getContratoSelecionado() {
-        return contratoSelecionado;
-    }
-
-    public void setContratoSelecionado(Contrato contratoSelecionado) {
-        this.contratoSelecionado = contratoSelecionado;
-    }
-
-    public ListarCursos getListarCursos() {
-        return listarCursos;
-    }
-
-    public void setListarCursos(ListarCursos listarCursos) {
-        this.listarCursos = listarCursos;
     }
 
     public UsuarioBean getUsuarioBean() {

@@ -29,18 +29,13 @@ public class ListarAlbunsFunc implements Serializable {
     private long qtdDia;
     private long qtdDiaFotos;
 
-    Relatorio relatorio = new Relatorio();
-
     RelatorioDao relatorioDao = new RelatorioDao();
     private List<Relatorio> relatorioList;
-
-    private Contrato contratoSelecionado = new Contrato();
 
     @PostConstruct
     public void listarAlbumFeito(){
         try {
 
-            // relatorioList = relatorioDao.ListarAlbunsFunc(usuarioBean.getUsuarioLogado());
             relatorioList = relatorioDao.ListarAlbunsHoje(usuarioBean.getUsuarioLogado());
             qtdDia = relatorioDao.contarAlbunsHoje(usuarioBean.getUsuarioLogado());
             qtdDiaFotos = relatorioDao.contarFotosHoje(usuarioBean.getUsuarioLogado());

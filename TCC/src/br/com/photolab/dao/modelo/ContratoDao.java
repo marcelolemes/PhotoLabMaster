@@ -73,7 +73,17 @@ public class ContratoDao implements Serializable {
         sessao.close();
         return listaRetorno;
     }
-
+    public List<Contrato> listarContratosStatus(int min, int max) throws Exception {
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Contrato.class);
+        criteria.add(Restrictions.ge("status", min)).add(Restrictions.le("status", max));
+        criteria.addOrder(Order.desc("ocupado")); // ordenar os ocupados primeiro
+        criteria.addOrder(Order.asc("urgencia")); // ordenar por urgencia
+        criteria.addOrder(Order.desc("status"));
+        List<Contrato> listaRetorno = criteria.list();
+        sessao.close();
+        return listaRetorno;
+    }
     public Contrato listarContratoStatus(int min, int max,int order) throws Exception {
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Contrato.class);
@@ -97,7 +107,9 @@ public class ContratoDao implements Serializable {
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Contrato.class);
         criteria.add(Restrictions.eq("status", unique));
-        criteria.addOrder(Order.asc("urgencia"));
+        criteria.addOrder(Order.desc("urgencia"));
+        criteria.addOrder(Order.desc("dataPrazo"));
+        criteria.addOrder(Order.desc("cod"));
         List<Contrato> listaRetorno = criteria.list();
         sessao.close();
         return listaRetorno;

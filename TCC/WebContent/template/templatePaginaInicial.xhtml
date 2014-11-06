@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+    <h:outputStylesheet library="css" name="estilo.css" />
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=ISO-8859-1" />
+    <title>PhotoLab Master</title>
+    <link rel="shortcut icon" type="image/x-icon"
+          href="#{request.contextPath}/resources/images/icone.ico" />
+
+</h:head>
+<body>
+<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+
+    <p:graphicImage url="/resources/images/ajaxloadingbar.gif"  style="align-self: center"/>
+
+</p:dialog>
+
+<p:layout fullPage="true">
+    <p:layoutUnit position="north" size="20%" maxSize="45">
+        <ui:insert name="menu" />
+    </p:layoutUnit>
+    <p:layoutUnit position="center" resizable="false" rendered="true">
+        <p:growl showDetail="true" autoUpdate="true" />
+        <ui:insert name="content" />
+        <p:ajaxExceptionHandler type="javax.faces.application.ViewExpiredException"
+                                onexception="alert('Tempo de login expirado para prosseguir, pressione F5, e refaça o seu login')"/>
+
+        <p:ajaxExceptionHandler id="exception" type="java.lang.NullPointerException"
+                                onexception="alert('Uma exceção ocorreu, por favor atualize a página e tente novamente')"/>
+    </p:layoutUnit>
+    <p:layoutUnit position="east" resizable="true" maxSize="450" collapsible="true" collapsed="true">
+        <ui:insert name="east" />
+    </p:layoutUnit>
+    <p:layoutUnit position="west" resizable="true"  maxSize="410" collapsible="true" collapsed="true">
+        <ui:insert name="west" />
+    </p:layoutUnit>
+    <p:layoutUnit position="south" resizable="true" maxSize="90"> <!--maxSize="50"-->
+
+        <h:form id="footer">
+
+
+
+
+            <div style="float: right;">
+                <p:graphicImage url="/resources/images/footer.png" />
+            </div>
+            <div style="float: left;">
+                <p:panelGrid columns="5" styleClass="semBorda">
+                    <p:commandButton icon="ui-icon-close" styleClass="botao-sair"
+                                     rendered="#{not empty paginaPrincipalBean.usuarioBean.usuarioLogado.apelido}"
+                                     value="#{paginaPrincipalBean.usuarioBean.usuarioLogado.apelido} (sair)"
+                                     action="#{paginaPrincipalBean.sairSessao()}" update="@all" process="@this" />
+
+                    <p:clock pattern="HH:mm:ss" mode="server" />
+                    <p:outputLabel value="ultimo acesso" rendered="#{not empty paginaPrincipalBean.usuarioBean.usuarioLogado.ultimoacesso}" />
+                    <p:outputLabel
+                            value="#{paginaPrincipalBean.usuarioBean.usuarioLogado.ultimoacesso}" rendered="#{not empty paginaPrincipalBean.usuarioBean.usuarioLogado.ultimoacesso}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </p:outputLabel>
+                </p:panelGrid>
+            </div>
+        </h:form>
+    </p:layoutUnit>
+
+</p:layout>
+</body>
+</html>

@@ -1,17 +1,20 @@
-package br.com.photolab.bean.usuarios.admin.listar.tratamento;
+package br.com.photolab.bean.usuarios.admin.listar.impressao;
 
+import br.com.photolab.bean.usuarios.admin.listar.ListarFichas;
 import br.com.photolab.dao.modelo.ContratoDao;
 import br.com.photolab.modelo.Contrato;
 import br.com.photolab.modelo.apoio.Metricas;
+import com.lowagie.text.*;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
 @ManagedBean
 @ViewScoped
-public class ListarContratoTratamento implements Serializable {
+public class ListarContratoImpressao implements Serializable {
 
     /**
      *
@@ -26,12 +29,13 @@ public class ListarContratoTratamento implements Serializable {
     private List<Contrato> listaContratoEmEspera;
     private List<Contrato> listaContratoPronto;
     private List<Contrato> listaContratoFazendo;
+    private List<Contrato> contratosFiltrados;
 
-    public ListarContratoTratamento() throws Exception {
+    public ListarContratoImpressao() throws Exception {
         contDao = new ContratoDao();
-        listaContratoEmEspera = contDao.listarContratosStatus(5, 7,1);
-        listaContratoFazendo  = contDao.listarContratosStatus(8);
-        listaContratoPronto = contDao.listarContratosStatus(11);
+        listaContratoFazendo = contDao.listarContratosStatus(15);
+        listaContratoEmEspera = contDao.listarContratosStatus(14);
+        listaContratoPronto = contDao.listarContratosStatus(16);
     }
 
 
@@ -40,13 +44,26 @@ public class ListarContratoTratamento implements Serializable {
             listaContratoEmEspera.clear();
             listaContratoPronto.clear();
             contDao = new ContratoDao();
-            listaContratoFazendo  = contDao.listarContratosStatus(8);
-            listaContratoEmEspera = contDao.listarContratosStatus(5, 7,1);
-            listaContratoPronto = contDao.listarContratosStatus(11);
+            listaContratoFazendo = contDao.listarContratosStatus(15);
+            listaContratoEmEspera = contDao.listarContratosStatus(14);
+            listaContratoPronto = contDao.listarContratosStatus(16);
         } catch (Exception ex) {
 
         }
     }
+
+
+    public void preProcessPDF(Object document) throws IOException,
+            BadElementException, DocumentException {
+        Document pdf = (Document) document;
+        pdf.open();
+        pdf.add(new Paragraph("Setor montagem:  "));
+        pdf.add(new Paragraph(" "));
+        pdf.setPageSize(PageSize.A4.rotate());
+
+
+    }
+
 
     public ContratoDao getContDao() {
         return contDao;
@@ -63,6 +80,17 @@ public class ListarContratoTratamento implements Serializable {
     public void setMetricas(Metricas metricas) {
         this.metricas = metricas;
     }
+
+
+    public List<Contrato> getContratosFiltrados() {
+        return contratosFiltrados;
+    }
+
+    public void setContratosFiltrados(List<Contrato> contratosFiltrados) {
+        this.contratosFiltrados = contratosFiltrados;
+    }
+
+
 
     public List<Contrato> getListaContratoEmEspera() {
         return listaContratoEmEspera;

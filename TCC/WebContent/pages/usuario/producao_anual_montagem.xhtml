@@ -27,7 +27,7 @@
     <ui:define name="content">
         <h:form>
 
-            <p:dataGrid var="mes" value="#{listarMeseslBean.meses}" columns="3" layout="grid"
+            <p:dataGrid var="mes" value="#{listarMesesBean.meses}" columns="3" layout="grid"
                         id="meses">
                 <f:facet name="header">
                     <h:outputLabel for="ano" value="Produção do setor da montagem do ano: " />
@@ -40,7 +40,7 @@
 
                 <p:panel header="#{mes.nome}" style="text-align:center">
                     <h:panelGrid columns="1" style="width:100%">
-                        <p:commandLink title="Abrir produção mensal" action="#{listarMeseslBean.btProducaoMensalMontagem()}" value="Abrir produção mensal">
+                        <p:commandLink title="Abrir produção mensal" action="#{listarMesesBean.btProducaoMensalMontagem()}" value="Abrir produção mensal">
                             <h:outputText styleClass="ui-icon ui-icon-search"/>
                             <f:setPropertyActionListener value="#{mes}" target="#{usuarioBean.mesSelecionado}" />
                         </p:commandLink>
