@@ -111,6 +111,9 @@ public class RelatorioMensalTratamentoBean
         yAxis.setLabel("Fotos");
         yAxis.setMin(0);
         yAxis.setMax(qtdMaximo+100);
+
+        lineModel1.setLegendPosition("s");
+        lineModel1.setLegendRows(1);
         return lineModel1;
     }
 

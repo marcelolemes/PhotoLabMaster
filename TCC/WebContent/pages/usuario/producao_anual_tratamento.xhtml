@@ -30,10 +30,14 @@
             <p:dataGrid var="mes" value="#{listarMeseslBean.meses}" columns="3" layout="grid"
                         id="meses">
                 <f:facet name="header">
-                       Produção do setor do tratamento de pele do ano:  <p:inputText id="ano" value="#{usuarioBean.anoSelecionado}" validatorMessage="Insira um valor de 2013 à 2020" required="true" requiredMessage="Por favor, insira o ano desejado">
-                    <f:validateDoubleRange maximum="2020" minimum="2013"/>
-                </p:inputText>
+                    <h:outputLabel for="ano" value="Produção do setor de tratamento de pele do ano: " />
+                    <p:inplace id="ano" editor="true">
+                        <p:inputText value="#{usuarioBean.anoSelecionado}"  label="text" validatorMessage="Insira um valor de 2013 à 2020" required="true" requiredMessage="Por favor, insira o ano desejado" >
+                            <f:validateDoubleRange maximum="2020" minimum="2013"/>
+                        </p:inputText>
+                    </p:inplace>
                 </f:facet>
+
                 <p:panel header="#{mes.nome}" style="text-align:center">
                     <h:panelGrid columns="1" style="width:100%">
                         <p:commandLink title="Abrir produção mensal" action="#{listarMeseslBean.btProducaoMensalTratamento()}" value="Abrir produção mensal"  >
@@ -44,7 +48,7 @@
                 </p:panel>
 
             </p:dataGrid>
-            <p:commandButton value="Atualizar" actionListener="#{listarFichas.atualizar}" update="@all" process="@all"/>
+
         </h:form>
 
     </ui:define>

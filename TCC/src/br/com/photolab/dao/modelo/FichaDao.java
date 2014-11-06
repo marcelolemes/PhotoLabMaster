@@ -31,7 +31,8 @@ public class FichaDao implements Serializable {
 	public List<Ficha> ListarFichas() throws Exception {
 		Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Ficha.class);
-        criteria.addOrder(Order.asc("numero"));
+        criteria.addOrder(Order.asc("ano"));
+        criteria.addOrder(Order.desc("numero"));
 		List<Ficha> listaRetorno = criteria.list();
 		sessao.close();
 		return listaRetorno;

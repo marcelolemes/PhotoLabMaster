@@ -112,41 +112,41 @@ public class RelatorioMensalMontagemMediaBean
     public double mediaAlbunsMes(Usuario usuario,int mes,int ano) throws Exception {
 
         calendar = Calendar.getInstance();
-                calendar.clear(Calendar.YEAR);
-                calendar.clear(Calendar.DAY_OF_YEAR);
-                calendar.clear(Calendar.DAY_OF_WEEK);
-                calendar.clear(Calendar.DAY_OF_MONTH);
-                calendar.clear(Calendar.DAY_OF_WEEK_IN_MONTH);
-                calendar.clear(Calendar.HOUR_OF_DAY);
-                calendar.clear(Calendar.WEEK_OF_YEAR);
-                calendar.clear(Calendar.WEEK_OF_MONTH);
-                calendar.clear(Calendar.HOUR);
-                calendar.clear(Calendar.AM_PM);
-                calendar.clear(Calendar.MINUTE);
-                calendar.clear(Calendar.SECOND);
-                calendar.clear(Calendar.MILLISECOND);
-                calendar.set(Calendar.MONTH,mes);
-                calendar.set(Calendar.YEAR,ano);
+        calendar.clear(Calendar.YEAR);
+        calendar.clear(Calendar.DAY_OF_YEAR);
+        calendar.clear(Calendar.DAY_OF_WEEK);
+        calendar.clear(Calendar.DAY_OF_MONTH);
+        calendar.clear(Calendar.DAY_OF_WEEK_IN_MONTH);
+        calendar.clear(Calendar.HOUR_OF_DAY);
+        calendar.clear(Calendar.WEEK_OF_YEAR);
+        calendar.clear(Calendar.WEEK_OF_MONTH);
+        calendar.clear(Calendar.HOUR);
+        calendar.clear(Calendar.AM_PM);
+        calendar.clear(Calendar.MINUTE);
+        calendar.clear(Calendar.SECOND);
+        calendar.clear(Calendar.MILLISECOND);
+        calendar.set(Calendar.MONTH,mes);
+        calendar.set(Calendar.YEAR,ano);
 
-                calendar2 = Calendar.getInstance();
-                calendar2.clear(Calendar.YEAR);
-                calendar2.clear(Calendar.DAY_OF_YEAR);
-                calendar2.clear(Calendar.DAY_OF_WEEK);
-                calendar2.clear(Calendar.DAY_OF_MONTH);
-                calendar2.clear(Calendar.DAY_OF_WEEK_IN_MONTH);
-                calendar2.clear(Calendar.HOUR_OF_DAY);
-                calendar2.clear(Calendar.WEEK_OF_YEAR);
-                calendar2.clear(Calendar.WEEK_OF_MONTH);
-                calendar2.clear(Calendar.HOUR);
-                calendar2.clear(Calendar.AM_PM);
-                calendar2.clear(Calendar.MINUTE);
-                calendar2.clear(Calendar.SECOND);
-                calendar2.clear(Calendar.MILLISECOND);
-                calendar2.set(Calendar.MONTH,mes+1);
-                calendar2.set(Calendar.YEAR,ano);
+        calendar2 = Calendar.getInstance();
+        calendar2.clear(Calendar.YEAR);
+        calendar2.clear(Calendar.DAY_OF_YEAR);
+        calendar2.clear(Calendar.DAY_OF_WEEK);
+        calendar2.clear(Calendar.DAY_OF_MONTH);
+        calendar2.clear(Calendar.DAY_OF_WEEK_IN_MONTH);
+        calendar2.clear(Calendar.HOUR_OF_DAY);
+        calendar2.clear(Calendar.WEEK_OF_YEAR);
+        calendar2.clear(Calendar.WEEK_OF_MONTH);
+        calendar2.clear(Calendar.HOUR);
+        calendar2.clear(Calendar.AM_PM);
+        calendar2.clear(Calendar.MINUTE);
+        calendar2.clear(Calendar.SECOND);
+        calendar2.clear(Calendar.MILLISECOND);
+        calendar2.set(Calendar.MONTH,mes+1);
+        calendar2.set(Calendar.YEAR,ano);
 
-            return relatorioDiarioDao.ListarMediaMes(usuario,calendar,calendar2);
-        }
+        return relatorioDiarioDao.ListarMediaMes(usuario,calendar,calendar2);
+    }
 
 
 
@@ -159,41 +159,41 @@ public class RelatorioMensalMontagemMediaBean
     public double totalAlbunsMes(Usuario usuario,int mes, int ano) throws Exception {
 
         calendar = Calendar.getInstance();
-               calendar.clear(Calendar.YEAR);
-               calendar.clear(Calendar.DAY_OF_YEAR);
-               calendar.clear(Calendar.DAY_OF_WEEK);
-               calendar.clear(Calendar.DAY_OF_MONTH);
-               calendar.clear(Calendar.DAY_OF_WEEK_IN_MONTH);
-               calendar.clear(Calendar.HOUR_OF_DAY);
-               calendar.clear(Calendar.WEEK_OF_YEAR);
-               calendar.clear(Calendar.WEEK_OF_MONTH);
-               calendar.clear(Calendar.HOUR);
-               calendar.clear(Calendar.AM_PM);
-               calendar.clear(Calendar.MINUTE);
-               calendar.clear(Calendar.SECOND);
-               calendar.clear(Calendar.MILLISECOND);
-               calendar.set(Calendar.MONTH,mes);
-               calendar.set(Calendar.YEAR,ano);
+        calendar.clear(Calendar.YEAR);
+        calendar.clear(Calendar.DAY_OF_YEAR);
+        calendar.clear(Calendar.DAY_OF_WEEK);
+        calendar.clear(Calendar.DAY_OF_MONTH);
+        calendar.clear(Calendar.DAY_OF_WEEK_IN_MONTH);
+        calendar.clear(Calendar.HOUR_OF_DAY);
+        calendar.clear(Calendar.WEEK_OF_YEAR);
+        calendar.clear(Calendar.WEEK_OF_MONTH);
+        calendar.clear(Calendar.HOUR);
+        calendar.clear(Calendar.AM_PM);
+        calendar.clear(Calendar.MINUTE);
+        calendar.clear(Calendar.SECOND);
+        calendar.clear(Calendar.MILLISECOND);
+        calendar.set(Calendar.MONTH,mes);
+        calendar.set(Calendar.YEAR,ano);
 
-               calendar2 = Calendar.getInstance();
-               calendar2.clear(Calendar.YEAR);
-               calendar2.clear(Calendar.DAY_OF_YEAR);
-               calendar2.clear(Calendar.DAY_OF_WEEK);
-               calendar2.clear(Calendar.DAY_OF_MONTH);
-               calendar2.clear(Calendar.DAY_OF_WEEK_IN_MONTH);
-               calendar2.clear(Calendar.HOUR_OF_DAY);
-               calendar2.clear(Calendar.WEEK_OF_YEAR);
-               calendar2.clear(Calendar.WEEK_OF_MONTH);
-               calendar2.clear(Calendar.HOUR);
-               calendar2.clear(Calendar.AM_PM);
-               calendar2.clear(Calendar.MINUTE);
-               calendar2.clear(Calendar.SECOND);
-               calendar2.clear(Calendar.MILLISECOND);
-               calendar2.set(Calendar.MONTH,mes+1);
-               calendar2.set(Calendar.YEAR,ano);
+        calendar2 = Calendar.getInstance();
+        calendar2.clear(Calendar.YEAR);
+        calendar2.clear(Calendar.DAY_OF_YEAR);
+        calendar2.clear(Calendar.DAY_OF_WEEK);
+        calendar2.clear(Calendar.DAY_OF_MONTH);
+        calendar2.clear(Calendar.DAY_OF_WEEK_IN_MONTH);
+        calendar2.clear(Calendar.HOUR_OF_DAY);
+        calendar2.clear(Calendar.WEEK_OF_YEAR);
+        calendar2.clear(Calendar.WEEK_OF_MONTH);
+        calendar2.clear(Calendar.HOUR);
+        calendar2.clear(Calendar.AM_PM);
+        calendar2.clear(Calendar.MINUTE);
+        calendar2.clear(Calendar.SECOND);
+        calendar2.clear(Calendar.MILLISECOND);
+        calendar2.set(Calendar.MONTH,mes+1);
+        calendar2.set(Calendar.YEAR,ano);
 
-           return relatorioDiarioDao.ListarTotalMes(usuario,calendar,calendar2);
-       }
+        return relatorioDiarioDao.ListarTotalMes(usuario,calendar,calendar2);
+    }
 
 
 
@@ -203,16 +203,20 @@ public class RelatorioMensalMontagemMediaBean
         barChartModel1 = initBarModel1(usersMontagem);
         barChartModel1.setTitle("Participação Media Montagem do mês de "+ usuarioBean.getMesSelecionado().getNome()+" de "+ usuarioBean.getAnoSelecionado());
         barChartModel1.setLegendPosition("ws");
-
-
+        barChartModel1.setShowDatatip(true);
+        barChartModel1.setShowPointLabels(true);
+        barChartModel1.setAnimate(true);
+        barChartModel1.setMouseoverHighlight(false);
+        barChartModel1.setLegendPosition("s");
+        barChartModel1.setLegendRows(1);
         return barChartModel1;
     }
     public PieChartModel createPieModels1() throws Exception {
         PieChartModel pieChartModel1 = new PieChartModel();
         pieChartModel1 = initPieModel1(usersMontagem);
         pieChartModel1.setTitle("Participação Total Montagem do mês de "+ usuarioBean.getMesSelecionado().getNome()+" de "+ usuarioBean.getAnoSelecionado());
-        pieChartModel1.setLegendPosition("ws");
-
+        pieChartModel1.setLegendPosition("s");
+        pieChartModel1.setLegendRows(1);
 
         return pieChartModel1;
     }
@@ -229,10 +233,10 @@ public class RelatorioMensalMontagemMediaBean
 
     public void itemSelect2(ItemSelectEvent event) {
 
-         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-                 "Usuário", usersMontagem.get(event.getSeriesIndex()).getApelido());
-         FacesContext.getCurrentInstance().addMessage(null, msg);
-     }
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+                "Usuário", usersMontagem.get(event.getSeriesIndex()).getApelido());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 
 
     private BarChartModel initBarModel1(List<Usuario> usuarios) throws Exception {
@@ -264,7 +268,7 @@ public class RelatorioMensalMontagemMediaBean
         Axis yAxis = model.getAxis(AxisType.Y);
         yAxis.setLabel("Fotos");
         yAxis.setMin(0);
-        yAxis.setMax(qtdMaximo + 50);
+        yAxis.setMax(qtdMaximo + 100);
 
         return model;
     }
@@ -277,7 +281,8 @@ public class RelatorioMensalMontagemMediaBean
             model.set(usuarios.get(y).getApelido(), totalAlbunsMes(usuarios.get(y), usuarioBean.getMesSelecionado().getNumero(), usuarioBean.getAnoSelecionado()));
 
         }
-
+        model.setShowDataLabels(true);
+        model.setFill(false);
         return model;
     }
 

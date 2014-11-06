@@ -15,10 +15,12 @@
 
 </h:head>
 <body>
-<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+<p:ajaxStatus onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
 
 <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-    <p:graphicImage url="/resources/images/ajaxloadingbar.gif" />
+
+    <p:graphicImage url="/resources/images/ajaxloadingbar.gif"  style="align-self: center"/>
+
 </p:dialog>
 
 <p:layout fullPage="true">

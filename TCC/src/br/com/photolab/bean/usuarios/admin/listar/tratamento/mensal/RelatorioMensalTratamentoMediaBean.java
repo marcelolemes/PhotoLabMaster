@@ -202,8 +202,13 @@ public class RelatorioMensalTratamentoMediaBean
         BarChartModel barChartModel1;
         barChartModel1 = initBarModel1(usersTratamento);
         barChartModel1.setTitle("Participação Media Montagem do mês de "+ usuarioBean.getMesSelecionado().getNome()+" de "+ usuarioBean.getAnoSelecionado());
-        barChartModel1.setLegendPosition("ws");
 
+        barChartModel1.setShowDatatip(true);
+        barChartModel1.setShowPointLabels(true);
+        barChartModel1.setAnimate(true);
+        barChartModel1.setMouseoverHighlight(false);
+        barChartModel1.setLegendPosition("s");
+        barChartModel1.setLegendRows(1);
 
         return barChartModel1;
     }
@@ -211,8 +216,8 @@ public class RelatorioMensalTratamentoMediaBean
         PieChartModel pieChartModel1 = new PieChartModel();
         pieChartModel1 = initPieModel1(usersTratamento);
         pieChartModel1.setTitle("Participação Total Tratamento do mês de "+ usuarioBean.getMesSelecionado().getNome()+" de "+ usuarioBean.getAnoSelecionado());
-        pieChartModel1.setLegendPosition("ws");
-
+        pieChartModel1.setLegendPosition("s");
+        pieChartModel1.setLegendRows(1);
 
         return pieChartModel1;
     }
@@ -261,7 +266,7 @@ public class RelatorioMensalTratamentoMediaBean
         Axis yAxis = model.getAxis(AxisType.Y);
         yAxis.setLabel("Fotos");
         yAxis.setMin(0);
-        yAxis.setMax(qtdMaximo + 50);
+        yAxis.setMax(qtdMaximo + 100);
 
         return model;
     }
@@ -274,7 +279,8 @@ public class RelatorioMensalTratamentoMediaBean
             model.set(usuarios.get(y).getApelido(), totalAlbunsMes(usuarios.get(y), usuarioBean.getMesSelecionado().getNumero(), usuarioBean.getAnoSelecionado()));
 
         }
-
+        model.setShowDataLabels(true);
+        model.setFill(false);
         return model;
     }
 
