@@ -25,7 +25,7 @@
     </error-page>
 -->
     <session-config>
-        <session-timeout>35</session-timeout> <!-- o tempo de sessão é 35 minutos, pois usuários na página inicial atualizam a páginas sozinhos
+        <session-timeout>90</session-timeout> <!-- o tempo de sessão é 35 minutos, pois usuários na página inicial atualizam a páginas sozinhos
          a cada 30 minutos -->
     </session-config>
 </web-app>
