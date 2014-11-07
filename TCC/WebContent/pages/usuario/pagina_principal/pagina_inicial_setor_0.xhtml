@@ -4,7 +4,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                template="#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 2 ?'/template/templatePaginaInicialGestor.xhtml':'/template/templatePaginaInicial.xhtml'}"
+                template="#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 0 ?'/template/templatePaginaInicialGestor.xhtml':'/template/templatePaginaInicial.xhtml'}"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <h:head>
@@ -53,7 +53,7 @@
         </h:form>
     </ui:define>
     <ui:define name="east">
-        Tratamento
+        <f:facet name="header"> Tratamento </f:facet>
         <h:form>
             <p:panel rendered="#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 0? true:false}" styleClass="paneeast">
                 <p:dataTable value="#{listarContratoTratamento.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
@@ -98,9 +98,9 @@
         </h:form>
     </ui:define>
     <ui:define name="west">
-        Montagem
+        <f:facet name="header">Montagem</f:facet>
         <h:form>
-            <p:panel rendered="#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 0? true:false}" styleClass="paneeast">
+            <p:panel styleClass="paneeast">
 
                 <p:dataTable value="#{listarContratoMontagem.listaContratoFazendo}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato sendo montado">
                     <f:facet name="header">Contratos em montagem</f:facet>

@@ -24,8 +24,6 @@ public class ListarAlbuns implements Serializable {
      *
      */
 
-    @ManagedProperty("#{listarCursos}")
-    ListarCursos listarCursos;
     @ManagedProperty("#{usuarioBean}")
     private UsuarioBean usuarioBean;
     AlbumDao albumDao = new AlbumDao();

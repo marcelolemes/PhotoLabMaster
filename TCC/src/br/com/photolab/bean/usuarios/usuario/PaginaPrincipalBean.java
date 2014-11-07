@@ -116,14 +116,14 @@ public class PaginaPrincipalBean implements Serializable {
 
     public void btGraficoProducaoMensalTratamento() throws Exception {
 
-           if (usuarioBean.getUsuario().isLogado() /* && (usuarioBean.getUsuarioLogado() != null) */) {
+        if (usuarioBean.getUsuario().isLogado() /* && (usuarioBean.getUsuarioLogado() != null) */) {
 
-               FacesContext.getCurrentInstance().getExternalContext().redirect(  FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/usuario/producao_anual_tratamento.jsf");
+            FacesContext.getCurrentInstance().getExternalContext().redirect(  FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/usuario/producao_anual_tratamento.jsf");
 
-           } else {
-               FacesContext.getCurrentInstance().getExternalContext().redirect("/pages/login_index.jsf");
-           }
-       }
+        } else {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/pages/login_index.jsf");
+        }
+    }
 
     public String btCadastrarFicha(){
 
@@ -309,6 +309,35 @@ public class PaginaPrincipalBean implements Serializable {
         }
 
     }
+
+
+    public String btListarAlbunsImpressao() {
+
+        if (usuarioBean.getUsuario().isLogado()) {
+            if (usuarioBean.getUsuarioLogado().getSetor()  == 4) {
+
+                return "/pages/admin/conteudo/visualizaralbuns_impressao.xhtml";
+            } else
+            {
+                usuarioBean.autoridadeInsuficiente();
+                System.out.println("Setor do usuario "+usuarioBean.getUsuarioLogado().getSetor());
+
+                if (usuarioBean.getUsuarioLogado().getNivelAcesso() > 2) {
+                    return "/pages/admin/conteudo/pagina_inicial_admin.xhtml";
+                } else {
+                    return "/pages/usuario/pagina_inicial_setor_"
+                            + usuarioBean.getUsuarioLogado().getSetor() + ".xhtml";
+                }
+            }
+
+        } else {
+            usuarioBean.nenhumUsuario();
+            return "/pages/login_index.xhtml";
+
+        }
+
+    }
+
 
     public String btListarUsers() {
 

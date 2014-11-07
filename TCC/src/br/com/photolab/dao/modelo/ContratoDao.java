@@ -103,12 +103,52 @@ public class ContratoDao implements Serializable {
         return retorno;
     }
 
+    public Contrato listarContratoStatus(int min, int max) throws Exception {
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Contrato.class);
+        criteria.add(Restrictions.ge("status", min)).add(Restrictions.le("status", max));
+        criteria.addOrder(Order.desc("ocupado")); // ordenar os ocupados primeiro
+        criteria.addOrder(Order.desc("status"));
+       criteria.addOrder(Order.asc("urgencia")); // ordenar por urgencia
+        criteria.setMaxResults(1);
+        Contrato retorno = (Contrato) criteria.uniqueResult();
+        sessao.close();
+        System.out.println("Retorno contrato "+retorno.getNumeroContrato());
+        return retorno;
+    }
+    public Contrato listarContratoStatus(int unique) throws Exception {
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Contrato.class);
+        criteria.add(Restrictions.eq("status", unique));
+        criteria.addOrder(Order.desc("status"));
+        criteria.addOrder(Order.desc("ocupado")); // ordenar os ocupados primeiro
+        criteria.addOrder(Order.asc("urgencia")); // ordenar por urgencia
+        criteria.setMaxResults(1);
+        Contrato retorno = (Contrato) criteria.uniqueResult();
+        sessao.close();
+        System.out.println("Retorno contrato "+retorno.getNumeroContrato());
+        return retorno;
+    }
+
+
     public List<Contrato> listarContratosStatus(int unique) throws Exception {
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Contrato.class);
         criteria.add(Restrictions.eq("status", unique));
         criteria.addOrder(Order.desc("urgencia"));
         criteria.addOrder(Order.desc("dataPrazo"));
+        criteria.addOrder(Order.desc("cod"));
+        List<Contrato> listaRetorno = criteria.list();
+        sessao.close();
+        return listaRetorno;
+    }
+
+    public List<Contrato> listarContratosImpressos(int unique) throws Exception {
+        Session sessao = HibernateUtil.getSession();
+        Criteria criteria = sessao.createCriteria(Contrato.class);
+        criteria.add(Restrictions.eq("status", unique));
+        criteria.addOrder(Order.desc("dataEntrega"));
+        criteria.addOrder(Order.desc("urgencia"));
         criteria.addOrder(Order.desc("cod"));
         List<Contrato> listaRetorno = criteria.list();
         sessao.close();
@@ -186,6 +226,21 @@ public class ContratoDao implements Serializable {
                             break;
                         case 15:
                             retorno.setStatus(statusMax);
+                            break;
+                        case 16:
+                            if(status != statusMax) {
+                                if (status == 14){
+                                    retorno.setStatus(15);
+                                }
+                                else if (status == 15){
+                                    retorno.setStatus(15);
+                                }
+                            }
+                            else {
+                                retorno.setStatus(statusMax);
+                                retorno.setUrgencia(4);
+                                retorno.setOcupado(false);
+                            }
                             break;
                         default:
                             retorno.setStatus(statusMax);
@@ -286,6 +341,24 @@ public class ContratoDao implements Serializable {
                             break;
                         case 15:
                             retorno.setStatus(statusMax);
+                            retorno.setUrgencia(0);
+                            retorno.setOcupado(true);
+                            break;
+
+                        case 16:
+                            if(status != statusMax) {
+                                if (status == 14){
+                                    retorno.setStatus(15);
+                                }
+                                else if (status == 15){
+                                    retorno.setStatus(15);
+                                }
+                            }
+                            else {
+                                retorno.setStatus(statusMax);
+                                retorno.setUrgencia(4);
+                                retorno.setOcupado(false);
+                            }
                             break;
                         default:
                             retorno.setStatus(statusMax);

@@ -181,9 +181,9 @@
     </h:form>
 </ui:define>
 <ui:define name="east">
-    <f:facet name="#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 2 ?'header':null}" >"#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 2? "Área de apoio ao gestor":null}"</f:facet>
+    <f:facet name="header">Área de apoio ao gestor</f:facet>
     <h:form>
-        <p:panel rendered="#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 2? true:false}" styleClass="paneeast">
+        <p:panel styleClass="paneeast">
             <p:dataTable value="#{listarContratoMontagem.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
                 <f:facet name="header">Contratos em espera</f:facet>
                 <p:column headerText="contrato" width="22%">
@@ -213,6 +213,6 @@
         </p:panel>
     </h:form>
 </ui:define>
-<p:ajaxExceptionHandler type="javax.faces.application.ViewExpiredException"  onexception="#{usuarioBean.btHome}" />
+
 </body>
 </ui:composition>

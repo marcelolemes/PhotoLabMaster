@@ -25,182 +25,228 @@
 </ui:define>
 <ui:define name="content">
 
-    <p:tabView id="impressao" value="impressão">
-        <p:tab id="tabImpressao" title="Contratos para impressão">
-            <h:form id="cursosImpressao">
-                <p:dataTable id="todosContratos" var="contrato"
-                             value="#{listarContratoImpressao.listaContratoFazendo}" resizableColumns="true" sortBy="urgencia" widgetVar="cursosTable"
-                             rowKey="#{contrato.cod}" emptyMessage="Nenhum contrato encontrado."
-                             filteredValue="#{listarContratoImpressao.contratosFiltrados}"
-                             draggableColumns="true" scrollRows="30" scrollable="true"
-                             scrollHeight="450" liveScroll="true" styleClass="interiorTabela" >
+<p:tabView id="impressao" value="impressão">
 
+    <p:tab title="Albuns">
+        <h:form>
 
-                    <p:column style="width:32px;text-align: center" width="30px"
-                              exportable="false">
-                        <p:commandButton id="botao-edit" styleClass="botao-edit"
-                                         update=":editarForm:contratoEditar"
-                                         oncomplete="PF('contratoEdit').show()" icon="ui-icon-wrench"
-                                         title="Editar">
-                            <f:setPropertyActionListener value="#{contrato}"
-                                                         target="#{usuarioBean.contratoSelecionado}" />
-                        </p:commandButton>
-                    </p:column>
-                    <p:column style="width:32px;text-align: center" width="30px"
-                              exportable="false">
-                        <p:commandButton id="botao-info" styleClass="botao-info"
-                                         update=":formDetalhe:contratoDetalhe"
-                                         oncomplete="PF('contratoDialogo').show()" icon="ui-icon-info"
-                                         title="Info">
-                            <f:setPropertyActionListener value="#{contrato}"
-                                                         target="#{usuarioBean.contratoSelecionado}" />
-                        </p:commandButton>
-                    </p:column>
-                    <p:column style="width:70px;text-align: center" exportable="false" headerText="Album">
-                        <p:commandButton title="Visualizar Albuns Curso" value="Ver" rendered="#{contrato.qtdAlbum le 0 ? false:true}" update="@all" process="@all"
-                                         action="#{paginaPrincipalBean.btListarAlbunsCurso()}">
-                            <f:setPropertyActionListener value="#{contrato}"
-                                                         target="#{usuarioBean.contratoSelecionado}" />
-                        </p:commandButton>
-                    </p:column>
-
-                    <p:column headerText="Contrato" width="9%" filterBy="numeroContrato"
-                              filterMatchMode="contains" sortBy="numeroContrato">
-                        <h:outputText value="#{contrato.numeroContrato}" />
-                    </p:column>
-                    <p:column headerText="Curso" filterBy="curso"
-                              filterMatchMode="contains" sortBy="curso">
-                        <h:outputText value="#{contrato.curso}" />
-                    </p:column>
-
-                </p:dataTable>
-
-                <p:panelGrid columns="3" styleClass="semBorda">
-                    <p:commandButton value="Atualizar" action="#{listarContratoImpressao.atualizar()}" process="@all"
-                                     update="@all" immediate="true">
-                        <p:resetInput target=":cursosImpressao" />
-
-
-                    </p:commandButton>
-
-
-
+            <p:dataTable id="albuns" value="#{regraImpressao.listaAlbuns}"
+                         var="album" scrollable="true" scrollHeight="45%" sortBy="numero">
+                <f:facet name="header">
                     <h:commandLink id="tabelapdf">
                         <p:graphicImage url="/resources/images/pdf.png" />
-                        <p:dataExporter type="pdf" target=":impressao:cursosImpressao:todosContratos" fileName="Cursos em impressão"
-                                        encoding="iso-8859-1" pageOnly="true"
-                                        preProcessor="#{listarContratoImpressao.preProcessPDF}" />
+                        <p:dataExporter type="pdf" target="albuns" fileName="albuns"
+                                        encoding="iso-8859-1" />
                     </h:commandLink>
+                    <p:spacer width="50" height="10" />
+                    <p:commandButton value="Atualizar" actionListener="#{regraImpressao.iniciar()}" update="albuns"/>
+                </f:facet>
+                <p:column exportable="false" width="10%">
+                    <p:commandButton value="Impresso" rendered="#{album.status eq 14}" actionListener="#{regraImpressao.btImpresso(album)}" update="albuns"/>
+                </p:column>
+                <p:column headerText="Número" width="8%">
+                    <h:outputText value="#{album.numero}" />
+                </p:column>
+                <p:column headerText="Fotos" width="8%">
+                    <p:outputLabel value="#{album.qtdFotos} fotos" rendered="#{album.status eq 16}" />
+                </p:column>
+                <p:column headerText="Contrato" width="10%">
+                    <h:outputText value="#{album.contrato.numeroContrato}" />
+                </p:column>
+                <p:column headerText="Curso"  exportable="false">
+                    <h:outputText value="#{album.contrato.curso}" />
+                </p:column>
+                <p:column headerText="Obs"  exportable="false">
+                    <h:outputText value="#{album.obs}" />
+                </p:column>
 
-                </p:panelGrid>
-            </h:form>
+            </p:dataTable>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Quantidade de albuns deste contrato "/>
+                <p:outputLabel value="#{listarAlbuns.qtdAlbuns}"/>
+                <p:outputLabel value="Quantidade de fotos deste contrato "/>
+                <p:outputLabel value="#{listarAlbuns.qtdFotosTotal}"/>
+            </p:panelGrid>
 
 
-        </p:tab>
-    </p:tabView>
+        </h:form>
 
-    <p:dialog id="continfo" header="Contrato info:"
-              widgetVar="contratoDialogo" modal="false" showEffect="fade"
-              resizable="false" closable="true" styleClass="fundobranco"
-              closeOnEscape="true" style="text-align:center;">
-        <h:form id="formDetalhe">
+    </p:tab>
+
+    <p:tab id="tabImpressao" title="Contratos em impressão">
+        <h:form id="cursosImpressao">
+            <p:dataTable id="todosContratos" var="contrato"
+                         value="#{listarContratoImpressao.listaContratoFazendo}" resizableColumns="true" sortBy="urgencia" widgetVar="cursosTable"
+                         rowKey="#{contrato.cod}" emptyMessage="Nenhum contrato encontrado."
+                         filteredValue="#{listarContratoImpressao.contratosFiltrados}"
+                         draggableColumns="true" scrollRows="30" scrollable="true"
+                         scrollHeight="450" liveScroll="true" styleClass="interiorTabela" >
+
+
+                <p:column style="width:32px;text-align: center" width="30px"
+                          exportable="false">
+                    <p:commandButton id="botao-edit" styleClass="botao-edit"
+                                     update=":editarForm:contratoEditar"
+                                     oncomplete="PF('contratoEdit').show()" icon="ui-icon-wrench"
+                                     title="Editar">
+                        <f:setPropertyActionListener value="#{contrato}"
+                                                     target="#{usuarioBean.contratoSelecionado}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column style="width:32px;text-align: center" width="30px"
+                          exportable="false">
+                    <p:commandButton id="botao-info" styleClass="botao-info"
+                                     update=":formDetalhe:contratoDetalhe"
+                                     oncomplete="PF('contratoDialogo').show()" icon="ui-icon-info"
+                                     title="Info">
+                        <f:setPropertyActionListener value="#{contrato}"
+                                                     target="#{usuarioBean.contratoSelecionado}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column style="width:70px;text-align: center" exportable="false" headerText="Album">
+                    <p:commandButton title="Visualizar Albuns Curso" value="Ver" rendered="#{contrato.qtdAlbum le 0 ? false:true}" update="@all" process="@all"
+                                     action="#{paginaPrincipalBean.btListarAlbunsImpressao()}">
+                        <f:setPropertyActionListener value="#{contrato}"
+                                                     target="#{usuarioBean.contratoSelecionado}" />
+                    </p:commandButton>
+                </p:column>
+
+                <p:column headerText="Contrato" width="9%" filterBy="numeroContrato"
+                          filterMatchMode="contains" sortBy="numeroContrato">
+                    <h:outputText value="#{contrato.numeroContrato}" />
+                </p:column>
+                <p:column headerText="Curso" filterBy="curso"
+                          filterMatchMode="contains" sortBy="curso">
+                    <h:outputText value="#{contrato.curso}" />
+                </p:column>
+
+            </p:dataTable>
+
+            <p:panelGrid columns="3" styleClass="semBorda">
+                <p:commandButton value="Atualizar" action="#{listarContratoImpressao.atualizar()}" process="@all"
+                                 update="@all" immediate="true">
+                    <p:resetInput target=":cursosImpressao" />
+
+
+                </p:commandButton>
+
+                <h:commandLink id="tabelapdfContratos">
+                    <p:graphicImage url="/resources/images/pdf.png" />
+                    <p:dataExporter type="pdf" target=":impressao:cursosImpressao:todosContratos" fileName="Cursos em impressão"
+                                    encoding="iso-8859-1" pageOnly="true"
+                                    preProcessor="#{listarContratoImpressao.preProcessPDF}" />
+                </h:commandLink>
+
+            </p:panelGrid>
+        </h:form>
+
+
+    </p:tab>
+
+</p:tabView>
+
+<p:dialog id="continfo" header="Contrato info:"
+          widgetVar="contratoDialogo" modal="false" showEffect="fade"
+          resizable="false" closable="true" styleClass="fundobranco"
+          closeOnEscape="true" style="text-align:center;">
+    <h:form id="formDetalhe">
         <p:outputPanel id="contratoDetalhe" style="text-align:center;">
 
-                <p:panelGrid columns="2"
-                             rendered="#{not empty usuarioBean.contratoSelecionado}" styleClass="semBorda">
-                    <p:outputLabel value="Curso:" />
-                    <h:outputText value="#{usuarioBean.contratoSelecionado.curso}" />
-                    <p:outputLabel value="Contrato:" />
-                    <h:outputText
-                            value="#{usuarioBean.contratoSelecionado.numeroContrato}" />
-                    <p:outputLabel value="Data Prazo:" />
-                    <h:outputText value="#{usuarioBean.contratoSelecionado.dataPrazo}">
-                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                    </h:outputText>
-                    <p:outputLabel value="Caminho:" />
-                    <h:outputText value="#{usuarioBean.contratoSelecionado.caminho}" />
-                    <p:outputLabel value="OBS:" />
-                    <h:outputText value="#{usuarioBean.contratoSelecionado.obs}" />
-                    <p:outputLabel value="Entidade:" />
-                    <h:outputText value="#{usuarioBean.contratoSelecionado.entidade}" />
+            <p:panelGrid columns="2"
+                         rendered="#{not empty usuarioBean.contratoSelecionado}" styleClass="semBorda">
+                <p:outputLabel value="Curso:" />
+                <h:outputText value="#{usuarioBean.contratoSelecionado.curso}" />
+                <p:outputLabel value="Contrato:" />
+                <h:outputText
+                        value="#{usuarioBean.contratoSelecionado.numeroContrato}" />
+                <p:outputLabel value="Data Prazo:" />
+                <h:outputText value="#{usuarioBean.contratoSelecionado.dataPrazo}">
+                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                </h:outputText>
+                <p:outputLabel value="Caminho:" />
+                <h:outputText value="#{usuarioBean.contratoSelecionado.caminho}" />
+                <p:outputLabel value="OBS:" />
+                <h:outputText value="#{usuarioBean.contratoSelecionado.obs}" />
+                <p:outputLabel value="Entidade:" />
+                <h:outputText value="#{usuarioBean.contratoSelecionado.entidade}" />
 
-                    <p:outputLabel value="Média de fotos" />
-                    <h:outputText value="#{usuarioBean.contratoSelecionado.media}" />
+                <p:outputLabel value="Média de fotos" />
+                <h:outputText value="#{usuarioBean.contratoSelecionado.media}" />
 
-                    <h:commandLink id="infopdf">
-                        <p:graphicImage url="/resources/images/pdf.png" />
-                        <p:printer target=":continfo" />
-                    </h:commandLink>
-                </p:panelGrid>
+                <h:commandLink id="infopdf">
+                    <p:graphicImage url="/resources/images/pdf.png" />
+                    <p:printer target=":continfo" />
+                </h:commandLink>
+            </p:panelGrid>
 
         </p:outputPanel>
     </h:form>
-    </p:dialog>
+</p:dialog>
 
-    <p:dialog widgetVar="contratoEdit" showEffect="fade" resizable="false"
-              closable="true" styleClass="fundobranco" closeOnEscape="true"
-              modal="false" style="text-align:center;">
-        <h:form id="editarForm">
-            <p:outputPanel id="contratoEditar" style="text-align:center;">
-                <p:panelGrid columns="4"
-                             rendered="#{not empty usuarioBean.contratoSelecionado}"
-                             styleClass="semBorda">
-                    <p:outputLabel value="Número do contrato" />
-                    <p:inputText
-                            value="#{usuarioBean.contratoSelecionado.numeroContrato}" />
-                    <p:outputLabel value="Curso" />
-                    <p:inputText value="#{usuarioBean.contratoSelecionado.curso}" />
-                    <p:outputLabel value="Cidade" />
-                    <p:inputText value="#{usuarioBean.contratoSelecionado.cidade}" />
-                    <p:outputLabel value="Entidade" />
-                    <p:inputText value="#{usuarioBean.contratoSelecionado.entidade}" />
-                    <p:outputLabel value="Média" />
-                    <p:inputText value="#{usuarioBean.contratoSelecionado.media}" />
-                    <p:outputLabel value="Data Entrada" />
-                    <p:calendar value="#{usuarioBean.contratoSelecionado.dataEntrada}"
-                                locale="pt" navigator="true" pattern="MM-dd-yyyy" />
-                    <p:outputLabel value="Data Prazo" />
-                    <p:calendar styleClass="calendar"
-                                value="#{usuarioBean.contratoSelecionado.dataPrazo}" locale="pt"
-                                navigator="true" pattern="MM-dd-yyyy" />
+<p:dialog widgetVar="contratoEdit" showEffect="fade" resizable="false"
+          closable="true" styleClass="fundobranco" closeOnEscape="true"
+          modal="false" style="text-align:center;">
+    <h:form id="editarForm">
+        <p:outputPanel id="contratoEditar" style="text-align:center;">
+            <p:panelGrid columns="4"
+                         rendered="#{not empty usuarioBean.contratoSelecionado}"
+                         styleClass="semBorda">
+                <p:outputLabel value="Número do contrato" />
+                <p:inputText
+                        value="#{usuarioBean.contratoSelecionado.numeroContrato}" />
+                <p:outputLabel value="Curso" />
+                <p:inputText value="#{usuarioBean.contratoSelecionado.curso}" />
+                <p:outputLabel value="Cidade" />
+                <p:inputText value="#{usuarioBean.contratoSelecionado.cidade}" />
+                <p:outputLabel value="Entidade" />
+                <p:inputText value="#{usuarioBean.contratoSelecionado.entidade}" />
+                <p:outputLabel value="Média" />
+                <p:inputText value="#{usuarioBean.contratoSelecionado.media}" />
+                <p:outputLabel value="Data Entrada" />
+                <p:calendar value="#{usuarioBean.contratoSelecionado.dataEntrada}"
+                            locale="pt" navigator="true" pattern="MM-dd-yyyy" />
+                <p:outputLabel value="Data Prazo" />
+                <p:calendar styleClass="calendar"
+                            value="#{usuarioBean.contratoSelecionado.dataPrazo}" locale="pt"
+                            navigator="true" pattern="MM-dd-yyyy" />
 
-                    <p:outputLabel value="Caminho" />
-                    <p:inputText value="#{usuarioBean.contratoSelecionado.caminho}" />
-                    <p:outputLabel value="Status" />
-                    <p:selectOneMenu value="#{usuarioBean.contratoSelecionado.status}">
-                        <f:selectItems
-                                value="#{cadastrarContratoBean.metricas.statusContratoLista}" />
-                    </p:selectOneMenu>
-                    <p:outputLabel value="Urgencia" />
-                    <p:selectOneMenu
-                            value="#{usuarioBean.contratoSelecionado.urgencia}">
-                        <f:selectItems
-                                value="#{cadastrarContratoBean.metricas.urgenciaLista}" />
-                    </p:selectOneMenu>
-                    <p:outputLabel value="Ocupado" />
-                    <p:selectOneMenu value="#{usuarioBean.contratoSelecionado.ocupado}">
-                        <f:selectItems
-                                value="#{cadastrarContratoBean.metricas.ocupadoEditar}" />
-                    </p:selectOneMenu>
+                <p:outputLabel value="Caminho" />
+                <p:inputText value="#{usuarioBean.contratoSelecionado.caminho}" />
+                <p:outputLabel value="Status" />
+                <p:selectOneMenu value="#{usuarioBean.contratoSelecionado.status}">
+                    <f:selectItems
+                            value="#{cadastrarContratoBean.metricas.statusContratoLista}" />
+                </p:selectOneMenu>
+                <p:outputLabel value="Urgencia" />
+                <p:selectOneMenu
+                        value="#{usuarioBean.contratoSelecionado.urgencia}">
+                    <f:selectItems
+                            value="#{cadastrarContratoBean.metricas.urgenciaLista}" />
+                </p:selectOneMenu>
+                <p:outputLabel value="Ocupado" />
+                <p:selectOneMenu value="#{usuarioBean.contratoSelecionado.ocupado}">
+                    <f:selectItems
+                            value="#{cadastrarContratoBean.metricas.ocupadoEditar}" />
+                </p:selectOneMenu>
 
-                    <p:outputLabel value="OBS:" />
-                    <p:inputTextarea value="#{usuarioBean.contratoSelecionado.obs}" />
-                    <p:commandButton value="Salvar"
-                                     action="#{listarCursos.updateContrato(usuarioBean.contratoSelecionado)}"
-                                     oncomplete="PF('contratoEdit').hide()" update=":impressao:cursosImpressao:todosContratos" />
-                    <p:commandButton value="Cancelar" process="@all" update="@all"
-                                     immediate="true" oncomplete="PF('contratoEdit').hide()" />
-                </p:panelGrid>
-            </p:outputPanel>
-        </h:form>
-    </p:dialog>
+                <p:outputLabel value="OBS:" />
+                <p:inputTextarea value="#{usuarioBean.contratoSelecionado.obs}" />
+                <p:commandButton value="Salvar"
+                                 action="#{listarCursos.updateContrato(usuarioBean.contratoSelecionado)}"
+                                 oncomplete="PF('contratoEdit').hide()" update=":impressao:cursosImpressao:todosContratos" />
+                <p:commandButton value="Cancelar" process="@all" update="@all"
+                                 immediate="true" oncomplete="PF('contratoEdit').hide()" />
+            </p:panelGrid>
+        </p:outputPanel>
+    </h:form>
+</p:dialog>
 
 </ui:define>
 
 <ui:define name="west">
 
-    <f:facet name="header">Contratos prontos</f:facet>
-    <p:panel rendered="#{paginaPrincipalBean.usuarioBean.usuarioLogado.setor eq 4? true:false}" styleClass="paneeast">
+    <f:facet name="header">Contratos em espera</f:facet>
+    <p:panel styleClass="paneeast">
         <p:dataTable value="#{listarContratoImpressao.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
             <f:facet name="header">Contratos em espera</f:facet>
             <p:column headerText="contrato" width="24%">
@@ -218,7 +264,7 @@
 <ui:define name="east">
     <f:facet name="header">Contratos prontos</f:facet>
     <h:form>
-        <p:panel rendered="#{paginaPrincipalBean.usuarioBean.usuarioLogado.setor eq 4? true:false}" styleClass="paneeast">
+        <p:panel styleClass="paneeast">
 
             <p:dataTable value="#{listarContratoImpressao.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
                 <f:facet name="header">Contratos prontos</f:facet>

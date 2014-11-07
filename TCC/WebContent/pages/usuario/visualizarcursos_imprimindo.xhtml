@@ -55,13 +55,8 @@
                 </p:commandButton>
             </p:column>
             <p:column style="width:70px;text-align: center" exportable="false" headerText="Album">
-                <p:commandButton value="Gerar" title="Gerar Albuns" rendered="#{contrato.qtdAlbum le 0 ? true:false}"
-                                 action="#{cadastrarAlbum.gerarAlbunsCurso(usuarioBean.contratoSelecionado)}" update="@all" process="@all">
-                    <f:setPropertyActionListener value="#{contrato}"
-                                                 target="#{usuarioBean.contratoSelecionado}" />
-                </p:commandButton>
                 <p:commandButton title="Visualizar Albuns Curso" value="Ver" rendered="#{contrato.qtdAlbum le 0 ? false:true}" update="@all" process="@all"
-                                 action="#{paginaPrincipalBean.btListarAlbunsCurso()}">
+                                 action="#{paginaPrincipalBean.btListarAlbunsImpressao()}">
                     <f:setPropertyActionListener value="#{contrato}"
                                                  target="#{usuarioBean.contratoSelecionado}" />
                 </p:commandButton>
