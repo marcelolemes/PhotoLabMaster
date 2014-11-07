@@ -26,15 +26,15 @@
 		<ui:define name="content">
             <h:form>
 
-                <p:dataTable var="usuarios" value="#{listaUsuariosBean.listaUsuarios}">
-                    <p:column headerText="Apelido">
+                <p:dataTable var="usuarios" value="#{listaUsuariosBean.listaUsuarios}" rowKey="#{usuario.cod}"  sortBy="cod">
+                    <p:column headerText="Apelido" sortBy="apelido">
                         <h:outputText value="#{usuarios.apelido}" />
                     </p:column>
 
-                    <p:column headerText="Nivel de acesso">
+                    <p:column headerText="Nivel de acesso" sortBy="nivelAcesso">
                         <h:outputText value="#{listaUsuariosBean.parserNivel(usuarios)}" />
                     </p:column>
-                    <p:column headerText="Setor">
+                    <p:column headerText="Setor" sortBy="setor">
                         <h:outputText value="#{listaUsuariosBean.parserSetor(usuarios)}"
                                       rendered="#{not empty usuarios.setor}" />
                     </p:column>
