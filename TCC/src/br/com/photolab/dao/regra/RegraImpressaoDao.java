@@ -62,6 +62,24 @@ public class RegraImpressaoDao implements Serializable {
     }
 
 
+    public void contratoImpressao(Contrato contrato) throws Exception {
+        Session sessao = HibernateUtil.getSession();
+        org.hibernate.Transaction transacao = sessao.beginTransaction();
 
+
+        if (contrato!=null){
+            contrato.setStatus(15);
+            sessao.update(contrato);
+            transacao.commit();
+        }
+
+        try {
+            sessao.close();
+            //contDao.atualizarContrato(contrato);
+        }
+        catch (Exception e) {
+        }
+
+    }
 
 }

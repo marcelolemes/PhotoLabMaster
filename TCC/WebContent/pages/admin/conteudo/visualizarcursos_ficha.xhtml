@@ -39,9 +39,8 @@
 <ui:define name="content">
     <h:form id="cursos">
         <p:dataTable id="contratos" var="contrato"
-                     value="#{listarFichas.listarCursosFicha()}" resizableColumns="true" sortBy="urgencia" widgetVar="cursosTable"
+                     value="#{listarFichas.contratosEncontratos}" resizableColumns="true"  sortBy="ocupado" widgetVar="cursosTable"
                      rowKey="#{contrato.cod}" emptyMessage="Nenhum contrato encontrado."
-                     filteredValue="#{listarFichas.contratosFiltrados}"
                      draggableColumns="true" scrollRows="30" scrollable="true"
                      scrollHeight="450" liveScroll="true" styleClass="interiorTabela" >
 
@@ -83,31 +82,20 @@
                               </p:commandButton>
             </p:column>
 
-            <p:column headerText="Contrato" width="9%" filterBy="numeroContrato"
-                      filterMatchMode="contains" sortBy="numeroContrato">
+            <p:column headerText="Contrato" width="9%" sortBy="numeroContrato">
                 <h:outputText value="#{contrato.numeroContrato}" />
             </p:column>
-            <p:column headerText="Curso" filterBy="curso"
-                      filterMatchMode="contains" sortBy="curso">
+            <p:column headerText="Curso"  sortBy="curso">
                 <h:outputText value="#{contrato.curso}" />
             </p:column>
-            <p:column headerText="Cidade" filterBy="cidade"
-                      filterMatchMode="contains" sortBy="cidade">
+            <p:column headerText="Cidade" sortBy="cidade">
                 <h:outputText value="#{contrato.cidade}" />
             </p:column>
             <p:column headerText="Ficha" width="8%">
                 <h:outputText value="#{contrato.ficha.numero}/#{contrato.ficha.ano}" rendered="#{not empty contrato.ficha.numero}" />
             </p:column>
-            <p:column headerText="Status" width="20%" sortBy="status"
-                      filterBy="status" filterMatchMode="exact">
-                <f:facet name="filter">
-                    <p:selectOneMenu onchange="PF('cursosTable').filter()">
-                        <f:selectItem itemLabel="Selecione um status" itemValue="#{null}"
-                                      noSelectionOption="true" />
-                        <f:selectItems
-                                value="#{listarCursos.metricas.statusContratoLista}" />
-                    </p:selectOneMenu>
-                </f:facet>
+            <p:column headerText="Status" width="20%" sortBy="status">
+
                 <h:outputText value=" #{listarCursos.parserStatus(contrato)}" />
             </p:column>
 

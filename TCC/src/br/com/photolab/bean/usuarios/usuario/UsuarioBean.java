@@ -28,6 +28,7 @@ public class UsuarioBean implements Serializable {
     private List<SelectItem> setores = new Metricas().getSetores();
     private Contrato contratoSelecionado= new Contrato();
     private Mes mesSelecionado= new Mes();
+    private long qtdFotosAux;
     private int anoSelecionado= Calendar.getInstance().get(Calendar.YEAR);
     public UsuarioBean() {
 
@@ -325,7 +326,9 @@ public class UsuarioBean implements Serializable {
     public void setSessao(String sessao) {
         this.sessao = sessao;
     }
-
+    public boolean isLogado() {
+        return logado;
+    }
     public Usuario getUsuarioLogado() {
         return usuarioLogado;
     }
@@ -334,9 +337,6 @@ public class UsuarioBean implements Serializable {
         this.usuarioLogado = usuarioLogado;
     }
 
-    public boolean isLogado() {
-        return logado;
-    }
 
     public void setLogado(boolean logado) {
         UsuarioBean.logado = logado;
@@ -390,5 +390,13 @@ public class UsuarioBean implements Serializable {
 
     public void setAnoSelecionado(int anoSelecionado) {
         this.anoSelecionado = anoSelecionado;
+    }
+
+    public long getQtdFotosAux() {
+        return qtdFotosAux;
+    }
+
+    public void setQtdFotosAux(long qtdFotosAux) {
+        this.qtdFotosAux = qtdFotosAux;
     }
 }

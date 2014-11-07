@@ -34,14 +34,14 @@
                     <h:commandLink id="tabelapdf">
                         <p:graphicImage url="/resources/images/pdf.png" />
                         <p:dataExporter type="pdf" target="albuns" fileName="albuns"
-                                        encoding="iso-8859-1" />
-                    </h:commandLink>
+                                        encoding="iso-8859-1" preProcessor="#{regraImpressao.listaPdfAlbuns}" />
+                        </h:commandLink>
                 </f:facet>
                 <p:column headerText="Número" width="10%">
                     <h:outputText value="#{album.numero}" />
                 </p:column>
 
-                <p:column headerText="Contrato" width="10%">
+                <p:column headerText="Contrato" width="10%" exportable="false">
                     <h:outputText value="#{album.contrato.numeroContrato}" />
                 </p:column>
                 <p:column headerText="Curso"  exportable="false">
@@ -55,7 +55,7 @@
                 <p:outputLabel value="Quantidade de albuns deste contrato "/>
                 <p:outputLabel value="#{listarAlbuns.qtdAlbuns}"/>
                 <p:outputLabel value="Quantidade de fotos deste contrato "/>
-                <p:outputLabel value="#{listarAlbuns.qtdFotosTotal}"/>
+                <p:outputLabel value="#{usuarioBean.qtdFotosAux}"/>
             </p:panelGrid>
             <p:commandButton value="Atualizar" actionListener="#{listarAlbuns.btAtualizar}" update="@all" process="@all"/>
 

@@ -103,6 +103,7 @@ public class PaginaPrincipalBean implements Serializable {
 
     }
 
+
     public void btGraficoProducaoMensalMontagem() throws Exception {
 
         if (usuarioBean.getUsuario().isLogado() /* && (usuarioBean.getUsuarioLogado() != null) */) {

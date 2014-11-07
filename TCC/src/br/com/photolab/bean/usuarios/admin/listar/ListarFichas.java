@@ -28,7 +28,8 @@ public class ListarFichas implements Serializable {
     Metricas metricas = new Metricas();
     ContratoDao contDao = new ContratoDao();
     private List<Ficha> listaFichas;
-    List<Contrato> contratosFiltrados = new ArrayList<Contrato>();
+    private List<Contrato> contratosFiltrados = new ArrayList<Contrato>();
+    private List<Contrato> contratosEncontratos = new ArrayList<Contrato>();
 
     public static Ficha getFichaSelecionada() {
         return fichaSelecionada;
@@ -44,6 +45,10 @@ public class ListarFichas implements Serializable {
         try {
 
             listaFichas = fichaDao.ListarFichas();
+            if(fichaSelecionada!= null){
+                contratosEncontratos = contDao.listarContratosPorFicha(fichaSelecionada);
+            }
+
         } catch (Exception e) {
             //
             e.printStackTrace();
@@ -55,6 +60,10 @@ public class ListarFichas implements Serializable {
         this.listaFichas.clear();
         this.fichaDao.ListarFichas().clear();
         this.listaFichas = fichaDao.ListarFichas();
+
+        if(fichaSelecionada!= null){
+            contratosEncontratos = contDao.listarContratosPorFicha(fichaSelecionada);
+        }
     }
 
     public List<Contrato> listarCursosFicha() throws Exception {
@@ -93,4 +102,11 @@ public class ListarFichas implements Serializable {
         this.contratosFiltrados = contratosFiltrados;
     }
 
+    public List<Contrato> getContratosEncontratos() {
+        return contratosEncontratos;
+    }
+
+    public void setContratosEncontratos(List<Contrato> contratosEncontratos) {
+        this.contratosEncontratos = contratosEncontratos;
+    }
 }

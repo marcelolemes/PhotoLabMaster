@@ -39,7 +39,7 @@ public class ListarAlbuns implements Serializable {
             albumDao = new AlbumDao();
 
             qtdAlbuns = albumDao.ContarAlbunsContrato(usuarioBean.getContratoSelecionado());
-            qtdFotosTotal = albumDao.ContarFotosContrato(usuarioBean.getContratoSelecionado());
+            usuarioBean.setQtdFotosAux(albumDao.ContarFotosContrato(usuarioBean.getContratoSelecionado()));
             listaAlbuns = albumDao.ListarAlbunsContrato(usuarioBean.getContratoSelecionado());
         } catch (Exception e) {
             // TODO Auto-generated catch block

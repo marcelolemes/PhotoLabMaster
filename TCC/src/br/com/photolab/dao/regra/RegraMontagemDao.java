@@ -116,6 +116,8 @@ public class RegraMontagemDao implements Serializable {
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();
         if (album!=null){
+            album.getContrato().setQtdAlbum(album.getContrato().getQtdAlbum()-1);
+            sessao.update(album.getContrato());
             sessao.delete(album);
         }
 

@@ -1,5 +1,6 @@
 package br.com.photolab.regra;
 
+import br.com.photolab.bean.usuarios.usuario.PaginaPrincipalBean;
 import br.com.photolab.bean.usuarios.usuario.UsuarioBean;
 import br.com.photolab.dao.modelo.AlbumDao;
 import br.com.photolab.dao.modelo.ContratoDao;
@@ -12,6 +13,7 @@ import br.com.photolab.modelo.Album;
 import br.com.photolab.modelo.Contrato;
 import br.com.photolab.relatorio.Relatorio;
 import br.com.photolab.relatorio.RelatorioDiario;
+import com.lowagie.text.*;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -21,6 +23,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -37,19 +40,28 @@ public class RegraImpressao implements Serializable {
     private RegraImpressaoDao regDao = new RegraImpressaoDao();
     AlbumDao albumDao = new AlbumDao();
     ContratoDao contDao = new ContratoDao();
-    private String cont;
     private List<Album> listaAlbuns=new ArrayList<Album>();
+    @ManagedProperty("#{usuarioBean}")
+    private UsuarioBean usuarioBean;
     @PostConstruct
     public void iniciar(){
 
         try {
-            listaAlbuns = albumDao.ListarAlbunsContrato(contDao.listarContratoStatus(14,15));
+            listaAlbuns = albumDao.ListarAlbunsContrato(contDao.listarContratoStatus(15));
         } catch (Exception e) {
             e.printStackTrace();
 
         }
 
     }
+
+    public void btContratoImpressao(Contrato contrato) throws Exception {
+
+
+        regDao.contratoImpressao(contrato);
+        usuarioBean.btHome();
+    }
+
 
     public void btImpresso(Album album) throws Exception {
 
@@ -83,11 +95,41 @@ public class RegraImpressao implements Serializable {
         }
     };
 
+    public void listaPdfAlbuns(Object document) throws IOException,
+            BadElementException, DocumentException {
+        Document pdf = (Document) document;
+        pdf.open();
+        pdf.add(new Paragraph("Setor impressão"));
+        pdf.add(new Paragraph("Lista de albuns do contrato: "+usuarioBean.getContratoSelecionado().getNumeroContrato()+" curso: "+usuarioBean.getContratoSelecionado().getCurso()));
+        pdf.add(new Paragraph("Total de fotos do contrato: "+usuarioBean.getQtdFotosAux()+"  Total de albuns do contrato: "+usuarioBean.getContratoSelecionado().getQtdAlbum()));
+        pdf.add(new Paragraph(" "));
+
+
+    }
+    public void posListaPdfAlbuns(Object document) throws IOException,
+            BadElementException, DocumentException {
+        Document pdf = (Document) document;
+        pdf.open();
+        pdf.add(new Paragraph(" "));
+        pdf.add(new Paragraph("Total de fotos do contrato: "+usuarioBean.getQtdFotosAux()+"  Total de albuns do contrato: "+usuarioBean.getContratoSelecionado().getQtdAlbum()));
+
+
+
+    }
+
     public List<Album> getListaAlbuns() {
         return listaAlbuns;
     }
 
     public void setListaAlbuns(List<Album> listaAlbuns) {
         this.listaAlbuns = listaAlbuns;
+    }
+
+    public UsuarioBean getUsuarioBean() {
+        return usuarioBean;
+    }
+
+    public void setUsuarioBean(UsuarioBean usuarioBean) {
+        this.usuarioBean = usuarioBean;
     }
 }

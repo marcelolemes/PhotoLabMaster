@@ -4,7 +4,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                template="#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 2 ?'/template/templatePaginaInicialGestor.xhtml':'/template/templatePaginaInicial.xhtml'}"
+                template="/template/templatePaginaInicial.xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
@@ -30,8 +30,8 @@
     <p:tab title="Albuns">
         <h:form>
 
-            <p:dataTable id="albuns" value="#{regraImpressao.listaAlbuns}"
-                         var="album" scrollable="true" scrollHeight="45%" sortBy="numero">
+            <p:dataTable id="albuns" value="#{regraImpressao.listaAlbuns}" emptyMessage="Sem albuns, nenhum contrato em impressão"
+                         var="album" scrollable="true" scrollHeight="350" sortBy="numero">
                 <f:facet name="header">
                     <h:commandLink id="tabelapdf">
                         <p:graphicImage url="/resources/images/pdf.png" />
@@ -41,10 +41,10 @@
                     <p:spacer width="50" height="10" />
                     <p:commandButton value="Atualizar" actionListener="#{regraImpressao.iniciar()}" update="albuns"/>
                 </f:facet>
-                <p:column exportable="false" width="10%">
+                <p:column exportable="false" width="110">
                     <p:commandButton value="Impresso" rendered="#{album.status eq 14}" actionListener="#{regraImpressao.btImpresso(album)}" update="albuns"/>
                 </p:column>
-                <p:column headerText="Número" width="8%">
+                <p:column headerText="Número" width="90">
                     <h:outputText value="#{album.numero}" />
                 </p:column>
                 <p:column headerText="Fotos" width="8%">
@@ -77,22 +77,12 @@
         <h:form id="cursosImpressao">
             <p:dataTable id="todosContratos" var="contrato"
                          value="#{listarContratoImpressao.listaContratoFazendo}" resizableColumns="true" sortBy="urgencia" widgetVar="cursosTable"
-                         rowKey="#{contrato.cod}" emptyMessage="Nenhum contrato encontrado."
+                         rowKey="#{contrato.cod}" emptyMessage="Nenhum contrato em impressão"
                          filteredValue="#{listarContratoImpressao.contratosFiltrados}"
                          draggableColumns="true" scrollRows="30" scrollable="true"
                          scrollHeight="450" liveScroll="true" styleClass="interiorTabela" >
 
 
-                <p:column style="width:32px;text-align: center" width="30px"
-                          exportable="false">
-                    <p:commandButton id="botao-edit" styleClass="botao-edit"
-                                     update=":editarForm:contratoEditar"
-                                     oncomplete="PF('contratoEdit').show()" icon="ui-icon-wrench"
-                                     title="Editar">
-                        <f:setPropertyActionListener value="#{contrato}"
-                                                     target="#{usuarioBean.contratoSelecionado}" />
-                    </p:commandButton>
-                </p:column>
                 <p:column style="width:32px;text-align: center" width="30px"
                           exportable="false">
                     <p:commandButton id="botao-info" styleClass="botao-info"
@@ -133,6 +123,63 @@
                 <h:commandLink id="tabelapdfContratos">
                     <p:graphicImage url="/resources/images/pdf.png" />
                     <p:dataExporter type="pdf" target=":impressao:cursosImpressao:todosContratos" fileName="Cursos em impressão"
+                                    encoding="iso-8859-1" pageOnly="true"
+                                    preProcessor="#{listarContratoImpressao.preProcessPDF}" />
+                </h:commandLink>
+
+            </p:panelGrid>
+        </h:form>
+
+
+    </p:tab>
+    <p:tab id="tabImpressos" title="Contratos impressos">
+        <h:form id="cursosImpressos">
+            <p:dataTable id="todosContratos2" var="contrato"
+                         value="#{listarContratoImpressao.listaContratoPronto}" resizableColumns="true" sortBy="urgencia" widgetVar="cursosTable"
+                         rowKey="#{contrato.cod}" emptyMessage="Nenhum contrato encontrado."
+                         filteredValue="#{listarContratoImpressao.contratosFiltrados}"
+                         draggableColumns="true" scrollRows="30" scrollable="true"
+                         scrollHeight="450" liveScroll="true" styleClass="interiorTabela" >
+
+
+
+                <p:column style="width:32px;text-align: center" width="30px"
+                          exportable="false">
+                    <p:commandButton id="botao-info2" styleClass="botao-info"
+                                     update=":formDetalhe:contratoDetalhe"
+                                     oncomplete="PF('contratoDialogo').show()" icon="ui-icon-info"
+                                     title="Info">
+                        <f:setPropertyActionListener value="#{contrato}"
+                                                     target="#{usuarioBean.contratoSelecionado}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column style="width:70px;text-align: center" exportable="false" headerText="Album">
+                    <p:commandButton title="Visualizar Albuns Curso" value="Ver" rendered="#{contrato.qtdAlbum le 0 ? false:true}" update="@all" process="@all"
+                                     action="#{paginaPrincipalBean.btListarAlbunsImpressao()}">
+                        <f:setPropertyActionListener value="#{contrato}"
+                                                     target="#{usuarioBean.contratoSelecionado}" />
+                    </p:commandButton>
+                </p:column>
+
+                <p:column headerText="Contrato" width="9%" filterBy="numeroContrato"
+                          filterMatchMode="contains" sortBy="numeroContrato">
+                    <h:outputText value="#{contrato.numeroContrato}" />
+                </p:column>
+                <p:column headerText="Curso" filterBy="curso"
+                          filterMatchMode="contains" sortBy="curso">
+                    <h:outputText value="#{contrato.curso}" />
+                </p:column>
+
+            </p:dataTable>
+
+            <p:panelGrid columns="3" styleClass="semBorda">
+                <p:commandButton value="Atualizar" action="#{listarContratoImpressao.atualizar()}" process="@all"
+                                 update="@all" immediate="true">
+                    </p:commandButton>
+
+                <h:commandLink id="tabelapdfContratos3">
+                    <p:graphicImage url="/resources/images/pdf.png" />
+                    <p:dataExporter type="pdf" target=":impressao:cursosImpressos:todosContratos2" fileName="Cursos em impressão"
                                     encoding="iso-8859-1" pageOnly="true"
                                     preProcessor="#{listarContratoImpressao.preProcessPDF}" />
                 </h:commandLink>
@@ -233,7 +280,7 @@
                 <p:inputTextarea value="#{usuarioBean.contratoSelecionado.obs}" />
                 <p:commandButton value="Salvar"
                                  action="#{listarCursos.updateContrato(usuarioBean.contratoSelecionado)}"
-                                 oncomplete="PF('contratoEdit').hide()" update=":impressao:cursosImpressao:todosContratos" />
+                                 oncomplete="PF('contratoEdit').hide()" update="@all" />
                 <p:commandButton value="Cancelar" process="@all" update="@all"
                                  immediate="true" oncomplete="PF('contratoEdit').hide()" />
             </p:panelGrid>
@@ -258,28 +305,11 @@
             <p:column headerText="albuns" width="20%">
                 #{contrato.qtdAlbum}
             </p:column>
+            <p:column headerText="Imp...">
+            <p:commandButton value="ok" rendered="#{contrato.status eq 14}" actionListener="#{regraImpressao.btContratoImpressao(contrato)}" update="@all" process="@all"/>
+            </p:column>
         </p:dataTable>
     </p:panel>
-</ui:define>
-<ui:define name="east">
-    <f:facet name="header">Contratos prontos</f:facet>
-    <h:form>
-        <p:panel styleClass="paneeast">
-
-            <p:dataTable value="#{listarContratoImpressao.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
-                <f:facet name="header">Contratos prontos</f:facet>
-                <p:column headerText="contrato" width="22%">
-                    #{contrato.numeroContrato}
-                </p:column>
-                <p:column headerText="curso">
-                    #{contrato.curso}
-                </p:column>
-                <p:column headerText="albuns" width="18%">
-                    #{contrato.qtdAlbum}
-                </p:column>
-            </p:dataTable>
-        </p:panel>
-    </h:form>
 </ui:define>
 
 </body>

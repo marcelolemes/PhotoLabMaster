@@ -349,9 +349,13 @@ public class ContratoDao implements Serializable {
                             if(status != statusMax) {
                                 if (status == 14){
                                     retorno.setStatus(15);
+                                    retorno.setUrgencia(0);
+                                    retorno.setOcupado(true);
                                 }
                                 else if (status == 15){
                                     retorno.setStatus(15);
+                                    retorno.setUrgencia(0);
+                                    retorno.setOcupado(true);
                                 }
                             }
                             else {
@@ -384,14 +388,10 @@ public class ContratoDao implements Serializable {
 
     public List<Contrato> listarContratosPorFicha(Ficha ficha) throws Exception {
         Session sessao = HibernateUtil.getSession();
-        org.hibernate.Transaction transacao = sessao.beginTransaction();
-        int status;
-        int statusMax;
         System.out.println("Chegou no hibernate");
         Criteria criteria = sessao.createCriteria(Contrato.class);
         criteria.add(Restrictions.eq("ficha", ficha));
         List<Contrato> listaRetorno = criteria.list();
-
         sessao.close();
         return listaRetorno;
 
