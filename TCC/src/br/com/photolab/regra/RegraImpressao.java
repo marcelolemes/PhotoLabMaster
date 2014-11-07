@@ -63,6 +63,12 @@ public class RegraImpressao implements Serializable {
     }
 
 
+    public void btImprimindo(Album album) throws Exception {
+
+        album.setQtdFotos(qtdFotosAtual(album.getContrato().getCaminho()+File.separator+album.getNumero()));
+        regDao.albumemImpressao(album);
+
+    }
     public void btImpresso(Album album) throws Exception {
 
         album.setQtdFotos(qtdFotosAtual(album.getContrato().getCaminho()+File.separator+album.getNumero()));

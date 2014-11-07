@@ -61,6 +61,28 @@ public class RegraImpressaoDao implements Serializable {
 
     }
 
+    public void albumemImpressao(Album album) throws Exception {
+        Session sessao = HibernateUtil.getSession();
+        org.hibernate.Transaction transacao = sessao.beginTransaction();
+
+
+        if (album!=null){
+            album.setStatus(15);
+            album.setOcupado(true);
+            sessao.update(album);
+            transacao.commit();
+        }
+
+        try {
+            sessao.close();
+            contDao.atualizarContrato(album.getContrato());
+        }
+        catch (Exception e) {
+        }
+
+    }
+
+
 
     public void contratoImpressao(Contrato contrato) throws Exception {
         Session sessao = HibernateUtil.getSession();

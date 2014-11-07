@@ -42,7 +42,8 @@
                     <p:commandButton value="Atualizar" actionListener="#{regraImpressao.iniciar()}" update="albuns"/>
                 </f:facet>
                 <p:column exportable="false" width="110">
-                    <p:commandButton value="Impresso" rendered="#{album.status eq 14}" actionListener="#{regraImpressao.btImpresso(album)}" update="albuns"/>
+                    <p:commandButton value="Imprimir" rendered="#{album.status eq 14}" actionListener="#{regraImpressao.btImprimindo(album)}"  style=" background: none!important;color: #ffffff!important; background-color: red!important;" update="albuns"/>
+                    <p:commandButton value="Conferir" rendered="#{album.status eq 15}" actionListener="#{regraImpressao.btImpresso(album)}" style="background: none!important; background-color: yellow!important;" update="albuns"/>
                 </p:column>
                 <p:column headerText="Número" width="90">
                     <h:outputText value="#{album.numero}" />
