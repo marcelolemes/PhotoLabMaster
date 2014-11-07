@@ -55,13 +55,6 @@ public class Contrato implements Serializable {
     @OneToMany(mappedBy = "contrato")
     private List<Album> listaAlbum;
 
-    public List<Album> getListaAlbum() {
-        return listaAlbum;
-    }
-
-    public void setListaAlbum(List<Album> listaAlbum) {
-        this.listaAlbum = listaAlbum;
-    }
 
     public int getCod() {
         return cod;
