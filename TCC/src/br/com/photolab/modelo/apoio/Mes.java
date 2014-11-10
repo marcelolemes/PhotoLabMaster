@@ -1,4 +1,4 @@
-package br.com.photolab.modelo;
+package br.com.photolab.modelo.apoio;
 
 /**
  * Created by mega on 04/11/2014.

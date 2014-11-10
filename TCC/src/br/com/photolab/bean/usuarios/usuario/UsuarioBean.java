@@ -2,7 +2,7 @@ package br.com.photolab.bean.usuarios.usuario;
 
 import br.com.photolab.dao.modelo.UsuarioDao;
 import br.com.photolab.modelo.Contrato;
-import br.com.photolab.modelo.Mes;
+import br.com.photolab.modelo.apoio.Mes;
 import br.com.photolab.modelo.apoio.Metricas;
 import br.com.photolab.modelo.Usuario;
 import org.primefaces.context.RequestContext;

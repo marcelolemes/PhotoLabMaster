@@ -1,6 +1,6 @@
 package br.com.photolab.bean.usuarios.admin.listar;
 
-import br.com.photolab.modelo.Mes;
+import br.com.photolab.modelo.apoio.Mes;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;

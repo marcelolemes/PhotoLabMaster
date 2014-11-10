@@ -3,7 +3,7 @@ package br.com.photolab.bean.usuarios.admin.listar.montagem.mensal;
 import br.com.photolab.dao.relatorio.RelatorioDiarioDao;
 import br.com.photolab.dao.modelo.UsuarioDao;
 import br.com.photolab.bean.usuarios.usuario.UsuarioBean;
-import br.com.photolab.modelo.Mes;
+import br.com.photolab.modelo.apoio.Mes;
 import br.com.photolab.modelo.apoio.Metricas;
 import br.com.photolab.relatorio.RelatorioDiario;
 import br.com.photolab.modelo.Usuario;
