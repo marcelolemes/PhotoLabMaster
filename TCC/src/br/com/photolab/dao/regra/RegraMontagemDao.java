@@ -3,7 +3,7 @@ package br.com.photolab.dao.regra;
 import br.com.photolab.dao.relatorio.RelatorioDao;
 import br.com.photolab.dao.modelo.AlbumDao;
 import br.com.photolab.dao.modelo.ContratoDao;
-import br.com.photolab.bean.usuarios.usuario.UsuarioBean;
+import br.com.photolab.bean.usuario.UsuarioBean;
 import br.com.photolab.modelo.Album;
 import br.com.photolab.modelo.Contrato;
 import br.com.photolab.modelo.Usuario;

@@ -26,7 +26,7 @@
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
 
-        <mapping class="br.com.photolab.bean.usuarios.usuario.UsuarioBean"/>
+        <mapping class="br.com.photolab.bean.usuario.UsuarioBean"/>
         <mapping class="br.com.photolab.modelo.Contrato"/>
         <mapping class="br.com.photolab.modelo.Album"/>
         <mapping class="br.com.photolab.modelo.Ficha"/>
@@ -34,7 +34,7 @@
         <mapping class="br.com.photolab.modelo.Usuario"/>
         <mapping class="br.com.photolab.relatorio.Relatorio"/>
         <mapping class="br.com.photolab.relatorio.RelatorioDiario"/>
-        <mapping class="br.com.photolab.bean.usuarios.admin.cadastro.CadastrarContratoBean"/>
+        <mapping class="br.com.photolab.bean.admin.cadastro.CadastrarContratoBean"/>
 
     </session-factory>
 </hibernate-configuration>

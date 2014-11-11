@@ -13,7 +13,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import br.com.photolab.bean.usuarios.usuario.UsuarioBean;
+import br.com.photolab.bean.usuario.UsuarioBean;
 import br.com.photolab.modelo.Usuario;
 import br.com.photolab.util.HibernateUtil;
 
