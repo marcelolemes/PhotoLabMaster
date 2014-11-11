@@ -366,18 +366,7 @@ public class PaginaPrincipalBean implements Serializable {
 
     }
 
-    public void fecharSessao() {
-        // remover sessão do manage bean selecionado
-        // FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuarioBean");
-		/*
-		 * usuarioBean.setUsuarioLogado(null); usuarioBean.setLogado(false);
-		 */
-        usuarioBean.setLogado(false);
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.getExternalContext().invalidateSession();
-    }
-
-    public String sairSessao() throws Exception {
+public String sairSessao() throws Exception {
 
         if (usuarioBean.getUsuario().isLogado()) {
             try {
