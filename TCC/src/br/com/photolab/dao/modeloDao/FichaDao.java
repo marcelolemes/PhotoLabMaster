@@ -1,4 +1,4 @@
-package br.com.photolab.dao.modelo;
+package br.com.photolab.dao.modeloDao;
 
 import br.com.photolab.modelo.Ficha;
 import br.com.photolab.util.HibernateUtil;

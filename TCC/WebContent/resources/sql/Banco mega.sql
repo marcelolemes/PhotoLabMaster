@@ -1039,7 +1039,7 @@ REPLACE INTO `ficha` (`cod`, `ano`, `numero`, `cli_id`) VALUES
 /*!40000 ALTER TABLE `ficha` ENABLE KEYS */;
 
 
--- Copiando estrutura para tabela login.relatorio
+-- Copiando estrutura para tabela login.relatorioDao
 CREATE TABLE IF NOT EXISTS `relatorio` (
   `cod` int(11) NOT NULL AUTO_INCREMENT,
   `dataFinal` datetime DEFAULT NULL,
@@ -1055,7 +1055,7 @@ CREATE TABLE IF NOT EXISTS `relatorio` (
   CONSTRAINT `FK_trtfdtdem0igrfhwol2ukvjat` FOREIGN KEY (`album`) REFERENCES `album` (`cod`)
 ) ENGINE=InnoDB AUTO_INCREMENT=925 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela login.relatorio: ~871 rows (aproximadamente)
+-- Copiando dados para a tabela login.relatorioDao: ~871 rows (aproximadamente)
 /*!40000 ALTER TABLE `relatorio` DISABLE KEYS */;
 REPLACE INTO `relatorio` (`cod`, `dataFinal`, `album`, `func`, `fotos`, `dataInicial`, `tempoOperacao`) VALUES
 	(10, '2014-09-29 16:44:18', 234, 20, 0, NULL, 0),

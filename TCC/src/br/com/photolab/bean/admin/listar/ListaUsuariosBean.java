@@ -1,6 +1,6 @@
 package br.com.photolab.bean.admin.listar;
 
-import br.com.photolab.dao.modelo.UsuarioDao;
+import br.com.photolab.dao.modeloDao.UsuarioDao;
 import br.com.photolab.modelo.apoio.Metricas;
 import br.com.photolab.modelo.Usuario;
 

@@ -1,6 +1,6 @@
 package br.com.photolab.bean.usuario;
 
-import br.com.photolab.dao.relatorio.RelatorioDao;
+import br.com.photolab.dao.relatorioDao.RelatorioDao;
 import br.com.photolab.relatorio.Relatorio;
 import br.com.photolab.modelo.Usuario;
 

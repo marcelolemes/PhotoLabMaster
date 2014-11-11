@@ -1,4 +1,4 @@
-package br.com.photolab.dao.modelo;
+package br.com.photolab.dao.modeloDao;
 
 import java.io.Serializable;
 import java.sql.Date;

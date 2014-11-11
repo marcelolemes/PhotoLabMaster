@@ -1,7 +1,7 @@
 package br.com.photolab.bean.usuario.montagem;
 
-import br.com.photolab.dao.relatorio.RelatorioDiarioDao;
-import br.com.photolab.dao.modelo.UsuarioDao;
+import br.com.photolab.dao.relatorioDao.RelatorioDiarioDao;
+import br.com.photolab.dao.modeloDao.UsuarioDao;
 import br.com.photolab.bean.usuario.UsuarioBean;
 import br.com.photolab.modelo.apoio.Metricas;
 import br.com.photolab.relatorio.RelatorioDiario;

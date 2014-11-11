@@ -1,7 +1,7 @@
 package br.com.photolab.bean.admin.cadastro;
 
-import br.com.photolab.dao.modelo.ClienteDao;
-import br.com.photolab.dao.modelo.FichaDao;
+import br.com.photolab.dao.modeloDao.ClienteDao;
+import br.com.photolab.dao.modeloDao.FichaDao;
 import br.com.photolab.modelo.Cliente;
 import br.com.photolab.modelo.Ficha;
 

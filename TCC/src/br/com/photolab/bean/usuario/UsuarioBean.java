@@ -1,6 +1,6 @@
 package br.com.photolab.bean.usuario;
 
-import br.com.photolab.dao.modelo.UsuarioDao;
+import br.com.photolab.dao.modeloDao.UsuarioDao;
 import br.com.photolab.modelo.Contrato;
 import br.com.photolab.modelo.apoio.Mes;
 import br.com.photolab.modelo.apoio.Metricas;

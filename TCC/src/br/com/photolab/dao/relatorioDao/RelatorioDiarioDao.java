@@ -1,4 +1,4 @@
-package br.com.photolab.dao.relatorio;
+package br.com.photolab.dao.relatorioDao;
 
 import br.com.photolab.modelo.*;
 import br.com.photolab.relatorio.RelatorioDiario;

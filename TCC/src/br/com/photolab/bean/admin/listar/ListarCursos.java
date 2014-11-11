@@ -1,6 +1,6 @@
 package br.com.photolab.bean.admin.listar;
 
-import br.com.photolab.dao.modelo.ContratoDao;
+import br.com.photolab.dao.modeloDao.ContratoDao;
 import br.com.photolab.modelo.Contrato;
 import br.com.photolab.modelo.apoio.Metricas;
 import com.lowagie.text.*;

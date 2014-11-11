@@ -1,8 +1,8 @@
-package br.com.photolab.dao.regra;
+package br.com.photolab.dao.regraDao;
 
-import br.com.photolab.dao.relatorio.RelatorioDao;
-import br.com.photolab.dao.modelo.AlbumDao;
-import br.com.photolab.dao.modelo.ContratoDao;
+import br.com.photolab.dao.relatorioDao.RelatorioDao;
+import br.com.photolab.dao.modeloDao.AlbumDao;
+import br.com.photolab.dao.modeloDao.ContratoDao;
 import br.com.photolab.bean.usuario.UsuarioBean;
 import br.com.photolab.modelo.Album;
 import br.com.photolab.modelo.Contrato;
@@ -19,7 +19,7 @@ import java.io.Serializable;
  * Created by marcelo on 27/09/2014.
  */
 @ManagedBean
-public class RegraTratamentoDao implements Serializable {
+public class RegraMontagemDao implements Serializable {
     private UsuarioBean usuarioBean;
     ContratoDao contDao = new ContratoDao();
     RelatorioDao relatorioDao = new RelatorioDao();
@@ -29,18 +29,17 @@ public class RegraTratamentoDao implements Serializable {
 
     public Album NovoAlbum(Usuario usuario) throws Exception { //sobrecarga com "USER"
         Album retorno = null;
-        Contrato contrato =  contDao.listarContratoStatus(5, 10, 1);
+        Contrato contrato =  contDao.listarContratoStatus(10, 13, 1);
 
         if (contrato!= null) {
-
-            retorno = albumDao.ProximoAlbum(contrato,5,10);
+            retorno = albumDao.ProximoAlbum(contrato,10,12);
 
             if (retorno != null) {
                 if (usuario != null){
-                    retorno.setUsuarioTratamento(usuario);
+                    retorno.setUsuarioMontagem(usuario);
                 }
 
-                retorno.setStatus(8); //Marca o album como "montagem"
+                retorno.setStatus(13); //Marca o album como "montagem"
                 retorno.setOcupado(true);
                 Session sessao = HibernateUtil.getSession();
                 org.hibernate.Transaction transacao = sessao.beginTransaction();
@@ -89,7 +88,7 @@ public class RegraTratamentoDao implements Serializable {
 
 
         if (album!=null){
-            album.setStatus(11);
+            album.setStatus(14);
             album.setOcupado(false);
             sessao.update(album);
             transacao.commit();
@@ -141,7 +140,7 @@ public class RegraTratamentoDao implements Serializable {
         Session sessao = HibernateUtil.getSession();
         org.hibernate.Transaction transacao = sessao.beginTransaction();
         if (album!=null){
-            album.setStatus(7);
+            album.setStatus(12);
             album.setOcupado(false);
         }
         sessao.update(album);

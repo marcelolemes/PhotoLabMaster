@@ -1,7 +1,7 @@
 package br.com.photolab.bean.admin.cadastro;
 
-import br.com.photolab.dao.modelo.AlbumDao;
-import br.com.photolab.dao.modelo.ContratoDao;
+import br.com.photolab.dao.modeloDao.AlbumDao;
+import br.com.photolab.dao.modeloDao.ContratoDao;
 import br.com.photolab.modelo.Album;
 import br.com.photolab.modelo.Contrato;
 

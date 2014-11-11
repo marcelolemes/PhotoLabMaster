@@ -1,6 +1,6 @@
 package br.com.photolab.bean.usuario;
 
-import br.com.photolab.dao.relatorio.RelatorioDiarioDao;
+import br.com.photolab.dao.relatorioDao.RelatorioDiarioDao;
 import br.com.photolab.relatorio.RelatorioDiario;
 import br.com.photolab.modelo.Usuario;
 import com.lowagie.text.*;
