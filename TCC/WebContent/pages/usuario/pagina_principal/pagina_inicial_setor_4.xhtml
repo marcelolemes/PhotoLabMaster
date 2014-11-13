@@ -58,8 +58,8 @@
                 <p:column headerText="Curso"  exportable="false">
                     <h:outputText value="#{album.contrato.curso}" />
                 </p:column>
-                <p:column headerText="Obs"  exportable="false">
-                    <h:outputText value="#{album.obs}" />
+                <p:column headerText="Tamanho"  exportable="false">
+                    <h:outputText value="#{album.contrato.tamanho}" />
                 </p:column>
 
             </p:dataTable>
@@ -157,14 +157,14 @@
 
                 </p:column>
                 <p:column style="width:32px;text-align: center" width="30px"
-                                         exportable="false">
+                          exportable="false">
                     <p:commandButton id="botao-atualizar" styleClass="botao-info"
-                                                                       update=":formDetalhe:contratoDetalhe"
-                                                                       action="#{apoio.atualizarAlbunsCurso(contrato)}" icon="ui-icon-wrench"
-                                                                       title="atualizar albuns">
-                                                          <f:setPropertyActionListener value="#{contrato}"
-                                                                                       target="#{usuarioBean.contratoSelecionado}" />
-                                                      </p:commandButton>
+                                     update=":formDetalhe:contratoDetalhe"
+                                     action="#{apoio.atualizarAlbunsCurso(contrato)}" icon="ui-icon-wrench"
+                                     title="atualizar albuns">
+                        <f:setPropertyActionListener value="#{contrato}"
+                                                     target="#{usuarioBean.contratoSelecionado}" />
+                    </p:commandButton>
                 </p:column>
                 <p:column style="width:70px;text-align: center" exportable="false" headerText="Album">
                     <p:commandButton title="Visualizar Albuns Curso" value="Ver" rendered="#{contrato.qtdAlbum le 0 ? false:true}" update="@all" process="@all"
@@ -188,7 +188,7 @@
             <p:panelGrid columns="3" styleClass="semBorda">
                 <p:commandButton value="Atualizar" action="#{listarContratoImpressao.atualizar()}" process="@all"
                                  update="@all" immediate="true">
-                    </p:commandButton>
+                </p:commandButton>
 
                 <h:commandLink id="tabelapdfContratos3">
                     <p:graphicImage url="/resources/images/pdf.png" />
@@ -319,7 +319,7 @@
                 #{contrato.qtdAlbum}
             </p:column>
             <p:column headerText="Imp...">
-            <p:commandButton value="ok" rendered="#{contrato.status eq 14}" actionListener="#{regraImpressao.btContratoImpressao(contrato)}" update="@all" process="@all"/>
+                <p:commandButton value="ok" rendered="#{contrato.status eq 14}" actionListener="#{regraImpressao.btContratoImpressao(contrato)}" update="@all" process="@all"/>
             </p:column>
         </p:dataTable>
     </p:panel>

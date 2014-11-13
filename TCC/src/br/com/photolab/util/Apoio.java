@@ -106,16 +106,16 @@ public class Apoio implements Serializable {
             Album album = new Album();
             album.setNumero(file.getName());
             album.setQtdFotos(file.listFiles(fotoFilter).length);
-            album.setOcupado(false);
-            album.setContrato(contrato);
-            qtdFotos = qtdFotos+ album.getQtdFotos();
-            if(qtdFotos>=50)
+            if(album.getQtdFotos()>=50)
             {
                 maisde50++;
             }
             else{
                 menosde50++;
             }
+            album.setOcupado(false);
+            album.setContrato(contrato);
+            qtdFotos = qtdFotos+ album.getQtdFotos();
             album.setStatus(contrato.getStatus());
             listaAlbum.add(album);
             qtdAlbuns++;
