@@ -43,6 +43,9 @@ public class ListarMesesBean
     public String btProducaoMensalTratamento(){
           return "/pages/usuario/producao_mensal_tratamento.jsf";
       }
+    public String btProducaoMensalContrato(){
+             return "/pages/usuario/producao_mensal_contratos.jsf";
+         }
     public List<Mes> getMeses() {
         return meses;
     }

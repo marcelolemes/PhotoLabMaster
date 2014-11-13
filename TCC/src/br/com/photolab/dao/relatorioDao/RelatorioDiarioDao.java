@@ -160,6 +160,8 @@ public class RelatorioDiarioDao {
         return listaRetorno;
     }
 
+
+
     public List<RelatorioDiario> ListarMes(Usuario usuario, Calendar calendar1,Calendar calendar2) throws Exception { //testando
 
 

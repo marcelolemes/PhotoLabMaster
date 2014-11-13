@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template/templatePrincipal.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title></title>
+    </h:head>
+    <h:outputStylesheet library="css" name="estilo.css" />
+
+
+
+    <p:growl showDetail="true" autoUpdate="true" />
+
+    <f:metadata>
+        <f:viewAction action="#{usuarioBean.resultRedirectAdmin}" />
+    </f:metadata>
+
+    <ui:define name="menu">
+        <ui:include src="/include/usuario/menu_patrao.xhtml"/>
+    </ui:define>
+    <ui:define name="content">
+        <h:form>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Álbuns do mês"/>
+                <p:outputLabel value="#{relatorioMensalContratosBean.totalAlbunsMes}"/>
+                <p:outputLabel value="Fotos do mês"/>
+                <p:outputLabel value="#{relatorioMensalContratosBean.totalFotosMes}"/>
+            </p:panelGrid>
+            <p:dataTable value="#{relatorioMensalContratosBean.contratosMes}" var="contrato" >
+                <p:column headerText="Nº contrato">
+                    <p:outputLabel value="#{contrato.numeroContrato}"/>
+                </p:column>
+                <p:column headerText="Curso">
+                    <p:outputLabel value="#{contrato.curso}"/>
+                </p:column>
+                <p:column headerText="Qtd Fotos">
+                    <p:outputLabel value="#{contrato.qtdFotos}"/>
+                </p:column>
+                <p:column headerText="Qtd Álbuns">
+                    <p:outputLabel value="#{contrato.qtdAlbum}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
