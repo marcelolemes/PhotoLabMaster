@@ -124,6 +124,9 @@
                     <p:outputLabel value="Contrato:" />
                     <h:outputText
                             value="#{usuarioBean.contratoSelecionado.numeroContrato}" />
+                    <p:outputLabel value="Tamanho:" />
+                                       <h:outputText
+                                               value="#{usuarioBean.contratoSelecionado.tamanho}" />
                     <p:outputLabel value="Data Prazo:" />
                     <h:outputText value="#{usuarioBean.contratoSelecionado.dataPrazo}">
                         <f:convertDateTime pattern="dd/MM/yyyy" />
@@ -185,6 +188,8 @@
                     <p:inputText value="#{usuarioBean.contratoSelecionado.entidade}" />
                     <p:outputLabel value="Média" />
                     <p:inputText value="#{usuarioBean.contratoSelecionado.media}" />
+                    <p:outputLabel value="Tamanho" />
+                                      <p:inputText value="#{usuarioBean.contratoSelecionado.tamanho}" />
                     <p:outputLabel value="Data Entrada" />
                     <p:calendar value="#{usuarioBean.contratoSelecionado.dataEntrada}"
                                 locale="pt" navigator="true" pattern="MM-dd-yyyy" />
