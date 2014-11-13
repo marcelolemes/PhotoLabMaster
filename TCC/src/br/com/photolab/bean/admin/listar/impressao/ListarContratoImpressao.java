@@ -34,7 +34,7 @@ public class ListarContratoImpressao implements Serializable {
         contDao = new ContratoDao();
         listaContratoFazendo = contDao.listarContratosStatus(15);
         listaContratoEmEspera = contDao.listarContratosStatus(14);
-        listaContratoPronto = contDao.listarContratosStatus(16);
+        listaContratoPronto = contDao.listarContratosImpressos(16);
     }
 
 

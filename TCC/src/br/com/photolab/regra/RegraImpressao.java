@@ -9,9 +9,11 @@ import br.com.photolab.modelo.Contrato;
 import com.lowagie.text.*;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -59,7 +61,21 @@ public class RegraImpressao implements Serializable {
     }
     public void btImpresso(Album album) throws Exception {
 
-        album.setQtdFotos(qtdFotosAtual(album.getContrato().getCaminho()+File.separator+album.getNumero()));
+
+        File file = new File(album.getContrato().getCaminho()+File.separator+album.getNumero());
+        if (file.isDirectory()){
+            album.setQtdFotos(qtdFotosAtual(album.getContrato().getCaminho()+File.separator+album.getNumero()));
+        }
+        else {
+            FacesContext
+                    .getCurrentInstance()
+                    .addMessage(
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    "Atualizar Contrato", "Caminho incorreto, contrato provavelmente movido!"));
+        }
+
+
         regDao.albumImpresso(album);
 
     }

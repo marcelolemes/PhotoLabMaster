@@ -36,7 +36,7 @@ public class Apoio implements Serializable {
     private static int maisde50;
     Date data = new Date();
     ContratoDao contDao = new ContratoDao();
-SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     public Apoio() {
         qtdFotos =0;
@@ -82,29 +82,40 @@ SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 
     public void atualizarAlbunsCurso(Contrato contrato) throws Exception {
+        File file = new File(contrato.getCaminho());
 
-        File[] pastas;
-        File diretorio = new File(contrato.getCaminho());
-        pastas = diretorio.listFiles(pastaFilter);
-        System.out.println("Albuns Gerados");
-        persistirListaAlbum(pastas, contrato);
-        contrato.setQtdFotos(qtdFotos);
-        contrato.setQtdAlbum(qtdAlbuns);
-        contrato.setMaisde50(maisde50);
-        contrato.setMenosde50(menosde50);
-        contrato.setDataEntrada(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
-        contDao.Gravar(contrato);
+        if (file.isDirectory()) {
+            File[] pastas;
+            File diretorio = new File(contrato.getCaminho());
+            pastas = diretorio.listFiles(pastaFilter);
+            System.out.println("Albuns Gerados");
+            persistirListaAlbum(pastas, contrato);
+            contrato.setQtdFotos(qtdFotos);
+            contrato.setQtdAlbum(qtdAlbuns);
+            contrato.setMaisde50(maisde50);
+            contrato.setMenosde50(menosde50);
+            contrato.setDataEntrega(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
+            contDao.Gravar(contrato);
 
-        FacesContext
-                .getCurrentInstance()
-                .addMessage(
-                        null,
-                        new FacesMessage(FacesMessage.SEVERITY_INFO, //não testado
-                                "Gerar albuns",
-                                pastas.length + " albuns gerados, do contrato " + contrato.getNumeroContrato()));
+            FacesContext
+                    .getCurrentInstance()
+                    .addMessage(
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_INFO, //não testado
+                                    "Contrato atualizado",
+                                    pastas.length + " albuns atualizados, do contrato " + contrato.getNumeroContrato()));
 
+        }
+        else {
+            FacesContext
+                    .getCurrentInstance()
+                    .addMessage(
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    "Atualizar Contrato", "Caminho incorreto, contrato provavelmente movido!"));
+
+        }
     }
-
 
 
     public void persistirListaAlbum(File[] albuns, Contrato contrato)
@@ -130,11 +141,22 @@ SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
             qtdAlbuns++;
         }
 
-        System.out.println("Lista Pronta para persistencia "+listaAlbum.size());
+        //   System.out.println("Lista Pronta para persistencia "+listaAlbum.size());
 
         albumDao.AtualizarLista(listaAlbum, contrato);
-        gerarFechamento(contrato.getCaminho()+"\\"+"TESTE.html",contrato,menosde50,maisde50,qtdFotos,qtdAlbuns);
+        File file = new File(contrato.getCaminho());
+        if(file.isDirectory()){
+            gerarFechamento(contrato.getCaminho()+"\\"+contrato.getNumeroContrato()+" FECHAMENTO.html",contrato,menosde50,maisde50,qtdFotos,qtdAlbuns);
+        }
 
+        else {
+            FacesContext
+                    .getCurrentInstance()
+                    .addMessage(
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    "Atualizar Contrato", "Caminho incorreto, contrato provavelmente movido!"));
+        }
     }
 
     public void gerarFechamento(String caminho,Contrato contrato,int Menos50Foto, int Mais50Foto, int QtdFotos,int QtdAlbuns) throws FileNotFoundException {

@@ -59,22 +59,33 @@ public class CadastrarAlbum implements Serializable {
     private String contratoPesquisarNumero;
 
     public void gerarAlbunsCurso(Contrato contrato) throws Exception {
+        File file = new File(contrato.getCaminho());
 
-        File[] pastas;
-        File diretorio = new File(contrato.getCaminho());
-        pastas = diretorio.listFiles(pastaFilter);
-        System.out.println("Albuns Gerados");
-        persistirListaAlbum(pastas, contrato);
-        FacesContext
-                        .getCurrentInstance()
-                        .addMessage(
-                                null,
-                                new FacesMessage(FacesMessage.SEVERITY_INFO, //não testado
-                                        "Gerar albuns",
-                                        pastas.length + " albuns gerados, do contrato " + contrato.getNumeroContrato()));
+        if (file.isDirectory()) {
+            File[] pastas;
+            File diretorio = new File(contrato.getCaminho());
+            pastas = diretorio.listFiles(pastaFilter);
+            System.out.println("Albuns Gerados");
+            persistirListaAlbum(pastas, contrato);
+            FacesContext
+                    .getCurrentInstance()
+                    .addMessage(
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_INFO, //não testado
+                                    "Gerar albuns",
+                                    pastas.length + " albuns gerados, do contrato " + contrato.getNumeroContrato()));
 
+        }
+        else {
+            FacesContext
+                    .getCurrentInstance()
+                    .addMessage(
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    "Atualizar Contrato", "Caminho incorreto, contrato provavelmente movido!"));
+
+        }
     }
-
     public void gravarAlbum() throws Exception {
         album.setContrato(contDao.pesquisarContrato(contratoPesquisarNumero));
         albumDao.gravar(album);

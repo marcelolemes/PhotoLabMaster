@@ -146,7 +146,7 @@ public class ContratoDao implements Serializable {
     public List<Contrato> listarContratosImpressos(int unique) throws Exception {
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Contrato.class);
-        criteria.add(Restrictions.eq("status", unique));
+        criteria.add(Restrictions.eq("status", unique)).add(Restrictions.isNull("dataEntrega"));
         criteria.addOrder(Order.desc("dataEntrega"));
         criteria.addOrder(Order.desc("urgencia"));
         criteria.addOrder(Order.desc("cod"));
