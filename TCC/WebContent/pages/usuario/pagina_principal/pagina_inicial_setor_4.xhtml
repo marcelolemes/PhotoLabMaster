@@ -154,6 +154,17 @@
                         <f:setPropertyActionListener value="#{contrato}"
                                                      target="#{usuarioBean.contratoSelecionado}" />
                     </p:commandButton>
+
+                </p:column>
+                <p:column style="width:32px;text-align: center" width="30px"
+                                         exportable="false">
+                    <p:commandButton id="botao-atualizar" styleClass="botao-info"
+                                                                       update=":formDetalhe:contratoDetalhe"
+                                                                       action="#{apoio.atualizarAlbunsCurso(contrato)}" icon="ui-icon-wrench"
+                                                                       title="atualizar albuns">
+                                                          <f:setPropertyActionListener value="#{contrato}"
+                                                                                       target="#{usuarioBean.contratoSelecionado}" />
+                                                      </p:commandButton>
                 </p:column>
                 <p:column style="width:70px;text-align: center" exportable="false" headerText="Album">
                     <p:commandButton title="Visualizar Albuns Curso" value="Ver" rendered="#{contrato.qtdAlbum le 0 ? false:true}" update="@all" process="@all"

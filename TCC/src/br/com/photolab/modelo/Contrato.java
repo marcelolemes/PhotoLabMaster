@@ -48,6 +48,15 @@ public class Contrato implements Serializable {
     private boolean ocupado;
     @Column
     private Date dataBackup;
+    @Column
+    private int menosde50;
+    @Column
+    private int maisde50;
+    @Column
+    private int qtdFotos;
+    @Column
+    private String tamanho;
+
     @ManyToOne(cascade = CascadeType.PERSIST, optional = true)
     @JoinColumn(name = "ficha_id", referencedColumnName = "cod")
     private Ficha ficha;
@@ -190,6 +199,38 @@ public class Contrato implements Serializable {
 
     public void setOcupado(boolean ocupado) {
         this.ocupado = ocupado;
+    }
+
+    public String getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(String tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    public int getQtdFotos() {
+        return qtdFotos;
+    }
+
+    public void setQtdFotos(int qtdFotos) {
+        this.qtdFotos = qtdFotos;
+    }
+
+    public int getMenosde50() {
+        return menosde50;
+    }
+
+    public void setMenosde50(int menosde50) {
+        this.menosde50 = menosde50;
+    }
+
+    public int getMaisde50() {
+        return maisde50;
+    }
+
+    public void setMaisde50(int maisde50) {
+        this.maisde50 = maisde50;
     }
 }
 

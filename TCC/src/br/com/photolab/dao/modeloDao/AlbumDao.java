@@ -32,15 +32,48 @@ public class AlbumDao implements Serializable {
         return true;
 
     }
-
-
     public boolean GravarLista(List<Album> albuns,Contrato contrato) throws Exception {
         Session sessao = HibernateUtil.getSession();
         sessao.beginTransaction();
-        System.out.println("Transaçãoo iniciada");
+        System.out.println("Transação iniciada");
         for (Album album : albuns) {
             sessao.save(album);
             System.out.println("Album persistido");
+        }
+        contrato.setQtdAlbum(albuns.size());
+        try {
+            sessao.update(contrato);
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+        sessao.getTransaction().commit();
+        sessao.close();
+        return true;
+
+    }
+
+    public boolean AtualizarLista(List<Album> albuns,Contrato contrato) throws Exception {
+        Session sessao = HibernateUtil.getSession();
+        sessao.beginTransaction();
+        Album albumAntigo;
+        System.out.println("Transação iniciada");
+        for (Album album : albuns) {
+           try {
+               Criteria criteria = sessao.createCriteria(Album.class);
+                           criteria.setMaxResults(1);
+                           criteria.add(Restrictions.eq("numero",album.getNumero())).add(Restrictions.eq("contrato",album.getContrato()));
+                           albumAntigo = (Album)criteria.uniqueResult();
+                           albumAntigo.setQtdFotos(album.getQtdFotos());
+                           sessao.update( albumAntigo);
+                           System.out.println("Album Atualizado");
+           }
+
+           catch (Exception ex){
+               //TODO
+           }
         }
         contrato.setQtdAlbum(albuns.size());
         try {
