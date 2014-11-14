@@ -29,7 +29,7 @@ public class UsuarioBean implements Serializable {
     private Contrato contratoSelecionado= new Contrato();
     private Mes mesSelecionado= new Mes();
     private long qtdFotosAux;
-    private int anoSelecionado= Calendar.getInstance().get(Calendar.YEAR);
+    private int anoSelecionado = Calendar.getInstance().get(Calendar.YEAR);
     public UsuarioBean() {
 
         usuario = new Usuario();

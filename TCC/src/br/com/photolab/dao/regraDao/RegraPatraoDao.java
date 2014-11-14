@@ -194,6 +194,7 @@ public class RegraPatraoDao implements Serializable {
         if(criteria.uniqueResult()!=null){
             retorno = (Long) criteria.uniqueResult();
         }
+
         System.out.println("Date 1 aqui: "+calendar1.getTime());
         System.out.println("Date 2 aqui: "+calendar2.getTime());
         sessao.close();
