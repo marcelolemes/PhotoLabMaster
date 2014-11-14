@@ -1,5 +1,6 @@
 package br.com.photolab.bean.admin.listar.patrao;
 
+import br.com.photolab.bean.admin.listar.ListarFichas;
 import br.com.photolab.bean.usuario.UsuarioBean;
 import br.com.photolab.dao.modeloDao.UsuarioDao;
 import br.com.photolab.dao.regraDao.RegraPatraoDao;
@@ -9,11 +10,13 @@ import br.com.photolab.modelo.Usuario;
 import br.com.photolab.modelo.apoio.Mes;
 import br.com.photolab.modelo.apoio.Metricas;
 import br.com.photolab.relatorio.RelatorioDiario;
+import com.lowagie.text.*;
 import org.primefaces.model.chart.*;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.view.ViewScoped;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -75,7 +78,7 @@ public class RelatorioMensalContratosBean
         calendar2.set(Calendar.YEAR,usuarioBean.getAnoSelecionado());
 
 
-     return regraPatraoDao.ContarAlbumMes(calendar, calendar2);
+        return regraPatraoDao.ContarAlbumMes(calendar, calendar2);
 
     }
 
@@ -164,9 +167,16 @@ public class RelatorioMensalContratosBean
 
         return regraPatraoDao.ListarContratoMes(calendar,calendar2);
 
-
     }
-
+    public void preProcessPDF(Object document) throws Exception {
+        Document pdf = (Document) document;
+        pdf.open();
+        pdf.add(new Paragraph("Mês " + usuarioBean.getMesSelecionado().getNome()));
+        pdf.add(new Paragraph("quantidade de Álbuns produzidas "+qtdAlbunsMes()));
+        pdf.add(new Paragraph("quantidade de fotos produzidas "+qtdFotosMes()));
+        pdf.add(new Paragraph(" "));
+        pdf.add(new Paragraph(" "));
+    }
 
     public UsuarioBean getUsuarioBean() {
         return usuarioBean;

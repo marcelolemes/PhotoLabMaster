@@ -26,13 +26,21 @@
     </ui:define>
     <ui:define name="content">
         <h:form>
-            <p:panelGrid columns="2">
-                <p:outputLabel value="Álbuns do mês"/>
-                <p:outputLabel value="#{relatorioMensalContratosBean.qtdAlbunsMes()}"/>
-                <p:outputLabel value="Fotos do mês"/>
-                <p:outputLabel value="#{relatorioMensalContratosBean.qtdFotosMes()}"/>
+            <p:panelGrid columns="2" styleClass="semBorda">
+                <p:panelGrid columns="2" styleClass="semBorda">
+                    <p:outputLabel value="Álbuns do mês"/>
+                    <p:outputLabel value="#{relatorioMensalContratosBean.qtdAlbunsMes()}"/>
+                    <p:outputLabel value="Fotos do mês"/>
+                    <p:outputLabel value="#{relatorioMensalContratosBean.qtdFotosMes()}"/>
+                </p:panelGrid>
+                <h:commandLink id="tabelapdf">
+                    <p:graphicImage url="/resources/images/pdf.png" />
+                    <p:dataExporter type="pdf" target="tabelaContratosEncerrados" fileName="ContratosFechados"
+                                    encoding="iso-8859-1" pageOnly="true"
+                                    preProcessor="#{relatorioMensalContratosBean.preProcessPDF}" />
+                </h:commandLink>
             </p:panelGrid>
-            <p:dataTable value="#{relatorioMensalContratosBean.contratoMes()}" var="contrato">
+            <p:dataTable id="tabelaContratosEncerrados" value="#{relatorioMensalContratosBean.contratoMes()}" var="contrato" emptyMessage="Nenhum contrato entregue neste mês">
                 <p:column headerText="Nº contrato">
                     <p:outputLabel value="#{contrato.numeroContrato}"/>
                 </p:column>
@@ -44,6 +52,14 @@
                 </p:column>
                 <p:column headerText="qtdAlbuns">
                     <p:outputLabel value="#{contrato.qtdAlbum}"/>
+                </p:column>
+                <p:column headerText="Tamanho">
+                    <p:outputLabel value="#{contrato.tamanho}"/>
+                </p:column>
+                <p:column headerText="Data de fechamento">
+                    <p:outputLabel value="#{contrato.dataEntrega}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </p:outputLabel>
                 </p:column>
 
             </p:dataTable>
