@@ -32,6 +32,21 @@
                 <p:outputLabel value="Fotos do mês"/>
                 <p:outputLabel value="#{relatorioMensalContratosBean.qtdFotosMes()}"/>
             </p:panelGrid>
+            <p:dataTable value="#{relatorioMensalContratosBean.contratoMes()}" var="contrato">
+                <p:column headerText="Nº contrato">
+                    <p:outputLabel value="#{contrato.numeroContrato}"/>
+                </p:column>
+                <p:column headerText="Contrato">
+                    <p:outputLabel value="#{contrato.curso}"/>
+                </p:column>
+                <p:column headerText="qtdFotos">
+                    <p:outputLabel value="#{contrato.qtdFotos}"/>
+                </p:column>
+                <p:column headerText="qtdAlbuns">
+                    <p:outputLabel value="#{contrato.qtdAlbum}"/>
+                </p:column>
+
+            </p:dataTable>
 
         </h:form>
     </ui:define>
