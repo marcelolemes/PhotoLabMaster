@@ -170,12 +170,15 @@ public class RelatorioMensalContratosBean
     }
     public void preProcessPDF(Object document) throws Exception {
         Document pdf = (Document) document;
+        pdf.setPageSize(PageSize.A4.rotate());
         pdf.open();
         pdf.add(new Paragraph("Mês " + usuarioBean.getMesSelecionado().getNome()));
         pdf.add(new Paragraph("quantidade de Álbuns produzidas "+qtdAlbunsMes()));
         pdf.add(new Paragraph("quantidade de fotos produzidas "+qtdFotosMes()));
         pdf.add(new Paragraph(" "));
         pdf.add(new Paragraph(" "));
+        pdf.addAuthor("PhotoLabMaster");
+
     }
 
     public UsuarioBean getUsuarioBean() {
