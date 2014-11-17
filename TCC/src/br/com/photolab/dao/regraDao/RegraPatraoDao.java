@@ -164,6 +164,7 @@ public class RegraPatraoDao implements Serializable {
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Contrato.class);
         criteria.add(Restrictions.gt("dataEntrega", calendar1.getTime())).add(Restrictions.lt("dataEntrega",calendar2.getTime()));
+        criteria.addOrder(Order.desc("dataEntrega"));
         List<Contrato> listaRetorno = criteria.list();
         System.out.println("Date 1 aqui: "+calendar1.getTime());
         System.out.println("Date 2 aqui: "+calendar2.getTime());
