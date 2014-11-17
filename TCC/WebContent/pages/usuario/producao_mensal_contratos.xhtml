@@ -61,7 +61,9 @@
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </p:outputLabel>
                 </p:column>
-
+                <p:column headerText="Cliente">
+                    <p:outputLabel value="#{contrato.cliente.nome}"/>
+                </p:column>
             </p:dataTable>
 
         </h:form>
