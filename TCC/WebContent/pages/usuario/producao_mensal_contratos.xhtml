@@ -56,7 +56,7 @@
                 <p:column headerText="Tamanho">
                     <p:outputLabel value="#{contrato.tamanho}"/>
                 </p:column>
-                <p:column headerText="Data de fechamento">
+                <p:column headerText="Data de fechamento" sortBy="#{contrato.dataEntrega}">
                     <p:outputLabel value="#{contrato.dataEntrega}">
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </p:outputLabel>
