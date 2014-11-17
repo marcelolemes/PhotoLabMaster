@@ -47,6 +47,7 @@ public class Metricas implements Serializable {
 		setores.add(new SelectItem(3, "Montagem"));
 		setores.add(new SelectItem(4, "Impressão"));
 		setores.add(new SelectItem(5, "Backup"));
+        setores.add(new SelectItem(6, "Desligado da empresa"));
 
 	}
 
