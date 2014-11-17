@@ -60,7 +60,18 @@ public class RelatorioDao {
         transacao.commit();
         sessao.close();
     }
+    public void deletarRelatorios(List<Relatorio> relatorios) throws Exception{
 
+        Session sessao = HibernateUtil.getSession();
+        org.hibernate.Transaction transacao = sessao.beginTransaction();
+
+        for (Relatorio relatorio : relatorios){
+            sessao.delete(relatorio);
+            System.out.println("Relatório deletado");
+        }
+        transacao.commit();
+        sessao.close();
+    }
 
     public static String msToHourSecond( int ms ) {
         Calendar c = Calendar.getInstance();
@@ -86,16 +97,24 @@ public class RelatorioDao {
         sessao.close();
         return listaRetorno;
     }
-
     public Relatorio encontrarRelatorio(Usuario usuario,Album album) throws Exception {
+           Session sessao = HibernateUtil.getSession();
+           Criteria criteria = sessao.createCriteria(Relatorio.class);
+           criteria.add(Restrictions.eq("funcionario", usuario));
+           criteria.add(Restrictions.eq("album", album));
+           criteria.setMaxResults(1);
+           Relatorio retorno = (Relatorio) criteria.uniqueResult();
+           sessao.close();
+           return retorno;
+       }
+
+    public List<Relatorio> encontrarRelatorios(Album album) throws Exception {
         Session sessao = HibernateUtil.getSession();
         Criteria criteria = sessao.createCriteria(Relatorio.class);
-        criteria.add(Restrictions.eq("funcionario", usuario));
         criteria.add(Restrictions.eq("album", album));
-        criteria.setMaxResults(1);
-        Relatorio retorno = (Relatorio) criteria.uniqueResult();
+        List<Relatorio> listaRetorno = criteria.list();
         sessao.close();
-        return retorno;
+        return listaRetorno;
     }
 
     public long contarAlbunsHoje(Usuario usuario) throws Exception {

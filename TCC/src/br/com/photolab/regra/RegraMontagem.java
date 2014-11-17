@@ -22,8 +22,10 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.sql.Timestamp;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by marcelo on 26/09/2014.
@@ -108,14 +110,14 @@ public class RegraMontagem implements Serializable {
     }
 
     public void btMenosDeVinte() throws Exception {
+        List<Relatorio> relatorios = new ArrayList<Relatorio>();
         Album album = usuarioBean.getUsuarioLogado().getAlbumAtual();
         usuarioBean.getUsuarioLogado().setAlbumAtual(null);
         usuarioDao.Update(usuarioBean.getUsuarioLogado());
-        relatorio = relatorioDao.encontrarRelatorio(usuarioBean.getUsuarioLogado(),album);
-        relatorioDao.deletarRelatorio(relatorio);
+        relatorios = relatorioDao.encontrarRelatorios(album);
+        relatorioDao.deletarRelatorios(relatorios);
         regDao.albumDeletado(album);
-        //   usuarioBean.btHome();
-    }
+       }
 
     public void btTerminarAlbum() throws Exception {
         try{
