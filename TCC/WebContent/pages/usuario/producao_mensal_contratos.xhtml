@@ -56,13 +56,13 @@
                 <p:column headerText="Tamanho">
                     <p:outputLabel value="#{contrato.tamanho}"/>
                 </p:column>
-                <p:column headerText="Data de fechamento" sortBy="#{contrato.dataEntrega}">
+                <p:column headerText="Data de fechamento">
                     <p:outputLabel value="#{contrato.dataEntrega}">
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </p:outputLabel>
                 </p:column>
                 <p:column headerText="Cliente">
-                    <p:outputLabel value="#{contrato.cliente.nome}"/>
+                    <p:outputLabel value="#{contrato.ficha.cliente.nome}"/>
                 </p:column>
             </p:dataTable>
 
