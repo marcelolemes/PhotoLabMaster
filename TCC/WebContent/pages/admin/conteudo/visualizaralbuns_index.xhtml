@@ -36,6 +36,9 @@
                         <p:dataExporter type="pdf" target="albuns" fileName="albuns"
                                         encoding="iso-8859-1" />
                     </h:commandLink>
+                    <p:spacer width="100" height="10" />
+                    <p:commandButton value="Acrescentar Pedidos" oncomplete="PF('pedidos').show();"/>
+
                 </f:facet>
                 <p:column headerText="Número">
                     <h:outputText value="#{album.numero}" />
@@ -60,21 +63,34 @@
                     <h:outputText value=" #{album.usuarioMontagem.apelido}"  />
                 </p:column>
                 <p:column headerText="Fotos:">
-                                    <h:outputText value="#{album.qtdFotos}" />
-                                </p:column>
+                    <h:outputText value="#{album.qtdFotos}" />
+                </p:column>
                 <p:column headerText="OBS:">
                     <h:outputText value="#{album.obs}" />
                 </p:column>
             </p:dataTable>
             <p:panelGrid columns="2">
-            <p:outputLabel value="Quantidade de albuns deste contrato "/>
-            <p:outputLabel value="#{listarAlbuns.qtdAlbuns}"/>
-            <p:outputLabel value="Quantidade de fotos deste contrato "/>
-            <p:outputLabel value="#{listarAlbuns.qtdFotosTotal}"/>
+                <p:outputLabel value="Quantidade de albuns deste contrato "/>
+                <p:outputLabel value="#{listarAlbuns.qtdAlbuns}"/>
             </p:panelGrid>
             <p:commandButton value="Atualizar" actionListener="#{listarAlbuns.btAtualizar}" update="@all" process="@all"/>
 
         </h:form>
+        <p:dialog widgetVar="pedidos" showEffect="fade" resizable="false"
+                  closable="true" styleClass="semBorda" closeOnEscape="true"
+                  modal="false" style="text-align:center;" header="Inserir Pedidos">
+            <h:form>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Quantidade de pedidos deste contrato"/>
+                    <p:outputLabel value="#{usuarioBean.contratoSelecionado.qtdPedidos}"/>
+                    <p:outputLabel value="Adicionar pedidos"/>
+                    <p:inputText value="#{listarAlbuns.qtdPedidos}"/>
+                </p:panelGrid>
+
+                <p:commandButton value="OK" actionListener="#{listarAlbuns.btInserirPedidos()}" update="@all" process="@all" oncomplete="PF('pedidos').hide();"/>
+            </h:form>
+        </p:dialog>
+
     </ui:define>
 
 

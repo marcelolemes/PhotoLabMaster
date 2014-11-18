@@ -55,6 +55,8 @@ public class Contrato implements Serializable {
     @Column
     private int qtdFotos;
     @Column
+    private int qtdPedidos;
+    @Column
     private String tamanho;
 
     @ManyToOne(cascade = CascadeType.PERSIST, optional = true)
@@ -231,6 +233,14 @@ public class Contrato implements Serializable {
 
     public void setMaisde50(int maisde50) {
         this.maisde50 = maisde50;
+    }
+
+    public int getQtdPedidos() {
+        return qtdPedidos;
+    }
+
+    public void setQtdPedidos(int qtdPedidos) {
+        this.qtdPedidos = qtdPedidos;
     }
 }
 

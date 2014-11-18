@@ -2,7 +2,9 @@ package br.com.photolab.bean.admin.listar;
 
 import br.com.photolab.dao.modeloDao.AlbumDao;
 import br.com.photolab.bean.usuario.UsuarioBean;
+import br.com.photolab.dao.modeloDao.ContratoDao;
 import br.com.photolab.modelo.Album;
+import br.com.photolab.modelo.Contrato;
 import br.com.photolab.modelo.apoio.Metricas;
 
 import javax.annotation.PostConstruct;
@@ -30,6 +32,7 @@ public class ListarAlbuns implements Serializable {
     private List<Album> listaAlbuns;
     private long qtdAlbuns;
     private long qtdFotosTotal;
+    private int qtdPedidos;
 
     @PostConstruct
     public void inicializarLista() {
@@ -51,7 +54,13 @@ public class ListarAlbuns implements Serializable {
         inicializarLista();
     }
 
-
+    public void btInserirPedidos() throws Exception{
+        ContratoDao contratoDao = new ContratoDao();
+        Contrato contrato = usuarioBean.getContratoSelecionado();
+        contrato.setQtdPedidos(contrato.getQtdPedidos()+qtdPedidos);
+        contrato.setQtdFotos(contrato.getQtdFotos()+qtdPedidos);
+        contratoDao.Gravar(contrato);
+    }
 
 
 
@@ -94,5 +103,13 @@ public class ListarAlbuns implements Serializable {
 
     public void setQtdFotosTotal(long qtdFotosTotal) {
         this.qtdFotosTotal = qtdFotosTotal;
+    }
+
+    public int getQtdPedidos() {
+        return qtdPedidos;
+    }
+
+    public void setQtdPedidos(int qtdPedidos) {
+        this.qtdPedidos = qtdPedidos;
     }
 }

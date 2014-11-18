@@ -125,8 +125,8 @@
                     <h:outputText
                             value="#{usuarioBean.contratoSelecionado.numeroContrato}" />
                     <p:outputLabel value="Tamanho:" />
-                                       <h:outputText
-                                               value="#{usuarioBean.contratoSelecionado.tamanho}" />
+                    <h:outputText
+                            value="#{usuarioBean.contratoSelecionado.tamanho}" />
                     <p:outputLabel value="Data Prazo:" />
                     <h:outputText value="#{usuarioBean.contratoSelecionado.dataPrazo}">
                         <f:convertDateTime pattern="dd/MM/yyyy" />
@@ -140,11 +140,6 @@
 
                     <p:outputLabel value="Média de fotos" />
                     <h:outputText value="#{usuarioBean.contratoSelecionado.media}" />
-
-                    <h:commandLink id="infopdf">
-                        <p:graphicImage url="/resources/images/pdf.png" />
-                        <p:printer target="continfo" />
-                    </h:commandLink>
                 </p:panelGrid>
             </p:outputPanel>
         </p:dialog>
@@ -189,7 +184,7 @@
                     <p:outputLabel value="Média" />
                     <p:inputText value="#{usuarioBean.contratoSelecionado.media}" />
                     <p:outputLabel value="Tamanho" />
-                                      <p:inputText value="#{usuarioBean.contratoSelecionado.tamanho}" />
+                    <p:inputText value="#{usuarioBean.contratoSelecionado.tamanho}" />
                     <p:outputLabel value="Data Entrada" />
                     <p:calendar value="#{usuarioBean.contratoSelecionado.dataEntrada}"
                                 locale="pt" navigator="true" pattern="MM-dd-yyyy" />
