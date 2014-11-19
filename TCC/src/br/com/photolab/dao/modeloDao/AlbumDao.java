@@ -59,7 +59,7 @@ public class AlbumDao implements Serializable {
         Session sessao = HibernateUtil.getSession();
         sessao.beginTransaction();
         Album albumAntigo;
-        System.out.println("Transação iniciada");
+        System.out.println("Transação Iniciada");
         for (Album album : albuns) {
            try {
                Criteria criteria = sessao.createCriteria(Album.class);
