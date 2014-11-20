@@ -35,7 +35,7 @@
                 <f:facet name="header">
                     <h:commandLink id="tabelapdf">
                         <p:graphicImage url="/resources/images/pdf.png" />
-                        <p:dataExporter type="pdf" target="albuns" fileName="albuns"
+                        <p:dataExporter type="pdf" target="albuns" fileName="albuns" preProcessor="#{regraImpressao.preFicha}"
                                         encoding="iso-8859-1" />
                     </h:commandLink>
                     <p:spacer width="50" height="10" />
@@ -52,7 +52,7 @@
                 <p:column headerText="Fotos" width="8%">
                     <p:outputLabel value="#{album.qtdFotos} fotos" rendered="#{album.status eq 16}" />
                 </p:column>
-                <p:column headerText="Contrato" width="10%">
+                <p:column headerText="Contrato" width="10%" exportable="false">
                     <h:outputText value="#{album.contrato.numeroContrato}" />
                 </p:column>
                 <p:column headerText="Curso"  exportable="false">

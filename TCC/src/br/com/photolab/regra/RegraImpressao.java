@@ -126,7 +126,19 @@ public class RegraImpressao implements Serializable {
 
 
     }
+    public void preFicha(Object document) throws Exception {
+        Document pdf = (Document) document;
+        pdf.open();
+        pdf.add(new Paragraph("PhotoLabMaster© Setor impressão"));
+        pdf.add(new Paragraph("Lista de albuns do contrato: "+listaAlbuns.get(0).getContrato().getNumeroContrato()));
+        pdf.add(new Paragraph("Curso de: "+listaAlbuns.get(0).getContrato().getCurso()));
+        pdf.add(new Paragraph("da cidade: "+listaAlbuns.get(0).getContrato().getCidade()));
+        pdf.add(new Paragraph("Localizado em "+listaAlbuns.get(0).getContrato().getCaminho()));
+        pdf.add(new Paragraph(" "));
+        pdf.add(new Paragraph(" "));
+        pdf.addAuthor("PhotoLabMaster");
 
+    }
     public List<Album> getListaAlbuns() {
         return listaAlbuns;
     }

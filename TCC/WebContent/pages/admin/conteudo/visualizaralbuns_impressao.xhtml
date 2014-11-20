@@ -34,7 +34,7 @@
                     <h:commandLink id="tabelapdf">
                         <p:graphicImage url="/resources/images/pdf.png" />
                         <p:dataExporter type="pdf" target="albuns" fileName="albuns"
-                                        encoding="iso-8859-1" preProcessor="#{regraImpressao.listaPdfAlbuns}" />
+                                        encoding="iso-8859-1"  preProcessor="#{regraImpressao.preFicha}" />
                         </h:commandLink>
                 </f:facet>
                 <p:column headerText="Número" width="10%">
