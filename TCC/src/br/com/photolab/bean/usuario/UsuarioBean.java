@@ -78,7 +78,9 @@ public class UsuarioBean implements Serializable {
                 setSessao(usuario.getApelido());
                 usuario = new Usuario();
                 usuario.setLogado(true);
+                usuarioDao.gravarTimestamp(usuarioLogado);
                 return messageSucessoLogin();
+
 
             } else {
                 System.out.print("Não encontrado");
