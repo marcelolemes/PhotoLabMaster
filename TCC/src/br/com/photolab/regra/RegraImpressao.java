@@ -126,10 +126,12 @@ public class RegraImpressao implements Serializable {
 
 
     }
+
     public void preFicha(Object document) throws Exception {
         Document pdf = (Document) document;
         pdf.open();
-        pdf.add(new Paragraph("PhotoLabMaster© Setor impressão"));
+        Font fontbold = FontFactory.getFont("Times-Roman", 6, Font.BOLD);
+        pdf.add(new Paragraph("PhotoLabMaster© Setor impressão",fontbold));
         pdf.add(new Paragraph("Lista de albuns do contrato: "+listaAlbuns.get(0).getContrato().getNumeroContrato()));
         pdf.add(new Paragraph("Curso de: "+listaAlbuns.get(0).getContrato().getCurso()));
         pdf.add(new Paragraph("da cidade: "+listaAlbuns.get(0).getContrato().getCidade()));
@@ -137,8 +139,25 @@ public class RegraImpressao implements Serializable {
         pdf.add(new Paragraph(" "));
         pdf.add(new Paragraph(" "));
         pdf.addAuthor("PhotoLabMaster");
-
     }
+
+
+    public void preFichaFim(Object document) throws Exception {
+        Document pdf = (Document) document;
+        pdf.open();
+        Font fontbold = FontFactory.getFont("Times-Roman", 6, Font.BOLD);
+        pdf.add(new Paragraph("PhotoLabMaster© Setor impressão",fontbold));
+        pdf.add(new Paragraph("Lista de albuns do contrato: "+usuarioBean.getContratoSelecionado().getNumeroContrato()));
+        pdf.add(new Paragraph("Curso de: "+usuarioBean.getContratoSelecionado().getCurso()));
+        pdf.add(new Paragraph("da cidade: "+usuarioBean.getContratoSelecionado().getCidade()));
+        pdf.add(new Paragraph("Localizado em "+usuarioBean.getContratoSelecionado().getCaminho()));
+        pdf.add(new Paragraph(" "));
+        pdf.add(new Paragraph(" "));
+        pdf.addAuthor("PhotoLabMaster");
+    }
+
+
+
     public List<Album> getListaAlbuns() {
         return listaAlbuns;
     }

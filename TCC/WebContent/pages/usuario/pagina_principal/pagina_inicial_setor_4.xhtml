@@ -158,7 +158,7 @@
                 </p:column>
                 <p:column style="width:90px;text-align: center" width="30px"
                           exportable="false">
-                    <p:commandButton id="botao-atualizar" style="background: none!important;color: #ffffff!important; background-color: red!important;"
+                    <p:commandButton id="botao-fechar" style="background: none!important;color: #ffffff!important; background-color: red!important;"
                                      update=":formDetalhe:contratoDetalhe"
                                      action="#{apoio.atualizarAlbunsCurso(contrato)}"
                                      title="Fechar contrato" value="Fechar">
@@ -168,7 +168,7 @@
                 </p:column>
                 <p:column style="width:70px;text-align: center" exportable="false" headerText="Album">
                     <p:commandButton title="Visualizar Albuns Curso" value="Ver" rendered="#{contrato.qtdAlbum le 0 ? false:true}" update="@all" process="@all"
-                                     action="#{paginaPrincipalBean.btListarAlbunsImpressao()}">
+                                     action="#{paginaPrincipalBean.btListarAlbunsImpressos()}">
                         <f:setPropertyActionListener value="#{contrato}"
                                                      target="#{usuarioBean.contratoSelecionado}" />
                     </p:commandButton>

@@ -337,7 +337,32 @@ public class PaginaPrincipalBean implements Serializable {
         }
 
     }
+    public String btListarAlbunsImpressos() {
 
+            if (usuarioBean.getUsuario().isLogado()) {
+                if (usuarioBean.getUsuarioLogado().getSetor()  == 4) {
+
+                    return "/pages/admin/conteudo/visualizaralbuns_impressos.xhtml";
+                } else
+                {
+                    usuarioBean.autoridadeInsuficiente();
+                    System.out.println("Setor do usuario "+usuarioBean.getUsuarioLogado().getSetor());
+
+                    if (usuarioBean.getUsuarioLogado().getNivelAcesso() > 2) {
+                        return "/pages/admin/conteudo/pagina_inicial_admin.xhtml";
+                    } else {
+                        return "/pages/usuario/pagina_inicial_setor_"
+                                + usuarioBean.getUsuarioLogado().getSetor() + ".xhtml";
+                    }
+                }
+
+            } else {
+                usuarioBean.nenhumUsuario();
+                return "/pages/login_index.xhtml";
+
+            }
+
+        }
 
     public String btListarUsers() {
 
