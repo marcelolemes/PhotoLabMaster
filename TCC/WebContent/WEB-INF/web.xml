@@ -23,7 +23,10 @@
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/pages/admin/conteudo/erro.jsf</location>
     </error-page>
--->
+--><error-page>
+    <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+    <location>/pages/login_index.jsf</location>
+</error-page>
     <session-config>
         <session-timeout>90</session-timeout> <!-- o tempo de sessão é 35 minutos, pois usuários na página inicial atualizam a páginas sozinhos
          a cada 30 minutos -->

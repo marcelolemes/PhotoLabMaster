@@ -43,8 +43,6 @@
             </p:panelGrid>
 
 
-            <!--<p:layoutUnit position="center"
-                                              header="Setor {listaUsuariosBean.parserSetor(paginaPrincipalBean.usuarioBean.usuarioLogado)}"> -->
             <p:idleMonitor timeout="1800000"> <!-- Atualiza a cada 30 minutos-->
                 <p:ajax event="idle" listener="#{usuarioBean.btHome}"/>
             </p:idleMonitor>
