@@ -6,6 +6,10 @@ import br.com.photolab.dao.modeloDao.ContratoDao;
 import br.com.photolab.modelo.Album;
 import br.com.photolab.modelo.Contrato;
 import br.com.photolab.modelo.apoio.Metricas;
+import com.lowagie.text.Document;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import org.primefaces.mobile.component.page.Page;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -63,7 +67,20 @@ public class ListarAlbuns implements Serializable {
     }
 
 
+    public void preFicha(Object document) throws Exception {
+        Document pdf = (Document) document;
+        pdf.setPageSize(PageSize.A4.rotate());
+        pdf.open();
+        pdf.add(new Paragraph("PhotoLabMaster©"));
+        pdf.add(new Paragraph("Lista de albuns do contrato: "+listaAlbuns.get(0).getContrato().getNumeroContrato()));
+        pdf.add(new Paragraph("Curso de: "+listaAlbuns.get(0).getContrato().getCurso()));
+        pdf.add(new Paragraph("da cidade: "+listaAlbuns.get(0).getContrato().getCidade()));
+        pdf.add(new Paragraph("Localizado em "+listaAlbuns.get(0).getContrato().getCaminho()));
+        pdf.add(new Paragraph(" "));
+        pdf.add(new Paragraph(" "));
+        pdf.addAuthor("PhotoLabMaster©");
 
+    }
 
     public String parserUrgencia(int urgencia) {
         return metricas.getUrgenciaLista().get(urgencia).getLabel();
