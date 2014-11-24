@@ -4,7 +4,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                template="#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 0 ?'/template/templatePaginaInicialGestor.xhtml':'/template/templatePaginaInicial.xhtml'}"
+                template="#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 0 ?'/template/templatePrincipal.xhtml':'/template/templatePaginaInicial.xhtml'}"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <h:head>
@@ -27,16 +27,107 @@
     <ui:define name="content">
         <p:tabView>
             <p:tab title="Início">
-                <p:panel styleClass="panecentral">
-                    <p:panelGrid columns="2" styleClass="semBorda">
-                        <p:outputLabel value="Usuário da sessão" />
-                        <p:outputLabel value="#{paginaPrincipalBean.usuarioBean.usuarioLogado.apelido}" />
-                        <p:outputLabel value="ultimo acesso" />
-                        <p:outputLabel
-                                value="#{paginaPrincipalBean.usuarioBean.usuarioLogado.ultimoacesso}" />
-                    </p:panelGrid>
+                <p:panelGrid columns="2">
 
-                </p:panel>
+                    <h:form>
+                        <p:panel styleClass="paneeast">
+                            <f:facet name="header">Montagem</f:facet>
+                            <p:dataTable value="#{listarContratoMontagem.listaContratoFazendo}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato sendo montado">
+                                <f:facet name="header">Contratos em montagem</f:facet>
+                                <p:column headerText="contrato" width="15%">
+                                    #{contrato.numeroContrato}
+                                </p:column>
+                                <p:column headerText="curso">
+                                    #{contrato.curso}
+                                </p:column>
+                                <p:column headerText="albuns" width="15%">
+                                    #{contrato.qtdAlbum}
+                                </p:column>
+                            </p:dataTable>
+
+
+                            <p:dataTable value="#{listarContratoMontagem.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
+                                <f:facet name="header">Contratos prontos</f:facet>
+                                <p:column headerText="contrato" width="15%">
+                                    #{contrato.numeroContrato}
+                                </p:column>
+                                <p:column headerText="curso">
+                                    #{contrato.curso}
+                                </p:column>
+                                <p:column headerText="albuns" width="15%">
+                                    #{contrato.qtdAlbum}
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </h:form>
+
+
+                    <h:form>
+                        <p:panel rendered="#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 0? true:false}" styleClass="paneeast">
+                            <f:facet name="header">  Tratamento  </f:facet>
+                            <p:dataTable value="#{listarContratoTratamento.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
+                                <f:facet name="header">Contratos em espera</f:facet>
+                                <p:column headerText="contrato" width="15%">
+                                    #{contrato.numeroContrato}
+                                </p:column>
+                                <p:column headerText="curso">
+                                    #{contrato.curso}
+                                </p:column>
+                                <p:column headerText="albuns" width="15%">
+                                    #{contrato.qtdAlbum}
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:dataTable value="#{listarContratoTratamento.listaContratoFazendo}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em tratamento">
+                                <f:facet name="header">Contratos em tratamento de pele</f:facet>
+                                <p:column headerText="contrato" width="15%">
+                                    #{contrato.numeroContrato}
+                                </p:column>
+                                <p:column headerText="curso">
+                                    #{contrato.curso}
+                                </p:column>
+                                <p:column headerText="albuns" width="15%">
+                                    #{contrato.qtdAlbum}
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:dataTable value="#{listarContratoTratamento.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
+                                <f:facet name="header">Contratos prontos</f:facet>
+                                <p:column headerText="contrato" width="15%">
+                                    #{contrato.numeroContrato}
+                                </p:column>
+                                <p:column headerText="curso">
+                                    #{contrato.curso}
+                                </p:column>
+                                <p:column headerText="albuns" width="15%">
+                                    #{contrato.qtdAlbum}
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </h:form>
+
+                    <p:panel>
+                        <f:facet name="header">Impressão</f:facet>
+                        <h:form id="cursosImpressao">
+                            <p:dataTable id="todosContratos" var="contrato"
+                                         value="#{listarContratoImpressao.listaContratoFazendo}" resizableColumns="true" sortBy="urgencia" widgetVar="cursosTable"
+                                         rowKey="#{contrato.cod}" emptyMessage="Nenhum contrato em impressão"
+                                         draggableColumns="true" scrollRows="30" scrollable="true"
+                                         liveScroll="true" styleClass="interiorTabela" >
+
+                                <p:column headerText="Contrato" width="15%">
+                                    <h:outputText value="#{contrato.numeroContrato}" />
+                                </p:column>
+                                <p:column headerText="Curso">
+                                    <h:outputText value="#{contrato.curso}" />
+                                </p:column>
+                                <p:column headerText="albuns" width="15%">
+                                    #{contrato.qtdAlbum}
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </p:panel>
+                </p:panelGrid>
             </p:tab>
             <p:tab title="Fechamentos">
                 <p:dataGrid var="mes" value="#{listarMesesBean.meses}" columns="3" layout="grid"
@@ -80,83 +171,10 @@
         </h:form>
     </ui:define>
     <ui:define name="east">
-        <f:facet name="header"> Tratamento </f:facet>
-        <h:form>
-            <p:panel rendered="#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 0? true:false}" styleClass="paneeast">
-                <p:dataTable value="#{listarContratoTratamento.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
-                    <f:facet name="header">Contratos em espera</f:facet>
-                    <p:column headerText="contrato" width="22%">
-                        #{contrato.numeroContrato}
-                    </p:column>
-                    <p:column headerText="curso">
-                        #{contrato.curso}
-                    </p:column>
-                    <p:column headerText="albuns" width="18%">
-                        #{contrato.qtdAlbum}
-                    </p:column>
-                </p:dataTable>
 
-                <p:dataTable value="#{listarContratoTratamento.listaContratoFazendo}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em tratamento">
-                    <f:facet name="header">Contratos em tratamento de pele</f:facet>
-                    <p:column headerText="contrato" width="22%">
-                        #{contrato.numeroContrato}
-                    </p:column>
-                    <p:column headerText="curso">
-                        #{contrato.curso}
-                    </p:column>
-                    <p:column headerText="albuns" width="18%">
-                        #{contrato.qtdAlbum}
-                    </p:column>
-                </p:dataTable>
-
-                <p:dataTable value="#{listarContratoTratamento.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
-                    <f:facet name="header">Contratos prontos</f:facet>
-                    <p:column headerText="contrato" width="22%">
-                        #{contrato.numeroContrato}
-                    </p:column>
-                    <p:column headerText="curso">
-                        #{contrato.curso}
-                    </p:column>
-                    <p:column headerText="albuns" width="18%">
-                        #{contrato.qtdAlbum}
-                    </p:column>
-                </p:dataTable>
-            </p:panel>
-        </h:form>
     </ui:define>
     <ui:define name="west">
-        <f:facet name="header">Montagem</f:facet>
-        <h:form>
-            <p:panel styleClass="paneeast">
 
-                <p:dataTable value="#{listarContratoMontagem.listaContratoFazendo}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato sendo montado">
-                    <f:facet name="header">Contratos em montagem</f:facet>
-                    <p:column headerText="contrato" width="22%">
-                        #{contrato.numeroContrato}
-                    </p:column>
-                    <p:column headerText="curso">
-                        #{contrato.curso}
-                    </p:column>
-                    <p:column headerText="albuns" width="18%">
-                        #{contrato.qtdAlbum}
-                    </p:column>
-                </p:dataTable>
-
-
-                <p:dataTable value="#{listarContratoMontagem.listaContratoPronto}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato adiantado">
-                    <f:facet name="header">Contratos prontos</f:facet>
-                    <p:column headerText="contrato" width="23%">
-                        #{contrato.numeroContrato}
-                    </p:column>
-                    <p:column headerText="curso">
-                        #{contrato.curso}
-                    </p:column>
-                    <p:column headerText="albuns" width="18%">
-                        #{contrato.qtdAlbum}
-                    </p:column>
-                </p:dataTable>
-            </p:panel>
-        </h:form>
     </ui:define>
     </body>
 </ui:composition>
