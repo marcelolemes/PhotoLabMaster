@@ -27,10 +27,10 @@
     <ui:define name="content">
         <p:tabView>
             <p:tab title="Início">
-                <p:panelGrid columns="2">
+                <p:panelGrid columns="2" styleClass="semBorda">
 
                     <h:form>
-                        <p:panel styleClass="paneeast">
+                        <p:panel styleClass="panemontagem">
                             <f:facet name="header">Montagem</f:facet>
                             <p:dataTable value="#{listarContratoMontagem.listaContratoFazendo}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato sendo montado">
                                 <f:facet name="header">Contratos em montagem</f:facet>
@@ -63,7 +63,7 @@
 
 
                     <h:form>
-                        <p:panel rendered="#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 0? true:false}" styleClass="paneeast">
+                        <p:panel rendered="#{paginaPrincipalBean.usuarioBean.usuarioLogado.nivelAcesso eq 0? true:false}" styleClass="panetratamento">
                             <f:facet name="header">  Tratamento  </f:facet>
                             <p:dataTable value="#{listarContratoTratamento.listaContratoEmEspera}" var="contrato" resizableColumns="true" sortBy="#{contrato.urgencia}" emptyMessage="Nenhum contrato em espera">
                                 <f:facet name="header">Contratos em espera</f:facet>
@@ -106,7 +106,7 @@
                         </p:panel>
                     </h:form>
 
-                    <p:panel>
+                    <p:panel styleClass="paneimpressao">
                         <f:facet name="header">Impressão</f:facet>
                         <h:form id="cursosImpressao">
                             <p:dataTable id="todosContratos" var="contrato"

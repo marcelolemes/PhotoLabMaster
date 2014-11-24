@@ -83,6 +83,20 @@ ui-layout-south {
     background: transparent url("#{request.contextPath}/resources/images/back.png") !important;
 }
 
+.panetratamento{
+    border: solid 10px #0070c0 !important;
+}
+
+
+.panemontagem{
+    border: solid 10px #ffff00 !important;
+
+}
+
+.paneimpressao{
+    border: solid 10px #ffc000 !important;
+}
+
 .ui-button {
 
 }
