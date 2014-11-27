@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import java.io.File;
 import java.io.Serializable;
 
 /**
@@ -37,12 +38,15 @@ public class RegraMontagemDao implements Serializable {
             if (retorno != null) {
                 if (usuario != null){
                     retorno.setUsuarioMontagem(usuario);
+                    usuario.setAlbumAtual(retorno);
+                    usuario.setAuxiliar(usuario.getAlbumAtual().getContrato().getCaminho()+ File.separator+ usuario.getAlbumAtual().getNumero());
                 }
 
                 retorno.setStatus(13); //Marca o album como "montagem"
                 retorno.setOcupado(true);
                 Session sessao = HibernateUtil.getSession();
                 org.hibernate.Transaction transacao = sessao.beginTransaction();
+                sessao.update(usuario);
                 sessao.update(retorno);
                 transacao.commit();
                 sessao.close();

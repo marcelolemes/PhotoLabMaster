@@ -76,17 +76,13 @@ public class RegraTratamento implements Serializable {
 
     public void btPegarAlbum() throws Exception {
 
-
-
         try {
-            usuarioBean.getUsuarioLogado().setAlbumAtual(regDao.NovoAlbum(usuarioBean.getUsuarioLogado()));
-            usuarioBean.getUsuarioLogado().setAuxiliar(usuarioBean.getUsuarioLogado().getAlbumAtual().getContrato().getCaminho()+File.separator+ usuarioBean.getUsuarioLogado().getAlbumAtual().getNumero());
             relatorio = new Relatorio();
             relatorio.setDataInicial(new Timestamp(new Date(System.currentTimeMillis()).getTime()));
-            relatorio.setAlbum(usuarioBean.getUsuarioLogado().getAlbumAtual());
+            Album album = regDao.NovoAlbum(usuarioBean.getUsuarioLogado());
+            relatorio.setAlbum(album);
             relatorio.setFuncionario(usuarioBean.getUsuarioLogado());
             relatorioDao.salvarRelatorio(relatorio);
-            usuarioDao.Update(usuarioBean.getUsuarioLogado());
             iniciar();
         }
         catch (Exception e)
@@ -111,14 +107,14 @@ public class RegraTratamento implements Serializable {
     }
 
     public void btMenosDeVinte() throws Exception {
-         List<Relatorio> relatorios = new ArrayList<Relatorio>();
-         Album album = usuarioBean.getUsuarioLogado().getAlbumAtual();
-         usuarioBean.getUsuarioLogado().setAlbumAtual(null);
-         usuarioDao.Update(usuarioBean.getUsuarioLogado());
-         relatorios = relatorioDao.encontrarRelatorios(album);
-         relatorioDao.deletarRelatorios(relatorios);
-         regDao.albumDeletado(album);
-        }
+        List<Relatorio> relatorios = new ArrayList<Relatorio>();
+        Album album = usuarioBean.getUsuarioLogado().getAlbumAtual();
+        usuarioBean.getUsuarioLogado().setAlbumAtual(null);
+        usuarioDao.Update(usuarioBean.getUsuarioLogado());
+        relatorios = relatorioDao.encontrarRelatorios(album);
+        relatorioDao.deletarRelatorios(relatorios);
+        regDao.albumDeletado(album);
+    }
 
     public void btTerminarAlbum() throws Exception {
         try{
